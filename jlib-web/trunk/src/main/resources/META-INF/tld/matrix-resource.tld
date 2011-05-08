@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+  http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee">
+	<display-name>Matrix Resource tag</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>resource</short-name>
+	<uri>http://jakarta.apache.org/struts/tags-bean-1.0</uri>
+	<tag>
+		<name>write</name>
+		<tag-class>net.matrix.servlet.struts.taglib.ResourceTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>resource</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>message</name>
+		<tag-class>net.matrix.servlet.struts.taglib.MessageTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>exception</name>
+		<tag-class>net.matrix.servlet.struts.taglib.ExceptionTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
