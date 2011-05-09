@@ -375,9 +375,9 @@
 		<url>http://192.168.1.100:8082/continuum</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:http://192.168.1.100/svn/jmvn-genesis/trunk</connection>
-		<developerConnection>scm:svn:http://192.168.1.100/svn/jmvn-genesis/trunk</developerConnection>
-		<url>http://192.168.1.100/svn/jmvn-genesis/trunk</url>
+		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jmvn-genesis/trunk</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jmvn-genesis/trunk</developerConnection>
+		<url>https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jmvn-genesis/trunk</url>
 	</scm>
 	<distributionManagement>
 		<repository>
