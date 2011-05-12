@@ -5,9 +5,6 @@
  */
 package net.matrix.servlet.session;
 
-import java.beans.PropertyDescriptor;
-import java.beans.PropertyEditor;
-import java.lang.reflect.Constructor;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DateFormat;
@@ -16,11 +13,9 @@ import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.matrix.data.BusinessDate;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.ObjectUtil;
 
@@ -161,42 +156,5 @@ public abstract class WebProcess
 	public static String getDisplayString(String string)
 	{
 		return ObjectUtil.isNull(string, "");
-	}
-
-	public static <T> T fillObject(Class<T> tableClass, HttpServletRequest request)
-		throws Exception
-	{
-		try{
-			Constructor<T> ct = tableClass.getConstructor(new Class[]{});
-			T retobj = ct.newInstance(new Object[]{});
-			PropertyDescriptor[] pds = PropertyUtils.getPropertyDescriptors(tableClass);
-			for(PropertyDescriptor pd : pds){
-				String fieldName = pd.getName();
-				String value = request.getParameter(fieldName);
-				if(value == null)
-					continue;
-				PropertyEditor pe = pd.createPropertyEditor(retobj);
-				String fieldType = pd.getPropertyType().getSimpleName();
-				if("int".equals(fieldType)){
-					pe.setValue(Integer.parseInt(value));
-				}else if("long".equals(fieldType)){
-					pe.setValue(new Long(value));
-				}else if("float".equals(fieldType)){
-					pe.setValue(Float.parseFloat(value));
-				}else if("Calendar".equals(fieldType)){
-					pe.setValue(BusinessDate.parse(value, DateFormatHelper.ISO_DATE_FORMAT));
-				}else if("GregorianCalendar".equals(fieldType)){
-					pe.setValue(BusinessDate.parse(value, DateFormatHelper.ISO_DATE_FORMAT));
-				}else if("BigDecimal".equals(fieldType)){
-					pe.setValue(new BigDecimal(value));
-				}else{
-					pe.setValue(value);
-				}
-			} // end for
-			return retobj;
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
 	}
 }
