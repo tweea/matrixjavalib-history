@@ -1,0 +1,13 @@
+<projectDescription>
+  <name>mxlib-web</name>
+  <comment>与 Web 相关的实用工具等。</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>
