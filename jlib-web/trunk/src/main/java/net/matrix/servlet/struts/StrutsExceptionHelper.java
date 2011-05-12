@@ -7,17 +7,17 @@ package net.matrix.servlet.struts;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.Globals;
-
 public class StrutsExceptionHelper
 {
+	public static final String EXCEPTION_KEY = "org.apache.struts.action.EXCEPTION";
+
 	public static void storeException(HttpServletRequest request, Exception e)
 	{
-		request.setAttribute(Globals.EXCEPTION_KEY, e);
+		request.setAttribute(EXCEPTION_KEY, e);
 	}
 
 	public static Exception getException(HttpServletRequest request)
 	{
-		return (Exception)request.getAttribute(Globals.EXCEPTION_KEY);
+		return (Exception)request.getAttribute(EXCEPTION_KEY);
 	}
 }
