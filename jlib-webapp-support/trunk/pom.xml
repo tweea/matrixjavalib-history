@@ -6,7 +6,7 @@
 	<!-- 基本属性 - 项目属性 -->
 	<groupId>net.matrix</groupId>
 	<artifactId>mxlib-webapp-support</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 项目关系 -->
@@ -54,11 +54,11 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/trunk
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/tags/mxlib-webapp-support-1.0.1
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/trunk
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/tags/mxlib-webapp-support-1.0.1
 		</developerConnection>
-		<url>https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/trunk</url>
+		<url>https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/tags/mxlib-webapp-support-1.0.1</url>
 	</scm>
 </project>
