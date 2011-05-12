@@ -8,25 +8,25 @@
 	<classpathentry kind="var" path="M2_REPO/c3p0/c3p0/0.9.1.2/c3p0-0.9.1.2.jar" sourcepath="/M2_REPO/c3p0/c3p0/0.9.1.2/c3p0-0.9.1.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar" sourcepath="/M2_REPO/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-chain/commons-chain/1.2/commons-chain-1.2.jar" sourcepath="/M2_REPO/commons-chain/commons-chain/1.2/commons-chain-1.2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" sourcepath="/M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.5/commons-codec-1.5.jar" sourcepath="/M2_REPO/commons-codec/commons-codec/1.5/commons-codec-1.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar" sourcepath="/M2_REPO/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-configuration/commons-configuration/1.6/commons-configuration-1.6.jar" sourcepath="/M2_REPO/commons-configuration/commons-configuration/1.6/commons-configuration-1.6-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-digester/commons-digester/2.1/commons-digester-2.1.jar" sourcepath="/M2_REPO/commons-digester/commons-digester/2.1/commons-digester-2.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar" sourcepath="/M2_REPO/commons-io/commons-io/2.0.1/commons-io-2.0.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" sourcepath="/M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-pool/commons-pool/1.5.5/commons-pool-1.5.5.jar" sourcepath="/M2_REPO/commons-pool/commons-pool/1.5.5/commons-pool-1.5.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-pool/commons-pool/1.5.6/commons-pool-1.5.6.jar" sourcepath="/M2_REPO/commons-pool/commons-pool/1.5.6/commons-pool-1.5.6-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-validator/commons-validator/1.3.1/commons-validator-1.3.1.jar" sourcepath="/M2_REPO/commons-validator/commons-validator/1.3.1/commons-validator-1.3.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="/M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javassist/javassist/3.12.1.GA/javassist-3.12.1.GA.jar" sourcepath="/M2_REPO/javassist/javassist/3.12.1.GA/javassist-3.12.1.GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" sourcepath="/M2_REPO/javax/transaction/jta/1.1/jta-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar" sourcepath="/M2_REPO/junit/junit/4.8.2/junit-4.8.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16.jar" sourcepath="/M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.15/mysql-connector-java-5.1.15.jar"/>
-	<classpathentry kind="var" path="M2_REPO/net/matrix/mxlib-common/1.2.2/mxlib-common-1.2.2.jar" sourcepath="/M2_REPO/net/matrix/mxlib-common/1.2.2/mxlib-common-1.2.2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache-core/2.4.0/ehcache-core-2.4.0.jar" sourcepath="/M2_REPO/net/sf/ehcache/ehcache-core/2.4.0/ehcache-core-2.4.0-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-c3p0/3.6.2.Final/hibernate-c3p0-3.6.2.Final.jar" sourcepath="/M2_REPO/org/hibernate/hibernate-c3p0/3.6.2.Final/hibernate-c3p0-3.6.2.Final-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/3.6.2.Final/hibernate-core-3.6.2.Final.jar" sourcepath="/M2_REPO/org/hibernate/hibernate-core/3.6.2.Final/hibernate-core-3.6.2.Final-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-ehcache/3.6.2.Final/hibernate-ehcache-3.6.2.Final.jar" sourcepath="/M2_REPO/org/hibernate/hibernate-ehcache/3.6.2.Final/hibernate-ehcache-3.6.2.Final-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.16/mysql-connector-java-5.1.16.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/matrix/mxlib-common/1.3.0/mxlib-common-1.3.0.jar" sourcepath="/M2_REPO/net/matrix/mxlib-common/1.3.0/mxlib-common-1.3.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache-core/2.4.2/ehcache-core-2.4.2.jar" sourcepath="/M2_REPO/net/sf/ehcache/ehcache-core/2.4.2/ehcache-core-2.4.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-c3p0/3.6.4.Final/hibernate-c3p0-3.6.4.Final.jar" sourcepath="/M2_REPO/org/hibernate/hibernate-c3p0/3.6.4.Final/hibernate-c3p0-3.6.4.Final-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/3.6.4.Final/hibernate-core-3.6.4.Final.jar" sourcepath="/M2_REPO/org/hibernate/hibernate-core/3.6.4.Final/hibernate-core-3.6.4.Final-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-ehcache/3.6.4.Final/hibernate-ehcache-3.6.4.Final.jar" sourcepath="/M2_REPO/org/hibernate/hibernate-ehcache/3.6.4.Final/hibernate-ehcache-3.6.4.Final-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final.jar" sourcepath="/M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1.jar" sourcepath="/M2_REPO/org/slf4j/jcl-over-slf4j/1.6.1/jcl-over-slf4j-1.6.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar" sourcepath="/M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-sources.jar"/>
