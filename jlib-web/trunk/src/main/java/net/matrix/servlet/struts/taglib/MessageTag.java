@@ -25,7 +25,7 @@ public class MessageTag
 
 	private static final Log LOG = LogFactory.getLog(MessageTag.class);
 
-	protected String id = null;
+	protected String id;
 
 	@Override
 	public String getId()
