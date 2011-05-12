@@ -30,7 +30,7 @@ public class ExceptionTag
 
 	private static final String TD_END = "</td>";
 
-	protected String id = null;
+	protected String id;
 
 	@Override
 	public String getId()
