@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="gbk"?>
+<definitions>
+	<!-- 测试 -->
+	<definition code="Test" template="测试消息：{0}" />
+</definitions>
