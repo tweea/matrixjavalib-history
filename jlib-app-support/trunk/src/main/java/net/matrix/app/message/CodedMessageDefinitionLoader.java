@@ -12,6 +12,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import net.matrix.app.SystemContext;
+
 /**
  * 读取编码消息记录定义
  */
@@ -22,17 +24,26 @@ public class CodedMessageDefinitionLoader
 	public static void loadDefinitions()
 	{
 		try{
-			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(SystemContext.getResourceLoader());
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
 			for(Resource resource : resources){
-				XMLConfiguration config = new XMLConfiguration();
-				config.setDelimiterParsingDisabled(true);
-				config.load(resource.getInputStream());
-				for(HierarchicalConfiguration definitionConfig : (List<HierarchicalConfiguration>)config.configurationsAt("definition")){
-					String code = definitionConfig.getString("[@code]");
-					String template = definitionConfig.getString("[@template]");
-					CodedMessageDefinition.define(new CodedMessageDefinition(code, template));
-				}
+				loadDefinitions(resource);
+			}
+		}catch(IOException e){
+			LOG.error("加载失败", e);
+		}
+	}
+
+	public static void loadDefinitions(Resource resource)
+	{
+		try{
+			XMLConfiguration config = new XMLConfiguration();
+			config.setDelimiterParsingDisabled(true);
+			config.load(resource.getInputStream());
+			for(HierarchicalConfiguration definitionConfig : (List<HierarchicalConfiguration>)config.configurationsAt("definition")){
+				String code = definitionConfig.getString("[@code]");
+				String template = definitionConfig.getString("[@template]");
+				CodedMessageDefinition.define(new CodedMessageDefinition(code, template));
 			}
 		}catch(IOException e){
 			LOG.error("加载失败", e);

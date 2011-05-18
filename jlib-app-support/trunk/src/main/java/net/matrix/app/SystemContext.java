@@ -14,6 +14,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
@@ -41,48 +42,6 @@ public class SystemContext
 
 	public static Configuration getGlobalConfig()
 	{
-		checkConfig();
-		return globalConfig;
-	}
-
-	public static void setResourceLoader(ResourceLoader resourceLoader)
-	{
-		checkConfig();
-		SystemContext.resourceLoader = resourceLoader;
-	}
-
-	public static ResourceLoader getResourceLoader()
-	{
-		checkConfig();
-		return resourceLoader;
-	}
-
-	public static void setUserDataHome(File userHomeDir)
-	{
-		checkConfig();
-		userDataHome = new UserDataHome(userHomeDir);
-	}
-
-	public static UserDataHome getUserDataHome()
-	{
-		checkConfig();
-		return userDataHome;
-	}
-
-	public static void setSystemController(SystemController controller)
-	{
-		checkConfig();
-		systemController = controller;
-	}
-
-	public static SystemController getSystemController()
-	{
-		checkConfig();
-		return systemController;
-	}
-
-	private static void checkConfig()
-	{
 		// 尝试加载默认位置
 		if(globalConfig == null){
 			LOG.info("加载默认配置");
@@ -95,5 +54,39 @@ public class SystemContext
 				throw new RuntimeException("sysconfig.cfg 加载失败", e);
 			}
 		}
+		return globalConfig;
+	}
+
+	public static void setResourceLoader(ResourceLoader loader)
+	{
+		resourceLoader = loader;
+	}
+
+	public static ResourceLoader getResourceLoader()
+	{
+		if(resourceLoader == null){
+			resourceLoader = new DefaultResourceLoader();
+		}
+		return resourceLoader;
+	}
+
+	public static void setUserDataHome(File userHomeDir)
+	{
+		userDataHome = new UserDataHome(userHomeDir);
+	}
+
+	public static UserDataHome getUserDataHome()
+	{
+		return userDataHome;
+	}
+
+	public static void setSystemController(SystemController controller)
+	{
+		systemController = controller;
+	}
+
+	public static SystemController getSystemController()
+	{
+		return systemController;
 	}
 }
