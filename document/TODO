@@ -10,7 +10,9 @@
 	单元测试
 	derby
 应用 Resource 和 ResourceLoader
-SystemSettings 的多实例化，类似 Spring Application Context
+app-support
+	SystemContext 的多实例化，类似 Spring Application Context
+	UserDataHome
 定制日志文件的位置
 	DailyRollingFileAppender
 	System.out
@@ -20,3 +22,4 @@ Spring/Guice
 架构发展计划
 	如何扩展
 	发现新需求
+
