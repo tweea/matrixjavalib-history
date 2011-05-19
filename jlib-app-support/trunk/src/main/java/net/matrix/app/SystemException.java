@@ -16,8 +16,7 @@ public class SystemException
 
 	public SystemException()
 	{
-		super();
-		messages.add(createRootMessage());
+		messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR));
 	}
 
 	public SystemException(Throwable cause)
@@ -27,13 +26,12 @@ public class SystemException
 			SystemException se = (SystemException)cause;
 			messages.addAll(se.messages);
 		}else{
-			messages.add(createRootMessage());
+			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR, cause.getMessage()));
 		}
 	}
 
 	public SystemException(CodedMessage rootMessage)
 	{
-		super();
 		messages.add(rootMessage);
 	}
 
@@ -58,13 +56,11 @@ public class SystemException
 	}
 
 	/**
-	 * @return 根消息
+	 * @return 默认消息编码
 	 */
-	protected CodedMessage createRootMessage()
+	public String getDefaultMessageCode()
 	{
-		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.ERROR);
-		message.addArgument(super.getMessage());
-		return message;
+		return "System.Error";
 	}
 
 	/**

@@ -15,8 +15,6 @@ public class CodedMessageException
 {
 	private static final long serialVersionUID = 8050980676195083467L;
 
-	public static final String ERROR_CODE = "CodedMessage.Error";
-
 	public CodedMessageException()
 	{
 		super();
@@ -51,8 +49,8 @@ public class CodedMessageException
 	 * @return 根消息
 	 */
 	@Override
-	protected CodedMessage createRootMessage()
+	public String getDefaultMessageCode()
 	{
-		return new CodedMessage(ERROR_CODE, CodedMessageLevels.ERROR);
+		return "CodedMessage.Error";
 	}
 }
