@@ -22,32 +22,20 @@ public class CodedMessage
 
 	private List<String> arguments;
 
-	public CodedMessage(String code, int level)
+	public CodedMessage(String code, int level, String... arguments)
 	{
-		this(code, System.currentTimeMillis(), level);
+		this(code, System.currentTimeMillis(), level, arguments);
 	}
 
-	public CodedMessage(String code, long time, int level)
+	public CodedMessage(String code, long time, int level, String... arguments)
 	{
 		this.code = code;
 		this.time = time;
 		this.level = level;
 		this.arguments = new ArrayList<String>();
-	}
-
-	/**
-	 * 建立编码消息
-	 * @param code 编码
-	 * @param arguments 参数
-	 * @return 消息记录
-	 */
-	public static CodedMessage create(String code, int level, String... arguments)
-	{
-		CodedMessage message = new CodedMessage(code, level);
 		for(String argument : arguments){
-			message.addArgument(argument);
+			addArgument(argument);
 		}
-		return message;
 	}
 
 	/**

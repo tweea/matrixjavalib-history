@@ -32,6 +32,11 @@ public class CodedMessageException
 		super(rootMessage);
 	}
 
+	public CodedMessageException(String rootMessageCode)
+	{
+		super(rootMessageCode);
+	}
+
 	public CodedMessageException(Throwable cause, CodedMessage rootMessage)
 	{
 		super(cause, rootMessage);
