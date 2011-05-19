@@ -17,6 +17,7 @@ public class SystemException
 	public SystemException()
 	{
 		super();
+		messages.add(createRootMessage());
 	}
 
 	public SystemException(Throwable cause)
@@ -25,6 +26,8 @@ public class SystemException
 		if(cause instanceof SystemException){
 			SystemException se = (SystemException)cause;
 			messages.addAll(se.messages);
+		}else{
+			messages.add(createRootMessage());
 		}
 	}
 
@@ -32,6 +35,11 @@ public class SystemException
 	{
 		super();
 		messages.add(rootMessage);
+	}
+
+	public SystemException(String rootMessageCode)
+	{
+		this(new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR));
 	}
 
 	public SystemException(Throwable cause, CodedMessage rootMessage)
@@ -46,18 +54,7 @@ public class SystemException
 
 	public SystemException(Throwable cause, String rootMessageCode)
 	{
-		this(cause, CodedMessage.create(rootMessageCode, CodedMessageLevels.ERROR, cause.getMessage()));
-	}
-
-	/**
-	 * @return 根消息
-	 */
-	public final CodedMessage getRootMessage()
-	{
-		if(messages.size() == 0){
-			messages.add(createRootMessage());
-		}
-		return messages.get(0);
+		this(cause, new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR, cause.getMessage()));
 	}
 
 	/**
@@ -68,6 +65,14 @@ public class SystemException
 		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.ERROR);
 		message.addArgument(super.getMessage());
 		return message;
+	}
+
+	/**
+	 * @return 根消息
+	 */
+	public final CodedMessage getRootMessage()
+	{
+		return messages.get(0);
 	}
 
 	/**
