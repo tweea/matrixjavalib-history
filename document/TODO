@@ -1,25 +1,22 @@
-发布到网上的 repo
 重构
-	清理代码
-		缩减依赖范围
-		SpringSide
-		Joda-Time
-		Guava
-		Jodd
+	异常体系
+	应用 Resource 和 ResourceLoader
 	接口化
-测试
-	单元测试
-	derby
-应用 Resource 和 ResourceLoader
 app-support
 	SystemContext 的多实例化，类似 Spring Application Context
 	UserDataHome
+构建优化
+	SpringSide
+测试
+	单元测试
+	derby
 定制日志文件的位置
 	DailyRollingFileAppender
 	System.out
 	使用 MDC 增强日志
-OSGi
-Spring/Guice
+依赖
+	OSGi
+	Spring/Guice
 架构发展计划
 	如何扩展
 	发现新需求
