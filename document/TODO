@@ -1,8 +1,6 @@
-重构
-	异常体系
-	应用 Resource 和 ResourceLoader
-	接口化
 app-support
+	接口化
+	应用 Resource 和 ResourceLoader
 	SystemContext 的多实例化，类似 Spring Application Context
 	UserDataHome
 构建优化
