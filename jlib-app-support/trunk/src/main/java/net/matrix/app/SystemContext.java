@@ -5,7 +5,6 @@
  */
 package net.matrix.app;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.configuration.Configuration;
@@ -13,7 +12,6 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -22,47 +20,33 @@ public class SystemContext
 {
 	private static final Log LOG = LogFactory.getLog(SystemContext.class);
 
-	private static Configuration globalConfig;
+	private static SystemContext GLOBAL;
 
-	private static ResourceLoader resourceLoader;
+	private ResourceLoader resourceLoader;
 
-	private static UserDataHome userDataHome;
+	private Configuration config;
 
-	private static SystemController systemController;
+	private SystemController controller;
 
 	private SystemContext()
 	{
 		// 阻止访问
 	}
 
-	public static void setGlobalConfig(Configuration conf)
+	public static SystemContext global()
 	{
-		globalConfig = conf;
-	}
-
-	public static Configuration getGlobalConfig()
-	{
-		// 尝试加载默认位置
-		if(globalConfig == null){
-			LOG.info("加载默认配置");
-			Resource resource = new ClassPathResource("sysconfig.cfg");
-			try{
-				globalConfig = new PropertiesConfiguration(resource.getURL());
-			}catch(IOException e){
-				throw new RuntimeException("sysconfig.cfg 加载失败", e);
-			}catch(ConfigurationException e){
-				throw new RuntimeException("sysconfig.cfg 加载失败", e);
-			}
+		if(GLOBAL == null){
+			GLOBAL = new SystemContext();
 		}
-		return globalConfig;
+		return GLOBAL;
 	}
 
-	public static void setResourceLoader(ResourceLoader loader)
+	public void setResourceLoader(ResourceLoader loader)
 	{
 		resourceLoader = loader;
 	}
 
-	public static ResourceLoader getResourceLoader()
+	public ResourceLoader getResourceLoader()
 	{
 		if(resourceLoader == null){
 			resourceLoader = new DefaultResourceLoader();
@@ -70,23 +54,35 @@ public class SystemContext
 		return resourceLoader;
 	}
 
-	public static void setUserDataHome(File userHomeDir)
+	public void setConfig(Configuration config)
 	{
-		userDataHome = new UserDataHome(userHomeDir);
+		this.config = config;
 	}
 
-	public static UserDataHome getUserDataHome()
+	public Configuration getConfig()
 	{
-		return userDataHome;
+		// 尝试加载默认位置
+		if(config == null){
+			LOG.info("加载默认配置");
+			Resource resource = resourceLoader.getResource("classpath:sysconfig.cfg");
+			try{
+				config = new PropertiesConfiguration(resource.getURL());
+			}catch(IOException e){
+				throw new RuntimeException("sysconfig.cfg 加载失败", e);
+			}catch(ConfigurationException e){
+				throw new RuntimeException("sysconfig.cfg 加载失败", e);
+			}
+		}
+		return config;
 	}
 
-	public static void setSystemController(SystemController controller)
+	public void setController(SystemController controller)
 	{
-		systemController = controller;
+		this.controller = controller;
 	}
 
-	public static SystemController getSystemController()
+	public SystemController getController()
 	{
-		return systemController;
+		return controller;
 	}
 }
