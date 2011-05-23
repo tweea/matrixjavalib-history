@@ -9,7 +9,7 @@ package net.matrix.lang;
  * 重新加载失败
  */
 public class ReloadException
-	extends MxException
+	extends Exception
 {
 	private static final long serialVersionUID = 7185142142086056686L;
 
