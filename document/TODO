@@ -1,8 +1,10 @@
 app-support
-	接口化
 	应用 Resource 和 ResourceLoader
-	SystemContext 的多实例化，类似 Spring Application Context
-	UserDataHome
+	SystemContext
+		接口化
+		ResourcePatternResolver
+		类似 Spring Application Context 可以存放多种类型信息
+		与 CodedMessageDefinition 关联
 构建优化
 	SpringSide
 测试
