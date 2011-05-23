@@ -8,6 +8,19 @@ package net.matrix.app;
 public class DefaultSystemController
 	implements SystemController
 {
+	private SystemContext context;
+
+	public DefaultSystemController(SystemContext context)
+	{
+		this.context = context;
+	}
+
+	@Override
+	public SystemContext getContext()
+	{
+		return context;
+	}
+
 	@Override
 	public void start()
 	{

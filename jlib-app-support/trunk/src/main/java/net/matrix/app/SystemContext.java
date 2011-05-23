@@ -16,6 +16,9 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+/**
+ * 系统环境
+ */
 public class SystemContext
 {
 	private static final Log LOG = LogFactory.getLog(SystemContext.class);
@@ -27,11 +30,6 @@ public class SystemContext
 	private Configuration config;
 
 	private SystemController controller;
-
-	private SystemContext()
-	{
-		// 阻止访问
-	}
 
 	public static SystemContext global()
 	{
@@ -84,7 +82,7 @@ public class SystemContext
 	public SystemController getController()
 	{
 		if(controller == null){
-			controller = new DefaultSystemController();
+			controller = new DefaultSystemController(this);
 		}
 		return controller;
 	}
