@@ -62,7 +62,7 @@ public class SystemContext
 		// 尝试加载默认位置
 		if(config == null){
 			LOG.info("加载默认配置");
-			Resource resource = resourceLoader.getResource("classpath:sysconfig.cfg");
+			Resource resource = getResourceLoader().getResource("classpath:sysconfig.cfg");
 			try{
 				config = new PropertiesConfiguration(resource.getURL());
 			}catch(IOException e){
