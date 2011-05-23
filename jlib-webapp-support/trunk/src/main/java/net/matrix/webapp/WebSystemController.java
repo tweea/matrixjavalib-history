@@ -7,16 +7,18 @@ package net.matrix.webapp;
 
 import javax.servlet.ServletContext;
 
-import net.matrix.app.SystemController;
+import net.matrix.app.DefaultSystemController;
+import net.matrix.app.SystemContext;
 
 public class WebSystemController
-	implements SystemController
+	extends DefaultSystemController
 {
-	protected ServletContext context;
+	protected ServletContext servletContext;
 
-	public WebSystemController(ServletContext context)
+	public WebSystemController(SystemContext context, ServletContext servletContext)
 	{
-		this.context = context;
+		super(context);
+		this.servletContext = servletContext;
 	}
 
 	@Override

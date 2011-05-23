@@ -5,21 +5,15 @@
  */
 package net.matrix.webapp.servlet;
 
-import java.io.File;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 
 import net.matrix.app.SystemContext;
-import net.matrix.app.SystemController;
 import net.matrix.webapp.WebSystemController;
 
 /**
@@ -41,38 +35,33 @@ public class InitSystem
 		super.init();
 		// 初始化
 		LOG.info(getServletContext().getServletContextName() + " 初始化开始");
-		SystemContext.setGlobalConfig(getGlobalConfig());
-		SystemContext.setResourceLoader(getResourceLoader());
-		SystemContext.setUserDataHome(getUserDataHome());
-		SystemContext.setSystemController(getSystemController());
-		SystemContext.getSystemController().start();
+		SystemContext context = SystemContext.global();
+		setResourceLoader(context);
+		setConfig(context);
+		setController(context);
+		context.getController().start();
 		LOG.info(getServletContext().getServletContextName() + " 初始化完成");
 	}
 
-	protected Configuration getGlobalConfig()
+	protected void setResourceLoader(SystemContext context)
 	{
-		return SystemContext.getGlobalConfig();
+		context.getResourceLoader();
 	}
 
-	protected ResourceLoader getResourceLoader()
+	protected void setConfig(SystemContext context)
 	{
-		return new DefaultResourceLoader();
+		context.getConfig();
 	}
 
-	protected File getUserDataHome()
+	protected void setController(SystemContext context)
 	{
-		return new File(getServletContext().getRealPath(SystemContext.getGlobalConfig().getString("user_files_dir")));
-	}
-
-	protected SystemController getSystemController()
-	{
-		return new WebSystemController(getServletContext());
+		context.setController(new WebSystemController(context, getServletContext()));
 	}
 
 	@Override
 	public void destroy()
 	{
-		SystemContext.getSystemController().stop();
+		SystemContext.global().getController().stop();
 		super.destroy();
 	}
 
