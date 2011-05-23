@@ -11,9 +11,9 @@ import org.junit.Test;
 public class HTMLUtilTest
 {
 	@Test
-	public void testEncodeToHexString()
+	public void testFormatInputHTML()
 	{
 		String xx = "/abc/张三";
-		Assert.assertEquals(xx, HTMLUtil.decodeFromHexString(HTMLUtil.encodeToHexString(xx)));
+		Assert.assertEquals(xx, HTMLUtil.formatInputHTML(xx, 50));
 	}
 }
