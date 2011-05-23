@@ -83,6 +83,9 @@ public class SystemContext
 
 	public SystemController getController()
 	{
+		if(controller == null){
+			controller = new DefaultSystemController();
+		}
 		return controller;
 	}
 }
