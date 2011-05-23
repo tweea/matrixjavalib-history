@@ -24,7 +24,7 @@ public class CodedMessageDefinitionLoader
 	public static void loadDefinitions()
 	{
 		try{
-			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(SystemContext.getResourceLoader());
+			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(SystemContext.global().getResourceLoader());
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
 			for(Resource resource : resources){
 				loadDefinitions(resource);
