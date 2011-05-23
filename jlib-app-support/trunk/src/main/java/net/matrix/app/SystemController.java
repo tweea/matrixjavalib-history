@@ -7,9 +7,14 @@ package net.matrix.app;
 
 import net.matrix.lang.Resettable;
 
+/**
+ * 系统控制器
+ */
 public interface SystemController
 	extends Resettable
 {
+	SystemContext getContext();
+
 	void start();
 
 	void stop();
