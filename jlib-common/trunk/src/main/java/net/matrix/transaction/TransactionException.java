@@ -5,10 +5,8 @@
  */
 package net.matrix.transaction;
 
-import net.matrix.lang.MxException;
-
 public class TransactionException
-	extends MxException
+	extends Exception
 {
 	/**
 	 * serialVersionUID
