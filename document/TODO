@@ -2,6 +2,7 @@ app-support
 	应用 Resource 和 ResourceLoader
 	SystemContext
 		接口化
+		内置一个 Spring ApplicationContext
 		ResourcePatternResolver
 		类似 Spring Application Context 可以存放多种类型信息
 		与 CodedMessageDefinition 关联
@@ -16,7 +17,6 @@ app-support
 	使用 MDC 增强日志
 依赖
 	OSGi
-	Spring/Guice
 架构发展计划
 	如何扩展
 	发现新需求
