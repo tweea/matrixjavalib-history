@@ -6,6 +6,8 @@
 package net.matrix.app;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -28,7 +30,14 @@ public class DefaultSystemContext
 
 	private Configuration config;
 
+	private Map<Class, Object> objects;
+
 	private SystemController controller;
+
+	public DefaultSystemContext()
+	{
+		objects = new HashMap<Class, Object>();
+	}
 
 	@Override
 	public void setResourceLoader(ResourceLoader loader)
@@ -70,6 +79,22 @@ public class DefaultSystemContext
 	}
 
 	@Override
+	public <T> void registerObject(Class<T> type, T object)
+	{
+		objects.put(type, object);
+	}
+
+	@Override
+	public <T> T lookupObject(Class<T> type)
+	{
+		Object object = objects.get(type);
+		if(object == null){
+			return null;
+		}
+		return (T)object;
+	}
+
+	@Override
 	public void setController(SystemController controller)
 	{
 		this.controller = controller;
@@ -79,7 +104,8 @@ public class DefaultSystemContext
 	public SystemController getController()
 	{
 		if(controller == null){
-			controller = new DefaultSystemController(this);
+			controller = new DefaultSystemController();
+			controller.setContext(this);
 		}
 		return controller;
 	}

@@ -10,7 +10,8 @@ public class DefaultSystemController
 {
 	private SystemContext context;
 
-	public DefaultSystemController(SystemContext context)
+	@Override
+	public void setContext(SystemContext context)
 	{
 		this.context = context;
 	}
@@ -19,6 +20,11 @@ public class DefaultSystemController
 	public SystemContext getContext()
 	{
 		return context;
+	}
+
+	@Override
+	public void init()
+	{
 	}
 
 	@Override

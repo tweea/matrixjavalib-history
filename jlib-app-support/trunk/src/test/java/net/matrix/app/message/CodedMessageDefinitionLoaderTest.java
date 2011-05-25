@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.matrix.app.GlobalSystemContext;
+
 /**
  * 
  */
@@ -17,7 +19,7 @@ public class CodedMessageDefinitionLoaderTest
 	@BeforeClass
 	public static void setUp()
 	{
-		CodedMessageDefinitionLoader.loadDefinitions();
+		CodedMessageDefinitionLoader.loadDefinitions(GlobalSystemContext.get().getResourceLoader());
 	}
 
 	@Test

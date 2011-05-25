@@ -21,6 +21,10 @@ public interface SystemContext
 
 	Configuration getConfig();
 
+	<T> void registerObject(Class<T> type, T object);
+
+	<T> T lookupObject(Class<T> type);
+
 	void setController(SystemController controller);
 
 	SystemController getController();
