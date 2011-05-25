@@ -17,6 +17,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * 系统环境
@@ -27,6 +29,8 @@ public class DefaultSystemContext
 	private static final Log LOG = LogFactory.getLog(DefaultSystemContext.class);
 
 	private ResourceLoader resourceLoader;
+
+	private ResourcePatternResolver resourceResolver;
 
 	private Configuration config;
 
@@ -52,6 +56,19 @@ public class DefaultSystemContext
 			resourceLoader = new DefaultResourceLoader();
 		}
 		return resourceLoader;
+	}
+
+	@Override
+	public ResourcePatternResolver getResourcePatternResolver()
+	{
+		if(resourceResolver == null){
+			if(getResourceLoader() instanceof ResourcePatternResolver){
+				resourceResolver = (ResourcePatternResolver)getResourceLoader();
+			}else{
+				resourceResolver = new PathMatchingResourcePatternResolver(getResourceLoader());
+			}
+		}
+		return resourceResolver;
 	}
 
 	@Override
