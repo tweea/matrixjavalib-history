@@ -9,10 +9,9 @@ import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-
-import net.matrix.app.GlobalSystemContext;
 
 /**
  * 读取编码消息记录定义
@@ -21,10 +20,10 @@ public class CodedMessageDefinitionLoader
 {
 	private static final Log LOG = LogFactory.getLog(CodedMessageDefinitionLoader.class);
 
-	public static void loadDefinitions()
+	public static void loadDefinitions(ResourceLoader loader)
 	{
 		try{
-			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(GlobalSystemContext.get().getResourceLoader());
+			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(loader);
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
 			for(Resource resource : resources){
 				loadDefinitions(resource);
