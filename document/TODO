@@ -1,7 +1,6 @@
 app-support
 	应用 Resource 和 ResourceLoader
 	SystemContext
-		接口化
 		内置一个 Spring ApplicationContext
 		ResourcePatternResolver
 		类似 Spring Application Context 可以存放多种类型信息
