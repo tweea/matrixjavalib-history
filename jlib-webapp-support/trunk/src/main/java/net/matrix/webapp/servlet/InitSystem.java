@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import net.matrix.app.GlobalSystemContext;
 import net.matrix.app.SystemContext;
+import net.matrix.webapp.DefaultWebSystemController;
 import net.matrix.webapp.WebSystemController;
 
 /**
@@ -35,10 +37,11 @@ public class InitSystem
 		super.init();
 		// 初始化
 		LOG.info(getServletContext().getServletContextName() + " 初始化开始");
-		SystemContext context = SystemContext.global();
+		SystemContext context = GlobalSystemContext.get();
 		setResourceLoader(context);
 		setConfig(context);
 		setController(context);
+		context.getController().init();
 		context.getController().start();
 		LOG.info(getServletContext().getServletContextName() + " 初始化完成");
 	}
@@ -55,13 +58,15 @@ public class InitSystem
 
 	protected void setController(SystemContext context)
 	{
-		context.setController(new WebSystemController(context, getServletContext()));
+		WebSystemController controller = new DefaultWebSystemController(getServletContext());
+		controller.setContext(context);
+		context.setController(controller);
 	}
 
 	@Override
 	public void destroy()
 	{
-		SystemContext.global().getController().stop();
+		GlobalSystemContext.get().getController().stop();
 		super.destroy();
 	}
 

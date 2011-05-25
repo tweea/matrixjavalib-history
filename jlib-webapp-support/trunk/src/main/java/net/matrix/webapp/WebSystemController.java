@@ -7,32 +7,10 @@ package net.matrix.webapp;
 
 import javax.servlet.ServletContext;
 
-import net.matrix.app.DefaultSystemController;
-import net.matrix.app.SystemContext;
+import net.matrix.app.SystemController;
 
-public class WebSystemController
-	extends DefaultSystemController
+public interface WebSystemController
+	extends SystemController
 {
-	protected ServletContext servletContext;
-
-	public WebSystemController(SystemContext context, ServletContext servletContext)
-	{
-		super(context);
-		this.servletContext = servletContext;
-	}
-
-	@Override
-	public void reset()
-	{
-	}
-
-	@Override
-	public void start()
-	{
-	}
-
-	@Override
-	public void stop()
-	{
-	}
+	ServletContext getServletContext();
 }
