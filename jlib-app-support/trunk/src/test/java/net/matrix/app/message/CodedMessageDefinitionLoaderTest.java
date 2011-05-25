@@ -19,7 +19,7 @@ public class CodedMessageDefinitionLoaderTest
 	@BeforeClass
 	public static void setUp()
 	{
-		CodedMessageDefinitionLoader.loadDefinitions(GlobalSystemContext.get().getResourceLoader());
+		CodedMessageDefinitionLoader.loadDefinitions(GlobalSystemContext.get().getResourcePatternResolver());
 	}
 
 	@Test
