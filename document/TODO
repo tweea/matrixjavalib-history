@@ -1,10 +1,5 @@
 app-support
 	应用 Resource 和 ResourceLoader
-	SystemContext
-		内置一个 Spring ApplicationContext
-		ResourcePatternResolver
-		类似 Spring Application Context 可以存放多种类型信息
-		与 CodedMessageDefinition 关联
 构建优化
 	SpringSide
 测试
