@@ -12,7 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import net.matrix.app.SystemContext;
+import net.matrix.app.GlobalSystemContext;
 
 /**
  * 读取编码消息记录定义
@@ -24,7 +24,7 @@ public class CodedMessageDefinitionLoader
 	public static void loadDefinitions()
 	{
 		try{
-			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(SystemContext.global().getResourceLoader());
+			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(GlobalSystemContext.get().getResourceLoader());
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
 			for(Resource resource : resources){
 				loadDefinitions(resource);
