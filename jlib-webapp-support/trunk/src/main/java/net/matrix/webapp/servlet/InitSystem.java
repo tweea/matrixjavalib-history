@@ -5,18 +5,19 @@
  */
 package net.matrix.webapp.servlet;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import net.matrix.app.DefaultSystemController;
 import net.matrix.app.GlobalSystemContext;
 import net.matrix.app.SystemContext;
-import net.matrix.webapp.DefaultWebSystemController;
-import net.matrix.webapp.WebSystemController;
+import net.matrix.app.SystemController;
+import net.matrix.app.message.CodedMessageDefinitionLoader;
 
 /**
  * 系统初始化
@@ -24,26 +25,37 @@ import net.matrix.webapp.WebSystemController;
  * @since 2005-11-16
  */
 public class InitSystem
-	extends HttpServlet
+	implements ServletContextListener
 {
-	private static final long serialVersionUID = 4408320263631077194L;
-
 	private final static Log LOG = LogFactory.getLog(InitSystem.class);
 
 	@Override
-	public final void init()
-		throws ServletException
+	public void contextInitialized(ServletContextEvent sce)
 	{
-		super.init();
-		// 初始化
-		LOG.info(getServletContext().getServletContextName() + " 初始化开始");
+		ServletContext servletContext = sce.getServletContext();
+
+		// 加载消息
+		loadMessageDefinitions();
+
+		// 初始化系统环境
 		SystemContext context = GlobalSystemContext.get();
 		setResourceLoader(context);
 		setConfig(context);
-		setController(context);
-		context.getController().init();
-		context.getController().start();
-		LOG.info(getServletContext().getServletContextName() + " 初始化完成");
+		context.registerObject(ServletContext.class, servletContext);
+
+		// 初始化控制器
+		SystemController controller = getController();
+		controller.setContext(context);
+		context.setController(controller);
+		controller.init();
+		controller.start();
+
+		LOG.info(servletContext.getServletContextName() + " 初始化完成");
+	}
+
+	protected void loadMessageDefinitions()
+	{
+		CodedMessageDefinitionLoader.loadDefinitions(new PathMatchingResourcePatternResolver());
 	}
 
 	protected void setResourceLoader(SystemContext context)
@@ -56,31 +68,14 @@ public class InitSystem
 		context.getConfig();
 	}
 
-	protected void setController(SystemContext context)
+	protected SystemController getController()
 	{
-		WebSystemController controller = new DefaultWebSystemController(getServletContext());
-		controller.setContext(context);
-		context.setController(controller);
+		return new DefaultSystemController();
 	}
 
 	@Override
-	public void destroy()
+	public void contextDestroyed(ServletContextEvent sce)
 	{
 		GlobalSystemContext.get().getController().stop();
-		super.destroy();
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException
-	{
-		throw new UnsupportedOperationException();
 	}
 }
