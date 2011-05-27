@@ -11,7 +11,6 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import net.matrix.app.DefaultSystemController;
 import net.matrix.app.GlobalSystemContext;
@@ -29,6 +28,13 @@ public class InitSystem
 {
 	private final static Log LOG = LogFactory.getLog(InitSystem.class);
 
+	protected SystemContext context;
+
+	public InitSystem()
+	{
+		context = GlobalSystemContext.get();
+	}
+
 	@Override
 	public void contextInitialized(ServletContextEvent sce)
 	{
@@ -38,10 +44,9 @@ public class InitSystem
 		loadMessageDefinitions();
 
 		// 初始化系统环境
-		SystemContext context = GlobalSystemContext.get();
 		context.registerObject(ServletContext.class, servletContext);
-		setResourceLoader(context);
-		setConfig(context);
+		setResourceLoader();
+		setConfig();
 
 		// 初始化控制器
 		SystemController controller = getController();
@@ -55,20 +60,14 @@ public class InitSystem
 
 	protected void loadMessageDefinitions()
 	{
-		CodedMessageDefinitionLoader.loadDefinitions(new PathMatchingResourcePatternResolver());
+		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
 	}
 
-	/**
-	 * @param context 系统环境
-	 */
-	protected void setResourceLoader(SystemContext context)
+	protected void setResourceLoader()
 	{
 	}
 
-	/**
-	 * @param context 系统环境
-	 */
-	protected void setConfig(SystemContext context)
+	protected void setConfig()
 	{
 	}
 
@@ -80,6 +79,6 @@ public class InitSystem
 	@Override
 	public void contextDestroyed(ServletContextEvent sce)
 	{
-		GlobalSystemContext.get().getController().stop();
+		context.getController().stop();
 	}
 }
