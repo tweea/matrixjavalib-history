@@ -11,8 +11,17 @@ import net.matrix.lang.Resettable;
  * 系统控制器
  */
 public interface SystemController
-	extends Resettable, SystemModule
+	extends Resettable
 {
+	void setContext(SystemContext context);
+
+	SystemContext getContext();
+
+	/**
+	 * 初始化
+	 */
+	void init();
+
 	/**
 	 * 启动
 	 */
