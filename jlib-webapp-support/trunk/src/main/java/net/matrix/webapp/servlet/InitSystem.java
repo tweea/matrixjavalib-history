@@ -39,9 +39,9 @@ public class InitSystem
 
 		// 初始化系统环境
 		SystemContext context = GlobalSystemContext.get();
+		context.registerObject(ServletContext.class, servletContext);
 		setResourceLoader(context);
 		setConfig(context);
-		context.registerObject(ServletContext.class, servletContext);
 
 		// 初始化控制器
 		SystemController controller = getController();
@@ -58,14 +58,18 @@ public class InitSystem
 		CodedMessageDefinitionLoader.loadDefinitions(new PathMatchingResourcePatternResolver());
 	}
 
+	/**
+	 * @param context 系统环境
+	 */
 	protected void setResourceLoader(SystemContext context)
 	{
-		context.getResourceLoader();
 	}
 
+	/**
+	 * @param context 系统环境
+	 */
 	protected void setConfig(SystemContext context)
 	{
-		context.getConfig();
 	}
 
 	protected SystemController getController()
