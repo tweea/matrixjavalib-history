@@ -11,9 +11,10 @@ import org.junit.Test;
 public class HTMLUtilTest
 {
 	@Test
-	public void testFormatInputHTML()
+	public void fitToLength()
 	{
-		String xx = "/abc/张三";
-		Assert.assertEquals(xx, HTMLUtil.formatInputHTML(xx, 50));
+		String xx = "abc";
+		String yy = "abc&nbsp;&nbsp;";
+		Assert.assertEquals(yy, HTMLUtil.fitToLength(xx, 5));
 	}
 }
