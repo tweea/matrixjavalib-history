@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="gbk"?>
-<transport>
+<transport length="50">
 	<senders>
 		<target name="SysA" protocol="WMQ">
 			<properties name="hostname" value="192.168.1.234"/>
