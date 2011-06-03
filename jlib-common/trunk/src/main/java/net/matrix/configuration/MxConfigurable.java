@@ -5,12 +5,10 @@
  */
 package net.matrix.configuration;
 
-import org.apache.commons.configuration.Configuration;
-
 /**
  * 使用一个 MxConfiguration 配置
  */
-public interface MxConfigurable<CONFIG extends Configuration>
+public interface MxConfigurable<CONFIG>
 {
 	/**
 	 * 应用一个配置
