@@ -57,6 +57,7 @@ public class ResourceContextConfig
 	 */
 	public Set<String> catalogNames()
 	{
+		checkReload();
 		return set.catalogNames();
 	}
 
@@ -66,6 +67,7 @@ public class ResourceContextConfig
 	 */
 	public Set<String> resourceNames(String catalog)
 	{
+		checkReload();
 		return set.resourceNames(catalog);
 	}
 
@@ -76,6 +78,7 @@ public class ResourceContextConfig
 	 */
 	public ResourceSelection getSelection(String catalog)
 	{
+		checkReload();
 		Set<ResourceSelection> result = set.getSelections(catalog);
 		for(ResourceSelection selection : result){
 			return selection;
@@ -91,6 +94,7 @@ public class ResourceContextConfig
 	 */
 	public ResourceSelection getSelection(String catalog, String name)
 	{
+		checkReload();
 		Set<ResourceSelection> result = set.getSelections(catalog, name);
 		for(ResourceSelection selection : result){
 			return selection;
@@ -100,6 +104,7 @@ public class ResourceContextConfig
 
 	public Set<ResourceSelection> checkDiff(ResourceContextConfig target)
 	{
+		checkReload();
 		return set.checkDiff(target.set);
 	}
 }
