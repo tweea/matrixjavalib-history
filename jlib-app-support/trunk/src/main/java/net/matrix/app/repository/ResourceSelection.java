@@ -29,13 +29,13 @@ public class ResourceSelection
 		this.catalog = catalog;
 		this.version = version;
 		if(StringUtils.isBlank(name)){
-			this.name = generateFilename(catalog);
+			this.name = generateName(catalog);
 		}else{
 			this.name = name;
 		}
 	}
 
-	public static String generateFilename(String catalog)
+	public static String generateName(String catalog)
 	{
 		String[] catalogs = catalog.split("/");
 		return catalogs[catalogs.length - 1];
