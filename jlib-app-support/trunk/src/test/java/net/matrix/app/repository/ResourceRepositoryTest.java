@@ -12,16 +12,16 @@ import org.springframework.core.io.ClassPathResource;
 public class ResourceRepositoryTest
 {
 	@Test
-	public void getFile0()
+	public void getResource0()
 	{
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
-		// 默认文件名
+		// 默认资源名
 		Assert.assertTrue(repo.getResource(new ResourceSelection("test", "1", null)).exists());
 		Assert.assertNull(repo.getResource(new ResourceSelection("test/orz", "1", null)));
 	}
 
 	@Test
-	public void getFile1()
+	public void getResource1()
 	{
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 分类
@@ -30,13 +30,13 @@ public class ResourceRepositoryTest
 		Assert.assertNull(repo.getResource(new ResourceSelection("test1", "1", "middle.xml")));
 		// 版本
 		Assert.assertNull(repo.getResource(new ResourceSelection("test", "2", "middle.xml")));
-		// 文件名
+		// 资源名
 		Assert.assertNull(repo.getResource(new ResourceSelection("test", "1", "middle1.xml")));
 		Assert.assertNull(repo.getResource(new ResourceSelection("test", "1", "big.xml")));
 	}
 
 	@Test
-	public void getFile2()
+	public void getResource2()
 	{
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 默认版本
@@ -46,7 +46,7 @@ public class ResourceRepositoryTest
 	}
 
 	@Test
-	public void getFile3()
+	public void getResource3()
 	{
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 多级
