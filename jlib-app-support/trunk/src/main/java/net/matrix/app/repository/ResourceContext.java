@@ -26,6 +26,16 @@ public class ResourceContext
 		this.contextConfig = contextConfig;
 	}
 
+	public ResourceRepository getRepository()
+	{
+		return repository;
+	}
+
+	public ResourceContextConfig getContextConfig()
+	{
+		return contextConfig;
+	}
+
 	/**
 	 * 定位资源
 	 * @param catalog 类别
