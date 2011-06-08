@@ -16,7 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 public class ResourceContextTest
 {
 	@Test
-	public void getFile()
+	public void getResource()
 		throws ConfigurationException
 	{
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
