@@ -14,7 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import net.matrix.configuration.XMLConfigurationContainer;
 
 /**
- * 资源仓库选择配置
+ * 资源仓库加载环境配置
  */
 public class ResourceContextConfig
 	extends XMLConfigurationContainer
