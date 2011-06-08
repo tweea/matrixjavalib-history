@@ -20,18 +20,22 @@ public class XMLConfigurationContainer
 	private XMLConfiguration config;
 
 	@Override
-	public void load(Resource file)
+	public void load(Resource resource)
 		throws ConfigurationException
 	{
 		if(LOG.isTraceEnabled()){
-			LOG.trace("加载配置文件：" + file);
+			LOG.trace("加载配置：" + resource);
 		}
 		try{
 			config = new XMLConfiguration();
 			config.setDelimiterParsingDisabled(isDelimiterParsingDisabled());
-			config.load(file.getFile());
-			config.setReloadingStrategy(new FileChangedReloadingStrategy());
-			config.addConfigurationListener(new ConfigurationReloadingListener(this));
+			try{
+				config.load(resource.getFile());
+				config.setReloadingStrategy(new FileChangedReloadingStrategy());
+				config.addConfigurationListener(new ConfigurationReloadingListener(this));
+			}catch(IOException e){
+				config.load(resource.getInputStream());
+			}
 		}catch(IOException e){
 			throw new ConfigurationException(e);
 		}
