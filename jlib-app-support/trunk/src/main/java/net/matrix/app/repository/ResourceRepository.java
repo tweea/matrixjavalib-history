@@ -58,7 +58,7 @@ public class ResourceRepository
 				}
 			}catch(IOException e){
 				LOG.warn(root + "/" + path + '/' + name + " 解析失败", e);
-				throw new RuntimeException(e);
+				return null;
 			}
 			if(path.length() <= catalog.length()){
 				break;
