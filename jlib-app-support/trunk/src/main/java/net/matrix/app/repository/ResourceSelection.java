@@ -22,7 +22,7 @@ public class ResourceSelection
 	/**
 	 * @param catalog 分类
 	 * @param version 版本
-	 * @param name 资源名
+	 * @param name 名称
 	 */
 	public ResourceSelection(String catalog, String version, String name)
 	{
@@ -58,7 +58,7 @@ public class ResourceSelection
 	}
 
 	/**
-	 * @return 资源名
+	 * @return 名称
 	 */
 	public String getName()
 	{

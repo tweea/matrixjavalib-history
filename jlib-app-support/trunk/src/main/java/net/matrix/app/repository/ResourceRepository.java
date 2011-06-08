@@ -22,7 +22,7 @@ public class ResourceRepository
 	private Resource root;
 
 	/**
-	 * @param root 资源仓库所在路径
+	 * @param root 资源仓库位置
 	 */
 	public ResourceRepository(Resource root)
 	{
@@ -30,7 +30,7 @@ public class ResourceRepository
 	}
 
 	/**
-	 * 返回资源
+	 * 定位资源
 	 * @param selection 资源仓库选择
 	 * @return 资源
 	 */
