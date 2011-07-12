@@ -24,7 +24,13 @@ public interface SystemContext
 
 	Configuration getConfig();
 
+	void registerObject(String name, Object object);
+
 	<T> void registerObject(Class<T> type, T object);
+
+	Object lookupObject(String name);
+
+	<T> T lookupObject(String name, Class<T> type);
 
 	<T> T lookupObject(Class<T> type);
 
