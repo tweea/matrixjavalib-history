@@ -34,13 +34,13 @@ public class DefaultSystemContext
 
 	private Configuration config;
 
-	private Map<Class, Object> objects;
+	private Map<String, Object> objects;
 
 	private SystemController controller;
 
 	public DefaultSystemContext()
 	{
-		objects = new HashMap<Class, Object>();
+		objects = new HashMap<String, Object>();
 	}
 
 	@Override
@@ -96,19 +96,33 @@ public class DefaultSystemContext
 	}
 
 	@Override
+	public void registerObject(String name, Object object)
+	{
+		objects.put(name, object);
+	}
+
+	@Override
 	public <T> void registerObject(Class<T> type, T object)
 	{
-		objects.put(type, object);
+		registerObject(type.getName(), object);
+	}
+
+	@Override
+	public Object lookupObject(String name)
+	{
+		return objects.get(name);
+	}
+
+	@Override
+	public <T> T lookupObject(String name, Class<T> type)
+	{
+		return type.cast(lookupObject(name));
 	}
 
 	@Override
 	public <T> T lookupObject(Class<T> type)
 	{
-		Object object = objects.get(type);
-		if(object == null){
-			return null;
-		}
-		return (T)object;
+		return lookupObject(type.getName(), type);
 	}
 
 	@Override
