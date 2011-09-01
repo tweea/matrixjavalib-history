@@ -5,6 +5,7 @@
  */
 package net.matrix.text;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,21 +25,21 @@ public abstract class DateFormatHelper
 
 	public final static String ISO_TIME_FORMAT = "'T'HH:mm:ss";
 
-	private static final ThreadLocal<Map<String, SimpleDateFormat>> formats = new ThreadLocal<Map<String, SimpleDateFormat>>();
+	private static final ThreadLocal<Map<String, DateFormat>> FORMATS = new ThreadLocal<Map<String, DateFormat>>();
 
 	/**
-	 * 获得一个 SimpleDateFormat 实例
+	 * 获得一个 DateFormat 实例
 	 * @param format 日期格式。
-	 * @return 一个 SimpleDateFormat 实例。
+	 * @return 一个 DateFormat 实例。
 	 */
-	public static SimpleDateFormat getFormat(String format)
+	public static DateFormat getFormat(String format)
 	{
-		Map<String, SimpleDateFormat> localFormats = formats.get();
+		Map<String, DateFormat> localFormats = FORMATS.get();
 		if(localFormats == null){
-			localFormats = new HashMap<String, SimpleDateFormat>();
-			formats.set(localFormats);
+			localFormats = new HashMap<String, DateFormat>();
+			FORMATS.set(localFormats);
 		}
-		SimpleDateFormat formatObject = localFormats.get(format);
+		DateFormat formatObject = localFormats.get(format);
 		if(formatObject == null){
 			formatObject = new SimpleDateFormat(format);
 			localFormats.put(format, formatObject);
