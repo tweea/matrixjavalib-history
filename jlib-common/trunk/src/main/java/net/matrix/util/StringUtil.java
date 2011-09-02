@@ -5,13 +5,16 @@
  */
 package net.matrix.util;
 
-
 /**
  * 字符串实用方法
  * @since 2006.05.20
  */
-public abstract class StringUtil
+public class StringUtil
 {
+	private StringUtil()
+	{
+	}
+
 	/**
 	 * 在目标字符串中按定界符查找，将定界字符串中间的字符串的所有 replaceSrc 替换为 replaceDest。
 	 * @param source 源字符串

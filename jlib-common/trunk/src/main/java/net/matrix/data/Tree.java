@@ -110,7 +110,7 @@ public interface Tree<ID, DATA>
 	/**
 	 * 标识节点在树中的位置
 	 */
-	static class Key
+	class Key
 		implements Comparable<Key>, Serializable
 	{
 		private static final long serialVersionUID = 6009469890625904428L;

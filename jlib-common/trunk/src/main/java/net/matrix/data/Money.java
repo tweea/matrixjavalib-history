@@ -10,6 +10,9 @@ import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Locale;
 
+/**
+ * 金额：包括数量和货币
+ */
 public class Money
 {
 	private BigDecimal amount;

@@ -20,7 +20,7 @@ import net.matrix.util.Counter;
 public abstract class AbstractTransaction
 	implements Transaction
 {
-	private final static Log LOG = LogFactory.getLog(AbstractTransaction.class);
+	private static final Log LOG = LogFactory.getLog(AbstractTransaction.class);
 
 	private TransactionStatus status = TransactionStatus.INACTIVE;
 

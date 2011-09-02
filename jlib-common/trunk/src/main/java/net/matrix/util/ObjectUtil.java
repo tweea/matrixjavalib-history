@@ -5,8 +5,12 @@
  */
 package net.matrix.util;
 
-public abstract class ObjectUtil
+public class ObjectUtil
 {
+	private ObjectUtil()
+	{
+	}
+
 	public static <T> T isNull(T value, T replacement)
 	{
 		return value == null ? replacement : value;

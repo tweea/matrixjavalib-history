@@ -12,9 +12,13 @@ import java.text.NumberFormat;
  * @author T.A.Tang
  * @since 2006-1-19
  */
-public abstract class NumberFormatHelper
+public class NumberFormatHelper
 {
 	private static final ThreadLocal<NumberFormat> LOCAL_FORMAT = new ThreadLocal<NumberFormat>();
+
+	private NumberFormatHelper()
+	{
+	}
 
 	public static NumberFormat getDateFormat()
 	{
