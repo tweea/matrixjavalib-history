@@ -17,15 +17,19 @@ import java.util.Map;
  * @author T.A.Tang
  * @since 2005.03.09
  */
-public abstract class DateFormatHelper
+public class DateFormatHelper
 {
-	public final static String ISO_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+	public static final String ISO_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 
-	public final static String ISO_DATE_FORMAT = "yyyy-MM-dd";
+	public static final String ISO_DATE_FORMAT = "yyyy-MM-dd";
 
-	public final static String ISO_TIME_FORMAT = "'T'HH:mm:ss";
+	public static final String ISO_TIME_FORMAT = "'T'HH:mm:ss";
 
 	private static final ThreadLocal<Map<String, DateFormat>> FORMATS = new ThreadLocal<Map<String, DateFormat>>();
+
+	private DateFormatHelper()
+	{
+	}
 
 	/**
 	 * 获得一个 DateFormat 实例

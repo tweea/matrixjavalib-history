@@ -19,9 +19,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Resources
 {
-	private final static Log LOG = LogFactory.getLog(Resources.class);
+	private static final Log LOG = LogFactory.getLog(Resources.class);
 
-	private final static Map<String, Resources> RESOURCES = new HashMap<String, Resources>();
+	private static final Map<String, Resources> RESOURCES = new HashMap<String, Resources>();
 
 	private ResourceBundle bundle;
 

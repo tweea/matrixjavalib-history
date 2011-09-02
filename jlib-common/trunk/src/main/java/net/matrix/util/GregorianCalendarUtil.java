@@ -14,8 +14,12 @@ import java.util.GregorianCalendar;
  * @author Tweea
  * @since 2005.10.28
  */
-public abstract class GregorianCalendarUtil
+public class GregorianCalendarUtil
 {
+	private GregorianCalendarUtil()
+	{
+	}
+
 	public static GregorianCalendar copy(GregorianCalendar calendar)
 	{
 		return (GregorianCalendar)calendar.clone();
