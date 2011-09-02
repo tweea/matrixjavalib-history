@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * 解析逗号分割的字符串
+ */
 public class CommaSeparatedStringList
 	implements List<String>
 {

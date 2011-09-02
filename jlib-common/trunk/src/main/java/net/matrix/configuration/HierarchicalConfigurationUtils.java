@@ -13,8 +13,12 @@ import net.matrix.util.IterableIterator;
 /**
  * 配置对象实用工具
  */
-public abstract class HierarchicalConfigurationUtils
+public class HierarchicalConfigurationUtils
 {
+	private HierarchicalConfigurationUtils()
+	{
+	}
+
 	/**
 	 * 从一个表示名字、数值对的配置对象中抽取信息转换为 <code>Map</code> 对象
 	 * @param config 配置对象
