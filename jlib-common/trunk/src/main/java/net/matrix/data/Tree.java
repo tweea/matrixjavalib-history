@@ -18,99 +18,99 @@ public interface Tree<ID, DATA>
 	/**
 	 * @return 节点标识
 	 */
-	public Key getKey();
+	Key getKey();
 
 	/**
 	 * @param id 数据标识
 	 */
-	public void setId(ID id);
+	void setId(ID id);
 
 	/**
 	 * @return 数据标识
 	 */
-	public ID getId();
+	ID getId();
 
 	/**
 	 * @param data 数据
 	 */
-	public void setData(DATA data);
+	void setData(DATA data);
 
 	/**
 	 * @return 数据
 	 */
-	public DATA getData();
+	DATA getData();
 
 	/**
 	 * 通过数据标识查找节点标识
 	 * @param id 数据标识
 	 * @return 节点标识
 	 */
-	public Key findKey(ID id);
+	Key findKey(ID id);
 
 	/**
 	 * @return 上级节点
 	 */
-	public Tree<ID, DATA> getParent();
+	Tree<ID, DATA> getParent();
 
 	/**
 	 * 获得所有节点
 	 */
-	public SortedMap<Key, ? extends Tree<ID, DATA>> getAllNodes();
+	SortedMap<Key, ? extends Tree<ID, DATA>> getAllNodes();
 
 	/**
 	 * 获得所有子节点
 	 */
-	public SortedMap<Key, ? extends Tree<ID, DATA>> getChildNodes();
+	SortedMap<Key, ? extends Tree<ID, DATA>> getChildNodes();
 
 	/**
 	 * 获得节点
 	 */
-	public Tree<ID, DATA> getNode(Key key);
+	Tree<ID, DATA> getNode(Key key);
 
 	/**
 	 * 获得节点
 	 */
-	public Tree<ID, DATA> getNode(ID id);
+	Tree<ID, DATA> getNode(ID id);
 
 	/**
 	 * 获得子节点
 	 */
-	public Tree<ID, DATA> getChildNode(Key key);
+	Tree<ID, DATA> getChildNode(Key key);
 
 	/**
 	 * 获得子节点
 	 */
-	public Tree<ID, DATA> getChildNode(ID id);
+	Tree<ID, DATA> getChildNode(ID id);
 
 	/**
 	 * 增加新的子节点
 	 */
-	public Tree<ID, DATA> appendChildNode(ID id, DATA data);
+	Tree<ID, DATA> appendChildNode(ID id, DATA data);
 
 	/**
 	 * 移除子节点
 	 */
-	public void removeChildNode(Key key);
+	void removeChildNode(Key key);
 
 	/**
 	 * 移除子节点
 	 */
-	public void removeChildNode(ID id);
+	void removeChildNode(ID id);
 
 	/**
 	 * @return 是否根节点
 	 */
-	public boolean isRoot();
+	boolean isRoot();
 
 	/**
 	 * @return 是否叶节点
 	 */
-	public boolean isLeaf();
+	boolean isLeaf();
 
 	/**
 	 * 标识节点在树中的位置
 	 */
-	public static class Key
+	static class Key
 		implements Comparable<Key>, Serializable
 	{
 		private static final long serialVersionUID = 6009469890625904428L;

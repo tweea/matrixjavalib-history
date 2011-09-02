@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
 
 /**
- * 名称配置
+ * 读取 XML 格式的配置
  */
 public class XMLConfigurationContainer
 	implements ReloadableConfigurationContainer<XMLConfiguration>

@@ -5,6 +5,7 @@
  */
 package net.matrix.configuration;
 
+import org.apache.commons.configuration.AbstractConfiguration;
 import org.apache.commons.configuration.AbstractFileConfiguration;
 import org.apache.commons.configuration.event.ConfigurationEvent;
 import org.apache.commons.configuration.event.ConfigurationListener;
@@ -22,5 +23,16 @@ public class ConfigurationReloadingListenerTest
 		Assert.assertFalse(testReloader.isReloaded());
 		listener.configurationChanged(new ConfigurationEvent(this, AbstractFileConfiguration.EVENT_RELOAD, null, null, false));
 		Assert.assertTrue(testReloader.isReloaded());
+	}
+
+	@Test
+	public void testReloadingPerformed2()
+	{
+		// 读取配置
+		SampleReloader testReloader = new SampleReloader();
+		ConfigurationListener listener = new ConfigurationReloadingListener(testReloader);
+		Assert.assertFalse(testReloader.isReloaded());
+		listener.configurationChanged(new ConfigurationEvent(this, AbstractConfiguration.EVENT_CLEAR, null, null, false));
+		Assert.assertFalse(testReloader.isReloaded());
 	}
 }

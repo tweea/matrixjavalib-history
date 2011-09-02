@@ -6,7 +6,7 @@
 package net.matrix.configuration;
 
 /**
- * 使用一个 MxConfiguration 配置
+ * 可以使用 CONFIG 对象进行配置
  */
 public interface MxConfigurable<CONFIG>
 {
