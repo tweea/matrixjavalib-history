@@ -74,7 +74,14 @@ public class HierarchicalConfigurationUtilsTest
 	public void findForName()
 		throws ConfigurationException
 	{
-		config = HierarchicalConfigurationUtils.findForName(config.configurationAt("senders"), "target", "[@name]", "SysA");
-		Assert.assertEquals("WMQ", config.getString("[@protocol]"));
+		HierarchicalConfiguration subconfig = HierarchicalConfigurationUtils.findForName(config.configurationAt("senders"), "target", "[@name]", "SysA");
+		Assert.assertEquals("WMQ", subconfig.getString("[@protocol]"));
+	}
+
+	@Test(expected = ConfigurationException.class)
+	public void findForName2()
+		throws ConfigurationException
+	{
+		HierarchicalConfigurationUtils.findForName(config.configurationAt("senders"), "target", "[@name]", "SysX");
 	}
 }
