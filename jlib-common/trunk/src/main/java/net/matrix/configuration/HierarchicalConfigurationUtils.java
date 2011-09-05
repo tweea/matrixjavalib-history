@@ -97,6 +97,7 @@ public class HierarchicalConfigurationUtils
 	 * @param subKey 子项配置键值
 	 * @param nameKey 名字配置键值
 	 * @param nameValue 属性值
+	 * @throws ConfigurationException 找不到指定配置
 	 * @return 匹配的配置对象
 	 */
 	public static HierarchicalConfiguration findForName(HierarchicalConfiguration config, String subKey, String nameKey, String nameValue)
