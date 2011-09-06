@@ -2,6 +2,7 @@ Sonar
 CheckStyle
 测试
 	单元测试
+	Mock
 	derby
 定制日志文件的位置
 	DailyRollingFileAppender
