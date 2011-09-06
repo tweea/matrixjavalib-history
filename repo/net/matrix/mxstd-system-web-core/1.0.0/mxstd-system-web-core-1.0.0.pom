@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 50 2010-05-27 14:55:14Z tweea $ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 基本属性 - 项目属性 -->
+	<artifactId>mxstd-system-web-core</artifactId>
+	<packaging>jar</packaging>
+
+	<!-- 基本属性 - 项目关系 -->
+	<parent>
+		<groupId>net.matrix</groupId>
+		<artifactId>mxstd-system-web-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<!-- 构建设置 -->
+	<build>
+		<testResources>
+			<testResource>
+				<directory>target/native2ascii/resources</directory>
+				<targetPath>resources</targetPath>
+			</testResource>
+			<testResource>
+				<directory>../src/main/resources</directory>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>native2ascii</goal>
+						</goals>
+						<configuration>
+							<src>../src/main/native2ascii</src>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 项目信息 -->
+	<name>系统管理 Web 应用 :: CORE</name>
+	<description>CORE</description>
+
+	<!-- 构建环境 -->
+</project>
