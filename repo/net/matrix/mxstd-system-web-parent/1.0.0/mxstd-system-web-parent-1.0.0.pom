@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pom.xml 50 2010-05-27 14:55:14Z tweea $ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 基本属性 - 项目属性 -->
+	<groupId>net.matrix</groupId>
+	<artifactId>mxstd-system-web-parent</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<!-- 基本属性 - 项目关系 -->
+	<parent>
+		<groupId>net.matrix</groupId>
+		<artifactId>genesis</artifactId>
+		<version>11</version>
+	</parent>
+	<dependencies>
+		<!-- compile -->
+		<dependency>
+			<groupId>net.matrix</groupId>
+			<artifactId>mxlib-system</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.matrix</groupId>
+			<artifactId>mxlib-web</artifactId>
+			<version>1.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- provided -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- runtime -->
+		<dependency>
+			<!-- MySQL 的 JDBC 驱动 -->
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>core</module>
+		<module>war</module>
+	</modules>
+
+	<!-- 构建设置 -->
+
+	<!-- 项目信息 -->
+	<name>系统管理 Web 应用</name>
+	<description>系统管理 Web 应用。</description>
+	<url>http://192.168.1.100/mvn/site/${project.groupId}/${project.build.finalName}</url>
+	<inceptionYear>2008</inceptionYear>
+
+	<!-- 构建环境 -->
+	<issueManagement>
+		<system>jira</system>
+		<url>http://192.168.1.100:8083/jira/browse/JSTDSYSTEMWEB</url>
+	</issueManagement>
+	<scm>
+		<connection>
+			scm:svn:http://192.168.1.100/svn/jstd-system-web/tags/mxstd-system-web-parent-1.0.0
+		</connection>
+		<developerConnection>
+			scm:svn:http://192.168.1.100/svn/jstd-system-web/tags/mxstd-system-web-parent-1.0.0
+		</developerConnection>
+		<url>http://192.168.1.100/svn/jstd-system-web/tags/mxstd-system-web-parent-1.0.0</url>
+	</scm>
+</project>

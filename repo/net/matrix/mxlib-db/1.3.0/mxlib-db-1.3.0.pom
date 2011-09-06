@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- $Id: pom.xml 28 2011-05-12 03:50:59Z tweea $ -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 基本属性 - 项目属性 -->
+	<groupId>net.matrix</groupId>
+	<artifactId>mxlib-db</artifactId>
+	<version>1.3.0</version>
+	<packaging>jar</packaging>
+
+	<!-- 基本属性 - 项目关系 -->
+	<parent>
+		<groupId>net.matrix</groupId>
+		<artifactId>genesis</artifactId>
+		<version>15</version>
+	</parent>
+	<dependencies>
+		<!-- compile -->
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.matrix</groupId>
+			<artifactId>mxlib-common</artifactId>
+			<version>1.3.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<!-- 关系数据库映射工具 -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>3.2.0.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<!-- 关系数据库映射工具 -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.4.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<!-- 关系数据库映射工具 -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.6.4.Final</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- runtime -->
+		<dependency>
+			<!-- 文法分析工具，Hibernate 需要 -->
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- 数据库连接池 -->
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- XML 处理工具 -->
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<!-- 机器码工具，Hibernate 需要 -->
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.12.1.GA</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- 缓存工具 -->
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.4.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- 关系数据库映射工具 -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>3.6.4.Final</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- 关系数据库映射工具 -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>3.6.4.Final</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- test -->
+		<dependency>
+			<!-- MySQL 的 JDBC 驱动 -->
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.16</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<!-- 基本属性 - 属性 -->
+
+	<!-- 构建设置 -->
+	<build>
+		<testResources>
+			<testResource>
+				<directory>target/native2ascii/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>native2ascii</goal>
+						</goals>
+						<configuration>
+							<src>src/test/native2ascii</src>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 项目信息 -->
+	<name>数据库类库</name>
+	<description>访问数据库的公共方法。</description>
+	<url>
+		http://192.168.1.100/mvnsite/${project.groupId}/${project.build.finalName} 
+	</url>
+	<inceptionYear>2008</inceptionYear>
+
+	<!-- 构建环境 -->
+	<issueManagement>
+		<system>jira</system>
+		<url>http://192.168.1.100:8083/jira/browse/JLIBDB</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/tags/mxlib-db-1.3.0</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/tags/mxlib-db-1.3.0</developerConnection>
+		<url>https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/tags/mxlib-db-1.3.0</url>
+	</scm>
+</project>
