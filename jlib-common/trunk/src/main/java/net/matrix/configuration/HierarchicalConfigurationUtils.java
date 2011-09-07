@@ -15,6 +15,9 @@ import net.matrix.util.IterableIterator;
  */
 public class HierarchicalConfigurationUtils
 {
+	/**
+	 * 阻止实例化
+	 */
 	private HierarchicalConfigurationUtils()
 	{
 	}

@@ -10,8 +10,6 @@ import java.util.SortedMap;
 
 /**
  * 树型结构
- * @author Tweea
- * @since 2005.10.28
  */
 public interface Tree<ID, DATA>
 {
@@ -54,31 +52,41 @@ public interface Tree<ID, DATA>
 
 	/**
 	 * 获得所有节点
+	 * @return 所有节点
 	 */
 	SortedMap<Key, ? extends Tree<ID, DATA>> getAllNodes();
 
 	/**
 	 * 获得所有子节点
+	 * @return 所有子节点
 	 */
 	SortedMap<Key, ? extends Tree<ID, DATA>> getChildNodes();
 
 	/**
 	 * 获得节点
+	 * @param key 节点标识
+	 * @return 节点
 	 */
 	Tree<ID, DATA> getNode(Key key);
 
 	/**
 	 * 获得节点
+	 * @param id 数据标识
+	 * @return 节点
 	 */
 	Tree<ID, DATA> getNode(ID id);
 
 	/**
 	 * 获得子节点
+	 * @param key 节点标识
+	 * @return 子节点
 	 */
 	Tree<ID, DATA> getChildNode(Key key);
 
 	/**
 	 * 获得子节点
+	 * @param id 数据标识
+	 * @return 子节点
 	 */
 	Tree<ID, DATA> getChildNode(ID id);
 
