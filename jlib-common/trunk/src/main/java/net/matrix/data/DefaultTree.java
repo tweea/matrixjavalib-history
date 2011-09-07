@@ -57,6 +57,8 @@ public class DefaultTree<ID, DATA>
 
 	/**
 	 * 种一棵树
+	 * @param id 数据标识
+	 * @param data 数据对象
 	 */
 	public DefaultTree(ID id, DATA data)
 	{
@@ -74,6 +76,9 @@ public class DefaultTree<ID, DATA>
 
 	/**
 	 * 种一棵树
+	 * @param parent 父节点
+	 * @param id 数据标识
+	 * @param data 数据对象
 	 */
 	public DefaultTree(DefaultTree<ID, DATA> parent, ID id, DATA data)
 	{

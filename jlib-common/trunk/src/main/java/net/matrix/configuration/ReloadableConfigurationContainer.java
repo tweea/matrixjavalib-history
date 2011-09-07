@@ -6,7 +6,7 @@ import org.springframework.core.io.Resource;
 import net.matrix.lang.Reloadable;
 
 /**
- * 支持重新加载的配置对象容器
+ * 支持重新加载的配置对象容器，用于从指定资源加载内容形成配置对象
  */
 public interface ReloadableConfigurationContainer<CONFIG>
 	extends Reloadable

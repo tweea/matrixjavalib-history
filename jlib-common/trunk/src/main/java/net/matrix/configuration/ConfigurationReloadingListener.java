@@ -15,7 +15,7 @@ import net.matrix.lang.ReloadException;
 import net.matrix.lang.Reloadable;
 
 /**
- * 配置文件重新加载策略
+ * 配置重新加载监听器，当收到配置重新加载事件后重新加载相应的对象
  */
 public class ConfigurationReloadingListener
 	implements ConfigurationListener
@@ -25,7 +25,7 @@ public class ConfigurationReloadingListener
 	private Reloadable reloader;
 
 	/**
-	 * @param reloader 需要重新加载的配置对象
+	 * @param reloader 需要重新加载的对象
 	 */
 	public ConfigurationReloadingListener(Reloadable reloader)
 	{
