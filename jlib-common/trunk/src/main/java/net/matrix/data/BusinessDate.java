@@ -26,52 +26,104 @@ public class BusinessDate
 	 */
 	private static final long serialVersionUID = 5431733259456190646L;
 
+	/**
+	 * 使用当前时间和默认时区生成新实例
+	 */
 	public BusinessDate()
 	{
 		super();
 	}
 
+	/**
+	 * 使用指定日期和默认时区生成新实例
+	 * @param year 年
+	 * @param month 月
+	 * @param dayOfMonth 日
+	 */
 	public BusinessDate(int year, int month, int dayOfMonth)
 	{
 		super(year, month, dayOfMonth);
 	}
 
+	/**
+	 * 使用指定日期时间和默认时区生成新实例
+	 * @param year 年
+	 * @param month 月
+	 * @param dayOfMonth 日
+	 * @param hourOfDay 时
+	 * @param minute 分
+	 */
 	public BusinessDate(int year, int month, int dayOfMonth, int hourOfDay, int minute)
 	{
 		super(year, month, dayOfMonth, hourOfDay, minute);
 	}
 
+	/**
+	 * 使用指定日期时间和默认时区生成新实例
+	 * @param year 年
+	 * @param month 月
+	 * @param dayOfMonth 日
+	 * @param hourOfDay 时
+	 * @param minute 分
+	 * @param second 秒
+	 */
 	public BusinessDate(int year, int month, int dayOfMonth, int hourOfDay, int minute, int second)
 	{
 		super(year, month, dayOfMonth, hourOfDay, minute, second);
 	}
 
+	/**
+	 * 使用当前时间、默认时区和指定地区生成新实例
+	 * @param aLocale 地区
+	 */
 	public BusinessDate(Locale aLocale)
 	{
 		super(aLocale);
 	}
 
+	/**
+	 * 使用当前时间、默认地区和指定时区生成新实例
+	 * @param zone 时区
+	 */
 	public BusinessDate(TimeZone zone)
 	{
 		super(zone);
 	}
 
+	/**
+	 * 使用当前时间、指定时区和指定地区生成新实例
+	 * @param zone 时区
+	 * @param aLocale 地区
+	 */
 	public BusinessDate(TimeZone zone, Locale aLocale)
 	{
 		super(zone, aLocale);
 	}
 
+	/**
+	 * 使用已有日期生成新实例
+	 * @param date 日期
+	 */
 	public BusinessDate(GregorianCalendar date)
 	{
-		super(date.get(YEAR), date.get(MONTH), date.get(DAY_OF_MONTH), date.get(HOUR_OF_DAY), date.get(MINUTE), date.get(SECOND));
+		super(date.getTimeZone());
+		setTimeInMillis(date.getTimeInMillis());
 	}
 
+	/**
+	 * 使用已有日期生成新实例
+	 * @param date 日期
+	 */
 	public BusinessDate(Date date)
 	{
 		super();
 		setTime(date);
 	}
 
+	/**
+	 * 使用日期值生成新实例
+	 * @param date 日期值
+	 */
 	public BusinessDate(long date)
 	{
 		super();
@@ -106,6 +158,11 @@ public class BusinessDate
 		return DateFormatHelper.format(this, DateFormatHelper.ISO_DATETIME_FORMAT);
 	}
 
+	/**
+	 * 格式化为字符串
+	 * @param format 格式
+	 * @return 格式化结果
+	 */
 	public String toString(String format)
 	{
 		return DateFormatHelper.format(this, format);

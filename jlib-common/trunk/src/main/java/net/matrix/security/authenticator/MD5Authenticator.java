@@ -12,6 +12,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * 使用 MD5 算法校验密码
+ */
 public class MD5Authenticator
 	implements Authenticator
 {

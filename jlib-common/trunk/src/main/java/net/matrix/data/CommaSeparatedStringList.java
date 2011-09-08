@@ -20,25 +20,40 @@ public class CommaSeparatedStringList
 {
 	private List<String> internalList;
 
+	/**
+	 * 空字符串
+	 */
 	public CommaSeparatedStringList()
 	{
 		internalList = new ArrayList<String>();
 	}
 
+	/**
+	 * 解析字符串中的项目
+	 * @param value 逗号分割的字符串
+	 */
 	public CommaSeparatedStringList(String value)
 	{
 		String[] array = value.split(",", -1);
 		internalList = Arrays.asList(array);
 	}
 
+	/**
+	 * 使用多个项目形成字符串
+	 * @param values 项目
+	 */
 	public CommaSeparatedStringList(String[] values)
 	{
 		internalList = Arrays.asList(values);
 	}
 
+	/**
+	 * 使用多个项目形成字符串
+	 * @param list 项目
+	 */
 	public CommaSeparatedStringList(List<String> list)
 	{
-		internalList = list;
+		internalList = new ArrayList<String>(list);
 	}
 
 	@Override

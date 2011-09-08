@@ -20,21 +20,40 @@ public class RelativeResourceRootRegister
 
 	private Map<String, Resource> roots;
 
+	/**
+	 * 空的根注册
+	 */
 	public RelativeResourceRootRegister()
 	{
 		roots = new HashMap<String, Resource>();
 	}
 
+	/**
+	 * 注册资源根路径
+	 * @param name 根路径名
+	 * @param root 路径
+	 */
 	public void registerRoot(String name, Resource root)
 	{
 		roots.put(name, root);
 	}
 
+	/**
+	 * 获取根路径
+	 * @param name 根路径名
+	 * @return 路径
+	 */
 	public Resource getRoot(String name)
 	{
 		return roots.get(name);
 	}
 
+	/**
+	 * @param relativeResource 需要定位的资源
+	 * @return 已定位的绝对路径资源
+	 * @throws IOException 定位失败
+	 * @throws IllegalStateException 根路径没有注册
+	 */
 	public Resource getResource(RelativeResource relativeResource)
 		throws IOException
 	{

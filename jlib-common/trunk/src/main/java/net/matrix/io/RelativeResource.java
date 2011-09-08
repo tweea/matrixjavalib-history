@@ -9,12 +9,20 @@ public class RelativeResource
 
 	private String path;
 
+	/**
+	 * @param root 根路径名
+	 * @param path 相对路径
+	 */
 	public RelativeResource(String root, String path)
 	{
 		this.root = root;
 		this.path = path;
 	}
 
+	/**
+	 * @param parent 关联路径
+	 * @param path 相对路径
+	 */
 	public RelativeResource(RelativeResource parent, String path)
 	{
 		this.root = parent.root;

@@ -14,5 +14,5 @@ public interface UndoOperation
 	/**
 	 * 撤销操作
 	 */
-	public void undo();
+	void undo();
 }

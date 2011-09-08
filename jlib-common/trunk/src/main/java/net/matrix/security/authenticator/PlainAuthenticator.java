@@ -7,6 +7,9 @@ package net.matrix.security.authenticator;
 
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * 校验明文密码
+ */
 public class PlainAuthenticator
 	implements Authenticator
 {
