@@ -8,12 +8,12 @@ package net.matrix.transaction;
 import java.util.Stack;
 
 /**
- * 事务处理
+ * 事务处理管理器
  * @since 2006.07.04
  */
 public class TransactionManager
 {
-	private static final ThreadLocal<TransactionManager> threadManager = new ThreadLocal<TransactionManager>();
+	private static final ThreadLocal<TransactionManager> THREAD_MANAGERS = new ThreadLocal<TransactionManager>();
 
 	// 当前事务，现在只能有一个事务
 	private Stack<Transaction> transactions;
@@ -25,16 +25,24 @@ public class TransactionManager
 		transactions.push(transaction);
 	}
 
+	/**
+	 * 获取唯一实例
+	 * @return 唯一实例
+	 */
 	public static TransactionManager getInstance()
 	{
-		TransactionManager manager = threadManager.get();
+		TransactionManager manager = THREAD_MANAGERS.get();
 		if(manager == null){
 			manager = new TransactionManager();
-			threadManager.set(manager);
+			THREAD_MANAGERS.set(manager);
 		}
 		return manager;
 	}
 
+	/**
+	 * 设置顶级事务
+	 * @param transaction 事务
+	 */
 	public void setTransaction(Transaction transaction)
 	{
 		if(!transactions.empty()){
