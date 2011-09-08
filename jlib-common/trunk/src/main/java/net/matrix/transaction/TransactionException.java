@@ -5,6 +5,9 @@
  */
 package net.matrix.transaction;
 
+/**
+ * 事务处理异常
+ */
 public class TransactionException
 	extends Exception
 {
