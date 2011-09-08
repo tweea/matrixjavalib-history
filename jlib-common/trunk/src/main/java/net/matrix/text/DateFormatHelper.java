@@ -19,10 +19,19 @@ import java.util.Map;
  */
 public class DateFormatHelper
 {
+	/**
+	 * ISO 标准中日期时间格式
+	 */
 	public static final String ISO_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 
+	/**
+	 * ISO 标准中日期格式
+	 */
 	public static final String ISO_DATE_FORMAT = "yyyy-MM-dd";
 
+	/**
+	 * ISO 标准中时间格式
+	 */
 	public static final String ISO_TIME_FORMAT = "'T'HH:mm:ss";
 
 	private static final ThreadLocal<Map<String, DateFormat>> FORMATS = new ThreadLocal<Map<String, DateFormat>>();
@@ -73,6 +82,12 @@ public class DateFormatHelper
 		return format(date.getTime(), format);
 	}
 
+	/**
+	 * 转换日期值到字符串
+	 * @param time 日期值。
+	 * @return 字符串，形式见 SimpleDateFormat。
+	 * @see java.text.SimpleDateFormat
+	 */
 	public static String formatTime(long time, String format)
 	{
 		return format(new Date(time), format);
