@@ -15,7 +15,6 @@ import net.matrix.text.DateFormatHelper;
 
 /**
  * 工作日
- * @author Tweea
  * @since 2005.10.28
  */
 public class BusinessDate
