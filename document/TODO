@@ -1,3 +1,4 @@
+SpringSide4
 Sonar
 CheckStyle
 测试
@@ -5,6 +6,7 @@ CheckStyle
 	Mock
 	derby
 定制日志文件的位置
+	SLF4J API
 	DailyRollingFileAppender
 	System.out
 	使用 MDC 增强日志
