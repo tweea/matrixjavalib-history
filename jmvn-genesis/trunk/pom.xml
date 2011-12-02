@@ -285,7 +285,7 @@
 			</extension>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<artifactId>wagon-ssh</artifactId>
 				<version>2.1</version>
 			</extension>
 		</extensions>
@@ -439,21 +439,19 @@
 	</scm>
 	<distributionManagement>
 		<repository>
-			<id>internal.release</id>
+			<id>sourceforge.release</id>
 			<name>Internal Release</name>
-			<url>dav:http://192.168.1.100:8081/nexus/content/repositories/releases</url>
+			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/release</url>
 		</repository>
 		<snapshotRepository>
-			<id>internal.snapshot</id>
-			<name>Internal Snapshot</name>
-			<url>dav:http://192.168.1.100:8081/nexus/content/repositories/snapshots</url>
+			<id>sourceforge.snapshot</id>
+			<name>SourceForge Snapshot</name>
+			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/snapshot</url>
 		</snapshotRepository>
 		<site>
-			<id>internal.site</id>
+			<id>sourceforge.site</id>
 			<name>Internal Site</name>
-			<url>
-				dav:http://192.168.1.100/mvnsite/${project.groupId}/${project.build.finalName}
-			</url>
+			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site</url>
 		</site>
 	</distributionManagement>
 </project>
