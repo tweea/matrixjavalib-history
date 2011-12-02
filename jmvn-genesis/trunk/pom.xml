@@ -402,7 +402,7 @@
 		Genesis 提供 Maven3 构建支持，增加共享的配置和公共插件。
 	</description>
 	<url>
-		http://sourceforge.net/projects/matrixjavalib/mvnsite/${project.groupId}/${project.build.finalName}
+		http://sourceforge.net/projects/matrixjavalib/
 	</url>
 	<inceptionYear>2008</inceptionYear>
 	<licenses>
@@ -425,7 +425,7 @@
 
 	<!-- 构建环境 -->
 	<issueManagement>
-		<system>jira</system>
+		<system>sourceforge</system>
 		<url>http://sourceforge.net/tracker/?group_id=543402</url>
 	</issueManagement>
 	<ciManagement>
@@ -435,7 +435,7 @@
 	<scm>
 		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jmvn-genesis/trunk</connection>
 		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jmvn-genesis/trunk</developerConnection>
-		<url>https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jmvn-genesis/trunk</url>
+		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jmvn-genesis/trunk</url>
 	</scm>
 	<distributionManagement>
 		<repository>
