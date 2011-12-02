@@ -419,6 +419,7 @@
 			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/snapshot</url>
 		</snapshotRepository>
 		<site>
+			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
 			<id>sourceforge.site</id>
 			<name>Internal Site</name>
 			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site</url>
