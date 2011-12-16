@@ -1,18 +1,18 @@
-SpringSide4
-Sonar
-CheckStyle
+借鉴 SpringSide4
+增强检查规则
+	Sonar
+	CheckStyle
 测试
 	单元测试
 	Mock
 	derby
-定制日志文件的位置
+日志
 	SLF4J API
-	DailyRollingFileAppender
-	System.out
+	定制日志文件的位置
 	使用 MDC 增强日志
 依赖
 	OSGi
-架构发展计划
+发展计划
 	如何扩展
 	发现新需求
 
