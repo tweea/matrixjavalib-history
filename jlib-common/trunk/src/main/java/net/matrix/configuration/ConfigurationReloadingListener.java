@@ -8,8 +8,8 @@ package net.matrix.configuration;
 import org.apache.commons.configuration.AbstractFileConfiguration;
 import org.apache.commons.configuration.event.ConfigurationEvent;
 import org.apache.commons.configuration.event.ConfigurationListener;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.matrix.lang.ReloadException;
 import net.matrix.lang.Reloadable;
@@ -20,7 +20,7 @@ import net.matrix.lang.Reloadable;
 public class ConfigurationReloadingListener
 	implements ConfigurationListener
 {
-	private static final Log LOG = LogFactory.getLog(ConfigurationReloadingListener.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ConfigurationReloadingListener.class);
 
 	private Reloadable reloader;
 
