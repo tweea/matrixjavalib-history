@@ -6,9 +6,7 @@
 package net.matrix.lang;
 
 /**
- * 可重新加载的
- * @author Tweea
- * @since 2005.06.14
+ * 实现此接口的对象可以从预定义位置或配置的位置重新加载对象的状态或内容。
  */
 public interface Reloadable
 {
