@@ -9,8 +9,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 使用 MD5 算法校验密码
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 public class MD5Authenticator
 	implements Authenticator
 {
-	private static final Log LOG = LogFactory.getLog(MD5Authenticator.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MD5Authenticator.class);
 
 	private MessageDigest messageDigest;
 
