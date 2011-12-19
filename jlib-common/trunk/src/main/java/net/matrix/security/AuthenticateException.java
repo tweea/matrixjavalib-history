@@ -5,11 +5,13 @@
  */
 package net.matrix.security;
 
+import java.security.GeneralSecurityException;
+
 /**
  * 验证错误
  */
 public class AuthenticateException
-	extends MxSecurityException
+	extends GeneralSecurityException
 {
 	/**
 	 * serialVersionUID
