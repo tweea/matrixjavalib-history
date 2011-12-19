@@ -5,8 +5,8 @@ import java.io.IOException;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.core.io.Resource;
 public class XMLConfigurationContainer
 	implements ReloadableConfigurationContainer<XMLConfiguration>
 {
-	private static final Log LOG = LogFactory.getLog(XMLConfigurationContainer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(XMLConfigurationContainer.class);
 
 	private XMLConfiguration config;
 
@@ -39,7 +39,7 @@ public class XMLConfigurationContainer
 		}catch(IOException e){
 			throw new ConfigurationException(e);
 		}
-		reload();
+		reset();
 	}
 
 	/**
@@ -53,6 +53,18 @@ public class XMLConfigurationContainer
 	@Override
 	public void reload()
 	{
+		config.reload();
+	}
+
+	@Override
+	public void checkReload()
+	{
+		config.reload();
+	}
+
+	@Override
+	public void reset()
+	{
 		LOG.debug(this.getClass().getName() + ": 重新加载");
 	}
 
@@ -60,11 +72,5 @@ public class XMLConfigurationContainer
 	public XMLConfiguration getConfig()
 	{
 		return config;
-	}
-
-	@Override
-	public void checkReload()
-	{
-		config.reload();
 	}
 }
