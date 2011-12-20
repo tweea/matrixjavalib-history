@@ -3,7 +3,7 @@
  * Copyright(C) 2008 Matrix
  * All right reserved.
  */
-package net.matrix.text.resources;
+package net.matrix.text;
 
 import java.util.HashMap;
 import java.util.Map;

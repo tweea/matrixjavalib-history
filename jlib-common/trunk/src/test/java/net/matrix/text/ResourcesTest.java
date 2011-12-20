@@ -1,4 +1,4 @@
-package net.matrix.text.resources;
+package net.matrix.text;
 
 import org.junit.Assert;
 import org.junit.Test;
