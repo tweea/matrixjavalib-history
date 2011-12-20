@@ -15,10 +15,6 @@ import net.matrix.security.Digests;
 public class MD5Authenticator
 	implements Authenticator
 {
-	public MD5Authenticator()
-	{
-	}
-
 	@Override
 	public boolean authenticate(String password, String digest)
 	{
@@ -28,8 +24,8 @@ public class MD5Authenticator
 	@Override
 	public String getDigestString(String password)
 	{
-		byte pass[] = password.getBytes();
-		byte data[] = Digests.digest(password);
+		byte[] pass = password.getBytes();
+		byte[] data = Digests.md5(pass);
 		return toHexString(data);
 	}
 
