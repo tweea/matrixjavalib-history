@@ -1,4 +1,3 @@
-借鉴 SpringSide4
 增强检查规则
 	Sonar
 	CheckStyle
@@ -7,7 +6,6 @@
 	Mock
 	derby
 日志
-	SLF4J API
 	定制日志文件的位置
 	使用 MDC 增强日志
 依赖
