@@ -7,6 +7,8 @@ package net.matrix.security.authenticator;
 
 import org.apache.commons.lang.StringUtils;
 
+import net.matrix.security.Digests;
+
 /**
  * 使用 MD5 算法校验密码
  */
@@ -27,7 +29,7 @@ public class MD5Authenticator
 	public String getDigestString(String password)
 	{
 		byte pass[] = password.getBytes();
-		byte data[] = messageDigest.digest(pass);
+		byte data[] = Digests.digest(password);
 		return toHexString(data);
 	}
 
