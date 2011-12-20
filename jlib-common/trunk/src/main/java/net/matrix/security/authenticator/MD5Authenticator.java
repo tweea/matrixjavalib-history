@@ -5,12 +5,7 @@
  */
 package net.matrix.security.authenticator;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 使用 MD5 算法校验密码
@@ -18,17 +13,8 @@ import org.slf4j.LoggerFactory;
 public class MD5Authenticator
 	implements Authenticator
 {
-	private static final Logger LOG = LoggerFactory.getLogger(MD5Authenticator.class);
-
-	private MessageDigest messageDigest;
-
 	public MD5Authenticator()
 	{
-		try{
-			messageDigest = MessageDigest.getInstance("MD5");
-		}catch(NoSuchAlgorithmException ex){
-			LOG.warn("", ex);
-		}
 	}
 
 	@Override
