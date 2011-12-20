@@ -20,6 +20,39 @@ public class GregorianCalendarUtil
 	{
 	}
 
+	/**
+	 * 使用已有日期生成新实例
+	 * @param date 日期
+	 */
+	public static GregorianCalendar create(GregorianCalendar date)
+	{
+		GregorianCalendar calendar = new GregorianCalendar(date.getTimeZone());
+		calendar.setTimeInMillis(date.getTimeInMillis());
+		return calendar;
+	}
+
+	/**
+	 * 使用已有日期生成新实例
+	 * @param date 日期
+	 */
+	public static GregorianCalendar create(Date date)
+	{
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		return calendar;
+	}
+
+	/**
+	 * 使用日期值生成新实例
+	 * @param date 日期值
+	 */
+	public static GregorianCalendar create(long date)
+	{
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTimeInMillis(date);
+		return calendar;
+	}
+
 	public static GregorianCalendar copy(GregorianCalendar calendar)
 	{
 		return (GregorianCalendar)calendar.clone();

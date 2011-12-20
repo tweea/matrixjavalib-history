@@ -6,11 +6,15 @@
 package net.matrix.text;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.matrix.util.GregorianCalendarUtil;
 
 /**
  * 日期工具方法
@@ -91,5 +95,72 @@ public class DateFormatHelper
 	public static String formatTime(long time, String format)
 	{
 		return format(new Date(time), format);
+	}
+
+	/**
+	 * 根据字符串构造实例。
+	 * 格式为 yyyy-MM-dd'T'HH:mm:ss。
+	 * @param date 日期字符串。
+	 */
+	public static GregorianCalendar parse(String date)
+		throws ParseException
+	{
+		return parse(date, DateFormatHelper.ISO_DATETIME_FORMAT);
+	}
+
+	/**
+	 * 根据字符串构造实例。
+	 * @param dateString 日期字符串。
+	 */
+	public static GregorianCalendar parse(String dateString, String format)
+		throws ParseException
+	{
+		Date date = DateFormatHelper.getFormat(format).parse(dateString);
+		return GregorianCalendarUtil.create(date);
+	}
+
+	public static String toString(GregorianCalendar date)
+	{
+		return DateFormatHelper.format(date, DateFormatHelper.ISO_DATETIME_FORMAT);
+	}
+
+	/**
+	 * 格式化为字符串
+	 * @param format 格式
+	 * @return 格式化结果
+	 */
+	public static String toString(GregorianCalendar date, String format)
+	{
+		return DateFormatHelper.format(date, format);
+	}
+
+	/**
+	 * 转换日期字符串
+	 * @param year 年。
+	 * @param month 月。
+	 * @param day 日。
+	 * @return 目标字符串，形式为 yyyy(year)MM(month)dd(date)。
+	 */
+	public static String toDisplayString(GregorianCalendar date, String year, String month, String day)
+	{
+		return toString(date, "yyyy") + year + toString(date, "MM") + month + toString(date, "dd") + day;
+	}
+
+	/**
+	 * 转换日期字符串
+	 * @return 目标字符串，形式为 yyyy-MM-dd。
+	 */
+	public static String toDisplayString(GregorianCalendar date)
+	{
+		return toString(date, DateFormatHelper.ISO_DATE_FORMAT);
+	}
+
+	/**
+	 * 转换日期字符串
+	 * @return 目标字符串，形式为 yyyy年MM月dd日。
+	 */
+	public static String toChineseString(GregorianCalendar date)
+	{
+		return toDisplayString(date, "年", "月", "日");
 	}
 }
