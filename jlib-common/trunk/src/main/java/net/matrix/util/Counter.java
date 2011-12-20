@@ -1,6 +1,6 @@
 /*
  * $Id$
- * Copyright(C) 2008 Matrix
+ * Copyright(C) 2011 Matrix
  * All right reserved.
  */
 package net.matrix.util;
