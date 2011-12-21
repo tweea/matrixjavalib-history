@@ -6,7 +6,7 @@
 	<!-- 基本属性 - 项目属性 -->
 	<groupId>net.matrix</groupId>
 	<artifactId>mxlib-common</artifactId>
-	<version>1.4.0</version>
+	<version>1.4.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 项目关系 -->
@@ -213,13 +213,13 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-common/tags/mxlib-common-1.4.0
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-common/trunk
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-common/tags/mxlib-common-1.4.0
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-common/trunk
 		</developerConnection>
 		<url>
-			http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jlib-common/tags/mxlib-common-1.4.0
+			http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jlib-common/trunk
 		</url>
 	</scm>
 </project>
