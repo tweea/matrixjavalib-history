@@ -13,12 +13,9 @@ import java.util.Stack;
 import org.hibernate.util.ReflectHelper;
 
 import net.matrix.lang.Resettable;
-import net.matrix.sql.ContextManager;
-import net.matrix.sql.MxSQLException;
-import net.matrix.transaction.Transaction;
 
 public class HibernateContextManager
-	implements ContextManager, Resettable
+	implements Resettable
 {
 	private static Map<String, HibernateContextManager> managers = new HashMap<String, HibernateContextManager>();
 
@@ -67,7 +64,6 @@ public class HibernateContextManager
 		threadContext = new ThreadLocal<Stack<HibernateTransactionContext>>();
 	}
 
-	@Override
 	public HibernateTransactionContext getTransactionContext()
 		throws SQLException
 	{
@@ -81,14 +77,13 @@ public class HibernateContextManager
 			try{
 				context = transactionContextClass.newInstance();
 			}catch(Exception e){
-				throw new MxSQLException("Could not instantiate class", e);
+				throw new SQLException("Could not instantiate class", e);
 			}
 			contextStack.push(context);
 		}
 		return contextStack.peek();
 	}
 
-	@Override
 	public HibernateTransactionContext createTransactionContext()
 		throws SQLException
 	{
@@ -100,21 +95,21 @@ public class HibernateContextManager
 		try{
 			context = transactionContextClass.newInstance();
 		}catch(Exception e){
-			throw new MxSQLException("Could not instantiate class", e);
+			throw new SQLException("Could not instantiate class", e);
 		}
 		contextStack.push(context);
 		return context;
 	}
 
-	@Override
 	public void dropTransactionContext()
+		throws SQLException
 	{
 		Stack<HibernateTransactionContext> contextStack = threadContext.get();
 		if(contextStack == null){
 			return;
 		}
 		if(contextStack.size() > 1){
-			Transaction transactionToDrop = contextStack.pop();
+			HibernateTransactionContext transactionToDrop = contextStack.pop();
 			transactionToDrop.rollback();
 			transactionToDrop.release();
 		}

@@ -23,8 +23,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import net.matrix.sql.MxSQLException;
-import net.matrix.util.ObjectUtil;
+import net.matrix.lang.Objects;
 
 /**
  * Hibernate 实用类
@@ -72,7 +71,7 @@ public class HibernateHelper
 		try{
 			return (T)context.getSession().merge(object);
 		}catch(HibernateException e){
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}
 	}
 
@@ -85,7 +84,7 @@ public class HibernateHelper
 		try{
 			return merge0(getTransactionContext(context), object);
 		}catch(HibernateException e){
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}
 	}
 
@@ -106,7 +105,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -129,7 +128,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -151,7 +150,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -174,7 +173,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -197,7 +196,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -220,7 +219,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -244,7 +243,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -273,7 +272,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -301,7 +300,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -328,7 +327,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -363,7 +362,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -398,7 +397,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -435,7 +434,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -473,7 +472,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -508,7 +507,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -543,7 +542,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -580,7 +579,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -618,7 +617,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -652,7 +651,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -686,7 +685,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -722,7 +721,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -759,7 +758,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -784,7 +783,7 @@ public class HibernateHelper
 		}catch(ObjectNotFoundException oe){
 			return 0;
 		}catch(HibernateException he){
-			throw new MxSQLException(he);
+			throw new SQLException(he);
 		}catch(SQLException re){
 			throw re;
 		}finally{
@@ -809,7 +808,7 @@ public class HibernateHelper
 				return 0;
 			return ((Long)r).longValue();
 		}catch(HibernateException he){
-			throw new MxSQLException(he);
+			throw new SQLException(he);
 		}catch(SQLException re){
 			throw re;
 		}finally{
@@ -833,7 +832,7 @@ public class HibernateHelper
 				return 0;
 			return ((Long)r).longValue();
 		}catch(HibernateException he){
-			throw new MxSQLException(he);
+			throw new SQLException(he);
 		}catch(SQLException re){
 			throw re;
 		}finally{
@@ -859,7 +858,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			if(stat != null){
 				try{
@@ -903,7 +902,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
@@ -936,7 +935,7 @@ public class HibernateHelper
 			while(rs.next() && j < numPerPage){
 				HashMap<String, String> row = new HashMap<String, String>();
 				for(i = 0; i < count; i++){
-					tem = ObjectUtil.isNull(rs.getString(i + 1), "");
+					tem = Objects.isNull(rs.getString(i + 1), "");
 					row.put(str[i], tem);
 
 				}
@@ -950,7 +949,7 @@ public class HibernateHelper
 			throw re;
 		}catch(Exception e){
 			context.rollback();
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}finally{
 			context.release();
 		}
