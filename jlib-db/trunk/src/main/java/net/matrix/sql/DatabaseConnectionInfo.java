@@ -11,8 +11,8 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 数据库连接信息
@@ -22,7 +22,7 @@ public class DatabaseConnectionInfo
 {
 	private static final long serialVersionUID = -7842286530934311836L;
 
-	private static final Log LOG = LogFactory.getLog(DatabaseConnectionInfo.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DatabaseConnectionInfo.class);
 
 	// 连接信息
 	private String driverClass = null;
@@ -85,7 +85,7 @@ public class DatabaseConnectionInfo
 			Class.forName(driverClass);
 			return DriverManager.getConnection(url, userName, password);
 		}catch(ClassNotFoundException e){
-			throw new MxSQLException(e);
+			throw new SQLException(e);
 		}
 	}
 

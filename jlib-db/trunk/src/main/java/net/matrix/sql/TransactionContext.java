@@ -8,16 +8,23 @@ package net.matrix.sql;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import net.matrix.transaction.AbstractTransaction;
-
 /**
  * 事务处理
- * @author Tweea
  * @since 2005.06.15
  */
-public abstract class TransactionContext
-	extends AbstractTransaction
+public interface TransactionContext
 {
-	public abstract Connection getConnection()
+	Connection getConnection()
 		throws SQLException;
+
+	void begin()
+		throws SQLException;
+
+	void commit()
+		throws SQLException;
+
+	void rollback()
+		throws SQLException;
+
+	void release();
 }

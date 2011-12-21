@@ -8,18 +8,16 @@ package net.matrix.sql.hibernate;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import net.matrix.sql.MxSQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JDBCTransactionContext
-	extends HibernateTransactionContext
+	implements HibernateTransactionContext
 {
-	private static final Log LOG = LogFactory.getLog(JDBCTransactionContext.class);
+	private static final Logger LOG = LoggerFactory.getLogger(JDBCTransactionContext.class);
 
 	private String configName = SessionFactoryManager.DEFAULT_NAME;
 
@@ -57,7 +55,7 @@ public class JDBCTransactionContext
 			// TODO 考虑用其他方法获得 JDBC 连接
 			return getSession().connection();
 		}catch(HibernateException ex){
-			throw new MxSQLException(ex);
+			throw new SQLException(ex);
 		}
 	}
 
@@ -69,57 +67,57 @@ public class JDBCTransactionContext
 			try{
 				session = SessionFactoryManager.getInstance().createSession(configName);
 			}catch(HibernateException ex){
-				throw new MxSQLException(ex);
+				throw new SQLException(ex);
 			}
 		}
 		return session;
 	}
 
 	@Override
-	protected void doBegin()
+	public void begin()
 		throws SQLException
 	{
 		if(transaction == null){
 			try{
 				transaction = getSession().beginTransaction();
 			}catch(HibernateException ex){
-				throw new MxSQLException(ex);
+				throw new SQLException(ex);
 			}
 		}
 	}
 
 	@Override
-	protected void doCommit()
+	public void commit()
 		throws SQLException
 	{
 		if(transaction != null){
 			try{
 				transaction.commit();
 			}catch(HibernateException ex){
-				throw new MxSQLException(ex);
+				throw new SQLException(ex);
 			}
 		}
 	}
 
 	@Override
-	protected void doRollback()
+	public void rollback()
 		throws SQLException
 	{
 		if(transaction != null){
 			try{
 				transaction.rollback();
 			}catch(HibernateException ex){
-				throw new MxSQLException(ex);
+				throw new SQLException(ex);
 			}
 		}
 	}
 
 	@Override
-	protected void doRelease()
+	public void release()
 	{
 		try{
 			if(transaction != null && transaction.isActive()){
-				doRollback();
+				rollback();
 			}
 			if(session != null){
 				getSession().close();

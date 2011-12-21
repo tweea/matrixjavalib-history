@@ -11,13 +11,13 @@ import org.hibernate.Session;
 
 import net.matrix.sql.TransactionContext;
 
-public abstract class HibernateTransactionContext
+public interface HibernateTransactionContext
 	extends TransactionContext
 {
-	public abstract void setConfigName(String configName);
+	void setConfigName(String configName);
 
-	public abstract String getConfigName();
+	String getConfigName();
 
-	public abstract Session getSession()
+	Session getSession()
 		throws SQLException;
 }
