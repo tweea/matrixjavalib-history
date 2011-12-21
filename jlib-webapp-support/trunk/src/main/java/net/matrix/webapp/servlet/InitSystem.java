@@ -9,8 +9,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.matrix.app.DefaultSystemController;
 import net.matrix.app.GlobalSystemContext;
@@ -26,7 +26,7 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
 public class InitSystem
 	implements ServletContextListener
 {
-	private final static Log LOG = LogFactory.getLog(InitSystem.class);
+	private final static Logger LOG = LoggerFactory.getLogger(InitSystem.class);
 
 	protected SystemContext context;
 
