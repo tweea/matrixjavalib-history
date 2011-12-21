@@ -13,14 +13,12 @@ import net.matrix.app.repository.ResourceContextConfig;
 import net.matrix.app.repository.ResourceRepository;
 import net.matrix.app.repository.ResourceSelection;
 import net.matrix.configuration.ReloadableConfigurationContainer;
-import net.matrix.lang.Reloadable;
 
 /**
  * 配置仓库加载环境
  */
 public final class ConfigurationContext
 	extends ResourceContext
-	implements Reloadable
 {
 	private static final Log LOG = LogFactory.getLog(ConfigurationContext.class);
 
@@ -45,7 +43,6 @@ public final class ConfigurationContext
 		this.containerCache = new HashMap<Resource, ReloadableConfigurationContainer>();
 	}
 
-	@Override
 	public void reload()
 	{
 		getContextConfig().reload();
