@@ -11,9 +11,9 @@ import java.util.GregorianCalendar;
 
 /**
  * 工作日
- * @author Tweea
  * @since 2005.10.28
  */
+// TODO using JODA-TIME
 public class Calendars
 {
 	private Calendars()
