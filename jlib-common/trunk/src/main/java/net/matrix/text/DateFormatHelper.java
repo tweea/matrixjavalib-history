@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.matrix.util.GregorianCalendarUtil;
+import net.matrix.util.Calendars;
 
 /**
  * 日期工具方法
@@ -116,7 +116,7 @@ public class DateFormatHelper
 		throws ParseException
 	{
 		Date date = DateFormatHelper.getFormat(format).parse(dateString);
-		return GregorianCalendarUtil.create(date);
+		return Calendars.create(date);
 	}
 
 	public static String toString(GregorianCalendar date)
