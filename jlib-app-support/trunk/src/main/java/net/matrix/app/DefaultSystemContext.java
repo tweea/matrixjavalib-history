@@ -12,8 +12,8 @@ import java.util.Map;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -26,7 +26,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 public class DefaultSystemContext
 	implements SystemContext
 {
-	private static final Log LOG = LogFactory.getLog(DefaultSystemContext.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultSystemContext.class);
 
 	private ResourceLoader resourceLoader;
 

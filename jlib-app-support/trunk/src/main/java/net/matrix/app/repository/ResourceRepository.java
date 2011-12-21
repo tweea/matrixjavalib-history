@@ -8,8 +8,8 @@ package net.matrix.app.repository;
 import java.io.IOException;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 
 /**
@@ -17,7 +17,7 @@ import org.springframework.core.io.Resource;
  */
 public class ResourceRepository
 {
-	private static final Log LOG = LogFactory.getLog(ResourceRepository.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ResourceRepository.class);
 
 	private Resource root;
 

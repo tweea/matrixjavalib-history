@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -16,7 +16,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  */
 public class CodedMessageDefinitionLoader
 {
-	private static final Log LOG = LogFactory.getLog(CodedMessageDefinitionLoader.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CodedMessageDefinitionLoader.class);
 
 	public static void loadDefinitions(ResourcePatternResolver resolver)
 	{

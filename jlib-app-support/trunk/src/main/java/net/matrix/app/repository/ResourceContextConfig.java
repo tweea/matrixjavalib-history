@@ -22,9 +22,9 @@ public class ResourceContextConfig
 	private ResourceSelectionSet set;
 
 	@Override
-	public void reload()
+	public void reset()
 	{
-		super.reload();
+		super.reset();
 		set = new ResourceSelectionSet();
 		// catalog 节点
 		List<HierarchicalConfiguration> catalogsNode = getConfig().configurationsAt("catalog");

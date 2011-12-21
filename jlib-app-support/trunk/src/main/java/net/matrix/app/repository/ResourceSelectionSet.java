@@ -8,15 +8,15 @@ package net.matrix.app.repository;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 资源仓库选择集合
  */
 public class ResourceSelectionSet
 {
-	private static final Log LOG = LogFactory.getLog(ResourceSelectionSet.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ResourceSelectionSet.class);
 
 	private Set<ResourceSelection> selections;
 
