@@ -18,9 +18,9 @@ import net.matrix.util.Calendars;
 
 /**
  * 日期工具方法
- * @author T.A.Tang
  * @since 2005.03.09
  */
+// TODO using JODA-TIME
 public class DateFormatHelper
 {
 	/**
