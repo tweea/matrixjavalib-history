@@ -11,13 +11,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.matrix.lang.Resettable;
 import net.matrix.sql.DatabaseConnectionInfo;
@@ -27,7 +27,7 @@ public class SessionFactoryManager
 {
 	public final static String DEFAULT_NAME = "";
 
-	private static final Log LOG = LogFactory.getLog(SessionFactoryManager.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SessionFactoryManager.class);
 
 	private static SessionFactoryManager base = null;
 
