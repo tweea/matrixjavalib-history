@@ -14,9 +14,9 @@ import java.util.GregorianCalendar;
  * @author Tweea
  * @since 2005.10.28
  */
-public class GregorianCalendarUtil
+public class Calendars
 {
-	private GregorianCalendarUtil()
+	private Calendars()
 	{
 	}
 

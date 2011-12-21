@@ -3,15 +3,15 @@
  * Copyright(C) 2008 Matrix
  * All right reserved.
  */
-package net.matrix.util;
+package net.matrix.lang;
 
 /**
  * 字符串实用方法
  * @since 2006.05.20
  */
-public class StringUtil
+public class Strings
 {
-	private StringUtil()
+	private Strings()
 	{
 	}
 

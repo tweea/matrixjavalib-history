@@ -3,11 +3,11 @@
  * Copyright(C) 2008 Matrix
  * All right reserved.
  */
-package net.matrix.util;
+package net.matrix.lang;
 
-public class ObjectUtil
+public class Objects
 {
-	private ObjectUtil()
+	private Objects()
 	{
 	}
 
