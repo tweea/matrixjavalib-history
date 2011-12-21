@@ -13,15 +13,15 @@ import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import net.matrix.lang.Objects;
 import net.matrix.text.DateFormatHelper;
-import net.matrix.util.ObjectUtil;
 
 public abstract class WebProcess
 {
-	private static final Log LOG = LogFactory.getLog(WebProcess.class);
+	private static final Logger LOG = LoggerFactory.getLogger(WebProcess.class);
 
 	private final static String ERROR_KEY = "error_key";
 
@@ -155,6 +155,6 @@ public abstract class WebProcess
 	// /////////////////////////////////////////////////////////////////////////////////////
 	public static String getDisplayString(String string)
 	{
-		return ObjectUtil.isNull(string, "");
+		return Objects.isNull(string, "");
 	}
 }

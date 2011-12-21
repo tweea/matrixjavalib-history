@@ -26,13 +26,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RequestDumpFilter
 	implements Filter
 {
-	private static final Log LOG = LogFactory.getLog(RequestDumpFilter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RequestDumpFilter.class);
 
 	/**
 	 * The filter configuration object we are associated with. If this value is
