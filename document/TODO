@@ -1,7 +1,10 @@
 借鉴 SpringSide4
+---- next ------
+注意异常的抛出和处理
 增强检查规则
 	Sonar
 	CheckStyle
+	应用 JSR305 注解
 测试
 	单元测试
 	Mock
