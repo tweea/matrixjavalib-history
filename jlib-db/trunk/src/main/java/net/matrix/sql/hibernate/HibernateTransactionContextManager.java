@@ -73,7 +73,7 @@ public class HibernateTransactionContextManager
 			threadContext.set(contextStack);
 		}
 		if(contextStack.empty()){
-			contextStack.push(new JDBCTransactionContext());
+			contextStack.push(new HibernateTransactionContext());
 		}
 		return contextStack.peek();
 	}
@@ -88,7 +88,7 @@ public class HibernateTransactionContextManager
 		if(contextStack == null){
 			return getTransactionContext();
 		}
-		HibernateTransactionContext context = new JDBCTransactionContext();
+		HibernateTransactionContext context = new HibernateTransactionContext();
 		contextStack.push(context);
 		return context;
 	}
