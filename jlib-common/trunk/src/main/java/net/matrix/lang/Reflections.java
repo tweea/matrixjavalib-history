@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
  */
 public class Reflections
 {
-	public static final String CGLIB_CLASS_SEPARATOR = "$$";
+	private static final Logger LOG = LoggerFactory.getLogger(Reflections.class);
 
-	private static Logger LOGGER = LoggerFactory.getLogger(Reflections.class);
+	public static final String CGLIB_CLASS_SEPARATOR = "$$";
 
 	private Reflections()
 	{
@@ -78,7 +78,7 @@ public class Reflections
 		try{
 			result = field.get(obj);
 		}catch(IllegalAccessException e){
-			LOGGER.error("不可能抛出的异常{}", e.getMessage());
+			LOG.error("不可能抛出的异常{}", e.getMessage());
 		}
 		return result;
 	}
@@ -97,7 +97,7 @@ public class Reflections
 		try{
 			field.set(obj, value);
 		}catch(IllegalAccessException e){
-			LOGGER.error("不可能抛出的异常:{}", e.getMessage());
+			LOG.error("不可能抛出的异常:{}", e.getMessage());
 		}
 	}
 
@@ -161,18 +161,18 @@ public class Reflections
 		Type genType = clazz.getGenericSuperclass();
 
 		if(!(genType instanceof ParameterizedType)){
-			LOGGER.warn(clazz.getSimpleName() + "'s superclass not ParameterizedType");
+			LOG.warn(clazz.getSimpleName() + "'s superclass not ParameterizedType");
 			return Object.class;
 		}
 
 		Type[] params = ((ParameterizedType)genType).getActualTypeArguments();
 
 		if(index >= params.length || index < 0){
-			LOGGER.warn("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: " + params.length);
+			LOG.warn("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: " + params.length);
 			return Object.class;
 		}
 		if(!(params[index] instanceof Class)){
-			LOGGER.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
+			LOG.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
 			return Object.class;
 		}
 
