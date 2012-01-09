@@ -27,7 +27,6 @@ import net.matrix.lang.Objects;
 
 /**
  * Hibernate 实用类
- * @author Tweea
  * @since 2005.06.15
  */
 public class HibernateHelper
@@ -54,7 +53,6 @@ public class HibernateHelper
 	 * 获得 Hibernate 数据库连接管理对象
 	 */
 	private static HibernateTransactionContext getTransactionContext(HibernateTransactionContext context)
-		throws SQLException
 	{
 		if(context == null){
 			return HibernateContextManager.getInstance().getTransactionContext();

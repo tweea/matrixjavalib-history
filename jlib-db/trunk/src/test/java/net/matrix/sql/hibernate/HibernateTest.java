@@ -62,7 +62,7 @@ public class HibernateTest
 	{
 		HibernateContextManager mm = HibernateContextManager.getInstance();
 		HibernateTransactionContext tc = mm.getTransactionContext();
-		tc.setConfigName("");
+		tc.setSessionFactoryName("");
 		tc.begin();
 		tc.getConnection();
 		tc.commit();

@@ -19,31 +19,31 @@ public class JDBCTransactionContext
 {
 	private static final Logger LOG = LoggerFactory.getLogger(JDBCTransactionContext.class);
 
-	private String configName = SessionFactoryManager.DEFAULT_NAME;
+	private String sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
 
 	private Session session;
 
 	private Transaction transaction;
 
 	@Override
-	public void setConfigName(String configName)
+	public void setSessionFactoryName(String sessionFactoryName)
 	{
-		if(configName == null){
-			configName = SessionFactoryManager.DEFAULT_NAME;
+		if(sessionFactoryName == null){
+			sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
 		}
-		if(this.configName.equals(configName)){
+		if(this.sessionFactoryName.equals(sessionFactoryName)){
 			return;
 		}
 		if(session != null){
 			throw new IllegalStateException("Hibernate 会话已建立");
 		}
-		this.configName = configName;
+		this.sessionFactoryName = sessionFactoryName;
 	}
 
 	@Override
-	public String getConfigName()
+	public String getSessionFactoryName()
 	{
-		return configName;
+		return sessionFactoryName;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -65,7 +65,7 @@ public class JDBCTransactionContext
 	{
 		if(session == null){
 			try{
-				session = SessionFactoryManager.getInstance().createSession(configName);
+				session = SessionFactoryManager.getInstance().createSession(sessionFactoryName);
 			}catch(HibernateException ex){
 				throw new SQLException(ex);
 			}
@@ -117,17 +117,21 @@ public class JDBCTransactionContext
 	{
 		try{
 			if(transaction != null && transaction.isActive()){
-				rollback();
+				transaction.rollback();
 			}
-			if(session != null){
-				getSession().close();
-			}
+		}catch(HibernateException ex){
+			LOG.warn("Hibernate 事务回滚失败", ex);
+		}finally{
 			transaction = null;
-			session = null;
-		}catch(SQLException ex){
-			LOG.warn("Hibernate 会话结束失败", ex);
+		}
+		try{
+			if(session != null){
+				session.close();
+			}
 		}catch(HibernateException ex){
 			LOG.warn("Hibernate 会话结束失败", ex);
+		}finally{
+			session = null;
 		}
 		LOG.debug("Hibernate 会话结束");
 	}
