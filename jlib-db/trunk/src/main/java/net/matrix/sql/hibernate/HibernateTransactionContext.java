@@ -22,7 +22,7 @@ import net.matrix.sql.TransactionContext;
 public class HibernateTransactionContext
 	implements TransactionContext
 {
-	private static final Logger LOG = LoggerFactory.getLogger(JDBCTransactionContext.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HibernateTransactionContext.class);
 
 	private String sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
 
