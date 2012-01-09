@@ -10,18 +10,18 @@ package net.matrix.app;
  */
 public class GlobalSystemContext
 {
-	private static SystemContext GLOBAL;
+	private static SystemContext global;
 
 	public static SystemContext get()
 	{
-		if(GLOBAL == null){
-			GLOBAL = new DefaultSystemContext();
+		if(global == null){
+			global = new DefaultSystemContext();
 		}
-		return GLOBAL;
+		return global;
 	}
 
 	public static void set(SystemContext context)
 	{
-		GLOBAL = context;
+		global = context;
 	}
 }
