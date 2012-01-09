@@ -55,7 +55,7 @@ public class HibernateHelper
 	private static HibernateTransactionContext getTransactionContext(HibernateTransactionContext context)
 	{
 		if(context == null){
-			return HibernateContextManager.getInstance().getTransactionContext();
+			return HibernateTransactionContextManager.getInstance().getTransactionContext();
 		}
 		return context;
 	}

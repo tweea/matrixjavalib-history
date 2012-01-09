@@ -13,16 +13,16 @@ import java.util.Stack;
 import net.matrix.lang.Resettable;
 
 /**
- * Hibernate 事务管理器
+ * Hibernate 事务上下文管理器
  */
-public class HibernateContextManager
+public class HibernateTransactionContextManager
 	implements Resettable
 {
-	private static Map<String, HibernateContextManager> managers = new HashMap<String, HibernateContextManager>();
+	private static Map<String, HibernateTransactionContextManager> managers = new HashMap<String, HibernateTransactionContextManager>();
 
 	private ThreadLocal<Stack<HibernateTransactionContext>> threadContext;
 
-	private HibernateContextManager()
+	private HibernateTransactionContextManager()
 	{
 		threadContext = new ThreadLocal<Stack<HibernateTransactionContext>>();
 	}
@@ -31,7 +31,7 @@ public class HibernateContextManager
 	 * 获取默认实例
 	 * @return 默认实例
 	 */
-	public static synchronized HibernateContextManager getInstance()
+	public static synchronized HibernateTransactionContextManager getInstance()
 	{
 		return getInstance("");
 	}
@@ -41,11 +41,11 @@ public class HibernateContextManager
 	 * @param name 实例名称
 	 * @return 实例
 	 */
-	public static synchronized HibernateContextManager getInstance(String name)
+	public static synchronized HibernateTransactionContextManager getInstance(String name)
 	{
-		HibernateContextManager manager = managers.get(name);
+		HibernateTransactionContextManager manager = managers.get(name);
 		if(manager == null){
-			manager = new HibernateContextManager();
+			manager = new HibernateTransactionContextManager();
 			managers.put(name, manager);
 		}
 		return manager;
