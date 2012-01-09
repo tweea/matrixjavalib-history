@@ -14,6 +14,11 @@ import java.sql.SQLException;
  */
 public interface TransactionContext
 {
+	/**
+	 * 获取 JDBC 连接
+	 * @return JDBC 连接
+	 * @throws SQLException 获取失败
+	 */
 	Connection getConnection()
 		throws SQLException;
 

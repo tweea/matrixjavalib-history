@@ -8,7 +8,7 @@ package net.matrix.sql.hibernate;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
@@ -22,14 +22,20 @@ import org.slf4j.LoggerFactory;
 import net.matrix.lang.Resettable;
 import net.matrix.sql.DatabaseConnectionInfo;
 
+/**
+ * Hibernate SessionFactory 管理器。
+ */
 public class SessionFactoryManager
 	implements Resettable
 {
+	/**
+	 * 默认的 SessionFactory 名称
+	 */
 	public final static String DEFAULT_NAME = "";
 
 	private static final Logger LOG = LoggerFactory.getLogger(SessionFactoryManager.class);
 
-	private static SessionFactoryManager base = null;
+	private static SessionFactoryManager instance = null;
 
 	private Set<String> names;
 
@@ -45,15 +51,18 @@ public class SessionFactoryManager
 		names.add(DEFAULT_NAME);
 	}
 
+	/**
+	 * @return 唯一实例
+	 */
 	public static synchronized SessionFactoryManager getInstance()
 	{
-		if(base == null){
-			base = new SessionFactoryManager();
+		if(instance == null){
+			instance = new SessionFactoryManager();
 		}
-		return base;
+		return instance;
 	}
 
-	/*
+	/**
 	 * 删除所有 SessionFactory 配置
 	 * @see net.matrix.lang.Resettable#reset()
 	 */
@@ -69,8 +78,9 @@ public class SessionFactoryManager
 		names.add(DEFAULT_NAME);
 	}
 
-	/*
-	 * 判断名称是否已被占用
+	/**
+	 * 判断 SessionFactory 名称是否已被占用
+	 * @param name SessionFactory 名称
 	 */
 	public boolean isNameUsed(String name)
 	{
@@ -84,8 +94,10 @@ public class SessionFactoryManager
 		}
 	}
 
-	/*
+	/**
 	 * 命名一个配置文件到指定名称
+	 * @param name SessionFactory 名称
+	 * @param configResourceName SessionFactory 配置资源
 	 */
 	public void nameSessionFactory(String name, String configResourceName)
 		throws HibernateException
@@ -101,6 +113,11 @@ public class SessionFactoryManager
 		}
 	}
 
+	/**
+	 * 获取默认 SessionFactory 配置
+	 * @return 默认 SessionFactory 配置
+	 * @throws HibernateException 配置失败
+	 */
 	public Configuration getConfiguration()
 		throws HibernateException
 	{
@@ -115,6 +132,12 @@ public class SessionFactoryManager
 		return configuration;
 	}
 
+	/**
+	 * 获取 SessionFactory 配置
+	 * @param name SessionFactory 名称
+	 * @return SessionFactory 配置
+	 * @throws HibernateException 配置失败
+	 */
 	public Configuration getConfiguration(String name)
 		throws HibernateException
 	{
@@ -125,12 +148,23 @@ public class SessionFactoryManager
 		return configurations.get(name);
 	}
 
+	/**
+	 * 使用默认 SessionFactory 建立 Session
+	 * @return 新建的 Session
+	 * @throws HibernateException 建立失败
+	 */
 	public Session createSession()
 		throws HibernateException
 	{
 		return createSession(DEFAULT_NAME);
 	}
 
+	/**
+	 * 使用 SessionFactory 建立 Session
+	 * @param name SessionFactory 名称
+	 * @return 新建的 Session
+	 * @throws HibernateException 建立失败
+	 */
 	public Session createSession(String name)
 		throws HibernateException
 	{
@@ -146,11 +180,18 @@ public class SessionFactoryManager
 		return factory.openSession();
 	}
 
+	/**
+	 * 关闭默认的 SessionFactory
+	 */
 	public void closeSessionFactory()
 	{
 		closeSessionFactory(DEFAULT_NAME);
 	}
 
+	/**
+	 * 关闭 SessionFactory
+	 * @param name SessionFactory 名称
+	 */
 	public void closeSessionFactory(String name)
 	{
 		checkName(name);
@@ -164,24 +205,35 @@ public class SessionFactoryManager
 		}
 	}
 
+	/**
+	 * 获取默认 SessionFactory 相关连接信息
+	 * @return 连接信息
+	 * @throws SQLException 获取失败
+	 */
 	public DatabaseConnectionInfo getConnectionInfo()
 		throws SQLException
 	{
 		return getConnectionInfo(getConfiguration());
 	}
 
-	public DatabaseConnectionInfo getConnectionInfo(String configResourceName)
+	/**
+	 * 获取 SessionFactory 相关连接信息
+	 * @param name SessionFactory 名称
+	 * @return 连接信息
+	 * @throws SQLException 获取失败
+	 */
+	public DatabaseConnectionInfo getConnectionInfo(String name)
 		throws SQLException
 	{
-		return getConnectionInfo(getConfiguration(configResourceName));
+		return getConnectionInfo(getConfiguration(name));
 	}
 
 	private DatabaseConnectionInfo getConnectionInfo(Configuration conf)
 		throws SQLException
 	{
-		Map properties = conf.getProperties();
-		DatabaseConnectionInfo info = new DatabaseConnectionInfo((String)properties.get(Environment.DRIVER), (String)properties.get(Environment.URL),
-			(String)properties.get(Environment.USER), (String)properties.get(Environment.PASS));
+		Properties properties = conf.getProperties();
+		DatabaseConnectionInfo info = new DatabaseConnectionInfo(properties.getProperty(Environment.DRIVER), properties.getProperty(Environment.URL),
+			properties.getProperty(Environment.USER), properties.getProperty(Environment.PASS));
 		return info;
 	}
 }

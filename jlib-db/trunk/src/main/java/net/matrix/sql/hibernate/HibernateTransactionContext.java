@@ -14,10 +14,23 @@ import net.matrix.sql.TransactionContext;
 public interface HibernateTransactionContext
 	extends TransactionContext
 {
-	void setConfigName(String configName);
+	/**
+	 * 设置使用的 SessionFactory 名称
+	 * @param sessionFactoryName SessionFactory 名称
+	 */
+	void setSessionFactoryName(String sessionFactoryName);
 
-	String getConfigName();
+	/**
+	 * 当前使用的 SessionFactory 名称
+	 * @return SessionFactory 名称
+	 */
+	String getSessionFactoryName();
 
+	/**
+	 * 获取对应的 Hibernate Session
+	 * @return Hibernate Session
+	 * @throws SQLException 建立 Session 失败
+	 */
 	Session getSession()
 		throws SQLException;
 }

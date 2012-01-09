@@ -10,16 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import org.hibernate.util.ReflectHelper;
-
 import net.matrix.lang.Resettable;
 
+/**
+ * Hibernate 事务管理器
+ */
 public class HibernateContextManager
 	implements Resettable
 {
 	private static Map<String, HibernateContextManager> managers = new HashMap<String, HibernateContextManager>();
-
-	private Class<? extends HibernateTransactionContext> transactionContextClass = JDBCTransactionContext.class;
 
 	private ThreadLocal<Stack<HibernateTransactionContext>> threadContext;
 
@@ -28,11 +27,20 @@ public class HibernateContextManager
 		threadContext = new ThreadLocal<Stack<HibernateTransactionContext>>();
 	}
 
+	/**
+	 * 获取默认实例
+	 * @return 默认实例
+	 */
 	public static synchronized HibernateContextManager getInstance()
 	{
 		return getInstance("");
 	}
 
+	/**
+	 * 获取实例
+	 * @param name 实例名称
+	 * @return 实例
+	 */
 	public static synchronized HibernateContextManager getInstance(String name)
 	{
 		HibernateContextManager manager = managers.get(name);
@@ -43,18 +51,7 @@ public class HibernateContextManager
 		return manager;
 	}
 
-	public void setTransactionContextClass(String name)
-	{
-		Class klass;
-		try{
-			klass = ReflectHelper.classForName(name);
-		}catch(ClassNotFoundException cnfe){
-			throw new IllegalArgumentException("找不到类: " + name, cnfe);
-		}
-		transactionContextClass = klass;
-	}
-
-	/*
+	/**
 	 * 删除所有事务
 	 * @see net.matrix.lang.Resettable#reset()
 	 */
@@ -64,8 +61,11 @@ public class HibernateContextManager
 		threadContext = new ThreadLocal<Stack<HibernateTransactionContext>>();
 	}
 
+	/**
+	 * 获取当前顶层事务上下文，没有则建立
+	 * @return 当前顶层事务上下文
+	 */
 	public HibernateTransactionContext getTransactionContext()
-		throws SQLException
 	{
 		Stack<HibernateTransactionContext> contextStack = threadContext.get();
 		if(contextStack == null){
@@ -73,34 +73,30 @@ public class HibernateContextManager
 			threadContext.set(contextStack);
 		}
 		if(contextStack.empty()){
-			HibernateTransactionContext context = null;
-			try{
-				context = transactionContextClass.newInstance();
-			}catch(Exception e){
-				throw new SQLException("Could not instantiate class", e);
-			}
-			contextStack.push(context);
+			contextStack.push(new JDBCTransactionContext());
 		}
 		return contextStack.peek();
 	}
 
+	/**
+	 * 建立新的顶层事务上下文
+	 * @return 顶层事务上下文
+	 */
 	public HibernateTransactionContext createTransactionContext()
-		throws SQLException
 	{
 		Stack<HibernateTransactionContext> contextStack = threadContext.get();
 		if(contextStack == null){
 			return getTransactionContext();
 		}
-		HibernateTransactionContext context = null;
-		try{
-			context = transactionContextClass.newInstance();
-		}catch(Exception e){
-			throw new SQLException("Could not instantiate class", e);
-		}
+		HibernateTransactionContext context = new JDBCTransactionContext();
 		contextStack.push(context);
 		return context;
 	}
 
+	/**
+	 * 丢弃顶层事务上下文
+	 * @throws SQLException 回滚发生错误
+	 */
 	public void dropTransactionContext()
 		throws SQLException
 	{
@@ -110,8 +106,11 @@ public class HibernateContextManager
 		}
 		if(contextStack.size() > 1){
 			HibernateTransactionContext transactionToDrop = contextStack.pop();
-			transactionToDrop.rollback();
-			transactionToDrop.release();
+			try{
+				transactionToDrop.rollback();
+			}finally{
+				transactionToDrop.release();
+			}
 		}
 	}
 }

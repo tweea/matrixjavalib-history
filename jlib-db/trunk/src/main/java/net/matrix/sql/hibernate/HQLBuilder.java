@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 /**
  * HQL 构造器
- * @author Tweea
  * @since 2005.06.15
  */
 public class HQLBuilder
