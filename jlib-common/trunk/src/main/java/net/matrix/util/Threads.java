@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Threads
 {
-	private static Logger LOGGER = LoggerFactory.getLogger(Threads.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Threads.class);
 
 	private Threads()
 	{
@@ -30,7 +30,7 @@ public class Threads
 		try{
 			Thread.sleep(millis);
 		}catch(InterruptedException e){
-			LOGGER.warn("thread interrupted.");
+			LOG.warn("thread interrupted.");
 		}
 	}
 
@@ -49,7 +49,7 @@ public class Threads
 				pool.shutdownNow(); // Cancel currently executing tasks
 				// Wait a while for tasks to respond to being cancelled
 				if(!pool.awaitTermination(shutdownNowTimeout, timeUnit)){
-					LOGGER.error("Pool did not terminate");
+					LOG.error("Pool did not terminate");
 				}
 			}
 		}catch(InterruptedException ie){
@@ -68,7 +68,7 @@ public class Threads
 		try{
 			pool.shutdownNow();
 			if(!pool.awaitTermination(timeout, timeUnit)){
-				LOGGER.error("Pool did not terminate");
+				LOG.error("Pool did not terminate");
 			}
 		}catch(InterruptedException ie){
 			Thread.currentThread().interrupt();
