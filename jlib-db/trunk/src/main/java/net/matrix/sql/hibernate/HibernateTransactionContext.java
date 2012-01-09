@@ -11,6 +11,9 @@ import org.hibernate.Session;
 
 import net.matrix.sql.TransactionContext;
 
+/**
+ * Hibernate 事务上下文
+ */
 public interface HibernateTransactionContext
 	extends TransactionContext
 {

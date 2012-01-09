@@ -20,7 +20,7 @@ public class HibernateTest
 	public void testContextManager()
 		throws Exception
 	{
-		HibernateContextManager mm = HibernateContextManager.getInstance();
+		HibernateTransactionContextManager mm = HibernateTransactionContextManager.getInstance();
 		TransactionContext tc0 = mm.getTransactionContext();
 		TransactionContext tc1 = mm.getTransactionContext();
 		TransactionContext tc2 = mm.getTransactionContext();
@@ -36,7 +36,7 @@ public class HibernateTest
 	public void testCreateDrop()
 		throws Exception
 	{
-		HibernateContextManager mm = HibernateContextManager.getInstance();
+		HibernateTransactionContextManager mm = HibernateTransactionContextManager.getInstance();
 		Assert.assertNotNull(mm.createTransactionContext());
 		Assert.assertNotNull(mm.getTransactionContext());
 		mm.dropTransactionContext();
@@ -48,7 +48,7 @@ public class HibernateTest
 	public void testJDBCTransactionContext()
 		throws Exception
 	{
-		HibernateContextManager mm = HibernateContextManager.getInstance();
+		HibernateTransactionContextManager mm = HibernateTransactionContextManager.getInstance();
 		TransactionContext tc = mm.getTransactionContext();
 		tc.begin();
 		tc.getConnection();
@@ -60,7 +60,7 @@ public class HibernateTest
 	public void testSetConfigName()
 		throws Exception
 	{
-		HibernateContextManager mm = HibernateContextManager.getInstance();
+		HibernateTransactionContextManager mm = HibernateTransactionContextManager.getInstance();
 		HibernateTransactionContext tc = mm.getTransactionContext();
 		tc.setSessionFactoryName("");
 		tc.begin();
