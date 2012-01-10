@@ -1,6 +1,7 @@
 借鉴 SpringSide4
 ---- next ------
 注意异常的抛出和处理
+增强 Javadoc
 增强检查规则
 	Sonar
 	CheckStyle
