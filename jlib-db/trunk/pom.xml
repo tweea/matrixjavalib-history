@@ -32,22 +32,15 @@
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.2.0.Final</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<!-- 关系数据库映射工具 -->
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.6.5.Final</version>
+			<version>4.0.0.Final</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.6.5.Final</version>
+			<version>4.0.0.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -55,6 +48,13 @@
 					<artifactId>cglib</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<!-- 关系数据库映射工具 -->
+			<groupId>org.hibernate.common</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>4.0.1.Final</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -101,21 +101,21 @@
 			<!-- 缓存工具 -->
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
-			<version>2.4.3</version>
+			<version>2.5.0</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>3.6.5.Final</version>
+			<version>4.0.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>3.6.5.Final</version>
+			<version>4.0.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- test -->
@@ -129,7 +129,7 @@
 			<!-- MySQL 的 JDBC 驱动 -->
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
+			<version>5.1.18</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
