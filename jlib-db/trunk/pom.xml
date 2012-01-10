@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<!-- $Id$ -->
 	<modelVersion>4.0.0</modelVersion>
 
@@ -18,6 +19,26 @@
 	<dependencies>
 		<!-- compile -->
 		<dependency>
+			<!-- 文法分析工具，Hibernate 需要 -->
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<!-- XML 处理工具 -->
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
@@ -35,6 +56,16 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.0.0.Final</version>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.spec.javax.transaction</groupId>
+					<artifactId>jboss-transaction-api_1.1_spec</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
@@ -44,8 +75,12 @@
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
-					<groupId>cglib</groupId>
-					<artifactId>cglib</artifactId>
+					<groupId>javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.spec.javax.transaction</groupId>
+					<artifactId>jboss-transaction-api_1.1_spec</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -62,39 +97,19 @@
 			<version>1.0.1.Final</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- runtime -->
 		<dependency>
-			<!-- 文法分析工具，Hibernate 需要 -->
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
-			<scope>runtime</scope>
+			<!-- 机器码工具，Hibernate 需要 -->
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.15.0-GA</version>
+			<scope>compile</scope>
 		</dependency>
+		<!-- runtime -->
 		<dependency>
 			<!-- 数据库连接池 -->
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<!-- XML 处理工具 -->
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>xml-apis</groupId>
-					<artifactId>xml-apis</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<!-- 机器码工具，Hibernate 需要 -->
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.12.1.GA</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
