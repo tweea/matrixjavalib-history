@@ -15,12 +15,17 @@ import java.util.GregorianCalendar;
 import java.util.Properties;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
 public class DateTimeAsIntegerType
 	implements UserType, ParameterizedType
 {
+	private final static int[] TYPES = new int[]{
+		Types.INTEGER
+	};
+
 	private final static String[] FORMATS = {
 		"yyyyMMdd", "HHmmss"
 	};
@@ -34,9 +39,7 @@ public class DateTimeAsIntegerType
 	@Override
 	public int[] sqlTypes()
 	{
-		return new int[]{
-			Types.INTEGER
-		};
+		return TYPES;
 	}
 
 	@Override
@@ -49,10 +52,12 @@ public class DateTimeAsIntegerType
 	public boolean equals(Object x, Object y)
 		throws HibernateException
 	{
-		if(x == y)
+		if(x == y){
 			return true;
-		if(x == null || y == null)
+		}
+		if(x == null || y == null){
 			return false;
+		}
 		return x.equals(y);
 	}
 
@@ -64,17 +69,19 @@ public class DateTimeAsIntegerType
 	}
 
 	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
 		throws HibernateException, SQLException
 	{
 		int r = rs.getInt(names[0]);
-		if(rs.wasNull())
+		if(rs.wasNull()){
 			return null;
+		}
 		GregorianCalendar date = null;
 		if(formatIndex == yyyyMMdd){
 			// 0 相当于 NULL
-			if(r == 0)
+			if(r == 0){
 				return null;
+			}
 			int year = 0, month = 0, day = 0;
 			day = r % 100;
 			r -= day;
@@ -99,7 +106,7 @@ public class DateTimeAsIntegerType
 	}
 
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index)
+	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
 		throws HibernateException, SQLException
 	{
 		if(value == null){
@@ -124,8 +131,9 @@ public class DateTimeAsIntegerType
 	public Object deepCopy(Object value)
 		throws HibernateException
 	{
-		if(value == null)
+		if(value == null){
 			return null;
+		}
 		return ((GregorianCalendar)value).clone();
 	}
 
