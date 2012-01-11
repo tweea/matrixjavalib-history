@@ -6,7 +6,6 @@
 package net.matrix.sql.hibernate;
 
 import java.io.Serializable;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -41,12 +40,6 @@ public class HibernateHelper
 		throws SQLException
 	{
 		return context.getSession().getSession(EntityMode.MAP);
-	}
-
-	private static Connection getConnection(HibernateTransactionContext context)
-		throws SQLException
-	{
-		return context.getConnection();
 	}
 
 	/**
