@@ -49,6 +49,7 @@ public class SessionFactoryManager
 	 * @return 默认实例
 	 */
 	public static SessionFactoryManager getInstance()
+		throws HibernateException
 	{
 		SessionFactoryManager instance = instances.get(DEFAULT_NAME);
 		if(instance == null){
@@ -62,6 +63,7 @@ public class SessionFactoryManager
 	 * @return 默认实例
 	 */
 	public static SessionFactoryManager getInstance(String name)
+		throws HibernateException
 	{
 		if(DEFAULT_NAME.equals(name)){
 			return getInstance();
@@ -79,6 +81,21 @@ public class SessionFactoryManager
 	public static boolean isNameUsed(String name)
 	{
 		return instances.containsValue(name);
+	}
+
+	/**
+	 * 命名默认配置文件到指定名称
+	 * @param name SessionFactory 名称
+	 */
+	public static void nameSessionFactory(String name)
+		throws HibernateException
+	{
+		synchronized(instances){
+			if(isNameUsed(name)){
+				throw new IllegalStateException("名称 " + name + " 已被占用");
+			}
+			instances.put(name, new SessionFactoryManager(name));
+		}
 	}
 
 	/**
