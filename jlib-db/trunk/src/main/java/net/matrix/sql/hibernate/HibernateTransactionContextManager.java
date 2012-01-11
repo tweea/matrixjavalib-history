@@ -8,7 +8,6 @@ package net.matrix.sql.hibernate;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 
 import net.matrix.lang.Resettable;
 
@@ -20,11 +19,11 @@ public class HibernateTransactionContextManager
 {
 	private static Map<String, HibernateTransactionContextManager> managers = new HashMap<String, HibernateTransactionContextManager>();
 
-	private ThreadLocal<Stack<HibernateTransactionContext>> threadContext;
+	private ThreadLocal<HibernateTransactionContext> threadContext;
 
 	private HibernateTransactionContextManager()
 	{
-		threadContext = new ThreadLocal<Stack<HibernateTransactionContext>>();
+		threadContext = new ThreadLocal<HibernateTransactionContext>();
 	}
 
 	/**
@@ -58,7 +57,7 @@ public class HibernateTransactionContextManager
 	@Override
 	public void reset()
 	{
-		threadContext = new ThreadLocal<Stack<HibernateTransactionContext>>();
+		threadContext = new ThreadLocal<HibernateTransactionContext>();
 	}
 
 	/**
@@ -67,29 +66,11 @@ public class HibernateTransactionContextManager
 	 */
 	public HibernateTransactionContext getTransactionContext()
 	{
-		Stack<HibernateTransactionContext> contextStack = threadContext.get();
-		if(contextStack == null){
-			contextStack = new Stack<HibernateTransactionContext>();
-			threadContext.set(contextStack);
+		HibernateTransactionContext context = threadContext.get();
+		if(context == null){
+			context = new HibernateTransactionContext();
+			threadContext.set(context);
 		}
-		if(contextStack.empty()){
-			contextStack.push(new HibernateTransactionContext());
-		}
-		return contextStack.peek();
-	}
-
-	/**
-	 * 建立新的顶层事务上下文
-	 * @return 顶层事务上下文
-	 */
-	public HibernateTransactionContext createTransactionContext()
-	{
-		Stack<HibernateTransactionContext> contextStack = threadContext.get();
-		if(contextStack == null){
-			return getTransactionContext();
-		}
-		HibernateTransactionContext context = new HibernateTransactionContext();
-		contextStack.push(context);
 		return context;
 	}
 
@@ -100,17 +81,14 @@ public class HibernateTransactionContextManager
 	public void dropTransactionContext()
 		throws SQLException
 	{
-		Stack<HibernateTransactionContext> contextStack = threadContext.get();
-		if(contextStack == null){
+		HibernateTransactionContext context = threadContext.get();
+		if(context == null){
 			return;
 		}
-		if(contextStack.size() > 1){
-			HibernateTransactionContext transactionToDrop = contextStack.pop();
-			try{
-				transactionToDrop.rollback();
-			}finally{
-				transactionToDrop.release();
-			}
+		try{
+			context.rollback();
+		}finally{
+			context.release();
 		}
 	}
 }

@@ -45,13 +45,12 @@ public class HibernateTest
 	}
 
 	@Test
-	public void testJDBCTransactionContext()
+	public void testTransactionContext()
 		throws Exception
 	{
 		HibernateTransactionContextManager mm = HibernateTransactionContextManager.getInstance();
 		TransactionContext tc = mm.getTransactionContext();
 		tc.begin();
-		tc.getConnection();
 		tc.commit();
 		tc.release();
 	}
@@ -64,7 +63,6 @@ public class HibernateTest
 		HibernateTransactionContext tc = mm.getTransactionContext();
 		tc.setSessionFactoryName("");
 		tc.begin();
-		tc.getConnection();
 		tc.commit();
 		tc.release();
 	}
