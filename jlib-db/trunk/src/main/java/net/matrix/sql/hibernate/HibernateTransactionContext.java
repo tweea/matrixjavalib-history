@@ -5,7 +5,6 @@
  */
 package net.matrix.sql.hibernate;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.hibernate.HibernateException;
@@ -73,19 +72,6 @@ public class HibernateTransactionContext
 			}
 		}
 		return session;
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public Connection getConnection()
-		throws SQLException
-	{
-		try{
-			// TODO 考虑用其他方法获得 JDBC 连接
-			return getSession().connection();
-		}catch(HibernateException ex){
-			throw new SQLException(ex);
-		}
 	}
 
 	@Override
