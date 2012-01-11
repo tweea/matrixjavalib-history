@@ -33,27 +33,12 @@ public class HibernateTransactionContext
 	 * 设置使用的 SessionFactory 名称
 	 * @param sessionFactoryName SessionFactory 名称
 	 */
-	public void setSessionFactoryName(String sessionFactoryName)
+	public HibernateTransactionContext(String sessionFactoryName)
 	{
 		if(sessionFactoryName == null){
 			sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
 		}
-		if(this.sessionFactoryName.equals(sessionFactoryName)){
-			return;
-		}
-		if(session != null){
-			throw new IllegalStateException("Hibernate 会话已建立");
-		}
 		this.sessionFactoryName = sessionFactoryName;
-	}
-
-	/**
-	 * 当前使用的 SessionFactory 名称
-	 * @return SessionFactory 名称
-	 */
-	public String getSessionFactoryName()
-	{
-		return sessionFactoryName;
 	}
 
 	/**

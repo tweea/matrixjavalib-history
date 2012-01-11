@@ -8,6 +8,7 @@ package net.matrix.sql.hibernate;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -39,15 +40,18 @@ public class SessionFactoryManager
 
 	private Set<String> names;
 
-	private HashMap<String, Configuration> configurations;
+	private Map<String, Configuration> configurations;
 
-	private HashMap<String, SessionFactory> sessionFactorys;
+	private Map<String, SessionFactory> sessionFactorys;
+
+	private Map<String, HibernateTransactionContextManager> contextManagers;
 
 	private SessionFactoryManager()
 	{
 		names = new HashSet<String>();
 		configurations = new HashMap<String, Configuration>();
 		sessionFactorys = new HashMap<String, SessionFactory>();
+		contextManagers = new HashMap<String, HibernateTransactionContextManager>();
 		names.add(DEFAULT_NAME);
 	}
 
@@ -75,6 +79,7 @@ public class SessionFactoryManager
 		names = new HashSet<String>();
 		configurations = new HashMap<String, Configuration>();
 		sessionFactorys = new HashMap<String, SessionFactory>();
+		contextManagers = new HashMap<String, HibernateTransactionContextManager>();
 		names.add(DEFAULT_NAME);
 	}
 
@@ -203,6 +208,30 @@ public class SessionFactoryManager
 				LOG.info(name + " 配置的 Hibernate SessionFactory 已关闭。");
 			}
 		}
+	}
+
+	/**
+	 * 获取默认事务上下文管理器
+	 * @return 默认事务上下文管理器
+	 */
+	public HibernateTransactionContextManager getContextManager()
+	{
+		return getContextManager("");
+	}
+
+	/**
+	 * 获取事务上下文管理器
+	 * @param name SessionFactory 名称
+	 * @return 事务上下文管理器
+	 */
+	public HibernateTransactionContextManager getContextManager(String name)
+	{
+		HibernateTransactionContextManager manager = contextManagers.get(name);
+		if(manager == null){
+			manager = new HibernateTransactionContextManager(name);
+			contextManagers.put(name, manager);
+		}
+		return manager;
 	}
 
 	/**
