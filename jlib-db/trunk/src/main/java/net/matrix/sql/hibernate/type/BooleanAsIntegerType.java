@@ -12,17 +12,20 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 public class BooleanAsIntegerType
 	implements UserType
 {
+	private final static int[] TYPES = new int[]{
+		Types.INTEGER
+	};
+
 	@Override
 	public int[] sqlTypes()
 	{
-		return new int[]{
-			Types.INTEGER
-		};
+		return TYPES;
 	}
 
 	@Override
@@ -46,7 +49,7 @@ public class BooleanAsIntegerType
 	}
 
 	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
 		throws HibernateException, SQLException
 	{
 		int r = rs.getInt(names[0]);
@@ -54,14 +57,14 @@ public class BooleanAsIntegerType
 	}
 
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index)
+	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
 		throws HibernateException, SQLException
 	{
 		if(value == null){
 			st.setNull(index, Types.INTEGER);
 		}else{
 			Boolean v = (Boolean)value;
-			st.setInt(index, v.booleanValue() ? 1 : 0);
+			st.setInt(index, v ? 1 : 0);
 		}
 	}
 
