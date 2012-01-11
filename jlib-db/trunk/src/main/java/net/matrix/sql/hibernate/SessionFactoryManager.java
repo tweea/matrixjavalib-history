@@ -7,7 +7,6 @@ package net.matrix.sql.hibernate;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 
@@ -25,6 +24,7 @@ import net.matrix.sql.DatabaseConnectionInfo;
 /**
  * Hibernate SessionFactory 管理器。
  */
+// TODO 延迟加载配置
 public class SessionFactoryManager
 	implements Resettable
 {
@@ -43,7 +43,7 @@ public class SessionFactoryManager
 
 	private SessionFactory sessionFactory;
 
-	private HibernateTransactionContextManager contextManager;
+	private ThreadLocal<HibernateTransactionContext> threadContext;
 
 	/**
 	 * @return 默认实例
@@ -114,45 +114,66 @@ public class SessionFactoryManager
 		}
 	}
 
+	/**
+	 * 清除所有 SessionFactory 配置
+	 */
+	public static void clearAll()
+	{
+		resetAll();
+		instances.clear();
+	}
+
+	/**
+	 * 重置所有 SessionFactory 配置
+	 */
+	public static void resetAll()
+	{
+		for(SessionFactoryManager instance : instances.values()){
+			instance.reset();
+		}
+	}
+
 	private SessionFactoryManager(String name)
 		throws HibernateException
 	{
 		this.factoryName = name;
 		LOG.info("读取默认的 Hibernate 配置。");
 		this.configuration = new Configuration().configure();
-		this.contextManager = new HibernateTransactionContextManager(name);
+		this.threadContext = new ThreadLocal<HibernateTransactionContext>();
 	}
 
-	private SessionFactoryManager(String name, String configResourceName)
+	private SessionFactoryManager(String name, String configResource)
 		throws HibernateException
 	{
 		this.factoryName = name;
-		LOG.info("读取 " + configResourceName + "的 Hibernate 配置。");
-		this.configuration = new Configuration().configure(configResourceName);
-		this.contextManager = new HibernateTransactionContextManager(name);
+		LOG.info("读取 " + configResource + "的 Hibernate 配置。");
+		this.configuration = new Configuration().configure(configResource);
+		this.threadContext = new ThreadLocal<HibernateTransactionContext>();
 	}
 
 	/**
-	 * 删除所有 SessionFactory 配置
+	 * 关闭 SessionFactory
 	 * @see net.matrix.lang.Resettable#reset()
 	 */
 	@Override
 	public void reset()
 	{
-		for(SessionFactory factory : sessionFactorys.values()){
-			factory.close();
+		if(sessionFactory == null){
+			return;
 		}
-		names = new HashSet<String>();
-		configurations = new HashMap<String, Configuration>();
-		sessionFactorys = new HashMap<String, SessionFactory>();
-		contextManagers = new HashMap<String, HibernateTransactionContextManager>();
-		names.add(DEFAULT_NAME);
+		try{
+			sessionFactory.close();
+			LOG.info(factoryName + " 配置的 Hibernate SessionFactory 已关闭。");
+		}catch(HibernateException e){
+			LOG.error(factoryName + " 配置的 Hibernate SessionFactory 关闭失败。");
+		}finally{
+			sessionFactory = null;
+		}
 	}
 
 	/**
-	 * 获取默认 SessionFactory 配置
-	 * @return 默认 SessionFactory 配置
-	 * @throws HibernateException 配置失败
+	 * 获取 SessionFactory 配置
+	 * @return SessionFactory 配置
 	 */
 	public Configuration getConfiguration()
 	{
@@ -160,52 +181,80 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 使用默认 SessionFactory 建立 Session
+	 * 获取 SessionFactory
+	 * @return SessionFactory
+	 */
+	public SessionFactory getSessionFactory()
+		throws HibernateException
+	{
+		if(sessionFactory == null){
+			if(DEFAULT_NAME.equals(factoryName)){
+				LOG.info("以默认配置构建 Hibernate SessionFactory。");
+			}else{
+				LOG.info("以 " + factoryName + " 配置构建 Hibernate SessionFactory。");
+			}
+			sessionFactory = configuration.buildSessionFactory();
+		}
+		return sessionFactory;
+	}
+
+	/**
+	 * 使用 SessionFactory 建立 Session
 	 * @return 新建的 Session
 	 * @throws HibernateException 建立失败
 	 */
 	public Session createSession()
 		throws HibernateException
 	{
-		if(sessionFactory == null){
-			LOG.info("以 " + factoryName + " 的配置构建 Hibernate SessionFactory。");
-			sessionFactory = configuration.buildSessionFactory();
-		}
-		return sessionFactory.openSession();
+		return getSessionFactory().openSession();
 	}
 
 	/**
-	 * 关闭默认的 SessionFactory
+	 * 获取当前顶层事务上下文，没有则建立
+	 * @return 当前顶层事务上下文
 	 */
-	public void closeSessionFactory()
-		throws HibernateException
+	public HibernateTransactionContext getTransactionContext()
 	{
-		if(sessionFactory != null){
-			sessionFactory.close();
-			LOG.info(factoryName + " 配置的 Hibernate SessionFactory 已关闭。");
+		HibernateTransactionContext context = threadContext.get();
+		if(context == null){
+			context = new HibernateTransactionContext(factoryName);
+			threadContext.set(context);
+		}
+		return context;
+	}
+
+	/**
+	 * 丢弃顶层事务上下文
+	 * @throws SQLException 回滚发生错误
+	 */
+	public void dropTransactionContext()
+		throws SQLException
+	{
+		HibernateTransactionContext context = threadContext.get();
+		if(context == null){
+			return;
+		}
+		threadContext.set(null);
+		try{
+			context.rollback();
+		}finally{
+			context.release();
 		}
 	}
 
 	/**
-	 * 获取默认事务上下文管理器
-	 * @return 默认事务上下文管理器
-	 */
-	public HibernateTransactionContextManager getContextManager()
-	{
-		return contextManager;
-	}
-
-	/**
-	 * 获取默认 SessionFactory 相关连接信息
+	 * 获取 SessionFactory 相关连接信息
 	 * @return 连接信息
-	 * @throws SQLException 获取失败
+	 * @throws SQLException 信息获取失败
 	 */
 	public DatabaseConnectionInfo getConnectionInfo()
 		throws SQLException
 	{
 		Properties properties = configuration.getProperties();
-		DatabaseConnectionInfo info = new DatabaseConnectionInfo(properties.getProperty(AvailableSettings.DRIVER),
-			properties.getProperty(AvailableSettings.URL), properties.getProperty(AvailableSettings.USER), properties.getProperty(AvailableSettings.PASS));
-		return info;
+		String driver = properties.getProperty(AvailableSettings.DRIVER);
+		String url = properties.getProperty(AvailableSettings.URL);
+		String user = properties.getProperty(AvailableSettings.USER);
+		String pass = properties.getProperty(AvailableSettings.PASS);
+		return new DatabaseConnectionInfo(driver, url, user, pass);
 	}
 }
