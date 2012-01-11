@@ -14,8 +14,8 @@ import java.util.Set;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -232,8 +232,8 @@ public class SessionFactoryManager
 		throws SQLException
 	{
 		Properties properties = conf.getProperties();
-		DatabaseConnectionInfo info = new DatabaseConnectionInfo(properties.getProperty(Environment.DRIVER), properties.getProperty(Environment.URL),
-			properties.getProperty(Environment.USER), properties.getProperty(Environment.PASS));
+		DatabaseConnectionInfo info = new DatabaseConnectionInfo(properties.getProperty(AvailableSettings.DRIVER),
+			properties.getProperty(AvailableSettings.URL), properties.getProperty(AvailableSettings.USER), properties.getProperty(AvailableSettings.PASS));
 		return info;
 	}
 }
