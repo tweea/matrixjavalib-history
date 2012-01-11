@@ -57,7 +57,7 @@ public class HibernateTransactionContextManager
 	@Override
 	public void reset()
 	{
-		threadContext = new ThreadLocal<HibernateTransactionContext>();
+		threadContext.set(null);
 	}
 
 	/**
@@ -85,6 +85,7 @@ public class HibernateTransactionContextManager
 		if(context == null){
 			return;
 		}
+		threadContext.set(null);
 		try{
 			context.rollback();
 		}finally{
