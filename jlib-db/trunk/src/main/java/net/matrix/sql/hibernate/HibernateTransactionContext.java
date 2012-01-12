@@ -23,14 +23,22 @@ public class HibernateTransactionContext
 {
 	private static final Logger LOG = LoggerFactory.getLogger(HibernateTransactionContext.class);
 
-	private String sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
+	private String sessionFactoryName;
 
 	private Session session;
 
 	private Transaction transaction;
 
 	/**
-	 * 设置使用的 SessionFactory 名称
+	 * 使用默认的 SessionFactory 构建
+	 */
+	public HibernateTransactionContext()
+	{
+		sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
+	}
+
+	/**
+	 * 使用指定的 SessionFactory 名称构建
 	 * @param sessionFactoryName SessionFactory 名称
 	 */
 	public HibernateTransactionContext(String sessionFactoryName)
@@ -51,7 +59,7 @@ public class HibernateTransactionContext
 	{
 		if(session == null){
 			try{
-				session = SessionFactoryManager.getInstance().createSession(sessionFactoryName);
+				session = SessionFactoryManager.getInstance(sessionFactoryName).createSession();
 			}catch(HibernateException ex){
 				throw new SQLException(ex);
 			}
@@ -79,6 +87,7 @@ public class HibernateTransactionContext
 		if(transaction != null){
 			try{
 				transaction.commit();
+				transaction = null;
 			}catch(HibernateException ex){
 				throw new SQLException(ex);
 			}
@@ -94,6 +103,8 @@ public class HibernateTransactionContext
 				transaction.rollback();
 			}catch(HibernateException ex){
 				throw new SQLException(ex);
+			}finally{
+				transaction = null;
 			}
 		}
 	}
@@ -101,24 +112,26 @@ public class HibernateTransactionContext
 	@Override
 	public void release()
 	{
-		try{
-			if(transaction != null && transaction.isActive()){
-				transaction.rollback();
+		if(transaction != null){
+			try{
+				if(transaction.isActive()){
+					transaction.rollback();
+				}
+			}catch(HibernateException ex){
+				LOG.warn("Hibernate 事务回滚失败", ex);
+			}finally{
+				transaction = null;
 			}
-		}catch(HibernateException ex){
-			LOG.warn("Hibernate 事务回滚失败", ex);
-		}finally{
-			transaction = null;
 		}
-		try{
-			if(session != null){
+		if(session != null){
+			try{
 				session.close();
+				LOG.debug("Hibernate 会话结束");
+			}catch(HibernateException ex){
+				LOG.warn("Hibernate 会话结束失败", ex);
+			}finally{
+				session = null;
 			}
-		}catch(HibernateException ex){
-			LOG.warn("Hibernate 会话结束失败", ex);
-		}finally{
-			session = null;
 		}
-		LOG.debug("Hibernate 会话结束");
 	}
 }
