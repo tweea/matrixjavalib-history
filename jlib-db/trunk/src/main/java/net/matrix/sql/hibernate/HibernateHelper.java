@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.EntityMode;
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
@@ -30,27 +29,28 @@ import net.matrix.lang.Objects;
  */
 public class HibernateHelper
 {
-	private static Session getSession(HibernateTransactionContext context)
-		throws SQLException
-	{
-		return context.getSession();
-	}
-
-	private static Session getMapSession(HibernateTransactionContext context)
-		throws SQLException
-	{
-		return context.getSession().getSession(EntityMode.MAP);
-	}
-
 	/**
 	 * 获得 Hibernate 数据库连接管理对象
 	 */
 	private static HibernateTransactionContext getTransactionContext(HibernateTransactionContext context)
 	{
 		if(context == null){
-			return HibernateTransactionContextManager.getInstance().getTransactionContext();
+			return SessionFactoryManager.getInstance().getTransactionContext();
 		}
 		return context;
+	}
+
+	private static Session getSession(HibernateTransactionContext context)
+		throws SQLException
+	{
+		return context.getSession();
+	}
+
+	// TODO How to get EntityMode.MAP mode Session?
+	private static Session getMapSession(HibernateTransactionContext context)
+		throws SQLException
+	{
+		return context.getSession();
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class HibernateHelper
 		throws SQLException
 	{
 		try{
-			return (T)context.getSession().merge(object);
+			return (T)getSession(context).merge(object);
 		}catch(HibernateException e){
 			throw new SQLException(e);
 		}
@@ -85,12 +85,12 @@ public class HibernateHelper
 	public static Serializable create(HibernateTransactionContext context, Object object)
 		throws SQLException
 	{
-		Serializable id;
 		context = getTransactionContext(context);
 		try{
 			context.begin();
-			id = getSession(context).save(object);
+			Serializable id = getSession(context).save(object);
 			context.commit();
+			return id;
 		}catch(SQLException re){
 			context.rollback();
 			throw re;
@@ -100,7 +100,6 @@ public class HibernateHelper
 		}finally{
 			context.release();
 		}
-		return id;
 	}
 
 	/**
