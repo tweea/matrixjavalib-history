@@ -24,6 +24,7 @@ import net.matrix.sql.DatabaseConnectionInfo;
 /**
  * Hibernate SessionFactory 管理器。
  */
+// TODO 使用 SQLException
 public class SessionFactoryManager
 	implements Resettable
 {
