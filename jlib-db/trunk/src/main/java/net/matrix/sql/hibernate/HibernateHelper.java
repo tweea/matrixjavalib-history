@@ -399,25 +399,63 @@ public class HibernateHelper
 	/**
 	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
 	 */
+	public static Map<String, Object> getAsMap(Session session, Class objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		try{
+			return (Map)session.get(objectClass, primaryKey);
+		}catch(HibernateException e){
+			throw new SQLException(e);
+		}catch(ClassCastException e){
+			throw new SQLException(e);
+		}
+	}
+
+	/**
+	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
+	 */
 	public static Map<String, Object> getAsMap(HibernateTransactionContext context, Class objectClass, Serializable primaryKey)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
-		Map obj;
+		return getAsMap(getMapSession(context), objectClass, primaryKey);
+	}
+
+	/**
+	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
+	 */
+	public static Map<String, Object> getAsMap(Class objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		return getAsMap(getTransactionContext(), objectClass, primaryKey);
+	}
+
+	/**
+	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
+	 */
+	public static Map<String, Object> getAsMap(String sessionFactoryName, Class objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		return getAsMap(getTransactionContext(sessionFactoryName), objectClass, primaryKey);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(Session session, String queryString, Object... params)
+		throws SQLException
+	{
 		try{
-			context.begin();
-			obj = (Map)getMapSession(context).get(objectClass, primaryKey);
-			context.commit();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+			Query query = session.createQuery(queryString);
+			if(params != null){
+				for(int i = 0; i < params.length; i++){
+					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
+				}
+			}
+			int effectedRows = query.executeUpdate();
+			return effectedRows;
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
-		return obj;
 	}
 
 	/**
@@ -426,25 +464,43 @@ public class HibernateHelper
 	public static int execute(HibernateTransactionContext context, String queryString, Object... params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return execute(getSession(context), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(String queryString, Object... params)
+		throws SQLException
+	{
+		return execute(getTransactionContext(), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(String sessionFactoryName, String queryString, Object... params)
+		throws SQLException
+	{
+		return execute(getTransactionContext(sessionFactoryName), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(Session session, String queryString, Iterable params)
+		throws SQLException
+	{
 		try{
-			int effectedRows;
-			context.begin();
-			Query query = getSession(context).createQuery(queryString);
-			if(params != null)
-				for(int i = 0; i < params.length; i++)
-					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
-			effectedRows = query.executeUpdate();
-			context.commit();
+			Query query = session.createQuery(queryString);
+			int i = 0;
+			for(Object param : params){
+				query.setParameter(HQLBuilder.getParameterName(i++), param);
+			}
+			int effectedRows = query.executeUpdate();
 			return effectedRows;
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -454,25 +510,42 @@ public class HibernateHelper
 	public static int execute(HibernateTransactionContext context, String queryString, Iterable params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return execute(getSession(context), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(String queryString, Iterable params)
+		throws SQLException
+	{
+		return execute(getTransactionContext(), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(String sessionFactoryName, String queryString, Iterable params)
+		throws SQLException
+	{
+		return execute(getTransactionContext(sessionFactoryName), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static int execute(Session session, String queryString, Map<String, ?> params)
+		throws SQLException
+	{
 		try{
-			int effectedRows;
-			context.begin();
-			Query query = getSession(context).createQuery(queryString);
-			int i = 0;
-			for(Object param : params)
-				query.setParameter(HQLBuilder.getParameterName(i++), param);
-			effectedRows = query.executeUpdate();
-			context.commit();
+			Query query = session.createQuery(queryString);
+			for(Map.Entry<String, ? extends Object> paramEntry : params.entrySet()){
+				query.setParameter(paramEntry.getKey(), paramEntry.getValue());
+			}
+			int effectedRows = query.executeUpdate();
 			return effectedRows;
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -482,25 +555,25 @@ public class HibernateHelper
 	public static int execute(HibernateTransactionContext context, String queryString, Map<String, ?> params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
-		try{
-			int effectedRows;
-			context.begin();
-			Query query = getSession(context).createQuery(queryString);
-			for(Map.Entry<String, ? extends Object> paramEntry : params.entrySet())
-				query.setParameter(paramEntry.getKey(), paramEntry.getValue());
-			effectedRows = query.executeUpdate();
-			context.commit();
-			return effectedRows;
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
-			throw new SQLException(e);
-		}finally{
-			context.release();
-		}
+		return execute(getSession(context), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(String queryString, Map<String, ?> params)
+		throws SQLException
+	{
+		return execute(getTransactionContext(), queryString, params);
+	}
+
+	/**
+	 * 执行 HQL 语句
+	 */
+	public static int execute(String sessionFactoryName, String queryString, Map<String, ?> params)
+		throws SQLException
+	{
+		return execute(getTransactionContext(sessionFactoryName), queryString, params);
 	}
 
 	/**
