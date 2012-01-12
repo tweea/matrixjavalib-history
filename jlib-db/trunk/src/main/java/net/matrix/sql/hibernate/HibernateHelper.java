@@ -32,12 +32,17 @@ public class HibernateHelper
 	/**
 	 * 获得 Hibernate 数据库连接管理对象
 	 */
-	private static HibernateTransactionContext getTransactionContext(HibernateTransactionContext context)
+	private static HibernateTransactionContext getTransactionContext()
 	{
-		if(context == null){
-			return SessionFactoryManager.getInstance().getTransactionContext();
-		}
-		return context;
+		return SessionFactoryManager.getInstance().getTransactionContext();
+	}
+
+	/**
+	 * 获得 Hibernate 数据库连接管理对象
+	 */
+	private static HibernateTransactionContext getTransactionContext(String sessionFactoryName)
+	{
+		return SessionFactoryManager.getInstance(sessionFactoryName).getTransactionContext();
 	}
 
 	private static Session getSession(HibernateTransactionContext context)
@@ -53,14 +58,70 @@ public class HibernateHelper
 		return context.getSession();
 	}
 
+	public static void beginTransaction()
+		throws SQLException
+	{
+		getTransactionContext().begin();
+	}
+
+	public static void beginTransaction(String sessionFactoryName)
+		throws SQLException
+	{
+		getTransactionContext(sessionFactoryName).begin();
+	}
+
+	public static void commitTransaction()
+		throws SQLException
+	{
+		getTransactionContext().commit();
+	}
+
+	public static void commitTransaction(String sessionFactoryName)
+		throws SQLException
+	{
+		getTransactionContext(sessionFactoryName).commit();
+	}
+
+	public static void rollbackTransaction()
+		throws SQLException
+	{
+		getTransactionContext().rollback();
+	}
+
+	public static void rollbackTransaction(String sessionFactoryName)
+		throws SQLException
+	{
+		getTransactionContext(sessionFactoryName).rollback();
+	}
+
+	public static void releaseTransaction()
+	{
+		getTransactionContext().release();
+	}
+
+	public static void releaseTransaction(String sessionFactoryName)
+	{
+		getTransactionContext(sessionFactoryName).release();
+	}
+
+	public static void closeSession()
+	{
+		getTransactionContext().release();
+	}
+
+	public static void closeSession(String sessionFactoryName)
+	{
+		getTransactionContext(sessionFactoryName).release();
+	}
+
 	/**
 	 * 向数据库中存储一个对象
 	 */
-	private static <T> T merge0(HibernateTransactionContext context, T object)
+	public static <T> T merge(Session session, T object)
 		throws SQLException
 	{
 		try{
-			return (T)getSession(context).merge(object);
+			return (T)session.merge(object);
 		}catch(HibernateException e){
 			throw new SQLException(e);
 		}
@@ -72,8 +133,35 @@ public class HibernateHelper
 	public static <T> T merge(HibernateTransactionContext context, T object)
 		throws SQLException
 	{
+		return merge(getSession(context), object);
+	}
+
+	/**
+	 * 向数据库中存储一个对象
+	 */
+	public static <T> T merge(T object)
+		throws SQLException
+	{
+		return merge(getTransactionContext(), object);
+	}
+
+	/**
+	 * 向数据库中存储一个对象
+	 */
+	public static <T> T merge(String sessionFactoryName, T object)
+		throws SQLException
+	{
+		return merge(getTransactionContext(sessionFactoryName), object);
+	}
+
+	/**
+	 * 向数据库中存储一个对象
+	 */
+	public static Serializable create(Session session, Object object)
+		throws SQLException
+	{
 		try{
-			return merge0(getTransactionContext(context), object);
+			return session.save(object);
 		}catch(HibernateException e){
 			throw new SQLException(e);
 		}
@@ -85,20 +173,37 @@ public class HibernateHelper
 	public static Serializable create(HibernateTransactionContext context, Object object)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return create(getSession(context), object);
+	}
+
+	/**
+	 * 向数据库中存储一个对象
+	 */
+	public static Serializable create(Object object)
+		throws SQLException
+	{
+		return create(getTransactionContext(), object);
+	}
+
+	/**
+	 * 向数据库中存储一个对象
+	 */
+	public static Serializable create(String sessionFactoryName, Object object)
+		throws SQLException
+	{
+		return create(getTransactionContext(sessionFactoryName), object);
+	}
+
+	/**
+	 * 向数据库中更新一个对象
+	 */
+	public static void update(Session session, Object object)
+		throws SQLException
+	{
 		try{
-			context.begin();
-			Serializable id = getSession(context).save(object);
-			context.commit();
-			return id;
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+			session.update(object);
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -108,19 +213,37 @@ public class HibernateHelper
 	public static void update(HibernateTransactionContext context, Object object)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		update(getSession(context), object);
+	}
+
+	/**
+	 * 向数据库中更新一个对象
+	 */
+	public static void update(Object object)
+		throws SQLException
+	{
+		update(getTransactionContext(), object);
+	}
+
+	/**
+	 * 向数据库中更新一个对象
+	 */
+	public static void update(String sessionFactoryName, Object object)
+		throws SQLException
+	{
+		update(getTransactionContext(sessionFactoryName), object);
+	}
+
+	/**
+	 * 向数据库中存储或更新一个对象
+	 */
+	public static void createOrUpdate(Session session, Object object)
+		throws SQLException
+	{
 		try{
-			context.begin();
-			getSession(context).update(object);
-			context.commit();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+			session.saveOrUpdate(object);
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -130,19 +253,38 @@ public class HibernateHelper
 	public static void createOrUpdate(HibernateTransactionContext context, Object object)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		createOrUpdate(getSession(context), object);
+	}
+
+	/**
+	 * 向数据库中存储或更新一个对象
+	 */
+	public static void createOrUpdate(Object object)
+		throws SQLException
+	{
+		createOrUpdate(getTransactionContext(), object);
+	}
+
+	/**
+	 * 向数据库中存储或更新一个对象
+	 */
+	public static void createOrUpdate(String sessionFactoryName, Object object)
+		throws SQLException
+	{
+		createOrUpdate(getTransactionContext(sessionFactoryName), object);
+	}
+
+	/**
+	 * 从数据库中删除一个对象
+	 */
+	public static void delete(Session session, Object object)
+		throws SQLException
+	{
 		try{
-			context.begin();
-			getSession(context).saveOrUpdate(object);
-			context.commit();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+			object = session.merge(object);
+			session.delete(object);
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -152,20 +294,38 @@ public class HibernateHelper
 	public static void delete(HibernateTransactionContext context, Object object)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		delete(getSession(context), object);
+	}
+
+	/**
+	 * 从数据库中删除一个对象
+	 */
+	public static void delete(Object object)
+		throws SQLException
+	{
+		delete(getTransactionContext(), object);
+	}
+
+	/**
+	 * 从数据库中删除一个对象
+	 */
+	public static void delete(String sessionFactoryName, Object object)
+		throws SQLException
+	{
+		delete(getTransactionContext(sessionFactoryName), object);
+	}
+
+	/**
+	 * 从数据库中删除一个对象
+	 */
+	public static void delete(Session session, Class objectClass, Serializable primaryKey)
+		throws SQLException
+	{
 		try{
-			context.begin();
-			object = merge0(context, object);
-			getSession(context).delete(object);
-			context.commit();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+			Object obj = session.load(objectClass, primaryKey);
+			session.delete(obj);
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -175,20 +335,37 @@ public class HibernateHelper
 	public static void delete(HibernateTransactionContext context, Class objectClass, Serializable primaryKey)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		delete(getSession(context), objectClass, primaryKey);
+	}
+
+	/**
+	 * 从数据库中删除一个对象
+	 */
+	public static void delete(Class objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		delete(getTransactionContext(), objectClass, primaryKey);
+	}
+
+	/**
+	 * 从数据库中删除一个对象
+	 */
+	public static void delete(String sessionFactoryName, Class objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		delete(getTransactionContext(sessionFactoryName), objectClass, primaryKey);
+	}
+
+	/**
+	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
+	 */
+	public static <T> T get(Session session, Class<T> objectClass, Serializable primaryKey)
+		throws SQLException
+	{
 		try{
-			context.begin();
-			Object obj = getSession(context).load(objectClass, primaryKey);
-			getSession(context).delete(obj);
-			context.commit();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+			return (T)session.get(objectClass, primaryKey);
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -198,22 +375,25 @@ public class HibernateHelper
 	public static <T> T get(HibernateTransactionContext context, Class<T> objectClass, Serializable primaryKey)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
-		T obj;
-		try{
-			context.begin();
-			obj = (T)getSession(context).get(objectClass, primaryKey);
-			context.commit();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
-			throw new SQLException(e);
-		}finally{
-			context.release();
-		}
-		return obj;
+		return get(getSession(context), objectClass, primaryKey);
+	}
+
+	/**
+	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
+	 */
+	public static <T> T get(Class<T> objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		return get(getTransactionContext(), objectClass, primaryKey);
+	}
+
+	/**
+	 * 根据类型和主键从数据库中获得一个对象，若没有则返回 null
+	 */
+	public static <T> T get(String sessionFactoryName, Class<T> objectClass, Serializable primaryKey)
+		throws SQLException
+	{
+		return get(getTransactionContext(sessionFactoryName), objectClass, primaryKey);
 	}
 
 	/**
