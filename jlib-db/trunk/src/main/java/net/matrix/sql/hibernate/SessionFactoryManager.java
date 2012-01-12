@@ -24,7 +24,6 @@ import net.matrix.sql.DatabaseConnectionInfo;
 /**
  * Hibernate SessionFactory 管理器。
  */
-// TODO 延迟加载配置
 public class SessionFactoryManager
 	implements Resettable
 {
@@ -39,17 +38,18 @@ public class SessionFactoryManager
 
 	private String factoryName;
 
+	private String configResource;
+
+	private ThreadLocal<HibernateTransactionContext> threadContext;
+
 	private Configuration configuration;
 
 	private SessionFactory sessionFactory;
-
-	private ThreadLocal<HibernateTransactionContext> threadContext;
 
 	/**
 	 * @return 默认实例
 	 */
 	public static SessionFactoryManager getInstance()
-		throws HibernateException
 	{
 		SessionFactoryManager instance = instances.get(DEFAULT_NAME);
 		if(instance == null){
@@ -60,10 +60,11 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * @return 默认实例
+	 * @param name SessionFactory 名称
+	 * @return 实例
+	 * @throws IllegalStateException 还未命名实例
 	 */
 	public static SessionFactoryManager getInstance(String name)
-		throws HibernateException
 	{
 		if(DEFAULT_NAME.equals(name)){
 			return getInstance();
@@ -77,6 +78,7 @@ public class SessionFactoryManager
 	/**
 	 * 判断 SessionFactory 名称是否已被占用
 	 * @param name SessionFactory 名称
+	 * @return true 为已占用
 	 */
 	public static boolean isNameUsed(String name)
 	{
@@ -86,9 +88,9 @@ public class SessionFactoryManager
 	/**
 	 * 命名默认配置文件到指定名称
 	 * @param name SessionFactory 名称
+	 * @throws IllegalStateException 名称已被占用
 	 */
 	public static void nameSessionFactory(String name)
-		throws HibernateException
 	{
 		synchronized(instances){
 			if(isNameUsed(name)){
@@ -101,16 +103,16 @@ public class SessionFactoryManager
 	/**
 	 * 命名一个配置文件到指定名称
 	 * @param name SessionFactory 名称
-	 * @param configResourceName SessionFactory 配置资源
+	 * @param configResource SessionFactory 配置资源
+	 * @throws IllegalStateException 名称已被占用
 	 */
-	public static void nameSessionFactory(String name, String configResourceName)
-		throws HibernateException
+	public static void nameSessionFactory(String name, String configResource)
 	{
 		synchronized(instances){
 			if(isNameUsed(name)){
 				throw new IllegalStateException("名称 " + name + " 已被占用");
 			}
-			instances.put(name, new SessionFactoryManager(name, configResourceName));
+			instances.put(name, new SessionFactoryManager(name, configResource));
 		}
 	}
 
@@ -134,20 +136,16 @@ public class SessionFactoryManager
 	}
 
 	private SessionFactoryManager(String name)
-		throws HibernateException
 	{
 		this.factoryName = name;
-		LOG.info("读取默认的 Hibernate 配置。");
-		this.configuration = new Configuration().configure();
+		this.configResource = null;
 		this.threadContext = new ThreadLocal<HibernateTransactionContext>();
 	}
 
 	private SessionFactoryManager(String name, String configResource)
-		throws HibernateException
 	{
 		this.factoryName = name;
-		LOG.info("读取 " + configResource + "的 Hibernate 配置。");
-		this.configuration = new Configuration().configure(configResource);
+		this.configResource = configResource;
 		this.threadContext = new ThreadLocal<HibernateTransactionContext>();
 	}
 
@@ -158,17 +156,17 @@ public class SessionFactoryManager
 	@Override
 	public void reset()
 	{
-		if(sessionFactory == null){
-			return;
+		if(sessionFactory != null){
+			try{
+				sessionFactory.close();
+				LOG.info(factoryName + " 配置的 Hibernate SessionFactory 已关闭。");
+			}catch(HibernateException e){
+				LOG.error(factoryName + " 配置的 Hibernate SessionFactory 关闭失败。");
+			}finally{
+				sessionFactory = null;
+			}
 		}
-		try{
-			sessionFactory.close();
-			LOG.info(factoryName + " 配置的 Hibernate SessionFactory 已关闭。");
-		}catch(HibernateException e){
-			LOG.error(factoryName + " 配置的 Hibernate SessionFactory 关闭失败。");
-		}finally{
-			sessionFactory = null;
-		}
+		configuration = null;
 	}
 
 	/**
@@ -176,7 +174,17 @@ public class SessionFactoryManager
 	 * @return SessionFactory 配置
 	 */
 	public Configuration getConfiguration()
+		throws HibernateException
 	{
+		if(configuration == null){
+			if(configResource == null){
+				LOG.info("读取默认的 Hibernate 配置。");
+				configuration = new Configuration().configure();
+			}else{
+				LOG.info("读取 " + configResource + "的 Hibernate 配置。");
+				configuration = new Configuration().configure(configResource);
+			}
+		}
 		return configuration;
 	}
 
@@ -193,7 +201,7 @@ public class SessionFactoryManager
 			}else{
 				LOG.info("以 " + factoryName + " 配置构建 Hibernate SessionFactory。");
 			}
-			sessionFactory = configuration.buildSessionFactory();
+			sessionFactory = getConfiguration().buildSessionFactory();
 		}
 		return sessionFactory;
 	}
@@ -234,7 +242,7 @@ public class SessionFactoryManager
 		if(context == null){
 			return;
 		}
-		threadContext.set(null);
+		threadContext.remove();
 		try{
 			context.rollback();
 		}finally{
@@ -250,7 +258,7 @@ public class SessionFactoryManager
 	public DatabaseConnectionInfo getConnectionInfo()
 		throws SQLException
 	{
-		Properties properties = configuration.getProperties();
+		Properties properties = getConfiguration().getProperties();
 		String driver = properties.getProperty(AvailableSettings.DRIVER);
 		String url = properties.getProperty(AvailableSettings.URL);
 		String user = properties.getProperty(AvailableSettings.USER);
