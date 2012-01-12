@@ -31,6 +31,6 @@ public class HibernateHelperTest
 	public void testSet()
 		throws Exception
 	{
-		HibernateHelper.querySQLAsMap(null, "SELECT CURDATE()");
+		HibernateHelper.querySQLAsMap("SELECT CURDATE()");
 	}
 }
