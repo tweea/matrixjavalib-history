@@ -54,13 +54,9 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.0.0.Final</version>
+			<version>4.0.1.Final</version>
 			<scope>compile</scope>
 			<exclusions>
-				<exclusion>
-					<groupId>javassist</groupId>
-					<artifactId>javassist</artifactId>
-				</exclusion>
 				<exclusion>
 					<groupId>org.jboss.spec.javax.transaction</groupId>
 					<artifactId>jboss-transaction-api_1.1_spec</artifactId>
@@ -71,13 +67,9 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.0.0.Final</version>
+			<version>4.0.1.Final</version>
 			<scope>compile</scope>
 			<exclusions>
-				<exclusion>
-					<groupId>javassist</groupId>
-					<artifactId>javassist</artifactId>
-				</exclusion>
 				<exclusion>
 					<groupId>org.jboss.spec.javax.transaction</groupId>
 					<artifactId>jboss-transaction-api_1.1_spec</artifactId>
@@ -123,14 +115,14 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.0.0.Final</version>
+			<version>4.0.1.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.0.0.Final</version>
+			<version>4.0.1.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- test -->
