@@ -532,7 +532,7 @@ public class HibernateHelper
 	}
 
 	/**
-	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 * 执行 HQL 语句
 	 */
 	public static int execute(Session session, String queryString, Map<String, ?> params)
 		throws SQLException
@@ -550,7 +550,7 @@ public class HibernateHelper
 	}
 
 	/**
-	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 * 执行 HQL 语句
 	 */
 	public static int execute(HibernateTransactionContext context, String queryString, Map<String, ?> params)
 		throws SQLException
@@ -579,35 +579,69 @@ public class HibernateHelper
 	/**
 	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
 	 */
+	public static List queryAll(Session session, String queryString, Object... params)
+		throws SQLException
+	{
+		try{
+			Query query = session.createQuery(queryString);
+			if(params != null){
+				for(int i = 0; i < params.length; i++){
+					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
+				}
+			}
+			return query.list();
+		}catch(ObjectNotFoundException oe){
+			return new ArrayList();
+		}catch(HibernateException e){
+			throw new SQLException(e);
+		}
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
 	public static List queryAll(HibernateTransactionContext context, String queryString, Object... params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return queryAll(getSession(context), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List queryAll(String queryString, Object... params)
+		throws SQLException
+	{
+		return queryAll(getTransactionContext(), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List queryAll(String sessionFactoryName, String queryString, Object... params)
+		throws SQLException
+	{
+		return queryAll(getTransactionContext(sessionFactoryName), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List<Map<String, Object>> queryAllAsMap(Session session, String queryString, Object... params)
+		throws SQLException
+	{
 		try{
-			List l;
-			context.begin();
-			Query query = getSession(context).createQuery(queryString);
-			if(params != null)
-				for(int i = 0; i < params.length; i++)
+			Query query = session.createQuery(queryString);
+			if(params != null){
+				for(int i = 0; i < params.length; i++){
 					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
-			l = query.list();
-			context.commit();
-			return l;
-		}catch(ObjectNotFoundException oe){
-			try{
-				context.commit();
-			}catch(Exception e){
-				context.rollback();
+				}
 			}
+			return query.list();
+		}catch(ObjectNotFoundException oe){
 			return new ArrayList();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -617,32 +651,47 @@ public class HibernateHelper
 	public static List<Map<String, Object>> queryAllAsMap(HibernateTransactionContext context, String queryString, Object... params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return queryAllAsMap(getMapSession(context), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List<Map<String, Object>> queryAllAsMap(String queryString, Object... params)
+		throws SQLException
+	{
+		return queryAllAsMap(getTransactionContext(), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List<Map<String, Object>> queryAllAsMap(String sessionFactoryName, String queryString, Object... params)
+		throws SQLException
+	{
+		return queryAllAsMap(getTransactionContext(sessionFactoryName), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表，限定起始结果和行数。
+	 */
+	public static List queryPage(Session session, String queryString, int startNum, int maxResults, Object... params)
+		throws SQLException
+	{
 		try{
-			List l;
-			context.begin();
-			Query query = getMapSession(context).createQuery(queryString);
-			if(params != null)
-				for(int i = 0; i < params.length; i++)
+			Query query = session.createQuery(queryString);
+			if(params != null){
+				for(int i = 0; i < params.length; i++){
 					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
-			l = query.list();
-			context.commit();
-			return l;
-		}catch(ObjectNotFoundException oe){
-			try{
-				context.commit();
-			}catch(Exception e){
-				context.rollback();
+				}
 			}
+			query.setFirstResult(startNum);
+			query.setMaxResults(maxResults);
+			return query.list();
+		}catch(ObjectNotFoundException oe){
 			return new ArrayList();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -652,34 +701,47 @@ public class HibernateHelper
 	public static List queryPage(HibernateTransactionContext context, String queryString, int startNum, int maxResults, Object... params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return queryPage(getSession(context), queryString, startNum, maxResults, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表，限定起始结果和行数。
+	 */
+	public static List queryPage(String queryString, int startNum, int maxResults, Object... params)
+		throws SQLException
+	{
+		return queryPage(getTransactionContext(), queryString, startNum, maxResults, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表，限定起始结果和行数。
+	 */
+	public static List queryPage(String sessionFactoryName, String queryString, int startNum, int maxResults, Object... params)
+		throws SQLException
+	{
+		return queryPage(getTransactionContext(sessionFactoryName), queryString, startNum, maxResults, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表，限定起始结果和行数。
+	 */
+	public static List<Map<String, Object>> queryPageAsMap(Session session, String queryString, int startNum, int maxResults, Object... params)
+		throws SQLException
+	{
 		try{
-			List l;
-			context.begin();
-			Query query = getSession(context).createQuery(queryString);
-			if(params != null)
-				for(int i = 0; i < params.length; i++)
+			Query query = session.createQuery(queryString);
+			if(params != null){
+				for(int i = 0; i < params.length; i++){
 					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
+				}
+			}
 			query.setFirstResult(startNum);
 			query.setMaxResults(maxResults);
-			l = query.list();
-			context.commit();
-			return l;
+			return query.list();
 		}catch(ObjectNotFoundException oe){
-			try{
-				context.commit();
-			}catch(Exception e){
-				context.rollback();
-			}
 			return new ArrayList();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -690,34 +752,44 @@ public class HibernateHelper
 		Object... params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
+		return queryPageAsMap(getMapSession(context), queryString, startNum, maxResults, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表，限定起始结果和行数。
+	 */
+	public static List<Map<String, Object>> queryPageAsMap(String queryString, int startNum, int maxResults, Object... params)
+		throws SQLException
+	{
+		return queryPageAsMap(getTransactionContext(), queryString, startNum, maxResults, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表，限定起始结果和行数。
+	 */
+	public static List<Map<String, Object>> queryPageAsMap(String sessionFactoryName, String queryString, int startNum, int maxResults, Object... params)
+		throws SQLException
+	{
+		return queryPageAsMap(getTransactionContext(sessionFactoryName), queryString, startNum, maxResults, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List queryAll(Session session, String queryString, Iterable params)
+		throws SQLException
+	{
 		try{
-			List l;
-			context.begin();
-			Query query = getMapSession(context).createQuery(queryString);
-			if(params != null)
-				for(int i = 0; i < params.length; i++)
-					query.setParameter(HQLBuilder.getParameterName(i), params[i]);
-			query.setFirstResult(startNum);
-			query.setMaxResults(maxResults);
-			l = query.list();
-			context.commit();
-			return l;
-		}catch(ObjectNotFoundException oe){
-			try{
-				context.commit();
-			}catch(Exception e){
-				context.rollback();
+			Query query = session.createQuery(queryString);
+			int i = 0;
+			for(Object param : params){
+				query.setParameter(HQLBuilder.getParameterName(i++), param);
 			}
+			return query.list();
+		}catch(ObjectNotFoundException oe){
 			return new ArrayList();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
+		}catch(HibernateException e){
 			throw new SQLException(e);
-		}finally{
-			context.release();
 		}
 	}
 
@@ -727,33 +799,25 @@ public class HibernateHelper
 	public static List queryAll(HibernateTransactionContext context, String queryString, Iterable params)
 		throws SQLException
 	{
-		context = getTransactionContext(context);
-		try{
-			List l;
-			context.begin();
-			Query query = getSession(context).createQuery(queryString);
-			int i = 0;
-			for(Object param : params)
-				query.setParameter(HQLBuilder.getParameterName(i++), param);
-			l = query.list();
-			context.commit();
-			return l;
-		}catch(ObjectNotFoundException oe){
-			try{
-				context.commit();
-			}catch(Exception e){
-				context.rollback();
-			}
-			return new ArrayList();
-		}catch(SQLException re){
-			context.rollback();
-			throw re;
-		}catch(Exception e){
-			context.rollback();
-			throw new SQLException(e);
-		}finally{
-			context.release();
-		}
+		return queryAll(getSession(context), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List queryAll(String queryString, Iterable params)
+		throws SQLException
+	{
+		return queryAll(getTransactionContext(), queryString, params);
+	}
+
+	/**
+	 * 根据 HQL 查询字符串和参数从数据库中获得对象列表
+	 */
+	public static List queryAll(String sessionFactoryName, String queryString, Iterable params)
+		throws SQLException
+	{
+		return queryAll(getTransactionContext(sessionFactoryName), queryString, params);
 	}
 
 	/**
