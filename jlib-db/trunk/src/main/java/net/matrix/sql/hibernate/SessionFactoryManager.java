@@ -24,7 +24,6 @@ import net.matrix.sql.DatabaseConnectionInfo;
 /**
  * Hibernate SessionFactory 管理器。
  */
-// TODO 使用 SQLException
 public class SessionFactoryManager
 	implements Resettable
 {
@@ -175,18 +174,22 @@ public class SessionFactoryManager
 	 * @return SessionFactory 配置
 	 */
 	public Configuration getConfiguration()
-		throws HibernateException
+		throws SQLException
 	{
-		if(configuration == null){
-			if(configResource == null){
-				LOG.info("读取默认的 Hibernate 配置。");
-				configuration = new Configuration().configure();
-			}else{
-				LOG.info("读取 " + configResource + "的 Hibernate 配置。");
-				configuration = new Configuration().configure(configResource);
+		try{
+			if(configuration == null){
+				if(configResource == null){
+					LOG.info("读取默认的 Hibernate 配置。");
+					configuration = new Configuration().configure();
+				}else{
+					LOG.info("读取 " + configResource + "的 Hibernate 配置。");
+					configuration = new Configuration().configure(configResource);
+				}
 			}
+			return configuration;
+		}catch(HibernateException e){
+			throw new SQLException(e);
 		}
-		return configuration;
 	}
 
 	/**
@@ -194,28 +197,36 @@ public class SessionFactoryManager
 	 * @return SessionFactory
 	 */
 	public SessionFactory getSessionFactory()
-		throws HibernateException
+		throws SQLException
 	{
-		if(sessionFactory == null){
-			if(DEFAULT_NAME.equals(factoryName)){
-				LOG.info("以默认配置构建 Hibernate SessionFactory。");
-			}else{
-				LOG.info("以 " + factoryName + " 配置构建 Hibernate SessionFactory。");
+		try{
+			if(sessionFactory == null){
+				if(DEFAULT_NAME.equals(factoryName)){
+					LOG.info("以默认配置构建 Hibernate SessionFactory。");
+				}else{
+					LOG.info("以 " + factoryName + " 配置构建 Hibernate SessionFactory。");
+				}
+				sessionFactory = getConfiguration().buildSessionFactory();
 			}
-			sessionFactory = getConfiguration().buildSessionFactory();
+			return sessionFactory;
+		}catch(HibernateException e){
+			throw new SQLException(e);
 		}
-		return sessionFactory;
 	}
 
 	/**
 	 * 使用 SessionFactory 建立 Session
 	 * @return 新建的 Session
-	 * @throws HibernateException 建立失败
+	 * @throws SQLException 建立失败
 	 */
 	public Session createSession()
-		throws HibernateException
+		throws SQLException
 	{
-		return getSessionFactory().openSession();
+		try{
+			return getSessionFactory().openSession();
+		}catch(HibernateException e){
+			throw new SQLException(e);
+		}
 	}
 
 	/**
