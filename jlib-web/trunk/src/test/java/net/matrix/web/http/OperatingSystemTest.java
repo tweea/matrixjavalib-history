@@ -50,12 +50,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-/**
- * @author harald
- */
 public class OperatingSystemTest
 {
-
 	String[] tablets = {
 		"Mozilla/5.0 (Linux; U; Android 2.2; es-es; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
 		"Mozilla/5.0 (Linux; U; Android 2.2; en-us; SCH-I800 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
@@ -63,18 +59,8 @@ public class OperatingSystemTest
 		"Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)",
 		"Mozilla/4.0 (compatible; Linux 2.6.22) NetFront/3.4 Kindle/2.0 (screen 600x800)",
 		"Mozilla/5.0 (Linux; U; en-US) AppleWebKit/528.5+ (KHTML, like Gecko, Safari/528.5+) Version/4.0 Kindle/3.0 (screen 600x800; rotate)",
-		"Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13", // dropped
-																																			// the
-																																			// mobile
-																																			// part,
-																																			// so
-																																			// Android
-																																			// without
-																																			// mobile
-																																			// should
-																																			// be
-																																			// a
-																																			// tablet!
+		// dropped the mobile part, so Android without mobile should be a tablet!
+		"Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13",
 		"Mozilla/5.0 (PlayBook; U; RIM Tablet OS 1.0.0; en-US) AppleWebKit/534.8+ like Gecko) Version/0.0.1 Safari/534.8+"
 	};
 
@@ -105,11 +91,10 @@ public class OperatingSystemTest
 	};
 
 	String[] palmOsDevices = {
-		"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; PalmSource/Palm-TunX; Blazer/4.3) 16;320x320", // Palm
-																										// LiveDrive
-		"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; PalmSource/Palm-D050; Blazer/4.3) 16;320x320)", // Palm
-																										// TX
-																										// PDA
+		// Palm LiveDrive
+		"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; PalmSource/Palm-TunX; Blazer/4.3) 16;320x320",
+		// Palm TX PDA
+		"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; PalmSource/Palm-D050; Blazer/4.3) 16;320x320)",
 		"Mozilla/4.76 (compatible; MSIE 6.0; U; Windows 95; PalmSource; PalmOS; WebPro; Tungsten Proxyless 1.1 320x320x16)"
 	};
 
@@ -168,9 +153,8 @@ public class OperatingSystemTest
 	};
 
 	String[] iPad = {
-		"Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B367 Safari/531.21.10", // final
-																																						// iPad
-																																						// Simulator
+		// final iPad Simulator
+		"Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B367 Safari/531.21.10",
 		"Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10",
 		"Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5",
 		"Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
@@ -252,8 +236,7 @@ public class OperatingSystemTest
 	};
 
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.OperatingSystem#isInUserAgentString(java.lang.String)}.
+	 * Test method for {@link OperatingSystem#isInUserAgentString(java.lang.String)}.
 	 */
 	@Test
 	public void testIsInUserAgentString()
@@ -262,8 +245,7 @@ public class OperatingSystemTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.OperatingSystem#parseUserAgentString(java.lang.String)}.
+	 * Test method for {@link OperatingSystem#parseUserAgentString(java.lang.String)}.
 	 */
 	@Test
 	public void testParseUserAgentString()
@@ -314,16 +296,16 @@ public class OperatingSystemTest
 
 	public void testGroupRecursion()
 	{
-		assertEquals(OperatingSystem.ANDROID2_TABLET.getGroup(), OperatingSystem.ANDROID); // 2
-																							// levels
-																							// deep
-		assertEquals(OperatingSystem.BLACKBERRY6.getGroup(), OperatingSystem.BLACKBERRY); // one
-																							// level
-		assertEquals(OperatingSystem.MAC_OS.getGroup(), OperatingSystem.MAC_OS); // no children
+		// 2 levels deep
+		assertEquals(OperatingSystem.ANDROID2_TABLET.getGroup(), OperatingSystem.ANDROID);
+		// one level
+		assertEquals(OperatingSystem.BLACKBERRY6.getGroup(), OperatingSystem.BLACKBERRY);
+		// no children
+		assertEquals(OperatingSystem.MAC_OS.getGroup(), OperatingSystem.MAC_OS);
 	}
 
 	/**
-	 * Test method for {@link nl.bitwalker.useragentutils.OperatingSystem#valueOf(short)}
+	 * Test method for {@link OperatingSystem#valueOf(short)}
 	 */
 	@Test
 	public void testValueOf()
@@ -339,7 +321,7 @@ public class OperatingSystemTest
 	}
 
 	/**
-	 * Test method for {@link nl.bitwalker.useragentutils.OperatingSystem#valueOf(String)}
+	 * Test method for {@link OperatingSystem#valueOf(String)}
 	 */
 	@Test
 	public void testValueOfString()
@@ -360,14 +342,12 @@ public class OperatingSystemTest
 	@Test
 	public void testUniqueIdValues()
 	{
-
 		List<Short> retrievedIdValues = new ArrayList<Short>();
 
 		for(OperatingSystem operatingSystem : OperatingSystem.values()){
 			assertTrue(!retrievedIdValues.contains(operatingSystem.getId()));
 			retrievedIdValues.add(operatingSystem.getId());
 		}
-
 	}
 
 	private void testDeviceTypes(String[] agentStrings, DeviceType expectedDeviceType)
@@ -383,5 +363,4 @@ public class OperatingSystemTest
 			assertEquals(expectedOperatingSystem, OperatingSystem.parseUserAgentString(agentString));
 		}
 	}
-
 }

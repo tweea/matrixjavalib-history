@@ -45,11 +45,9 @@ package net.matrix.web.http;
  * Container for general version information.
  * All version information is stored as String as sometimes version information includes
  * alphabetical characters.
- * @author harald
  */
 public class Version
 {
-
 	String version;
 
 	String majorVersion;
@@ -58,7 +56,6 @@ public class Version
 
 	public Version(String version, String majorVersion, String minorVersion)
 	{
-		super();
 		this.version = version;
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
@@ -123,5 +120,4 @@ public class Version
 			return false;
 		return true;
 	}
-
 }

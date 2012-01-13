@@ -48,285 +48,368 @@ import java.util.regex.Pattern;
 
 /**
  * Enum constants for most common browsers, including e-mail clients and bots.
- * @author harald
  */
-
 public enum Browser
 {
-
+	// before MSIE
 	OPERA(Manufacturer.OPERA, null, 1, "Opera", new String[]{
 		"Opera"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.PRESTO, "Opera\\/(([\\d]+)\\.([\\w]+))"), // before
-																								// MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.PRESTO, "Opera\\/(([\\d]+)\\.([\\w]+))"),
+
+	// Opera for mobile devices
 	OPERA_MINI(Manufacturer.OPERA, Browser.OPERA, 20, "Opera Mini", new String[]{
 		"Opera Mini"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.PRESTO, null), // Opera for mobile devices
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.PRESTO, null),
+
 	/**
 	 * For some strange reason Opera uses 9.80 in the user-agent string and otherwise it is very
 	 * inconsistent. Use the getVersion method if you really want to know which version it is.
 	 */
 	OPERA10(Manufacturer.OPERA, Browser.OPERA, 10, "Opera 10", new String[]{
 		"Opera/9.8"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.PRESTO, "Version\\/(([\\d]+)\\.([\\w]+))"), OPERA9(Manufacturer.OPERA, Browser.OPERA, 5, "Opera 9",
-		new String[]{
-			"Opera/9"
-		}, null, BrowserType.WEB_BROWSER, RenderingEngine.PRESTO, null), KONQUEROR(Manufacturer.OTHER, null, 1, "Konqueror", new String[]{
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.PRESTO, "Version\\/(([\\d]+)\\.([\\w]+))"),
+
+	OPERA9(Manufacturer.OPERA, Browser.OPERA, 5, "Opera 9", new String[]{
+		"Opera/9"
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.PRESTO, null),
+
+	KONQUEROR(Manufacturer.OTHER, null, 1, "Konqueror", new String[]{
 		"Konqueror"
 	}, null, BrowserType.WEB_BROWSER, RenderingEngine.KHTML, "Konqueror\\/(([0-9]+)\\.?([\\w]+)?(-[\\w]+)?)"),
 
 	/**
 	 * Outlook email client
 	 */
+	// before IE7
 	OUTLOOK(Manufacturer.MICROSOFT, null, 100, "Outlook", new String[]{
 		"MSOffice"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WORD, "MSOffice (([0-9]+))"), // before IE7
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WORD, "MSOffice (([0-9]+))"),
+
 	/**
 	 * Microsoft Outlook 2007 identifies itself as MSIE7 but uses the html rendering engine of Word
 	 * 2007.
 	 * Example user agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR
 	 * 2.0.50727; .NET CLR 3.0.04506; .NET CLR 1.1.4322; MSOffice 12)
 	 */
+	// before IE7
 	OUTLOOK2007(Manufacturer.MICROSOFT, Browser.OUTLOOK, 107, "Outlook 2007", new String[]{
 		"MSOffice 12"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WORD, null), // before IE7
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WORD, null),
+
 	/**
 	 * Outlook 2010 is still using the rendering engine of Word. http://www.fixoutlook.org
 	 */
+	// before IE7
 	OUTLOOK2010(Manufacturer.MICROSOFT, Browser.OUTLOOK, 108, "Outlook 2010", new String[]{
 		"MSOffice 14"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WORD, null), // before IE7
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WORD, null),
 
 	/**
 	 * Family of Internet Explorer browsers
 	 */
+	// before Mozilla
 	IE(Manufacturer.MICROSOFT, null, 1, "Internet Explorer", new String[]{
 		"MSIE"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, "MSIE (([\\d]+)\\.([\\w]+))"), // before
-																								// Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, "MSIE (([\\d]+)\\.([\\w]+))"),
+
 	/**
 	 * Since version 7 Outlook Express is identifying itself. By detecting Outlook Express we can
 	 * not
 	 * identify the Internet Explorer version which is probably used for the rendering.
 	 * Obviously this product is now called Windows Live Mail Desktop or just Windows Live Mail.
 	 */
+	// before IE7, previously known as Outlook Express.
+	// First released in 2006, offered with different name later
 	OUTLOOK_EXPRESS7(Manufacturer.MICROSOFT, Browser.IE, 110, "Windows Live Mail", new String[]{
 		"Outlook-Express/7.0"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.TRIDENT, null), // before IE7, previously
-																		// known as Outlook Express.
-																		// First released in 2006,
-																		// offered with different
-																		// name later
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.TRIDENT, null),
+
 	/**
 	 * Since 2007 the mobile edition of Internet Explorer identifies itself as IEMobile in the
 	 * user-agent.
 	 * If previous versions have to be detected, use the operating system information as well.
 	 */
+	// before MSIE strings
 	IEMOBILE9(Manufacturer.MICROSOFT, Browser.IE, 123, "IE Mobile 9", new String[]{
 		"IEMobile/9"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE strings
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE strings
 	IEMOBILE7(Manufacturer.MICROSOFT, Browser.IE, 121, "IE Mobile 7", new String[]{
 		"IEMobile 7"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE strings
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IEMOBILE6(Manufacturer.MICROSOFT, Browser.IE, 120, "IE Mobile 6", new String[]{
 		"IEMobile 6"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE10(Manufacturer.MICROSOFT, Browser.IE, 92, "Internet Explorer 10", new String[]{
 		"MSIE 10"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE9(Manufacturer.MICROSOFT, Browser.IE, 90, "Internet Explorer 9", new String[]{
 		"MSIE 9"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE8(Manufacturer.MICROSOFT, Browser.IE, 80, "Internet Explorer 8", new String[]{
 		"MSIE 8"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE7(Manufacturer.MICROSOFT, Browser.IE, 70, "Internet Explorer 7", new String[]{
 		"MSIE 7"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE6(Manufacturer.MICROSOFT, Browser.IE, 60, "Internet Explorer 6", new String[]{
 		"MSIE 6"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE5_5(Manufacturer.MICROSOFT, Browser.IE, 55, "Internet Explorer 5.5", new String[]{
 		"MSIE 5.5"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
+
+	// before MSIE
 	IE5(Manufacturer.MICROSOFT, Browser.IE, 50, "Internet Explorer 5", new String[]{
 		"MSIE 5"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null), // before MSIE
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.TRIDENT, null),
 
 	/**
 	 * Google Chrome browser
 	 */
+	// before Mozilla
 	CHROME(Manufacturer.GOOGLE, null, 1, "Chrome", new String[]{
 		"Chrome"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, "Chrome\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?(\\.[\\w]+)?)"), // before
-																															// Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, "Chrome\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?(\\.[\\w]+)?)"),
+
+	// before Mozilla
 	CHROME15(Manufacturer.GOOGLE, Browser.CHROME, 20, "Chrome 15", new String[]{
 		"Chrome/15"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME14(Manufacturer.GOOGLE, Browser.CHROME, 19, "Chrome 14", new String[]{
 		"Chrome/14"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME13(Manufacturer.GOOGLE, Browser.CHROME, 18, "Chrome 13", new String[]{
 		"Chrome/13"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME12(Manufacturer.GOOGLE, Browser.CHROME, 17, "Chrome 12", new String[]{
 		"Chrome/12"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME11(Manufacturer.GOOGLE, Browser.CHROME, 16, "Chrome 11", new String[]{
 		"Chrome/11"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME10(Manufacturer.GOOGLE, Browser.CHROME, 15, "Chrome 10", new String[]{
 		"Chrome/10"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME9(Manufacturer.GOOGLE, Browser.CHROME, 10, "Chrome 9", new String[]{
 		"Chrome/9"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	CHROME8(Manufacturer.GOOGLE, Browser.CHROME, 5, "Chrome 8", new String[]{
 		"Chrome/8"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before Mozilla
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
 
 	OMNIWEB(Manufacturer.OTHER, null, 2, "Omniweb", new String[]{
 		"OmniWeb"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), //
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
 
+	// before AppleWebKit
 	SAFARI(Manufacturer.APPLE, null, 1, "Safari", new String[]{
 		"Safari"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, "Version\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"), // before
-																												// AppleWebKit
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, "Version\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"),
+
+	// before AppleWebKit
 	SAFARI5(Manufacturer.APPLE, Browser.SAFARI, 3, "Safari 5", new String[]{
 		"Version/5"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before AppleWebKit
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before Safari
 	MOBILE_SAFARI(Manufacturer.APPLE, Browser.SAFARI, 2, "Mobile Safari", new String[]{
 		"Mobile Safari", "Mobile/"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.WEBKIT, null), // before Safari
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.WEBKIT, null),
+
+	// before AppleWebKit
 	SAFARI4(Manufacturer.APPLE, Browser.SAFARI, 4, "Safari 4", new String[]{
 		"Version/4"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null), // before AppleWebKit
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.WEBKIT, null),
 
+	// webkit based browser for the bada os
 	DOLFIN2(Manufacturer.SAMSUNG, null, 1, "Samsung Dolphin 2", new String[]{
 		"Dolfin/2"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.WEBKIT, null), // webkit based browser for
-																		// the bada os
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.WEBKIT, null),
 
+	// Microsoft Entrourage/Outlook 2010 also only identifies itself as AppleWebKit
 	APPLE_MAIL(Manufacturer.APPLE, null, 50, "Apple Mail", new String[]{
 		"AppleWebKit"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WEBKIT, null), // Microsoft
-																		// Entrourage/Outlook 2010
-																		// also only identifies
-																		// itself as AppleWebKit
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.WEBKIT, null),
+
+	// before Mozilla
 	LOTUS_NOTES(Manufacturer.OTHER, null, 3, "Lotus Notes", new String[]{
 		"Lotus-Notes"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, "Lotus-Notes\\/(([\\d]+)\\.([\\w]+))"), // before
-																										// Mozilla
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, "Lotus-Notes\\/(([\\d]+)\\.([\\w]+))"),
 
 	/*
 	 * Thunderbird email client, based on the same Gecko engine Firefox is using.
 	 */
+	// using Gecko Engine
 	THUNDERBIRD(Manufacturer.MOZILLA, null, 110, "Thunderbird", new String[]{
 		"Thunderbird"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, "Thunderbird\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?(\\.[\\w]+)?)"), // using
-																																// Gecko
-																																// Engine
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, "Thunderbird\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?(\\.[\\w]+)?)"),
+
+	// using Gecko Engine
 	THUNDERBIRD8(Manufacturer.MOZILLA, Browser.THUNDERBIRD, 180, "Thunderbird 8", new String[]{
 		"Thunderbird/8"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	THUNDERBIRD7(Manufacturer.MOZILLA, Browser.THUNDERBIRD, 170, "Thunderbird 7", new String[]{
 		"Thunderbird/7"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	THUNDERBIRD6(Manufacturer.MOZILLA, Browser.THUNDERBIRD, 160, "Thunderbird 6", new String[]{
 		"Thunderbird/6"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	THUNDERBIRD3(Manufacturer.MOZILLA, Browser.THUNDERBIRD, 130, "Thunderbird 3", new String[]{
 		"Thunderbird/3"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	THUNDERBIRD2(Manufacturer.MOZILLA, Browser.THUNDERBIRD, 120, "Thunderbird 2", new String[]{
 		"Thunderbird/2"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.GECKO, null),
 
+	// using Gecko Engine
 	CAMINO(Manufacturer.OTHER, null, 5, "Camino", new String[]{
 		"Camino"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "Camino\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"), // using
-																												// Gecko
-																												// Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "Camino\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"),
+
+	// using Gecko Engine
 	CAMINO2(Manufacturer.OTHER, Browser.CAMINO, 17, "Camino 2", new String[]{
 		"Camino/2"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
 	FLOCK(Manufacturer.OTHER, null, 4, "Flock", new String[]{
 		"Flock"
 	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "Flock\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"),
 
+	// using Gecko Engine
 	FIREFOX(Manufacturer.MOZILLA, null, 10, "Firefox", new String[]{
 		"Firefox"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "Firefox\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?(\\.[\\w]+)?)"), // using
-																															// Gecko
-																															// Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "Firefox\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?(\\.[\\w]+)?)"),
+
+	// using Gecko Engine
 	FIREFOX3MOBILE(Manufacturer.MOZILLA, Browser.FIREFOX, 31, "Firefox 3 Mobile", new String[]{
 		"Firefox/3.5 Maemo"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX9(Manufacturer.MOZILLA, Browser.FIREFOX, 90, "Firefox 9", new String[]{
 		"Firefox/9"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX8(Manufacturer.MOZILLA, Browser.FIREFOX, 80, "Firefox 8", new String[]{
 		"Firefox/8"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX7(Manufacturer.MOZILLA, Browser.FIREFOX, 70, "Firefox 7", new String[]{
 		"Firefox/7"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX6(Manufacturer.MOZILLA, Browser.FIREFOX, 60, "Firefox 6", new String[]{
 		"Firefox/6"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX5(Manufacturer.MOZILLA, Browser.FIREFOX, 50, "Firefox 5", new String[]{
 		"Firefox/5"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX4(Manufacturer.MOZILLA, Browser.FIREFOX, 40, "Firefox 4", new String[]{
 		"Firefox/4"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX3(Manufacturer.MOZILLA, Browser.FIREFOX, 30, "Firefox 3", new String[]{
 		"Firefox/3"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX2(Manufacturer.MOZILLA, Browser.FIREFOX, 20, "Firefox 2", new String[]{
 		"Firefox/2"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
+
+	// using Gecko Engine
 	FIREFOX1_5(Manufacturer.MOZILLA, Browser.FIREFOX, 15, "Firefox 1.5", new String[]{
 		"Firefox/1.5"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null), // using Gecko Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, null),
 
+	// using Gecko Engine
 	SEAMONKEY(Manufacturer.OTHER, null, 15, "SeaMonkey", new String[]{
 		"SeaMonkey"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "SeaMonkey\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"), // using
-																													// Gecko
-																													// Engine
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.GECKO, "SeaMonkey\\/(([0-9]+)\\.?([\\w]+)?(\\.[\\w]+)?)"),
 
 	BOT(Manufacturer.OTHER, null, 12, "Robot/Spider", new String[]{
 		"Googlebot", "bot", "spider", "crawler", "Feedfetcher", "Slurp", "Twiceler", "Nutch", "BecomeBot"
 	}, null, BrowserType.ROBOT, RenderingEngine.OTHER, null),
 
+	// rest of the mozilla browsers
 	MOZILLA(Manufacturer.MOZILLA, null, 1, "Mozilla", new String[]{
 		"Mozilla", "Moozilla"
-	}, null, BrowserType.WEB_BROWSER, RenderingEngine.OTHER, null), // rest of the mozilla browsers
+	}, null, BrowserType.WEB_BROWSER, RenderingEngine.OTHER, null),
 
+	// Mac OS X cocoa library
 	CFNETWORK(Manufacturer.OTHER, null, 6, "CFNetwork", new String[]{
 		"CFNetwork"
-	}, null, BrowserType.UNKNOWN, RenderingEngine.OTHER, null), // Mac OS X cocoa library
+	}, null, BrowserType.UNKNOWN, RenderingEngine.OTHER, null),
 
+	// email client by Qualcomm
 	EUDORA(Manufacturer.OTHER, null, 7, "Eudora", new String[]{
 		"Eudora", "EUDORA"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null), // email client by Qualcomm
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null),
 
 	POCOMAIL(Manufacturer.OTHER, null, 8, "PocoMail", new String[]{
 		"PocoMail"
 	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null),
 
+	// Email Client
 	THEBAT(Manufacturer.OTHER, null, 9, "The Bat!", new String[]{
 		"The Bat"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null), // Email Client
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null),
 
+	// mobile device browser
 	NETFRONT(Manufacturer.OTHER, null, 10, "NetFront", new String[]{
 		"NetFront"
-	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.OTHER, null), // mobile device browser
+	}, null, BrowserType.MOBILE_BROWSER, RenderingEngine.OTHER, null),
 
+	// http://www.go-evolution.org/Camel.Stream
 	EVOLUTION(Manufacturer.OTHER, null, 11, "Evolution", new String[]{
 		"CamelHttpStream"
-	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null), // http://www.go-evolution.org/Camel.Stream
+	}, null, BrowserType.EMAIL_CLIENT, RenderingEngine.OTHER, null),
 
 	LYNX(Manufacturer.OTHER, null, 13, "Lynx", new String[]{
 		"Lynx"
@@ -344,7 +427,8 @@ public enum Browser
 
 	private final String[] aliases;
 
-	private final String[] excludeList; // don't match when these values are in the agent-string
+	// don't match when these values are in the agent-string
+	private final String[] excludeList;
 
 	private final BrowserType browserType;
 
@@ -391,10 +475,11 @@ public enum Browser
 	private Pattern getVersionRegEx()
 	{
 		if(this.versionRegEx == null){
-			if(this.getGroup() != this)
+			if(this.getGroup() != this){
 				return this.getGroup().getVersionRegEx();
-			else
+			}else{
 				return null;
+			}
 		}
 		return this.versionRegEx;
 	}
@@ -414,8 +499,10 @@ public enum Browser
 				String fullVersionString = matcher.group(1);
 				String majorVersion = matcher.group(2);
 				String minorVersion = "0";
-				if(matcher.groupCount() > 2) // usually but not always there is a minor version
+				// usually but not always there is a minor version
+				if(matcher.groupCount() > 2){
 					minorVersion = matcher.group(3);
+				}
 				return new Version(fullVersionString, majorVersion, minorVersion);
 			}
 		}
@@ -464,8 +551,9 @@ public enum Browser
 	public boolean isInUserAgentString(String agentString)
 	{
 		for(String alias : aliases){
-			if(agentString.toLowerCase().indexOf(alias.toLowerCase()) != -1)
+			if(agentString.toLowerCase().indexOf(alias.toLowerCase()) != -1){
 				return true;
+			}
 		}
 		return false;
 	}
@@ -480,8 +568,9 @@ public enum Browser
 	{
 		if(excludeList != null){
 			for(String exclude : excludeList){
-				if(agentString.toLowerCase().indexOf(exclude.toLowerCase()) != -1)
+				if(agentString.toLowerCase().indexOf(exclude.toLowerCase()) != -1){
 					return true;
+				}
 			}
 		}
 		return false;
@@ -511,8 +600,6 @@ public enum Browser
 	 * Iterates over all Browsers to compare the browser signature with
 	 * the user agent string. If no match can be found Browser.UNKNOWN will
 	 * be returned.
-	 * @param agentString
-	 * @return Browser
 	 */
 	public static Browser parseUserAgentString(String agentString)
 	{
@@ -531,18 +618,16 @@ public enum Browser
 	/**
 	 * Returns the enum constant of this type with the specified id.
 	 * Throws IllegalArgumentException if the value does not exist.
-	 * @param id
-	 * @return
 	 */
 	public static Browser valueOf(short id)
 	{
 		for(Browser browser : Browser.values()){
-			if(browser.getId() == id)
+			if(browser.getId() == id){
 				return browser;
+			}
 		}
 
 		// same behavior as standard valueOf(string) method
 		throw new IllegalArgumentException("No enum const for id " + id);
 	}
-
 }

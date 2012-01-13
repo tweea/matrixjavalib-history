@@ -44,32 +44,32 @@ package net.matrix.web.http;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Container class for user-agent information with operating system and browser details. 
- * Can decode user-agent strings.
- * <br><br>
+ * Container class for user-agent information with operating system and browser details.
+ * Can decode user-agent strings. <br>
+ * <br>
  * Resources:<br>
  * <a href="http://www.useragentstring.com">User Agent String.Com</a><br>
  * <a href="http://www.user-agents.org">List of User-Agents</a><br>
  * <a href="http://user-agent-string.info">user-agent-string.info</a><br>
  * <a href="http://www.zytrax.com/tech/web/browser_ids.htm">Browser ID (User-Agent) Strings</a><br>
- * <a href="http://www.zytrax.com/tech/web/mobile_ids.html">Mobile Browser ID (User-Agent) Strings</a><br>
+ * <a href="http://www.zytrax.com/tech/web/mobile_ids.html">Mobile Browser ID (User-Agent)
+ * Strings</a><br>
  * <a href="http://www.joergkrusesweb.de/internet/browser/user-agent.html">Browser-Kennungen</a><br>
  * <a href="http://deviceatlas.com/devices">Device Atlas - Mobile Device Intelligence</a><br>
  * <a href="http://mobileopera.com/reference/ua">Mobile Opera user-agent strings</a><br>
  * <a href="http://en.wikipedia.org/wiki/S60_platform">S60 platform</a><br>
- * <a href="http://msdn.microsoft.com/en-us/library/ms537503.aspx">Understanding User-Agent Strings</a><br>
- * <a href="http://developer.sonyericsson.com/site/global/docstools/browsing/p_browsing.jsp">Sony Ericsson Web Docs & Tools</a><br>
- * <a href="http://developer.apple.com/internet/safari/faq.html#anchor2">What is the Safari user-agent string</a><br>
+ * <a href="http://msdn.microsoft.com/en-us/library/ms537503.aspx">Understanding User-Agent
+ * Strings</a><br>
+ * <a href="http://developer.sonyericsson.com/site/global/docstools/browsing/p_browsing.jsp">Sony
+ * Ericsson Web Docs & Tools</a><br>
+ * <a href="http://developer.apple.com/internet/safari/faq.html#anchor2">What is the Safari
+ * user-agent string</a><br>
  * <a href="http://www.pgts.com.au/pgtsj/pgtsj0208c.html">List of User Agent Strings</a><br>
- * <a href="http://blogs.msdn.com/iemobile/archive/2006/08/03/Detecting_IE_Mobile.aspx">Detecting Internet Explorer Mobile's User-Agent on the server</a>
- */
-
-/**
- * @author harald
+ * <a href="http://blogs.msdn.com/iemobile/archive/2006/08/03/Detecting_IE_Mobile.aspx">Detecting
+ * Internet Explorer Mobile's User-Agent on the server</a>
  */
 public class UserAgent
 {
-
 	private OperatingSystem operatingSystem = OperatingSystem.UNKNOWN;
 
 	private Browser browser = Browser.UNKNOWN;
@@ -87,27 +87,24 @@ public class UserAgent
 
 	public UserAgent(String userAgentString)
 	{
-		Browser browser = Browser.parseUserAgentString(userAgentString);
-
-		OperatingSystem operatingSystem = OperatingSystem.UNKNOWN;
-
+		this.operatingSystem = OperatingSystem.UNKNOWN;
+		this.browser = Browser.parseUserAgentString(userAgentString);
 		// BOTs don't have an interesting OS for us
-		if(browser != Browser.BOT)
+		if(browser != Browser.BOT){
 			operatingSystem = OperatingSystem.parseUserAgentString(userAgentString);
-
-		this.operatingSystem = operatingSystem;
-		this.browser = browser;
+		}
 		this.id = ((operatingSystem.getId() << 16) + browser.getId());
 		this.userAgentString = userAgentString;
 	}
 
+	// TODO HttpServletRequests
+	@Deprecated
 	public UserAgent(HttpServletRequest request)
 	{
 		this(request.getHeader("user-agent"));
 	}
 
 	/**
-	 * @param userAgentString
 	 * @return UserAgent
 	 */
 	public static UserAgent parseUserAgentString(String userAgentString)
@@ -155,6 +152,7 @@ public class UserAgent
 	/**
 	 * Combined string representation of both enums
 	 */
+	@Override
 	public String toString()
 	{
 		return this.operatingSystem.toString() + "-" + this.browser.toString();
@@ -162,8 +160,6 @@ public class UserAgent
 
 	/**
 	 * Returns UserAgent based on specified unique id
-	 * @param id
-	 * @return
 	 */
 	public static UserAgent valueOf(int id)
 	{
@@ -174,13 +170,12 @@ public class UserAgent
 
 	/**
 	 * Returns UserAgent based on combined string representation
-	 * @param name
-	 * @return
 	 */
 	public static UserAgent valueOf(String name)
 	{
-		if(name == null)
+		if(name == null){
 			throw new NullPointerException("Name is null");
+		}
 
 		String[] elements = name.split("-");
 
@@ -236,5 +231,4 @@ public class UserAgent
 			return false;
 		return true;
 	}
-
 }

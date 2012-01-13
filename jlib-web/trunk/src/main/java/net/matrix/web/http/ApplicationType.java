@@ -44,15 +44,15 @@ package net.matrix.web.http;
 /**
  * Enum constants classifying the different types of applications which are common in referrer
  * strings
- * @author harald
  */
 public enum ApplicationType
 {
-
 	/**
 	 * Webmail service like Windows Live Hotmail and Gmail.
 	 */
-	WEBMAIL("Webmail client"), UNKNOWN("unknown");
+	WEBMAIL("Webmail client"),
+
+	UNKNOWN("unknown");
 
 	private String name;
 
@@ -65,5 +65,4 @@ public enum ApplicationType
 	{
 		return name;
 	}
-
 }
