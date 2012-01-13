@@ -7,17 +7,11 @@ package net.matrix.servlet;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Enumeration;
-import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.Validate;
-
-import net.matrix.util.IterableEnumeration;
 import net.matrix.web.http.HTTPs;
 
 /**
@@ -130,33 +124,5 @@ public class Servlets
 			response.setHeader(HTTPs.CONTENT_DISPOSITION_HEADER, "attachment; filename=\"" + encodedfileName + "\"");
 		}catch(UnsupportedEncodingException e){
 		}
-	}
-
-	/**
-	 * 取得带相同前缀的Request Parameters.
-	 * 返回的结果的Parameter名已去除前缀.
-	 */
-	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix)
-	{
-		Validate.notNull(request, "Request must not be null");
-		if(prefix == null){
-			prefix = "";
-		}
-		Enumeration paramNames = request.getParameterNames();
-		Map<String, Object> params = new TreeMap<String, Object>();
-		for(String paramName : new IterableEnumeration<String>(paramNames)){
-			if("".equals(prefix) || paramName.startsWith(prefix)){
-				String unprefixed = paramName.substring(prefix.length());
-				String[] values = request.getParameterValues(paramName);
-				if(values == null || values.length == 0){
-					// Do nothing, no values found at all.
-				}else if(values.length > 1){
-					params.put(unprefixed, values);
-				}else{
-					params.put(unprefixed, values[0]);
-				}
-			}
-		}
-		return params;
 	}
 }
