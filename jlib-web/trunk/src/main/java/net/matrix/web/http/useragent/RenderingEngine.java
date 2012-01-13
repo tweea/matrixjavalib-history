@@ -39,7 +39,7 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
 /**
  * Enum constants classifying the different types of rendering engines which are being used by
@@ -88,10 +88,15 @@ public enum RenderingEngine
 	 */
 	OTHER("Other");
 
-	String name;
+	private String name;
 
 	private RenderingEngine(String name)
 	{
 		this.name = name;
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 }
