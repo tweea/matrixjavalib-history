@@ -19,14 +19,12 @@ import net.matrix.sql.hibernate.entity.UserInfo;
 
 /**
  * Hibernate 测试
- * @author Tweea
  * @version 2005-11-30
  */
 public class HibernateJPATest
 {
 	@Test
 	public void testContextManager()
-		throws Exception
 	{
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("test1");
 		Assert.assertNotNull(emf);
