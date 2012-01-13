@@ -23,13 +23,13 @@ public abstract class WebProcess
 {
 	private static final Logger LOG = LoggerFactory.getLogger(WebProcess.class);
 
-	private final static String ERROR_KEY = "error_key";
+	private static final String ERROR_KEY = "error_key";
 
-	private final static String MESSAGE_KEY = "message_key";
+	private static final String MESSAGE_KEY = "message_key";
 
-	private final static String BACK_URI_KEY = "back_uri";
+	private static final String BACK_URI_KEY = "back_uri";
 
-	private final static String STORE_URI_KEY = "storeuri";
+	private static final String STORE_URI_KEY = "storeuri";
 
 	// /////////////////////////////////////////////////////////////////////////////////////
 	// 消息处理方法
