@@ -41,19 +41,14 @@
  */
 package net.matrix.web.http;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-/**
- * @author harald
- */
 public class UserAgentTest
 {
-
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.UserAgent#parseUserAgentString(java.lang.String)}.
+	 * Test method for {@link UserAgent#parseUserAgentString(java.lang.String)}.
 	 */
 	@Test
 	public void testParseUserAgentString()
@@ -64,7 +59,7 @@ public class UserAgentTest
 	}
 
 	/**
-	 * Test method for {@link nl.bitwalker.useragentutils.UserAgent#toString()}.
+	 * Test method for {@link UserAgent#toString()}.
 	 */
 	@Test
 	public void testToString()
@@ -74,7 +69,7 @@ public class UserAgentTest
 	}
 
 	/**
-	 * Test method for {@link nl.bitwalker.useragentutils.UserAgent#valueOf(int)}.
+	 * Test method for {@link UserAgent#valueOf(int)}.
 	 */
 	@Test
 	public void testValueOf()
@@ -85,7 +80,7 @@ public class UserAgentTest
 	}
 
 	/**
-	 * Test method for {@link nl.bitwalker.useragentutils.UserAgent#valueOf(String)}.
+	 * Test method for {@link UserAgent#valueOf(String)}.
 	 */
 	@Test
 	public void testValueOf2()
@@ -94,5 +89,4 @@ public class UserAgentTest
 		UserAgent retrievedUserAgent = UserAgent.valueOf(userAgent.toString());
 		assertEquals(userAgent, retrievedUserAgent);
 	}
-
 }

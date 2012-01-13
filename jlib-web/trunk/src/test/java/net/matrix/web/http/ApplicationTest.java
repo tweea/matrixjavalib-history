@@ -41,7 +41,8 @@
  */
 package net.matrix.web.http;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +51,9 @@ import org.junit.Test;
 
 /**
  * Test class for application detection.
- * @author harald
  */
 public class ApplicationTest
 {
-
 	String[] emptyOrNull = new String[]{
 		null, "", "-"
 	};
@@ -124,8 +123,7 @@ public class ApplicationTest
 	// "http://g1a83.mail.126.com/a/s?func=mbox:readMessageHTML&sid=abcdefg&mid=11:123456",
 
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.Application#isInReferrerString(java.lang.String)}.
+	 * Test method for {@link Application#isInReferrerString(java.lang.String)}.
 	 */
 	@Test
 	public void testIsBrowser()
@@ -134,8 +132,7 @@ public class ApplicationTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.Application#parseReferrerString(java.lang.String)}.
+	 * Test method for {@link Application#parseReferrerString(java.lang.String)}.
 	 */
 	@Test
 	public void testParseUserAgentString()
@@ -165,7 +162,6 @@ public class ApplicationTest
 	@Test
 	public void testUniqueIdValues()
 	{
-
 		List<Short> retrievedIdValues = new ArrayList<Short>();
 
 		for(Application application : Application.values()){
@@ -173,5 +169,4 @@ public class ApplicationTest
 			retrievedIdValues.add(application.getId());
 		}
 	}
-
 }

@@ -41,19 +41,17 @@
  */
 package net.matrix.web.http;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-/**
- * @author harald
- */
 public class BrowserTest
 {
-
 	String[] ie6clients = new String[]{
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; T312461)",
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; XMPP Tiscali Communicator v.10.0.2; .NET CLR 2.0.50727)",
@@ -64,10 +62,8 @@ public class BrowserTest
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)",
 		"Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0 ; .NET CLR 2.0.50215; SL Commerce Client v1.0; Tablet PC 2.0",
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
-		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.0.04506)" // Windows
-																											// Mail
-																											// on
-																											// Vista
+		// Windows Mail on Vista
+		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.0.04506)"
 	};
 
 	String[] ie8clients = new String[]{
@@ -216,12 +212,10 @@ public class BrowserTest
 
 	String[] mobileSafari = {
 		"Mozilla/5.0 (Linux; U; Android 2.1; en-us; Nexus One Build/ERD62) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17",
-		"Mozilla/5.0 (iPod; U; CPU iPhone OS 2_0 like Mac OS X; de-de) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5A347 Safari/525.20", // Mobile
-																																							// Safari
-																																							// 3.1.1
-		"Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A101a Safari/419.3", // Mobile
-																																		// Safari
-																																		// 3.0
+		// Mobile Safari 3.1.1
+		"Mozilla/5.0 (iPod; U; CPU iPhone OS 2_0 like Mac OS X; de-de) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5A347 Safari/525.20",
+		// Mobile Safari 3.0
+		"Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A101a Safari/419.3",
 		"Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B367 Safari/531.21.10",
 		"Mozilla/5.0 (iPod; U; CPU iPhone OS 4_1 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8B117 Safari/6531.22.7"
 	};
@@ -294,8 +288,7 @@ public class BrowserTest
 	};
 
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.Browser#isInUserAgentString(java.lang.String)}.
+	 * Test method for {@link Browser#isInUserAgentString(java.lang.String)}.
 	 */
 	@Test
 	public void testIsBrowser()
@@ -340,12 +333,8 @@ public class BrowserTest
 		testVersions(
 			"Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 NokiaE90-1/07.24.0.3; Profile/MIDP-2.0 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413 UP.Link/6.2.3.18.0",
 			null);
-		testVersions("Mozilla/5.0 (compatible; Googlebot/2.1; http://www.google.com/bot.html)", null); // no
-																										// version
-																										// information
-																										// for
-																										// some
-																										// browsers
+		// no version information for some browsers
+		testVersions("Mozilla/5.0 (compatible; Googlebot/2.1; http://www.google.com/bot.html)", null);
 	}
 
 	private void testVersions(String ua, Version expectedVersion)
@@ -355,8 +344,7 @@ public class BrowserTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link nl.bitwalker.useragentutils.Browser#parseUserAgentString(java.lang.String)}.
+	 * Test method for {@link Browser#parseUserAgentString(java.lang.String)}.
 	 */
 	@Test
 	public void testParseUserAgentString()
@@ -438,7 +426,6 @@ public class BrowserTest
 	@Test
 	public void testUniqueIdValues()
 	{
-
 		List<Short> retrievedIdValues = new ArrayList<Short>();
 
 		for(Browser browser : Browser.values()){
@@ -446,5 +433,4 @@ public class BrowserTest
 			retrievedIdValues.add(browser.getId());
 		}
 	}
-
 }
