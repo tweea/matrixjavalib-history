@@ -6,7 +6,7 @@
 	<!-- 基本属性 - 项目属性 -->
 	<groupId>net.matrix</groupId>
 	<artifactId>mxlib-db</artifactId>
-	<version>1.4.0</version>
+	<version>1.4.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 项目关系 -->
@@ -182,8 +182,8 @@
 		<url>http://sourceforge.net/tracker/?group_id=543402</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/tags/mxlib-db-1.4.0</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/tags/mxlib-db-1.4.0</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jlib-db/tags/mxlib-db-1.4.0</url>
+		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/trunk/</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-db/trunk/</developerConnection>
+		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jlib-db/trunk/</url>
 	</scm>
 </project>
