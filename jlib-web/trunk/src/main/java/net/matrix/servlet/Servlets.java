@@ -1,9 +1,7 @@
-/**
- * Copyright (c) 2005-2011 springside.org.cn
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * 
+/*
  * $Id$
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
  */
 package net.matrix.servlet;
 
@@ -17,18 +15,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.Validate;
-
-import net.matrix.util.Encodes;
 
 /**
  * Http与Servlet工具类.
- * @author calvin
  */
 public class Servlets
 {
-	private Servlets()
+	public static final String USER_AGENT_HEADER = "user-agent";
+
+	public static String getUserAgent(HttpServletRequest request)
 	{
+		return request.getHeader(USER_AGENT_HEADER);
 	}
 
 	/**
@@ -166,6 +165,6 @@ public class Servlets
 	public static String encodeHttpBasic(String userName, String password)
 	{
 		String encode = userName + ":" + password;
-		return "Basic " + Encodes.encodeBase64(encode.getBytes());
+		return "Basic " + Base64.encodeBase64String(encode.getBytes());
 	}
 }
