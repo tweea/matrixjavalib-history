@@ -15,6 +15,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +45,8 @@ public class SessionFactoryManager
 	private ThreadLocal<HibernateTransactionContext> threadContext;
 
 	private Configuration configuration;
+
+	private ServiceRegistry serviceRegistry;
 
 	private SessionFactory sessionFactory;
 
@@ -166,6 +170,11 @@ public class SessionFactoryManager
 				sessionFactory = null;
 			}
 		}
+		if(serviceRegistry != null){
+			ServiceRegistryBuilder.destroy(serviceRegistry);
+			LOG.info(factoryName + " 配置的 Hibernate ServiceRegistry 已销毁。");
+			serviceRegistry = null;
+		}
 		configuration = null;
 	}
 
@@ -193,6 +202,28 @@ public class SessionFactoryManager
 	}
 
 	/**
+	 * 获取 ServiceRegistry
+	 * @return ServiceRegistry
+	 */
+	public ServiceRegistry getServiceRegistry()
+		throws SQLException
+	{
+		try{
+			if(serviceRegistry == null){
+				if(DEFAULT_NAME.equals(factoryName)){
+					LOG.info("以默认配置构建 Hibernate ServiceRegistry。");
+				}else{
+					LOG.info("以 " + factoryName + " 配置构建 Hibernate ServiceRegistry。");
+				}
+				serviceRegistry = new ServiceRegistryBuilder().applySettings(getConfiguration().getProperties()).buildServiceRegistry();
+			}
+			return serviceRegistry;
+		}catch(HibernateException e){
+			throw new SQLException(e);
+		}
+	}
+
+	/**
 	 * 获取 SessionFactory
 	 * @return SessionFactory
 	 */
@@ -206,7 +237,7 @@ public class SessionFactoryManager
 				}else{
 					LOG.info("以 " + factoryName + " 配置构建 Hibernate SessionFactory。");
 				}
-				sessionFactory = getConfiguration().buildSessionFactory();
+				sessionFactory = getConfiguration().buildSessionFactory(getServiceRegistry());
 			}
 			return sessionFactory;
 		}catch(HibernateException e){

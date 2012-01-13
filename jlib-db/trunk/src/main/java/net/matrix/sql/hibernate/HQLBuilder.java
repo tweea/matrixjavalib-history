@@ -56,7 +56,7 @@ public class HQLBuilder
 
 	public static String getParameterName(int index)
 	{
-		return "" + PARAMETER_PREFIX[1] + index;
+		return PARAMETER_PREFIX[1] + Integer.toString(index);
 	}
 
 	public void clear()
