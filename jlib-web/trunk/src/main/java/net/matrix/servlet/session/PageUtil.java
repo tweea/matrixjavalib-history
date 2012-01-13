@@ -15,15 +15,15 @@ import net.matrix.lang.Objects;
 
 public abstract class PageUtil
 {
-	public final static String PAGING_KEY = "pagekey";
+	public static final String PAGING_KEY = "pagekey";
 
-	public final static String URL_KEY = "pageurl";
+	public static final String URL_KEY = "pageurl";
 
-	public final static String INDEX_KEY = "pageindex";
+	public static final String INDEX_KEY = "pageindex";
 
-	public final static String NUM_PER_PAGE_KEY = "numPerPage";
+	public static final String NUM_PER_PAGE_KEY = "numPerPage";
 
-	public final static String TATAL_NUM_KEY = "total";
+	public static final String TATAL_NUM_KEY = "total";
 
 	public static void setPageInfos(HttpServletRequest request, PagingInfo info)
 	{
