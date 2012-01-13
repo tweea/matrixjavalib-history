@@ -20,7 +20,6 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
 
 /**
  * 系统初始化
- * @author Tweea
  * @since 2005-11-16
  */
 public class InitSystem
