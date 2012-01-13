@@ -22,17 +22,17 @@ import org.hibernate.usertype.UserType;
 public class DateTimeAsIntegerType
 	implements UserType, ParameterizedType
 {
-	private final static int[] TYPES = new int[]{
+	private static final int[] TYPES = new int[]{
 		Types.INTEGER
 	};
 
-	private final static String[] FORMATS = {
+	private static final String[] FORMATS = {
 		"yyyyMMdd", "HHmmss"
 	};
 
-	private final static int yyyyMMdd = 0;
+	private static final int yyyyMMdd = 0;
 
-	private final static int HHmmss = 1;
+	private static final int HHmmss = 1;
 
 	private int formatIndex;
 
