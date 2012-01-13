@@ -26,7 +26,7 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
 public class InitSystem
 	implements ServletContextListener
 {
-	private final static Logger LOG = LoggerFactory.getLogger(InitSystem.class);
+	private static final Logger LOG = LoggerFactory.getLogger(InitSystem.class);
 
 	protected SystemContext context;
 
