@@ -99,7 +99,6 @@ public class Servlets
 			boolean conditionSatisfied = false;
 			if(!"*".equals(headerValue)){
 				StringTokenizer commaTokenizer = new StringTokenizer(headerValue, ",");
-
 				while(!conditionSatisfied && commaTokenizer.hasMoreTokens()){
 					String currentToken = commaTokenizer.nextToken();
 					if(currentToken.trim().equals(etag)){
