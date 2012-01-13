@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 在会话中设置标示
- * @author Tweea
  * @since 2005.11.10
  */
 public abstract class Token

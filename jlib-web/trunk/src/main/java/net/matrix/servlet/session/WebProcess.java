@@ -9,15 +9,20 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.matrix.lang.Objects;
 import net.matrix.text.DateFormatHelper;
+import net.matrix.util.IterableEnumeration;
 
 public abstract class WebProcess
 {
@@ -97,48 +102,54 @@ public abstract class WebProcess
 	public static String getParameter(HttpServletRequest request, String property)
 	{
 		String v = request.getParameter(property);
-		if(v == null)
+		if(v == null){
 			return "";
+		}
 		return v;
 	}
 
 	public static int getIntParameter(HttpServletRequest request, String property)
 	{
 		String value = getParameter(request, property);
-		if("".equals(value))
+		if("".equals(value)){
 			return 0;
+		}
 		return Integer.parseInt(value);
 	}
 
 	public static long getLongParameter(HttpServletRequest request, String property)
 	{
 		String value = getParameter(request, property);
-		if("".equals(value))
+		if("".equals(value)){
 			return 0;
+		}
 		return Long.parseLong(value);
 	}
 
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property)
 	{
 		String value = getParameter(request, property);
-		if("".equals(value))
+		if("".equals(value)){
 			return new BigDecimal(0);
+		}
 		return new BigDecimal(value);
 	}
 
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property, MathContext mc)
 	{
 		String value = getParameter(request, property);
-		if("".equals(value))
+		if("".equals(value)){
 			return new BigDecimal(0, mc);
+		}
 		return new BigDecimal(value, mc);
 	}
 
 	public static GregorianCalendar getGregorianCalendarParameter(HttpServletRequest request, String property, String format)
 	{
 		String value = getParameter(request, property);
-		if("".equals(value))
+		if("".equals(value)){
 			return null;
+		}
 		DateFormat df = DateFormatHelper.getFormat(format);
 		GregorianCalendar gc = new GregorianCalendar(1900, 1, 1);
 		try{
@@ -148,6 +159,34 @@ public abstract class WebProcess
 			return null;
 		}
 		return gc;
+	}
+
+	/**
+	 * 取得带相同前缀的Request Parameters.
+	 * 返回的结果的Parameter名已去除前缀.
+	 */
+	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix)
+	{
+		Validate.notNull(request, "Request must not be null");
+		if(prefix == null){
+			prefix = "";
+		}
+		Enumeration paramNames = request.getParameterNames();
+		Map<String, Object> params = new TreeMap<String, Object>();
+		for(String paramName : new IterableEnumeration<String>(paramNames)){
+			if("".equals(prefix) || paramName.startsWith(prefix)){
+				String unprefixed = paramName.substring(prefix.length());
+				String[] values = request.getParameterValues(paramName);
+				if(values == null || values.length == 0){
+					// Do nothing, no values found at all.
+				}else if(values.length > 1){
+					params.put(unprefixed, values);
+				}else{
+					params.put(unprefixed, values[0]);
+				}
+			}
+		}
+		return params;
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////////////
