@@ -5,7 +5,7 @@
  */
 package net.matrix.web.html;
 
-public abstract class HTMLUtil
+public abstract class HTMLs
 {
 	public static String fitToLength(String str, int length)
 	{
