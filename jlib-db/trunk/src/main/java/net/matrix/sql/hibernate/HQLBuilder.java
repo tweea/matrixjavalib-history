@@ -16,7 +16,7 @@ public class HQLBuilder
 {
 	private static final long serialVersionUID = 1525758570709007599L;
 
-	private final static char[] PARAMETER_PREFIX = {
+	private static final char[] PARAMETER_PREFIX = {
 		':', 'p'
 	};
 

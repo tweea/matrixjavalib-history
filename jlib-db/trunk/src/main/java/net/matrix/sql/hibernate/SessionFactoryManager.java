@@ -32,7 +32,7 @@ public class SessionFactoryManager
 	/**
 	 * 默认的 SessionFactory 名称
 	 */
-	public final static String DEFAULT_NAME = "";
+	public static final String DEFAULT_NAME = "";
 
 	private static final Logger LOG = LoggerFactory.getLogger(SessionFactoryManager.class);
 

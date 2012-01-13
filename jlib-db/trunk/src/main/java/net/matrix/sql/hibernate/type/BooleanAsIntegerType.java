@@ -18,7 +18,7 @@ import org.hibernate.usertype.UserType;
 public class BooleanAsIntegerType
 	implements UserType
 {
-	private final static int[] TYPES = new int[]{
+	private static final int[] TYPES = new int[]{
 		Types.INTEGER
 	};
 
