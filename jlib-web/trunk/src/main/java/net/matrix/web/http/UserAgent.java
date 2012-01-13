@@ -41,8 +41,6 @@
  */
 package net.matrix.web.http;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Container class for user-agent information with operating system and browser details.
  * Can decode user-agent strings. <br>
@@ -95,13 +93,6 @@ public class UserAgent
 		}
 		this.id = ((operatingSystem.getId() << 16) + browser.getId());
 		this.userAgentString = userAgentString;
-	}
-
-	// TODO HttpServletRequests
-	@Deprecated
-	public UserAgent(HttpServletRequest request)
-	{
-		this(request.getHeader("user-agent"));
 	}
 
 	/**
