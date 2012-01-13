@@ -12,7 +12,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 public class ServletsTest
 {
-
 	@Test
 	public void checkIfModified()
 	{
@@ -64,7 +63,5 @@ public class ServletsTest
 
 		result = Servlets.getParametersStartingWith(request, null);
 		assertEquals(3, result.size());
-
 	}
-
 }
