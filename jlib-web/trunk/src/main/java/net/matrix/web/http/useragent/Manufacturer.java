@@ -39,7 +39,7 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
 /**
  * Enum constants representing manufacturers of operating systems and client software.

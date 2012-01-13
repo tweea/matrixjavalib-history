@@ -39,7 +39,7 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

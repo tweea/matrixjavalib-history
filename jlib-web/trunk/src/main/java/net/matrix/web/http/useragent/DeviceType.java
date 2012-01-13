@@ -39,7 +39,7 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
 /**
  * Enum contact for the type of used device
@@ -76,7 +76,7 @@ public enum DeviceType
 	 */
 	UNKNOWN("Unknown");
 
-	String name;
+	private String name;
 
 	private DeviceType(String name)
 	{

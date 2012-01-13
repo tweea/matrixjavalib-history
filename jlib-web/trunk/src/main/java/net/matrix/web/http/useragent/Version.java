@@ -39,7 +39,7 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
 /**
  * Container for general version information.
@@ -48,11 +48,11 @@ package net.matrix.web.http;
  */
 public class Version
 {
-	String version;
+	private String version;
 
-	String majorVersion;
+	private String majorVersion;
 
-	String minorVersion;
+	private String minorVersion;
 
 	public Version(String version, String majorVersion, String minorVersion)
 	{

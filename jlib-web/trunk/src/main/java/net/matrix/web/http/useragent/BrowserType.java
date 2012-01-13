@@ -39,7 +39,7 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
 /**
  * Enum constants classifying the different types of browsers which are common in user-agent strings

@@ -39,30 +39,54 @@
  * Copyright(C) 2012 Matrix
  * All right reserved.
  */
-package net.matrix.web.http;
+package net.matrix.web.http.useragent;
 
-/**
- * Enum constants classifying the different types of applications which are common in referrer
- * strings
- */
-public enum ApplicationType
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class UserAgentTest
 {
 	/**
-	 * Webmail service like Windows Live Hotmail and Gmail.
+	 * Test method for {@link UserAgent#parseUserAgentString(java.lang.String)}.
 	 */
-	WEBMAIL("Webmail client"),
-
-	UNKNOWN("unknown");
-
-	private String name;
-
-	private ApplicationType(String name)
+	@Test
+	public void testParseUserAgentString()
 	{
-		this.name = name;
+		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+		assertEquals(OperatingSystem.WINDOWS_XP, userAgent.getOperatingSystem());
+		assertEquals(Browser.IE6, userAgent.getBrowser());
 	}
 
-	public String getName()
+	/**
+	 * Test method for {@link UserAgent#toString()}.
+	 */
+	@Test
+	public void testToString()
 	{
-		return name;
+		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+		assertEquals(OperatingSystem.WINDOWS_XP.toString() + "-" + Browser.IE6.toString(), userAgent.toString());
+	}
+
+	/**
+	 * Test method for {@link UserAgent#valueOf(int)}.
+	 */
+	@Test
+	public void testValueOf()
+	{
+		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+		UserAgent retrievedUserAgent = UserAgent.valueOf(userAgent.getId());
+		assertEquals(userAgent, retrievedUserAgent);
+	}
+
+	/**
+	 * Test method for {@link UserAgent#valueOf(String)}.
+	 */
+	@Test
+	public void testValueOf2()
+	{
+		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+		UserAgent retrievedUserAgent = UserAgent.valueOf(userAgent.toString());
+		assertEquals(userAgent, retrievedUserAgent);
 	}
 }
