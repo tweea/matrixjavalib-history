@@ -371,9 +371,7 @@
 	<description>
 		Genesis 提供 Maven3 构建支持，增加共享的配置和公共插件。
 	</description>
-	<url>
-		http://sourceforge.net/projects/matrixjavalib/
-	</url>
+	<url>http://sourceforge.net/projects/matrixjavalib/</url>
 	<inceptionYear>2008</inceptionYear>
 	<licenses>
 		<license>
@@ -410,7 +408,7 @@
 	<distributionManagement>
 		<repository>
 			<id>sourceforge.release</id>
-			<name>Internal Release</name>
+			<name>SourceForge Release</name>
 			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/release</url>
 		</repository>
 		<snapshotRepository>
@@ -421,7 +419,7 @@
 		<site>
 			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
 			<id>sourceforge.site</id>
-			<name>Internal Site</name>
+			<name>SourceForge Site</name>
 			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site</url>
 		</site>
 	</distributionManagement>
