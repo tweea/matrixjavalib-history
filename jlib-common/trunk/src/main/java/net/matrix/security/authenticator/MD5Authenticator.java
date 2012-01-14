@@ -29,6 +29,7 @@ public class MD5Authenticator
 		return toHexString(data);
 	}
 
+	// TODO 在所有地方应用 commons-codec
 	private String toHexString(byte[] data)
 	{
 		StringBuffer sb = new StringBuffer();
