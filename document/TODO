@@ -1,6 +1,5 @@
 eclipse 项目文件清理
 springside 1673
-maven-failsafe-plugin
 ---- next ------
 注意异常的抛出和处理
 增强 Javadoc
