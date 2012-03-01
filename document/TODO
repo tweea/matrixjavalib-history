@@ -2,6 +2,7 @@ springside Commit:8e25be12236ad64f5ac3e3d0339876e529b5d285
 ---- next ------
 注意异常的抛出和处理
 增强 Javadoc
+reporting 新配置方法和重复报表问题
 增强检查规则
 	Sonar
 	CheckStyle
