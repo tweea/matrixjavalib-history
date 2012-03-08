@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- $Id$ -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 基本属性 - 项目属性 -->
+	<groupId>net.matrix.build</groupId>
+	<artifactId>checkstyle-config</artifactId>
+	<version>1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<!-- 基本属性 - 项目关系 -->
+	<parent>
+		<groupId>net.matrix</groupId>
+		<artifactId>genesis</artifactId>
+		<version>19</version>
+	</parent>
+	<!-- 基本属性 - 属性 -->
+
+	<!-- 构建设置 -->
+
+	<!-- 项目信息 -->
+	<name>CheckStyle 配置</name>
+	<description>CheckStyle 配置。</description>
+	<url>http://sourceforge.net/projects/matrixjavalib/</url>
+	<inceptionYear>2008</inceptionYear>
+
+	<!-- 构建环境 -->
+	<issueManagement>
+		<system>sourceforge</system>
+		<url>http://sourceforge.net/tracker/?group_id=543402</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-build-checkstyle-config/trunk</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-build-checkstyle-config/trunk</developerConnection>
+		<url>http://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-build-checkstyle-config/trunk</url>
+	</scm>
+</project>
