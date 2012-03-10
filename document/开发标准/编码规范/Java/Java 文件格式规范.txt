@@ -1,0 +1,227 @@
+1、定义这个规范的目的是让项目中所有的文档都看起来像一个人写的，增加可读性，减少项目组中因为换人而带来的损失。
+2、这些规范可以适当变通，但是一定要让程序有良好的可读性，同时记录不遵循规范的原因。
+3、代码格式化规范遵守 Eclipse 的自定义格式化规范，请导入并使用该规范。
+   在代码编写完成时，如果正确设置了 Eclipse，Eclipse 会在保存时自动格式化修改的代码。
+4、我们统一使用中文作为注释语言
+5、Java 文件使用 UTF-8 编码保存
+
+Java 文件格式 
+--------------------------------------------------------------------------------
+所有的 Java(*.java) 文件都必须遵守如下的样式规则： 
+
+1 版权信息 
+  版权信息必须在 java 文件的开头，比如： 
+
+/*
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
+ */
+		 
+其他不需要出现在 javadoc 的信息也可以包含在这里。
+
+2 Package/Imports 
+  package 以 net.matrix 开头，后面跟上项目的名称，再后面名字根据自己的设计而定，名称要符合 Java 规范
+
+net.matrix.crm.util;
+
+  package 行要在 import 行之前，import 中标准的包名要在其他的包名之前，而且按照字母顺序排列。
+  请引用具体的 import java.util.Set 而不要引用包 import java.util.*。
+  引用顺序请导入 Eclipse 顺序设置。
+
+package net.matrix.stats;
+
+import java.io.Reader;
+import java.util.Observable;
+
+import net.sf.util.Application;
+		 
+3 接下来的是类的注释，一般是用来解释类的。 
+
+/**
+ * A class representing a set of packet and byte counters
+ * It is observable to allow it to be watched, but only
+ * reports changes when the current set is complete
+ */
+
+4 接下来是类定义，包含了在不同的行的 extends 和 implements 
+
+public class CounterSet
+		extends Observable
+		implements Cloneable
+
+5 接下来是类的成员变量
+  通常根据可见性，public 在前，private 在后。
+  根据实例化方式，静态成员在前，实例成员在后。
+  当一个字符串常量在两个及以上的地方被用到，必须将其定义为常量 Field，以避免重复定义
+
+  private static final SOME_CLASS_NAME = "com.foo.bar.Provider";
+
+  public 的成员变量必须生成文档（JavaDoc）。
+  proceted、private 和 package 定义的成员变量如果名字含义明确的话，可以没有注释。
+
+/**
+ * Packet counters
+ */
+protected int[] packets;
+
+6 接下来是构造函数，它应该用递增的方式写（比如：参数多的写在后面）。
+
+public CounterSet(int size)
+{
+  this.size = size;
+}
+
+和 finalize 方法
+
+protected void finalize()
+{
+}
+
+7 存取方法 
+  接下来是类变量的存取的方法。
+
+/**
+ * Get the counters
+ * @return an array containing the statistical data.  This array has been
+ * freshly allocated and can be modified by the caller.
+ */
+public int[] getPackets()
+{
+	return copyArray(packets, offset);
+}
+public int[] getBytes()
+{
+	return copyArray(bytes, offset);
+}
+
+public int[] getPackets()
+{
+	return packets;
+}
+public void setPackets(int[] packets)
+{
+	this.packets = packets;
+}
+ 
+8 如果这个类是可以被克隆的，那么下一步就是 clone 方法： 
+
+public Object clone()
+{
+	try{
+		CounterSet obj = (CounterSet)super.clone();
+		obj.packets = (int[])packets.clone();
+		obj.size = size;
+		return obj;
+	}catch(CloneNotSupportedException e){
+		throw new InternalError("Unexpected CloneNotSUpportedException: " + e.getMessage());
+	}
+}
+ 
+9 类方法 
+类中方法要包含有该方法功能和使用的说明，方法命名要遵守 Java 编码规范
+方法中对复杂逻辑要注释
+方法不宜太大, 可以将部分共用代码提取出来, 建议不超过50行, 抽出来的方法作用域要有限定, 一般为private
+
+/**
+ * Set the packet counters
+ * (such as when restoring from a database)
+ */
+protected final void setArray(int[] r1, int[] r2, int[] r3, int[] r4)
+	throws IllegalArgumentException
+{
+	//
+	// Ensure the arrays are of equal size
+	//
+	if (r1.length != r2.length || r1.length != r3.length || r1.length != r4.length)
+		throw new IllegalArgumentException("Arrays must be of the same size");
+	System.arraycopy(r1, 0, r3, 0, r1.length);
+	System.arraycopy(r2, 0, r4, 0, r1.length);
+}
+
+toString 方法：
+
+public String toString()
+{
+	String retval = "CounterSet: ";
+	for(int i = 0; i < data.length(); i++){
+		retval += data.bytes.toString();
+		retval += data.packets.toString();
+	}
+	return retval;
+}
+ 
+main 方法 
+如果定义 main(String[]) 方法, 那么它应该写在类的底部. 
+
+
+例子
+/*
+* @(#)Blah.java 1.82 99/03/18
+*
+* Copyright (c) 1994-1999 Sun Microsystems, Inc.
+* 901 San Antonio Road, Palo Alto, California, 94303, U.S.A.
+* All Rights Reserved.
+*
+* This software is the confidential and proprietary information of Sun
+* Microsystems, Inc. ("Confidential Information"). You shall not
+* disclose such Confidential Information and shall use it only in
+* accordance with the terms of the license agreement you entered into
+* with Sun.
+*/
+package java.blah;
+
+import java.blah.blahdy.BlahBlah;
+
+/**
+ * Class description goes here.
+ *
+ * @version 1.82 18 Mar 1999
+ * @author Firstname Lastname
+ */
+public class Blah
+	extends SomeClass
+{
+	/* A class implementation comment can go here. */
+	/** classVar1 documentation comment */
+	public static int classVar1;
+
+	/**
+	 * classVar2 documentation comment that happens to be
+	 * more than one line long
+	 */
+	private static Object classVar2;
+
+	/** instanceVar1 documentation comment */
+	public Object instanceVar1;
+
+	/** instanceVar2 documentation comment */
+	protected int instanceVar2;
+
+	/** instanceVar3 documentation comment */
+	private Object[] instanceVar3;
+
+	/**
+	 * ... constructor Blah documentation comment...
+	 */
+	public Blah()
+	{
+		// ...implementation goes here...
+	}
+
+	/**
+	 * ... method doSomething documentation comment...
+	 */
+	public void doSomething()
+	{
+		// ...implementation goes here...
+	}
+
+	/**
+	 * ...method doSomethingElse documentation comment...
+	 * @param someParam description
+	 */
+	public void doSomethingElse(Object someParam)
+	{
+		// ...implementation goes here...
+	}
+}

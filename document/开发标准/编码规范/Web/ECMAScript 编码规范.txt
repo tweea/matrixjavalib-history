@@ -1,0 +1,2 @@
+1 构造函数命名，依照 Java 类命名方式，如：net_matrix_abc_Xyz
+2 事件命名 net_matrix_abc_Xyz_onClick

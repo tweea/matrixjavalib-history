@@ -1,0 +1,157 @@
+重要特点
+• Convention over configuration
+	遵从默认的设置是最好的
+	• Standard directory layout for projects
+	• The concept of a single Maven project producing a single output
+		separation of concerns (SoC)
+	• Standard naming conventions
+• Declarative execution
+	Build Life Cycle 是软件项目一般都有的开发过程，如：准备，编译，测试，打包和部署。
+	这些 Build Life Cycle 由一系列的 phase 组成，每个 phase 对应着一个(或多个)操作；或对应着一个(或多个)goal。
+	在执行某一个生命周期时，Maven 会首先执行该生命周期之前的其它周期。如要执行compile，那么将首先执行validate，generate-source，process-source和generate-resources，最后再执行compile本身。
+• Reuse of build logic
+	一切都是由插件完成的
+• Coherent organization of dependencies
+	统一的资源库
+	可以自建资源库
+
+一、坐标和依赖
+1、坐标时项目在 maven 中引用组件的地址。包括：groupId、artifactId、version、packaging、classifier。
+	classifier：用来定义一些附属产品。如：javadoc 和 sources 等。
+	生成文件名格式：artifactId-version[-classifier].packaging
+2、依赖范围
+	确定依赖的使用范围。包括：compile、test、provided、runtime、system、import。
+	import 依赖仅导入依赖组件的 dependencyManagement 内容。
+3、依赖调解
+	传递依赖出现一个组件多个版本时：路径近的优先，路径相同先声明的优先。
+二、仓库
+1、组件路径
+	groupId/artifactId/version/artifactId-version.packaging
+三、生命周期
+1、生命周期包含多个阶段（phase），各阶段依次执行。
+2、三套独立的生命周期：clean、default、site。
+3、clean：pre-clean、clean、post-clean
+4、default：validate、initialize、generate-sources、process-sources、generate-resources、process-resources、compile、process-classes、generate-test-sources、process-test-sources、generate-test-resources、process-test-resources、test-compile、process-test-classes、test、prepare-package、package、pre-integration-test、integration-test、post-integration-test、verify、install、deploy
+5、site：pre-site、site、post-site、site-deploy
+6、每个插件有多个目标，每个目标对应插件的一个功能。
+7、将插件的目标绑定到生命周期的阶段以完成某项具体任务。
+四、聚合与继承
+1、可继承的元素
+	groupId、version、description、organization、inceptionYear、url、developers、contributors、distributionManagement、issueManagement、ciManagement、scm、mailingLists、properties、dependencies、dependencyManagement、repositories、build、reporting
+五、灵活的构建
+1、属性
+	内置、POM、自定义、Settings、Java 系统、环境变量。
+
+A：pom.xml
+project 顶级元素
+	modelVersion 版本固定为 4.0.0
+	（基本属性）
+	（（项目属性））
+	groupId 分组标识，说明本组件所属实际项目。
+	artifactId 组件标识，推荐使用所属实际项目名作前缀。
+	version 版本
+		版本格式：major.minor.bugFix-qualifier-buildNumber
+		SNAPSHOT：开发中版本
+	packaging 产品类型，说明产生什么样的产品及选择什么构建过程
+	（（项目关系））
+	parent 继承属性，表明这个组件从那个组件的设置继承属性
+		通过组件的基本属性指定组件
+		组件继承的信息
+			* dependencies
+			* developers and contributors
+			* plugin lists
+			* reports lists
+			* plugin executions with matching ids
+			* plugin configuration
+	dependencies 声明依赖的其他组件
+		可以使用 -X 选项查看依赖组件的来源
+		dependency
+			groupId
+			artifactId
+			version 版本范围
+				SNAPSHOT 版本，最新的开发版本
+				用于指定一定范围内的版本都可接受。
+					(低版本,高版本),(低版本,高版本)
+			type 依赖的类型，对应坐标的 packaging
+			scope 范围
+			optional 可选标记
+			exclusions 排除传递依赖
+	dependencyManagement 依赖管理
+		仅仅声明依赖关系的推荐版本信息，不实际加入依赖关系
+		当依赖声明中没有版本号时才起作用
+		dependencies
+			dependency
+	modules 模块化
+		划分模块的项目的 packaging 是 pom
+		每个模块都是项目中的一个子目录
+	（（属性））
+	properties 资源属性
+	（构建设置）
+	build 构建
+		defaultGoal
+		resources 资源
+			可以在 resources 建立资源文件，资源文件会拷到 jar 包中。
+		testResources
+		filters 动态资源
+			还可以建立 filter 用动态值修改资源文件。
+			可以是 filter 文件、-D属性、properties 元素属性
+		plugins 插件
+			通过插件的基本属性指定插件
+			plugin
+				executions 插件执行的所有任务
+					execution 声明一个插件在生命周期的某个 phase 中执行
+						id
+						phase 生命周期的阶段
+						goals 插件的目标
+						configuration 插件的选项，每个任务
+				configuration 设置插件的选项，所有任务
+		pluginManagement
+			plugins
+				plugin
+		extensions
+	reporting 生成组件信息，主要是网站
+	（项目信息）
+	name 名称
+	description 描述
+	url 项目站点地址
+	licenses
+	organization
+	developers
+	contributors
+	mailingLists
+	（构建环境）
+	issueManagement
+	ciManagement
+	scm
+	repositories
+		repository
+			updatePolicy 组件更新策略
+	pluginRepositories
+	distributionManagement 发布组件的方法，可以是文件、SSH2、SFTP、FTP等
+		repository 正式版
+		snapshotRepository 快照版
+		site 网站
+		relocation
+	profiles 为不同的目的使用多种方法构建
+		可以放在 settings.xml、profiles.xml、pom.xml（首选的）
+		这里的内容实际是 pom 文件的子集，但有一定限制
+		可以使用 -P 选项指定执行哪个方法，也可以使用 activation 元素
+		activation 指定使用此方法的条件，可以是 jdk 版本或系统环境变量
+		profile
+			id
+			activation
+				property
+				os
+				file
+				activeByDefault
+			modules
+			properties
+			reporting
+			build
+
+B：依赖管理注意事项
+1 检查项目中不再需要的依赖
+2 检查依赖的 scope
+3 使用版本范围，定义最小版本号
+4 排除不需要的传递依赖
+

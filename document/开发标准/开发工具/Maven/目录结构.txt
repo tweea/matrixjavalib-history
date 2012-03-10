@@ -1,0 +1,25 @@
+maven 的项目文件名为 pom.xml
+文件定义是
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+maven 项目可分为单一项目和模块项目
+
+单一项目的目录结构
+src/main/java 		源代码
+src/main/resources 	资源文件
+src/main/filters 	资源过滤文件
+src/main/assembly 	装配描述
+src/main/config 	配置文件
+src/main/webapp 	Web 应用代码
+src/test/java 		测试代码
+src/test/resources 	测试资源文件
+src/test/filters 	测试资源过滤文件
+src/site 			网站
+
+多模块项目结构按模块名称建立子目录，每个子目录代表一个模块。模块子目录中的结构与一般项目结构一样，也可以是单一项目或多模块项目。
++-src 共用部分
+| +-main
+| | +-resources
+| +-site
++-m1 模块1
++-m2 模块2

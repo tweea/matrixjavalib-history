@@ -1,0 +1,79 @@
+一、安装
+1、第一次运行 eclipse 时会提示选择一工作区，建立一空目录并选择这个目录。
+
+二、eclipse 设置
+打开菜单的 Window->Preferences 菜单设置下面内容。
+注意：eclipse 的设置存放于工作区中，如果新建工作区则需重新配置。
+
+1、编辑器杂项设置
+	设置 General->Editors 的 Size of recently opened files list 为 10
+	设置 General->Editors->Structured Text Editors->Task Tags 的 Enable searching for Task Tags 为选中
+	设置 General->Editors->Text Editors->Spelling 的 Enable spell checking 为未选中
+
+2、设置项目的默认文件编码
+	设置 General->Workspace 的 Text file encoding 为 UTF-8
+	确保所有编码设置为 UTF-8，在 filter 中输入 encoding
+
+3、maven 相关的设置
+	为了配合 maven 的标准目录，设置 Java->Build Path 的 Souce and output folder
+		src 为 src/main/java
+		bin 为 target/classes
+
+4、设置 Java 模板和导入顺序
+	在 Java->Code Style->Clean Up 中导入 cleanup.xml
+	在 Java->Code Style->Code Templates 中导入 codetemplates.xml
+	设置 Java->Code Style->Code Templates->Automatically add comments for new methods and types 为选中
+	在 Java->Code Style->Organize Imports 中导入 gs.importorder
+
+5、设置项目默认 Java 版本
+	设置 Java->Compiler 中的 JDK Compliance 的 Compiler compliance level 为 1.6
+
+6、设置输出忽略项目
+	在 Java->Compiler->Building 的 Output folder 的 Filtered Resources 中增加 .svn
+
+7、错误警告，检查一些常规的编码错误
+	在 Java->Compiler->Errors/Warinings
+		增加 Warinings
+		* Potential programming problem
+		  增加全部，除 Boxing and UnBoxing
+		* Name shadowing and confict
+		  增加全部
+		* Unecessary Code
+		  增加全部，除 Unecessary else
+		* Annoatation
+		  增加全部
+		去除 Waringings
+		* Generic types
+		  前两个
+	设置 Java->Compiler->Javadoc
+		Malformed Javadoc Comments 为 Warning
+		Only consider members as visible as 为 Default
+		Validate tag arguments 为选中
+		Missing tag descriptions 为 Validate all standard tags
+
+8、设置保存自动格式化、清理代码
+	设置 Java->Editor->SaveAction
+	选择 Format Source Code，Formate All Codes，与 Organize Imports
+
+9、设置 Web 编辑器项目
+	在 Web->CSS Files->Editor 的 Line width 设为 120
+	在 Web->HTML Files->Editor 的 Line width 设为 120
+	在 JavaScript->Code Style->Clean Up 中导入 js.cleanup.xml
+	在 JavaScript->Code Style->Formatter 中导入 js.formatter.xml
+	设置 JavaScript->Editor->SaveAction
+	选择 Perform the seclected actions on save，Format Source Code
+
+10、设置 XML 编辑器项目
+	XML->XML Files->Editor Line width 增加到 120 字符
+	XML->XML Files->Validation 的 Validating Files 的 No grammar is specified 设置为 Ignore
+	XML->XML Files->Validation 的 Enable markup validation 设置为选中
+
+三、m2eclipse 设置
+1、设置导入项目时加载依赖包源码和文档
+	设置 Maven->Download Artifact Sources 为选中
+	设置 Maven->Download Artifact JavaDoc 为选中
+2、设置 maven 安装路径
+	在 Maven->Installations 中点击 Add...，选择本地安装的 maven 路径并确认。
+	在 Maven->User Settings 中点击 Browse...，选择本地安装的 maven 中的 /conf/settings.xml 文件并确认。
+3、设置编辑器
+	在 Maven->User Interface 中选中 Open XML page in the POM editor by default。
