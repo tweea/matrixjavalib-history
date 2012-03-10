@@ -8,7 +8,7 @@
 
 	<!-- Header -->
 	<module name="RegexpHeader">
-		<property name="header" value="^/\*$\n^ /\* \$Id.+\$$" />
+		<property name="header" value="^/\*$\n^ \* \$Id.+\$$" />
 	</module>
 
 	<!-- Checks that each Java package has a Javadoc file used for commenting. -->
@@ -118,7 +118,9 @@
 			<property name="allowUnknownTags" value="true" />
 		</module>
 		<module name="JavadocVariable" />
-		<module name="JavadocStyle" />
+		<module name="JavadocStyle">
+			<property name="endOfSentenceFormat" value="([.?!。？！][ \t\n\r\f&lt;])|([.?!。？！]$)" />
+		</module>
 
 		<!-- Metrics -->
 		<module name="BooleanExpressionComplexity" />
