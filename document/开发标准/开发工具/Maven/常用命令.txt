@@ -1,0 +1,79 @@
+一、执行命令或插件的几种形式
+	mvn phase
+	mvn plugin:goal
+二、常用参数
+	-D属性 定义属性，如 -Duser=frek
+	-X 调试模式
+	-U 强制依赖更新检查
+三、常用命令
+	编译
+		mvn compile
+	测试
+		mvn test
+	安装到本地资源库中
+		mvn install
+	发布组件到内部资源库中
+		mvn deploy
+	生成项目网站
+		mvn site
+四、Apache 插件
+1、help
+	查看实际的 POM 内容
+		mvn help:effective-pom
+	查看系统属性
+		mvn help:system
+	查看插件配置选项
+		mvn help:describe -DgroupId=org.apache.maven.plugins -DartifactId=maven-compiler-plugin -Dfull=true
+2、建立项目
+	执行后可以依照 archetype 模版项目建立项目
+		mvn archetype:create -DgroupId=com.mycompany.app -DartifactId=my-app
+		mvn archetype:create -DgroupId=[your project's group id] -DartifactId=[your project's artifact id] -DarchetypeArtifactId=maven-archetype-webapp
+	生成 eclipse 项目
+		mvn eclipse:eclipse
+3、报告相关插件
+	依赖
+		mvn project-info-reports:dependencies
+	生成 javadoc
+		mvn javadoc:javadoc
+	The Java source cross reference
+		mvn jxr:jxr
+	PMD 代码检查
+		mvn pmd:pmd
+4、release 插件
+	更改 POM 并对版本控制库做相应操作
+	SCM 选项
+		-Dusername 用户名
+		-Dpassword 密码
+	1 先模拟运行不做实际操作 -DdryRun=true
+		mvn release:prepare -DdryRun=true
+	2 再清理结果
+		mvn release:clean
+	3 在执行实际更改
+		mvn release:prepare
+	4 发布结果
+		mvn release:perform
+			或
+		mvn release:perform -DconnectionUrl=scm:svn:http://svn-url/tags/TAG
+	5 最后清理运行结果
+		mvn release:clean
+		更改后在 pom.xml 中加入 xml 声明，并转换文件的编码
+5、依赖项插件
+	依赖树
+		mvn dependency:tree
+	分析
+		mvn dependency:analyze
+	拷贝
+		mvn dependency:copy-dependencies
+6、Jetty
+	启动Web 容器
+		mvn jetty:run
+		mvn org.mortbay.jetty:maven-jetty-plugin:run
+7、Versions
+	显示依赖更新
+		mvn versions:display-dependency-updates
+	显示插件更新
+		mvn versions:display-plugin-updates
+8、Sonar
+	运行 sonar 检查
+		mvn sonar:sonar
+

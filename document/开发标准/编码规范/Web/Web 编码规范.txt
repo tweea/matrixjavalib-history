@@ -1,0 +1,23 @@
+排版规范
+1 DOCTYPE 应至少被声明为
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+2 至少遵从 XHTML 1.0 transitional 规范。
+3 根据文档结构树进行缩进，每次缩进一制表符。
+
+标准
+W3C
+  CSS 1.0, 2.0
+  DOM 0, 1, 2
+  XHTML 1.0 transitional
+ECMA
+  ECMAScript 3
+  E4X 2
+
+注释方法
+	//<![CDATA[
+	//]]>
+
+XHTML 对象 id、name、class 等属性命名要有意义，容易理解
+CSS 规则名称要能体现用途

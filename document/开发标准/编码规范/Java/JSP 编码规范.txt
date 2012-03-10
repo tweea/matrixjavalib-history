@@ -1,0 +1,45 @@
+排版规范
+1、Web 标签及 JSP 标签遵从 Web 排版规范
+2、内嵌 java 代码遵从 java 排版规范。
+3、内嵌 java 代码块的 <% 和 %> 放在单独的行，但不包括 <%=xyz%>
+如：
+<%
+	String xyz = abc;
+%>
+4、由于 XML 1.0 规范的要求，<?xml version="1.0" encoding="GBK"?> 必须写在第一行
+5、第二行写编码声明，如 <%@ page contentType="text/html;charset=gbk" %>
+6、接下来是 taglib 声明和 import 指令等 @page 指令
+
+JSP 编码规范 
+--------------------------------------------------------------------------------
+。整个jsp/jsp bean表示层应当尽可能的瘦和简单化。
+。牢记大多数的JSP都应当是只读的视图，而由页面bean来提供模型。
+。应当一起设计JSP和JSP bean
+。在尽可能合理的情况下，把业务逻辑从JSP中移走。具体于HTTP的逻辑（如，对Cookie的处理）属于bean或支持类中，而不是JSP中。
+。尽量把条件逻辑放在控制器中而不是放在视图中。
+。为JSP、包含的文件、JSP Bean和实现扩展标记的类使用遵循标准的命名惯例。如：
+        jsp控制器   xxxxController.jsp
+        被包含的:  jsp _descriptiveNameOfFragment.jsp
+        jsp页面模型bean:   <pagename>Bean 如loginBean.java
+        jsp会话bean:   xxxxSessionBean
+        标记类 : xxxxTag,xxxxTagExtraInfo
+。jsp不应该直接去访问请求参数。bean应当执行这样的处理过程并且输出所处理的模型数据。
+。jsp不应当访问属性文件，或者使用JNDI。bean可以访问属性。
+。如果jsp bean具有的所有的属性不能够从页面请求中被映射到，就要尽力在<jsp:useBean>标记中设置属性。
+。应当避免设计既显示表单又处理结果的页面。
+。在jsp中避免代码重复。把要重复的功能放在一个包含的jsp、bean或标记扩展中，使得它能够被重用。
+。jsp bean应当永远不要去产生HTML
+。在jsp中应该避免使用out.pringln()发放来产生页面内容。
+。jsp层不应该直接访问数据，这包括JDBC数据库访问和EJB访问。
+。在长度上，scriptlests的代码最好不要超过5行。
+。除了jsp bean之外，jsp不应当去实例化复杂的可读写的对象。如果这样的话，就有可能在jsp中去执行不适当的业务逻辑。
+。jsp bean中不应当包含大量的数据。
+。如果使用了<jsp:forward>和<jsp:include标记>，并且必须使用简单类型的值来与外部页面进行通讯的话，就应当使用一个或多个<jsp:param>元素
+。定制标记应当用在适当把逻辑从jsp中移走的地方。
+。应当谨慎地使用<jsp:forward>标记，在jsp中它是一个等价的goto。
+。应当使用隐藏的注释来阻止输出的HTML过大。
+。在jsp中避免进行异常处理
+。每个jsp文件中都应当使用一个错误页面来处理不能够从中恢复的异常。
+。在jsp错误页面中，使用HTML注释来显示传递到该页面中的异常跟踪信息。
+。只有在能够获得性能上的好处时，才使用jspInin()方法和jspDestroy()方法。获取和放弃资源是jsp beans和标记处理器的事，而不是由jsp来负责的。
+。如果没有充分的理由，就不要在jsp中定义方法和内部类。
