@@ -13,7 +13,6 @@ import java.lang.reflect.Type;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.commons.lang3.reflect.MethodUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,12 +106,18 @@ public class Reflections
 	 */
 	public static Object invokeMethod(final Object obj, final String methodName, final Class<?>[] parameterTypes, final Object[] args)
 	{
-		Method method = MethodUtils.getAccessibleMethod(obj.getClass(), methodName, parameterTypes);
+		Method method = null;
+		try{
+			method = obj.getClass().getDeclaredMethod(methodName, parameterTypes);
+		}catch(NoSuchMethodException e){
+			throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
+		}
 		if(method == null){
 			throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
 		}
 
 		try{
+			method.setAccessible(true);
 			return method.invoke(obj, args);
 		}catch(IllegalAccessException e){
 			throw new ReflectionRuntimeException(e);

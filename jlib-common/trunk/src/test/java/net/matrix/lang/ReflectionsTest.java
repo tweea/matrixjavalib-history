@@ -93,8 +93,8 @@ public class ReflectionsTest
 			return publicField;
 		}
 
-		// TODO make private method accessible
-		public String privateMethod(String text)
+		@SuppressWarnings("unused")
+		private String privateMethod(String text)
 		{
 			return "hello " + text;
 		}
