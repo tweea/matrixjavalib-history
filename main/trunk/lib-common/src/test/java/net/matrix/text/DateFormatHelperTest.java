@@ -1,10 +1,11 @@
 /*
  * $Id$
- * Copyright(C) 2011 北航冠新
+ * Copyright(C) 2011 matrix
  * All right reserved.
  */
 package net.matrix.text;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.junit.Assert;
@@ -30,15 +31,15 @@ public class DateFormatHelperTest {
 
 	@Test
 	public void testParseString() {
-		GregorianCalendar bd1 = DateFormatHelper.parse("2011-12-01T13:15:35");
-		GregorianCalendar bd2 = new GregorianCalendar(2011, 11, 1, 13, 15, 35);
+		Calendar bd1 = DateFormatHelper.parse("2011-12-01T13:15:35");
+		Calendar bd2 = new GregorianCalendar(2011, 11, 1, 13, 15, 35);
 		Assert.assertEquals(bd2, bd1);
 	}
 
 	@Test
 	public void testParseStringString() {
-		GregorianCalendar bd1 = DateFormatHelper.parse("2011-12-01", "yyyy-MM-dd");
-		GregorianCalendar bd2 = new GregorianCalendar(2011, 11, 1);
+		Calendar bd1 = DateFormatHelper.parse("2011-12-01", "yyyy-MM-dd");
+		Calendar bd2 = new GregorianCalendar(2011, 11, 1);
 		Assert.assertEquals(bd2, bd1);
 	}
 
@@ -51,7 +52,7 @@ public class DateFormatHelperTest {
 	@Test
 	public void testToStringString() {
 		GregorianCalendar bd = new GregorianCalendar(2011, 11, 1, 13, 15, 35);
-		Assert.assertEquals("13:15:35", DateFormatHelper.toString(bd, "HH:mm:ss"));
+		Assert.assertEquals("13:15:35", DateFormatHelper.format(bd, "HH:mm:ss"));
 	}
 
 	@Test

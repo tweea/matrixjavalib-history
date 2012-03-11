@@ -38,7 +38,7 @@ public final class Resources {
 	 * @param key
 	 *            资源文件位置
 	 */
-	private Resources(String key) {
+	private Resources(final String key) {
 		try {
 			bundle = ResourceBundle.getBundle(key);
 		} catch (MissingResourceException e) {
@@ -90,7 +90,7 @@ public final class Resources {
 	 *            字符串名
 	 * @return 字符串
 	 */
-	public static String getProperty(String key, String name) {
+	public static String getProperty(final String key, final String name) {
 		return getResources(key).getProperty(name);
 	}
 }

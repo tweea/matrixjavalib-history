@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,23 +18,26 @@ import org.apache.commons.lang3.StringUtils;
 import net.matrix.lang.ReflectionRuntimeException;
 
 /**
- * Collections工具集。
- * 在JDK的Colllections和Guava的Collections2后，命名为Collections3.
+ * Collections 工具集。
+ * 在 JDK 的 Colllections 和 Guava 的 Collections2 后，命名为 Collections3。
  */
-public class Collections3 {
+public final class Collections3 {
+	/**
+	 * 阻止实例化。
+	 */
 	private Collections3() {
 	}
 
 	public static <T> List<T> subtract(final Collection<T> a, final Collection<T> b) {
-		ArrayList<T> list = new ArrayList<T>(a);
-		for (Iterator it = b.iterator(); it.hasNext();) {
-			list.remove(it.next());
+		List<T> list = new ArrayList<T>(a);
+		for (T item : b) {
+			list.remove(item);
 		}
 		return list;
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过Getter函数), 组合成Map.
+	 * 提取集合中的对象的属性(通过 Getter 函数)，组合成 Map。
 	 * 
 	 * @param collection
 	 *            来源集合.
@@ -63,7 +65,7 @@ public class Collections3 {
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过Getter函数), 组合成List.
+	 * 提取集合中的对象的属性(通过 Getter 函数)，组合成 List。
 	 * 
 	 * @param collection
 	 *            来源集合.
@@ -89,7 +91,7 @@ public class Collections3 {
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过Getter函数), 组合成由分割符分隔的字符串.
+	 * 提取集合中的对象的属性(通过 Getter 函数)，组合成由分割符分隔的字符串。
 	 * 
 	 * @param collection
 	 *            来源集合.

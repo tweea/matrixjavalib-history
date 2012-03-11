@@ -12,18 +12,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 线程相关工具类.
+ * 线程相关工具类。
  */
-public class Threads {
+public final class Threads {
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(Threads.class);
 
+	/**
+	 * 阻止实例化。
+	 */
 	private Threads() {
 	}
 
 	/**
-	 * sleep等待,单位毫秒,忽略InterruptedException.
+	 * sleep 等待，忽略 InterruptedException。
+	 * 
+	 * @param millis
+	 *            等待毫秒数
 	 */
-	public static void sleep(long millis) {
+	public static void sleep(final long millis) {
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
@@ -32,17 +41,19 @@ public class Threads {
 	}
 
 	/**
-	 * 按照ExecutorService JavaDoc示例代码编写的Graceful Shutdown方法.
-	 * 先使用shutdown, 停止接收新任务并尝试完成所有已存在任务.
-	 * 如果超时, 则调用shutdownNow, 取消在workQueue中Pending的任务,并中断所有阻塞函数.
-	 * 另对在shutdown时线程本身被调用中断做了处理.
+	 * 按照 ExecutorService JavaDoc 示例代码编写的 Graceful Shutdown 方法。
+	 * 先使用 shutdown，停止接收新任务并尝试完成所有已存在任务。
+	 * 如果超时，则调用 shutdownNow，取消在 workQueue 中 Pending 的任务，并中断所有阻塞函数。
+	 * 另对在 shutdown 时线程本身被调用中断做了处理。
 	 */
-	public static void gracefulShutdown(ExecutorService pool, int shutdownTimeout, int shutdownNowTimeout, TimeUnit timeUnit) {
-		pool.shutdown(); // Disable new tasks from being submitted
+	public static void gracefulShutdown(final ExecutorService pool, final int shutdownTimeout, final int shutdownNowTimeout, final TimeUnit timeUnit) {
+		// Disable new tasks from being submitted
+		pool.shutdown();
 		try {
 			// Wait a while for existing tasks to terminate
 			if (!pool.awaitTermination(shutdownTimeout, timeUnit)) {
-				pool.shutdownNow(); // Cancel currently executing tasks
+				// Cancel currently executing tasks
+				pool.shutdownNow();
 				// Wait a while for tasks to respond to being cancelled
 				if (!pool.awaitTermination(shutdownNowTimeout, timeUnit)) {
 					LOG.error("Pool did not terminate");
@@ -57,9 +68,9 @@ public class Threads {
 	}
 
 	/**
-	 * 直接调用shutdownNow的方法, 取消在workQueue中Pending的任务,并中断所有阻塞函数.
+	 * 直接调用 shutdownNow 的方法，取消在 workQueue 中 Pending 的任务，并中断所有阻塞函数。
 	 */
-	public static void normalShutdown(ExecutorService pool, int timeout, TimeUnit timeUnit) {
+	public static void normalShutdown(final ExecutorService pool, final int timeout, final TimeUnit timeUnit) {
 		try {
 			pool.shutdownNow();
 			if (!pool.awaitTermination(timeout, timeUnit)) {

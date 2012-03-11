@@ -10,12 +10,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * 工作日
- * 
- * @since 2005.10.28
+ * 日期工具类。
  */
 // TODO using JODA-TIME
-public class Calendars {
+public final class Calendars {
 	private Calendars() {
 	}
 

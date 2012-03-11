@@ -1,3 +1,8 @@
+/*
+ * $Id$
+ * Copyright(C) 2011 Matrix
+ * All right reserved.
+ */
 package net.matrix.util;
 
 import java.util.Enumeration;
@@ -6,13 +11,16 @@ import java.util.Iterator;
 import org.apache.commons.collections.iterators.EnumerationIterator;
 
 /**
- * 把 Enumeration 接口转化为一个 Iterable 接口
+ * 把 Enumeration 接口转化为一个 Iterable 接口。
+ * 
+ * @param <E>
+ *            内容类型
  */
 public class IterableEnumeration<E>
 	implements Iterable<E> {
 	private Iterator<E> it;
 
-	public IterableEnumeration(Enumeration<E> enumeration) {
+	public IterableEnumeration(final Enumeration<E> enumeration) {
 		this.it = new EnumerationIterator(enumeration);
 	}
 
