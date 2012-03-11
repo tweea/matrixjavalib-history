@@ -45,14 +45,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class UserAgentTest
-{
+public class UserAgentTest {
 	/**
 	 * Test method for {@link UserAgent#parseUserAgentString(java.lang.String)}.
 	 */
 	@Test
-	public void testParseUserAgentString()
-	{
+	public void testParseUserAgentString() {
 		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
 		assertEquals(OperatingSystem.WINDOWS_XP, userAgent.getOperatingSystem());
 		assertEquals(Browser.IE6, userAgent.getBrowser());
@@ -62,8 +60,7 @@ public class UserAgentTest
 	 * Test method for {@link UserAgent#toString()}.
 	 */
 	@Test
-	public void testToString()
-	{
+	public void testToString() {
 		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
 		assertEquals(OperatingSystem.WINDOWS_XP.toString() + "-" + Browser.IE6.toString(), userAgent.toString());
 	}
@@ -72,8 +69,7 @@ public class UserAgentTest
 	 * Test method for {@link UserAgent#valueOf(int)}.
 	 */
 	@Test
-	public void testValueOf()
-	{
+	public void testValueOf() {
 		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
 		UserAgent retrievedUserAgent = UserAgent.valueOf(userAgent.getId());
 		assertEquals(userAgent, retrievedUserAgent);
@@ -83,8 +79,7 @@ public class UserAgentTest
 	 * Test method for {@link UserAgent#valueOf(String)}.
 	 */
 	@Test
-	public void testValueOf2()
-	{
+	public void testValueOf2() {
 		UserAgent userAgent = UserAgent.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
 		UserAgent retrievedUserAgent = UserAgent.valueOf(userAgent.toString());
 		assertEquals(userAgent, retrievedUserAgent);

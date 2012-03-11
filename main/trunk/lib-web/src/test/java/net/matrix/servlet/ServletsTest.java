@@ -8,11 +8,9 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-public class ServletsTest
-{
+public class ServletsTest {
 	@Test
-	public void checkIfModified()
-	{
+	public void checkIfModified() {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		// 未设Header,返回true,需要传输内容
@@ -27,8 +25,7 @@ public class ServletsTest
 	}
 
 	@Test
-	public void checkIfNoneMatch()
-	{
+	public void checkIfNoneMatch() {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		// 未设Header,返回true,需要传输内容

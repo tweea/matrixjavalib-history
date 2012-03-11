@@ -44,8 +44,7 @@ package net.matrix.web.http.useragent;
 /**
  * Enum constants classifying the different types of browsers which are common in user-agent strings
  */
-public enum BrowserType
-{
+public enum BrowserType {
 	/**
 	 * Standard web-browser
 	 */
@@ -80,13 +79,11 @@ public enum BrowserType
 
 	private String name;
 
-	private BrowserType(String name)
-	{
+	private BrowserType(String name) {
 		this.name = name;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 }

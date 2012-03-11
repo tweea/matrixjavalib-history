@@ -45,8 +45,7 @@ package net.matrix.web.http.useragent;
  * Enum constants representing manufacturers of operating systems and client software.
  * Manufacturer could be used for specific handling of browser requests.
  */
-public enum Manufacturer
-{
+public enum Manufacturer {
 	/**
 	 * Unknow or rare manufacturer
 	 */
@@ -156,25 +155,22 @@ public enum Manufacturer
 
 	private final String name;
 
-	private Manufacturer(int id, String name)
-	{
-		this.id = (byte)id;
+	private Manufacturer(int id, String name) {
+		this.id = (byte) id;
 		this.name = name;
 	}
 
 	/**
 	 * @return the id
 	 */
-	public byte getId()
-	{
+	public byte getId() {
 		return id;
 	}
 
 	/**
 	 * @return the name
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 }

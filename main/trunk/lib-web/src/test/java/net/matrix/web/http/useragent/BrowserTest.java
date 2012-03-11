@@ -50,15 +50,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class BrowserTest
-{
-	String[] ie6clients = new String[]{
+public class BrowserTest {
+	String[] ie6clients = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; T312461)",
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; XMPP Tiscali Communicator v.10.0.2; .NET CLR 2.0.50727)",
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"
 	};
 
-	String[] ie7clients = new String[]{
+	String[] ie7clients = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)",
 		"Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0 ; .NET CLR 2.0.50215; SL Commerce Client v1.0; Tablet PC 2.0",
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
@@ -66,125 +65,125 @@ public class BrowserTest
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.0.04506)"
 	};
 
-	String[] ie8clients = new String[]{
+	String[] ie8clients = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; WOW64; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.0.04506; Media Center PC 5.0; .NET CLR 1.1.4322)",
 		"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Win64; x64; .NET CLR 2.0.50727; SLCC1; Media Center PC 5.0; .NET CLR 3.0.04506)"
 	};
 
-	String[] ie9clients = new String[]{
+	String[] ie9clients = new String[] {
 		"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; InfoPath.3; MS-RTC LM 8; .NET4.0C; .NET4.0E)",
 		"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0"
 	};
 
-	String[] ie10clients = new String[]{
+	String[] ie10clients = new String[] {
 		"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)"
 	};
 
-	String[] ie55clients = new String[]{
+	String[] ie55clients = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0; .NET CLR 1.1.4322)", "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)",
 		"Mozilla/4.0 (compatible; MSIE 5.5; Windows 95)"
 	};
 
-	String[] ieTooOld = new String[]{
+	String[] ieTooOld = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 4.01; Windows 95)", "Mozilla/4.0 (compatible; MSIE 4.0; Windows 95; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
 		"Mozilla/2.0 (compatible; MSIE 3.03; Windows 3.1)"
 	};
 
-	String[] outlook2007 = new String[]{
+	String[] outlook2007 = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.0.04506; .NET CLR 1.1.4322; MSOffice 12)"
 	};
 
-	String[] outlook2010 = new String[]{
+	String[] outlook2010 = new String[] {
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; GTB6.4; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 1.1.4322; .NET CLR 3.5.30729; .NET CLR 3.0.30729; OfficeLiveConnector.1.3; OfficeLivePatch.0.0; MSOffice 14)",
 		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Media Center PC 6.0; SLCC2; ms-office; MSOffice 14)"
 	};
 
-	String[] outookExpress = new String[]{
+	String[] outookExpress = new String[] {
 		"Outlook-Express/7.0 (MSIE 6.0; Windows NT 5.1; SV1; SIMBAR={xxx}; .NET CLR 2.0.50727; .NET CLR 1.1.4322; TmstmpExt)",
 		"Outlook-Express/7.0 (MSIE 7.0; Windows NT 5.1; InfoPath.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; TmstmpExt)"
 	};
 
-	String[] ieMobile6 = new String[]{
+	String[] ieMobile6 = new String[] {
 		"HTC_TyTN Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 6.12)",
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 6.12) Vodafone/1.0/HTC_s710/1.22.172.3",
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 6.8) PPC; 240x320; HTC_TyTN/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1"
 	};
 
-	String[] ieMobile7 = new String[]{
+	String[] ieMobile7 = new String[] {
 		"HTC_TouchDual Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.6)",
 		"PPC; 240x320; HTC_P3450/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1 Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.6)",
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.6) PPC; MDA Vario/3.0 Profile/MIDP-2.0 Configuration/CLDC-1.1",
 		"Palm750/v0005 Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 7.6) UP.Link/6.3.0.0.0"
 	};
 
-	String[] ieMobile9 = new String[]{
+	String[] ieMobile9 = new String[] {
 		"Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)"
 	};
 
-	String[] lotusNotes = new String[]{
+	String[] lotusNotes = new String[] {
 		"Mozilla/4.0 (compatible; Lotus-Notes/5.0; Windows-NT)", "Mozilla/4.0 (compatible; Lotus-Notes/6.0; Windows-NT)"
 	};
 
-	String[] lynxClient = new String[]{
+	String[] lynxClient = new String[] {
 		"Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.7d", "Lynx/2.7.1ac-0.102+intl+csuite libwww-FM/2.14"
 	};
 
-	String[] konqueror = new String[]{
+	String[] konqueror = new String[] {
 		"Mozilla/5.0 (compatible; konqueror/3.3; linux 2.4.21-243-smp4G) (KHTML, like Geko)",
 		"Mozilla/6.0 (compatible; Konqueror/4.2; i686 FreeBSD 6.4; 20060308)",
 		"Mozilla/5.0 (compatible; Konqueror/3.1; Linux 2.4.21-20.0.1.ELsmp; X11; i686; , en_US, en, de)"
 	};
 
-	String[] chrome = new String[]{
+	String[] chrome = new String[] {
 		"Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.310.0 Safari/532.9",
 		"Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.309.0 Safari/532.9"
 	};
 
-	String[] chrome8 = new String[]{
+	String[] chrome8 = new String[] {
 		"Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.558.0 Safari/534.10",
 		"Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/540.0 (KHTML, like Gecko) Ubuntu/10.10 Chrome/8.1.0.0 Safari/540.0"
 	};
 
-	String[] chrome9 = new String[]{
+	String[] chrome9 = new String[] {
 		"Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/540.0 (KHTML,like Gecko) Chrome/9.1.0.0 Safari/540.0",
 		"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.14 (KHTML, like Gecko) Chrome/9.0.600.0 Safari/534.14"
 	};
 
-	String[] chrome10 = new String[]{
+	String[] chrome10 = new String[] {
 		"Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.15 (KHTML, like Gecko) Ubuntu/10.10 Chromium/10.0.613.0 Chrome/10.0.613.0 Safari/534.15"
 	};
 
-	String[] chrome11 = new String[]{
+	String[] chrome11 = new String[] {
 		"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.697.0 Safari/534.24"
 	};
 
-	String[] chrome12 = new String[]{
+	String[] chrome12 = new String[] {
 		"Mozilla/5.0 (X11; CrOS i686 12.0.742.91) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.93 Safari/534.30"
 	};
 
-	String[] chrome13 = new String[]{
+	String[] chrome13 = new String[] {
 		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.41 Safari/535.1"
 	};
 
-	String[] chrome14 = new String[]{
+	String[] chrome14 = new String[] {
 		"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.815.0 Safari/535.1"
 	};
 
-	String[] firefox3 = new String[]{
+	String[] firefox3 = new String[] {
 		"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.14) Gecko/2009090216 Ubuntu/9.04 (jaunty) Firefox/3.0.14"
 	};
 
-	String[] firefox4 = new String[]{
+	String[] firefox4 = new String[] {
 		"Mozilla/5.0 (X11; Linux x86_64; rv:2.0b4) Gecko/20100818 Firefox/4.0b4",
 		"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.0b9pre) Gecko/20101228 Firefox/4.0b9pre"
 	};
 
-	String[] firefox5 = new String[]{
+	String[] firefox5 = new String[] {
 		"Mozilla/5.0 (Windows NT 6.1; U; ru; rv:5.0.1.6) Gecko/20110501 Firefox/5.0.1 Firefox/5.0.1",
 		"Mozilla/5.0 (X11; U; Linux i586; de; rv:5.0) Gecko/20100101 Firefox/5.0"
 	};
 
-	String[] firefox6 = new String[]{
+	String[] firefox6 = new String[] {
 		"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0a2) Gecko/20110612 Firefox/6.0a2"
 	};
 
@@ -291,8 +290,7 @@ public class BrowserTest
 	 * Test method for {@link Browser#isInUserAgentString(java.lang.String)}.
 	 */
 	@Test
-	public void testIsBrowser()
-	{
+	public void testIsBrowser() {
 		assertTrue(Browser.SAFARI
 			.isInUserAgentString("Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"));
 	}
@@ -301,8 +299,7 @@ public class BrowserTest
 	 * 
 	 */
 	@Test
-	public void testVersionDetection()
-	{
+	public void testVersionDetection() {
 		testVersions("Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.7d", new Version("2.8.5rel.1", "2", "8"));
 		testVersions("Mozilla/6.0 (compatible; Konqueror/4.2; i686 FreeBSD 6.4; 20060308)", new Version("4.2", "4", "2"));
 		testVersions("Mozilla/5.0 (compatible; Konqueror/3.1-rc5; i686 Linux; 20021219)", new Version("3.1-rc5", "3", "1"));
@@ -337,8 +334,7 @@ public class BrowserTest
 		testVersions("Mozilla/5.0 (compatible; Googlebot/2.1; http://www.google.com/bot.html)", null);
 	}
 
-	private void testVersions(String ua, Version expectedVersion)
-	{
+	private void testVersions(String ua, Version expectedVersion) {
 		Version version = Browser.parseUserAgentString(ua).getVersion(ua);
 		assertEquals(expectedVersion, version);
 	}
@@ -347,8 +343,7 @@ public class BrowserTest
 	 * Test method for {@link Browser#parseUserAgentString(java.lang.String)}.
 	 */
 	@Test
-	public void testParseUserAgentString()
-	{
+	public void testParseUserAgentString() {
 		testAgents(ie55clients, Browser.IE5_5);
 		testAgents(ie6clients, Browser.IE6);
 		testAgents(ie7clients, Browser.IE7);
@@ -398,24 +393,22 @@ public class BrowserTest
 		testAgents(thunderbird2, Browser.THUNDERBIRD2);
 	}
 
-	private void testAgents(String[] agentStrings, Browser expectedBrowser)
-	{
-		for(String agentString : agentStrings){
+	private void testAgents(String[] agentStrings, Browser expectedBrowser) {
+		for (String agentString : agentStrings) {
 			assertEquals(expectedBrowser, Browser.parseUserAgentString(agentString));
 		}
 	}
 
 	@Test
-	public void testIncompleteUAString()
-	{
-		try{
+	public void testIncompleteUAString() {
+		try {
 			Browser browser = Browser.parseUserAgentString("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us) AppleWebKit/531.21.11 (KHTML, like");
 			browser.getVersion("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us) AppleWebKit/531.21.11 (KHTML, like");
 			Browser browser2 = Browser.parseUserAgentString("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.8) Gecko/2009032608 Firefox");
 			browser2.getVersion("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.8) Gecko/2009032608 Firefox");
 			Browser browser3 = Browser.parseUserAgentString("Mozilla/4.0 (compatible; MSIE 8");
 			browser3.getVersion("Mozilla/4.0 (compatible; MSIE 8");
-		}catch(Exception e){
+		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 	}
@@ -424,11 +417,10 @@ public class BrowserTest
 	 * Test if generated id values are unique.
 	 */
 	@Test
-	public void testUniqueIdValues()
-	{
+	public void testUniqueIdValues() {
 		List<Short> retrievedIdValues = new ArrayList<Short>();
 
-		for(Browser browser : Browser.values()){
+		for (Browser browser : Browser.values()) {
 			assertTrue(browser.toString(), !retrievedIdValues.contains(browser.getId()));
 			retrievedIdValues.add(browser.getId());
 		}

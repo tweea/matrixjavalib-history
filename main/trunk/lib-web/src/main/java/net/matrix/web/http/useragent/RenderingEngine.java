@@ -45,8 +45,7 @@ package net.matrix.web.http.useragent;
  * Enum constants classifying the different types of rendering engines which are being used by
  * browsers.
  */
-public enum RenderingEngine
-{
+public enum RenderingEngine {
 	/**
 	 * Trident is the the Microsoft layout engine, mainly used by Internet Explorer.
 	 */
@@ -90,13 +89,11 @@ public enum RenderingEngine
 
 	private String name;
 
-	private RenderingEngine(String name)
-	{
+	private RenderingEngine(String name) {
 		this.name = name;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 }

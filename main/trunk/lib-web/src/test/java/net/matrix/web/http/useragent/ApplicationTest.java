@@ -52,51 +52,50 @@ import org.junit.Test;
 /**
  * Test class for application detection.
  */
-public class ApplicationTest
-{
-	String[] emptyOrNull = new String[]{
+public class ApplicationTest {
+	String[] emptyOrNull = new String[] {
 		null, "", "-"
 	};
 
-	String[] hotmail = new String[]{
+	String[] hotmail = new String[] {
 		"http://by105w.bay105.mail.live.com/mail/ReadMessageLight.aspx?Action=DeleteMessage&FolderID=00000000-0000-0000-0000-000000000001&InboxSortAscending=False&InboxSortBy=Date&ReadMessageId=12345-abcdedf-1345-abcdef&n=12345",
 		"http://by119fd.bay119.hotmail.msn.com/cgi-bin/getmsg?msg=12345-abcdedf-1345-abcdef&start=0&len=6715&msgread=1&imgsafe=y&curmbox=00000000%2d0000%2d0000%2d0000%2d000000000001&a=12345678"
 	};
 
-	String[] gmail = new String[]{
+	String[] gmail = new String[] {
 		"http://mail.google.com/mail/?ui=2&view=bsp&ver=abcd",
 		"http://mail.google.com/mail/?ui=1&ik=abcd&view=cv&search=inbox&th=123456&ww=123&cvap=11&qt=&zx=123456"
 	};
 
-	String[] yahooMail = new String[]{
+	String[] yahooMail = new String[] {
 		"http://us.f506.mail.yahoo.com/ym/ShowLetter?Search=&Idx=0&YY=12345&y5beta=yes&y5beta=yes&order=down&sort=date&pos=0",
 		"http://aa.mg1.mail.yahoo.com/dc/blank.html?bn=123.48&.intl=aa", "http://de.mg40.mail.yahoo.com/dc/blank.html?bn=123.40&.intl=de"
 	};
 
-	String[] compuserve = new String[]{
+	String[] compuserve = new String[] {
 		"http://csmail.compuserve.com/msgview.adp?folder=SU5CT1g=&seq=1&cmd=deletemsgs&msguid=12345&cmdnum=12345"
 	};
 
-	String[] aol = new String[]{
+	String[] aol = new String[] {
 		"http://webmail.aol.com/12345/aol/en-us/Suite.aspx", "http://9c.webmail.aol.com/123456/neuf/fr-fr/Suite.aspx",
 		"http://webmail.aol.com/38159/aim/en-us/Lite/MsgRead.aspx?folder=Inbox&uid=1.23456&seq=8&searchIn=none&searchQuery=&start=0"
 	};
 
-	String[] mailDotCom = new String[]{
+	String[] mailDotCom = new String[] {
 		"http://mail01.mail.com/scripts/mail/read.mail",
 		"http://mail01.mail.com/scripts/mail/read.mail?folder=INBOX&order=Newest&mview=a&mstart=1&pbox=0&msg_uid=12345&mprev=12345&mnext=12345&referer=mailbox"
 	};
 
-	String[] horde = new String[]{
+	String[] horde = new String[] {
 		"http://webmail.dds.nl/horde/imp/message.php?index=123456",
 		"http://webmail.versatel.nl/horde/imp/message.php?index=1234&start=8&actionID=delete_message"
 	};
 
-	String[] mobileMe = new String[]{
+	String[] mobileMe = new String[] {
 		"http://www.me.com/mail/", "http://www.me.com/wo/WebObjects/Webmail2.woa/wa/DirectAction/emptyPage?&action=view&mids=12345"
 	};
 
-	String[] unknownWebMailer = new String[]{
+	String[] unknownWebMailer = new String[] {
 		"http://sg2001.webmail.hinet.net/mailService/mail/M_mail_1_iframe.jsp?msg=123456",
 		"http://webmail.luxmail.com/email/scripts/view.pl?EV1=123456",
 		// 12move included an email address in the referrer
@@ -126,8 +125,7 @@ public class ApplicationTest
 	 * Test method for {@link Application#isInReferrerString(java.lang.String)}.
 	 */
 	@Test
-	public void testIsBrowser()
-	{
+	public void testIsBrowser() {
 		assertTrue(Application.GMAIL.isInReferrerString("http://mail.google.com/mail/?ui=1&ik=xx&view=cv&search=inbox&th=xx&ww=xx&cvap=5&qt=&zx=xx"));
 	}
 
@@ -135,8 +133,7 @@ public class ApplicationTest
 	 * Test method for {@link Application#parseReferrerString(java.lang.String)}.
 	 */
 	@Test
-	public void testParseUserAgentString()
-	{
+	public void testParseUserAgentString() {
 		testReferrers(emptyOrNull, Application.UNKNOWN);
 		testReferrers(hotmail, Application.HOTMAIL);
 		testReferrers(gmail, Application.GMAIL);
@@ -149,9 +146,8 @@ public class ApplicationTest
 		testReferrers(unknownWebMailer, Application.OTHER_WEBMAIL);
 	}
 
-	private void testReferrers(String[] referrerStrings, Application expectedApplication)
-	{
-		for(String agentString : referrerStrings){
+	private void testReferrers(String[] referrerStrings, Application expectedApplication) {
+		for (String agentString : referrerStrings) {
 			assertEquals(expectedApplication, Application.parseReferrerString(agentString));
 		}
 	}
@@ -160,11 +156,10 @@ public class ApplicationTest
 	 * Test if generated id values are unique.
 	 */
 	@Test
-	public void testUniqueIdValues()
-	{
+	public void testUniqueIdValues() {
 		List<Short> retrievedIdValues = new ArrayList<Short>();
 
-		for(Application application : Application.values()){
+		for (Application application : Application.values()) {
 			assertTrue(!retrievedIdValues.contains(application.getId()));
 			retrievedIdValues.add(application.getId());
 		}
