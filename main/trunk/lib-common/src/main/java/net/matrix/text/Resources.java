@@ -15,34 +15,34 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 读取多语言资源文件
+ * 
  * @since 2005-11-22
  */
-public class Resources
-{
+public class Resources {
 	private static final Logger LOG = LoggerFactory.getLogger(Resources.class);
 
 	private static final Map<String, Resources> RESOURCES = new HashMap<String, Resources>();
 
 	private ResourceBundle bundle;
 
-	private Resources(String key)
-	{
-		try{
+	private Resources(String key) {
+		try {
 			bundle = ResourceBundle.getBundle(key);
-		}catch(MissingResourceException e){
+		} catch (MissingResourceException e) {
 			LOG.warn(key + " 资源加载失败", e);
 		}
 	}
 
 	/**
 	 * 根据位置加载资源
-	 * @param key 位置
+	 * 
+	 * @param key
+	 *            位置
 	 * @return 资源
 	 */
-	public static Resources getResources(String key)
-	{
+	public static Resources getResources(String key) {
 		Resources res = RESOURCES.get(key);
-		if(res == null){
+		if (res == null) {
 			res = new Resources(key);
 			RESOURCES.put(key, res);
 		}
@@ -51,17 +51,18 @@ public class Resources
 
 	/**
 	 * 获取多语言字符串
-	 * @param name 字符串名
+	 * 
+	 * @param name
+	 *            字符串名
 	 * @return 字符串
 	 */
-	public String getProperty(String name)
-	{
-		if(bundle == null){
+	public String getProperty(String name) {
+		if (bundle == null) {
 			return name;
 		}
-		try{
+		try {
 			return bundle.getString(name);
-		}catch(MissingResourceException e){
+		} catch (MissingResourceException e) {
 			LOG.warn("找不到名为 " + name + " 的资源项");
 			return name;
 		}
@@ -69,12 +70,14 @@ public class Resources
 
 	/**
 	 * 加载资源并返回其中指定的字符串
-	 * @param key 位置
-	 * @param name 字符串名
+	 * 
+	 * @param key
+	 *            位置
+	 * @param name
+	 *            字符串名
 	 * @return 字符串
 	 */
-	public static String getProperty(String key, String name)
-	{
+	public static String getProperty(String key, String name) {
 		return getResources(key).getProperty(name);
 	}
 }

@@ -9,30 +9,25 @@ package net.matrix.lang;
  * 反射调用错误
  */
 public class ReflectionRuntimeException
-	extends RuntimeException
-{
+	extends RuntimeException {
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -8363292424989396451L;
 
-	public ReflectionRuntimeException()
-	{
+	public ReflectionRuntimeException() {
 		super();
 	}
 
-	public ReflectionRuntimeException(String msg)
-	{
+	public ReflectionRuntimeException(String msg) {
 		super(msg);
 	}
 
-	public ReflectionRuntimeException(Throwable e)
-	{
+	public ReflectionRuntimeException(Throwable e) {
 		super(e);
 	}
 
-	public ReflectionRuntimeException(String string, Throwable e)
-	{
+	public ReflectionRuntimeException(String string, Throwable e) {
 		super(string, e);
 	}
 }

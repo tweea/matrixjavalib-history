@@ -8,12 +8,10 @@ import javax.crypto.Cipher;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class CryptosTest
-{
+public class CryptosTest {
 	@Test
 	public void mac()
-		throws GeneralSecurityException, UnsupportedEncodingException
-	{
+		throws GeneralSecurityException, UnsupportedEncodingException {
 		String input = "foo message";
 
 		// key可为任意字符串
@@ -27,8 +25,7 @@ public class CryptosTest
 
 	@Test
 	public void des()
-		throws GeneralSecurityException, UnsupportedEncodingException
-	{
+		throws GeneralSecurityException, UnsupportedEncodingException {
 		String input = "foo message";
 
 		byte[] key = Cryptos.generateDesKey();
@@ -41,8 +38,7 @@ public class CryptosTest
 
 	@Test
 	public void aes()
-		throws GeneralSecurityException, UnsupportedEncodingException
-	{
+		throws GeneralSecurityException, UnsupportedEncodingException {
 		String input = "foo message";
 
 		byte[] key = Cryptos.generateAesKey();

@@ -11,15 +11,15 @@ import java.util.SortedMap;
 /**
  * 树型结构
  */
-public interface Tree<ID, DATA>
-{
+public interface Tree<ID, DATA> {
 	/**
 	 * @return 节点标识
 	 */
 	Key getKey();
 
 	/**
-	 * @param id 数据标识
+	 * @param id
+	 *            数据标识
 	 */
 	void setId(ID id);
 
@@ -29,7 +29,8 @@ public interface Tree<ID, DATA>
 	ID getId();
 
 	/**
-	 * @param data 数据
+	 * @param data
+	 *            数据
 	 */
 	void setData(DATA data);
 
@@ -40,7 +41,9 @@ public interface Tree<ID, DATA>
 
 	/**
 	 * 通过数据标识查找节点标识
-	 * @param id 数据标识
+	 * 
+	 * @param id
+	 *            数据标识
 	 * @return 节点标识
 	 */
 	Key findKey(ID id);
@@ -52,40 +55,50 @@ public interface Tree<ID, DATA>
 
 	/**
 	 * 获得所有节点
+	 * 
 	 * @return 所有节点
 	 */
 	SortedMap<Key, ? extends Tree<ID, DATA>> getAllNodes();
 
 	/**
 	 * 获得所有子节点
+	 * 
 	 * @return 所有子节点
 	 */
 	SortedMap<Key, ? extends Tree<ID, DATA>> getChildNodes();
 
 	/**
 	 * 获得节点
-	 * @param key 节点标识
+	 * 
+	 * @param key
+	 *            节点标识
 	 * @return 节点
 	 */
 	Tree<ID, DATA> getNode(Key key);
 
 	/**
 	 * 获得节点
-	 * @param id 数据标识
+	 * 
+	 * @param id
+	 *            数据标识
 	 * @return 节点
 	 */
 	Tree<ID, DATA> getNode(ID id);
 
 	/**
 	 * 获得子节点
-	 * @param key 节点标识
+	 * 
+	 * @param key
+	 *            节点标识
 	 * @return 子节点
 	 */
 	Tree<ID, DATA> getChildNode(Key key);
 
 	/**
 	 * 获得子节点
-	 * @param id 数据标识
+	 * 
+	 * @param id
+	 *            数据标识
 	 * @return 子节点
 	 */
 	Tree<ID, DATA> getChildNode(ID id);
@@ -119,8 +132,7 @@ public interface Tree<ID, DATA>
 	 * 标识节点在树中的位置
 	 */
 	class Key
-		implements Comparable<Key>, Serializable
-	{
+		implements Comparable<Key>, Serializable {
 		private static final long serialVersionUID = 6009469890625904428L;
 
 		private Key parent;
@@ -139,71 +151,63 @@ public interface Tree<ID, DATA>
 		 */
 		private String string;
 
-		public Key()
-		{
+		public Key() {
 			this(0);
 		}
 
-		private Key(int index)
-		{
+		private Key(int index) {
 			this.parent = null;
 			this.level = 0;
 			this.index = index;
 		}
 
-		public Key(Key parent, int index)
-		{
+		public Key(Key parent, int index) {
 			this.parent = parent;
 			this.level = parent.level + 1;
 			this.index = index;
 		}
 
-		public Key getParent()
-		{
+		public Key getParent() {
 			return parent;
 		}
 
-		public int getIndex()
-		{
+		public int getIndex() {
 			return index;
 		}
 
-		public int getLevel()
-		{
+		public int getLevel() {
 			return level;
 		}
 
 		@Override
-		public int compareTo(Key o)
-		{
-			if(level < o.level){
+		public int compareTo(Key o) {
+			if (level < o.level) {
 				return -1;
-			}else if(level > o.level){
+			} else if (level > o.level) {
 				return 1;
 			}
-			if(level != 0){
+			if (level != 0) {
 				int p = parent.compareTo(o.parent);
-				if(p != 0){
+				if (p != 0) {
 					return p;
 				}
 			}
-			if(index < o.index){
+			if (index < o.index) {
 				return -1;
-			}else if(index > o.index){
+			} else if (index > o.index) {
 				return 1;
 			}
 			return 0;
 		}
 
 		@Override
-		public boolean equals(Object obj)
-		{
-			if(obj instanceof Key){
-				Key ok = (Key)obj;
-				if(level != ok.level){
+		public boolean equals(Object obj) {
+			if (obj instanceof Key) {
+				Key ok = (Key) obj;
+				if (level != ok.level) {
 					return false;
 				}
-				if(level != 0 && !parent.equals(ok.parent)){
+				if (level != 0 && !parent.equals(ok.parent)) {
 					return false;
 				}
 				return index == ok.index;
@@ -212,12 +216,11 @@ public interface Tree<ID, DATA>
 		}
 
 		@Override
-		public int hashCode()
-		{
-			if(hash == 0){
-				if(parent != null){
+		public int hashCode() {
+			if (hash == 0) {
+				if (parent != null) {
 					hash = parent.hashCode() * 31 + index;
-				}else{
+				} else {
 					hash = 31 + index;
 				}
 			}
@@ -225,12 +228,11 @@ public interface Tree<ID, DATA>
 		}
 
 		@Override
-		public String toString()
-		{
-			if(string == null){
-				if(parent != null){
+		public String toString() {
+			if (string == null) {
+				if (parent != null) {
 					string = parent.toString() + "," + index;
-				}else{
+				} else {
 					string = "" + index;
 				}
 			}

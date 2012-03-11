@@ -15,12 +15,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ThreadsTest
-{
+public class ThreadsTest {
 	@Test
 	public void gracefulShutdown()
-		throws InterruptedException
-	{
+		throws InterruptedException {
 		Logger logger = LoggerFactory.getLogger("test");
 
 		// time enough to shutdown
@@ -43,12 +41,10 @@ public class ThreadsTest
 		self.execute(task);
 
 		final CountDownLatch lock = new CountDownLatch(1);
-		Thread thread = new Thread(new Runnable()
-		{
+		Thread thread = new Thread(new Runnable() {
 
 			@Override
-			public void run()
-			{
+			public void run() {
 				lock.countDown();
 				Threads.gracefulShutdown(self, 200000, 200000, TimeUnit.MILLISECONDS);
 			}
@@ -60,8 +56,7 @@ public class ThreadsTest
 	}
 
 	@Test
-	public void normalShutdown()
-	{
+	public void normalShutdown() {
 		Logger logger = LoggerFactory.getLogger("test");
 
 		// time not enough to shutdown,write error log.
@@ -73,34 +68,31 @@ public class ThreadsTest
 	}
 
 	static class Task
-		implements Runnable
-	{
+		implements Runnable {
 		private Logger logger;
 
 		private int runTime = 0;
 
 		private int sleepTime;
 
-		Task(Logger logger, int sleepTime, int runTime)
-		{
+		Task(Logger logger, int sleepTime, int runTime) {
 			this.logger = logger;
 			this.sleepTime = sleepTime;
 			this.runTime = runTime;
 		}
 
 		@Override
-		public void run()
-		{
+		public void run() {
 			System.out.println("start task");
-			if(runTime > 0){
+			if (runTime > 0) {
 				long start = System.currentTimeMillis();
-				while(System.currentTimeMillis() - start < runTime){
+				while (System.currentTimeMillis() - start < runTime) {
 				}
 			}
 
-			try{
+			try {
 				Thread.sleep(sleepTime);
-			}catch(InterruptedException e){
+			} catch (InterruptedException e) {
 				logger.warn("InterruptedException");
 			}
 		}

@@ -14,11 +14,9 @@ import org.junit.Test;
 
 import net.matrix.data.Tree.Key;
 
-public class DefaultTreeTest
-{
+public class DefaultTreeTest {
 	@Test
-	public void testDefaultTreeIDDATA()
-	{
+	public void testDefaultTreeIDDATA() {
 		Tree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		Assert.assertEquals(new Tree.Key(), tree.getKey());
 		Assert.assertEquals("root", tree.getId());
@@ -26,8 +24,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testDefaultTreeDefaultTreeOfIDDATAIDDATA()
-	{
+	public void testDefaultTreeDefaultTreeOfIDDATAIDDATA() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test2");
@@ -53,8 +50,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testFindKey()
-	{
+	public void testFindKey() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test1");
@@ -71,8 +67,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testGetParent()
-	{
+	public void testGetParent() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test1");
@@ -89,8 +84,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testGetAllNodes()
-	{
+	public void testGetAllNodes() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test1");
@@ -109,8 +103,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testGetChildNodes()
-	{
+	public void testGetChildNodes() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test1");
@@ -137,8 +130,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testGetNodeID()
-	{
+	public void testGetNodeID() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test1");
@@ -155,8 +147,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testGetChildNodeID()
-	{
+	public void testGetChildNodeID() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = new DefaultTree<String, String>(tree, "node1", "test1");
 		DefaultTree<String, String> node2 = new DefaultTree<String, String>(tree, "node2", "test1");
@@ -185,8 +176,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testAppendChildNode()
-	{
+	public void testAppendChildNode() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = tree.appendChildNode("node1", "test1");
 		DefaultTree<String, String> node2 = tree.appendChildNode("node2", "test2");
@@ -213,8 +203,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testRemoveChildNodeID()
-	{
+	public void testRemoveChildNodeID() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = tree.appendChildNode("node1", "test1");
 		DefaultTree<String, String> node2 = tree.appendChildNode("node2", "test2");
@@ -244,8 +233,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testIsRoot()
-	{
+	public void testIsRoot() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = tree.appendChildNode("node1", "test1");
 		DefaultTree<String, String> node2 = tree.appendChildNode("node2", "test2");
@@ -262,8 +250,7 @@ public class DefaultTreeTest
 	}
 
 	@Test
-	public void testIsLeaf()
-	{
+	public void testIsLeaf() {
 		DefaultTree<String, String> tree = new DefaultTree<String, String>("root", "test");
 		DefaultTree<String, String> node1 = tree.appendChildNode("node1", "test1");
 		DefaultTree<String, String> node2 = tree.appendChildNode("node2", "test2");
@@ -280,24 +267,21 @@ public class DefaultTreeTest
 	}
 
 	private static class TestSource
-		implements TreeSource<String, String>
-	{
+		implements TreeSource<String, String> {
 		@Override
-		public String getRootId()
-		{
+		public String getRootId() {
 			return "root";
 		}
 
 		@Override
-		public List<String> listChildrenId(String parentId)
-		{
+		public List<String> listChildrenId(String parentId) {
 			List<String> ids = new ArrayList<String>();
-			if("root".equals(parentId)){
+			if ("root".equals(parentId)) {
 				ids.add("node1");
 				ids.add("node2");
-			}else if("node1".equals(parentId)){
+			} else if ("node1".equals(parentId)) {
 				ids.add("leaf1");
-			}else if("node2".equals(parentId)){
+			} else if ("node2".equals(parentId)) {
 				ids.add("leaf2");
 				ids.add("leaf3");
 			}
@@ -305,15 +289,13 @@ public class DefaultTreeTest
 		}
 
 		@Override
-		public String getItem(String id)
-		{
+		public String getItem(String id) {
 			return id;
 		}
 	}
 
 	@Test
-	public void testGenerate()
-	{
+	public void testGenerate() {
 		DefaultTree<String, String> tree = DefaultTree.generate(new TestSource());
 
 		SortedMap<Key, DefaultTree<String, String>> allNodes = tree.getAllNodes();

@@ -11,30 +11,25 @@ import java.security.GeneralSecurityException;
  * 授权错误
  */
 public class AuthorizationException
-	extends GeneralSecurityException
-{
+	extends GeneralSecurityException {
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 5334348169085634972L;
 
-	public AuthorizationException()
-	{
+	public AuthorizationException() {
 		super();
 	}
 
-	public AuthorizationException(String msg)
-	{
+	public AuthorizationException(String msg) {
 		super(msg);
 	}
 
-	public AuthorizationException(Throwable e)
-	{
+	public AuthorizationException(Throwable e) {
 		super(e);
 	}
 
-	public AuthorizationException(String string, Throwable e)
-	{
+	public AuthorizationException(String string, Throwable e) {
 		super(string, e);
 	}
 }

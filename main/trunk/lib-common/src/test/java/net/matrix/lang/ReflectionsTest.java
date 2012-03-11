@@ -3,11 +3,9 @@ package net.matrix.lang;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ReflectionsTest
-{
+public class ReflectionsTest {
 	@Test
-	public void getAndSetFieldValue()
-	{
+	public void getAndSetFieldValue() {
 		TestBean bean = new TestBean();
 		// 无需getter函数, 直接读取privateField
 		Assert.assertEquals(1, Reflections.getFieldValue(bean, "privateField"));
@@ -25,8 +23,7 @@ public class ReflectionsTest
 	}
 
 	@Test
-	public void invokeGetterAndSetter()
-	{
+	public void invokeGetterAndSetter() {
 		TestBean bean = new TestBean();
 		Assert.assertEquals(bean.inspectPublicField() + 1, Reflections.invokeGetter(bean, "publicField"));
 
@@ -36,19 +33,17 @@ public class ReflectionsTest
 	}
 
 	@Test
-	public void invokeMethod()
-	{
+	public void invokeMethod() {
 		TestBean bean = new TestBean();
-		Assert.assertEquals("hello calvin", Reflections.invokeMethod(bean, "privateMethod", new Class[]{
+		Assert.assertEquals("hello calvin", Reflections.invokeMethod(bean, "privateMethod", new Class[] {
 			String.class
-		}, new Object[]{
+		}, new Object[] {
 			"calvin"
 		}));
 	}
 
 	@Test
-	public void getSuperClassGenricType()
-	{
+	public void getSuperClassGenricType() {
 		// 获取第1，2个泛型类型
 		Assert.assertEquals(String.class, Reflections.getSuperClassGenricType(TestBean.class));
 		Assert.assertEquals(Long.class, Reflections.getSuperClassGenricType(TestBean.class, 1));
@@ -60,62 +55,51 @@ public class ReflectionsTest
 		Assert.assertEquals(Object.class, Reflections.getSuperClassGenricType(TestBean3.class));
 	}
 
-	public static class ParentBean<T, ID>
-	{
+	public static class ParentBean<T, ID> {
 	}
 
 	public static class TestBean
-		extends ParentBean<String, Long>
-	{
+		extends ParentBean<String, Long> {
 		/** 没有getter/setter的field */
 		private int privateField = 1;
 
 		/** 有getter/setter的field */
 		private int publicField = 1;
 
-		public int getPublicField()
-		{
+		public int getPublicField() {
 			return publicField + 1;
 		}
 
-		public void setPublicField(int publicField)
-		{
+		public void setPublicField(int publicField) {
 			this.publicField = publicField + 1;
 		}
 
-		public int inspectPrivateField()
-		{
+		public int inspectPrivateField() {
 			return privateField;
 		}
 
-		public int inspectPublicField()
-		{
+		public int inspectPublicField() {
 			return publicField;
 		}
 
 		@SuppressWarnings("unused")
-		private String privateMethod(String text)
-		{
+		private String privateMethod(String text) {
 			return "hello " + text;
 		}
 	}
 
 	public static class TestBean2
-		extends ParentBean
-	{
+		extends ParentBean {
 	}
 
-	public static class TestBean3
-	{
+	public static class TestBean3 {
 		private int id;
 
-		public int getId()
-		{
+		public int getId() {
 			return id;
 		}
 
-		public void setId(int id)
-		{
+		public void setId(int id) {
 			this.id = id;
 		}
 	}

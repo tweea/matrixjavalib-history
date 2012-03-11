@@ -11,14 +11,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
-public class RelativeResourceRootRegisterTest
-{
+public class RelativeResourceRootRegisterTest {
 	private static RelativeResourceRootRegister classRegister;
 
 	@BeforeClass
 	public static void setUp()
-		throws IOException
-	{
+		throws IOException {
 		classRegister = new RelativeResourceRootRegister();
 		Resource test1 = new FileSystemResource("target/test1/");
 		test1.getFile().mkdirs();
@@ -29,8 +27,7 @@ public class RelativeResourceRootRegisterTest
 	}
 
 	@Test
-	public void registerRoot()
-	{
+	public void registerRoot() {
 		RelativeResourceRootRegister register = new RelativeResourceRootRegister();
 		register.registerRoot("test", new ClassPathResource(""));
 		Assert.assertNotNull(register.getRoot("test"));
@@ -38,8 +35,7 @@ public class RelativeResourceRootRegisterTest
 
 	@Test
 	public void getResource()
-		throws IOException
-	{
+		throws IOException {
 		RelativeResourceRootRegister register = new RelativeResourceRootRegister();
 		register.registerRoot("test", new ClassPathResource(""));
 		Assert.assertTrue(register.getResource(new RelativeResource("test", "bar.xml")).getFile().exists());
@@ -47,16 +43,14 @@ public class RelativeResourceRootRegisterTest
 
 	@Test(expected = IllegalStateException.class)
 	public void getResource1()
-		throws IOException
-	{
+		throws IOException {
 		RelativeResourceRootRegister register = new RelativeResourceRootRegister();
 		register.getResource(new RelativeResource("test", "bar.xml")).getFile();
 	}
 
 	@Test
 	public void getNewFile()
-		throws IOException
-	{
+		throws IOException {
 		RelativeResource src = new RelativeResource("test1", "getNewFile.txt");
 		File srcFile = classRegister.getResource(src).getFile();
 		srcFile.createNewFile();
@@ -67,8 +61,7 @@ public class RelativeResourceRootRegisterTest
 
 	@Test
 	public void moveFile()
-		throws IOException
-	{
+		throws IOException {
 		RelativeResource src = new RelativeResource("test1", "move.txt");
 		RelativeResource dest = new RelativeResource("test2", "move.txt");
 		File srcFile = classRegister.getResource(src).getFile();
@@ -82,8 +75,7 @@ public class RelativeResourceRootRegisterTest
 
 	@Test
 	public void moveFileOverride()
-		throws IOException
-	{
+		throws IOException {
 		RelativeResource src = new RelativeResource("test1", "moveOverride.txt");
 		RelativeResource dest = new RelativeResource("test2", "moveOverride.txt");
 		File srcFile = classRegister.getResource(src).getFile();
@@ -98,8 +90,7 @@ public class RelativeResourceRootRegisterTest
 
 	@Test
 	public void copyFile()
-		throws IOException
-	{
+		throws IOException {
 		RelativeResource src = new RelativeResource("test1", "copy.txt");
 		RelativeResource dest = new RelativeResource("test2", "copy.txt");
 		File srcFile = classRegister.getResource(src).getFile();
