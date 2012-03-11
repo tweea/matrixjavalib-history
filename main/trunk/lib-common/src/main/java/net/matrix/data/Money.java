@@ -10,40 +10,52 @@ import java.util.Currency;
 import java.util.Locale;
 
 /**
- * 金额：包括数量和货币
+ * 金额：包括数量和货币。
  */
 public class Money {
+	/**
+	 * 数量。
+	 */
 	private BigDecimal amount;
 
+	/**
+	 * 货币。
+	 */
 	private Currency currency;
 
-	public Money(BigDecimal amount) {
+	/**
+	 * 使用特定数量和默认货币构造对象。
+	 * 
+	 * @param amount
+	 *            数量
+	 */
+	public Money(final BigDecimal amount) {
 		this(amount, Currency.getInstance(Locale.getDefault()));
 	}
 
-	public Money(BigDecimal amount, Currency currency) {
+	/**
+	 * 使用特定数量和货币构造对象。
+	 * 
+	 * @param amount
+	 *            数量
+	 * @param currency
+	 *            货币
+	 */
+	public Money(final BigDecimal amount, final Currency currency) {
 		this.amount = amount;
 		this.currency = currency;
 	}
 
 	/**
-	 * 将一个字符串表示为货币额。
+	 * @return 数量
 	 */
-	public Money(String amount)
-		throws NumberFormatException {
-		this.amount = new BigDecimal(amount);
-		this.currency = Currency.getInstance(Locale.getDefault());
-	}
-
-	public Money(String amount, Currency currency) {
-		this.amount = new BigDecimal(amount);
-		this.currency = currency;
-	}
-
 	public BigDecimal getAmount() {
 		return amount;
 	}
 
+	/**
+	 * @return 货币
+	 */
 	public Currency getCurrency() {
 		return currency;
 	}
