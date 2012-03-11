@@ -24,8 +24,7 @@ import javax.persistence.Table;
 })
 @Table(name = "TEST_USER")
 public class UserInfo
-	implements Serializable
-{
+	implements Serializable {
 	/**
 	 * 
 	 */
@@ -41,43 +40,35 @@ public class UserInfo
 
 	private String xb;
 
-	public String getMm()
-	{
+	public String getMm() {
 		return mm;
 	}
 
-	public void setMm(String mm)
-	{
+	public void setMm(String mm) {
 		this.mm = mm;
 	}
 
-	public Long getNl()
-	{
+	public Long getNl() {
 		return nl;
 	}
 
-	public void setNl(Long nl)
-	{
+	public void setNl(Long nl) {
 		this.nl = nl;
 	}
 
-	public String getXb()
-	{
+	public String getXb() {
 		return xb;
 	}
 
-	public void setXb(String xb)
-	{
+	public void setXb(String xb) {
 		this.xb = xb;
 	}
 
-	public String getYhm()
-	{
+	public String getYhm() {
 		return yhm;
 	}
 
-	public void setYhm(String yhm)
-	{
+	public void setYhm(String yhm) {
 		this.yhm = yhm;
 	}
 }

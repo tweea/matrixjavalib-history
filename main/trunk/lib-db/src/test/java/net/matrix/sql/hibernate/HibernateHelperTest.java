@@ -12,25 +12,21 @@ import org.junit.Test;
 /**
  * @since 2007 三月 1
  */
-public class HibernateHelperTest
-{
+public class HibernateHelperTest {
 	@BeforeClass
 	public static void setUpBeforeClass()
-		throws Exception
-	{
+		throws Exception {
 		SessionFactoryManager.getInstance();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass()
-		throws Exception
-	{
+		throws Exception {
 	}
 
 	@Test
 	public void testSet()
-		throws Exception
-	{
+		throws Exception {
 		HibernateHelper.querySQLAsMap("SELECT CURDATE()");
 	}
 }

@@ -20,9 +20,8 @@ import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
 public class DateTimeAsIntegerType
-	implements UserType, ParameterizedType
-{
-	private static final int[] TYPES = new int[]{
+	implements UserType, ParameterizedType {
+	private static final int[] TYPES = new int[] {
 		Types.INTEGER
 	};
 
@@ -37,25 +36,22 @@ public class DateTimeAsIntegerType
 	private int formatIndex;
 
 	@Override
-	public int[] sqlTypes()
-	{
+	public int[] sqlTypes() {
 		return TYPES;
 	}
 
 	@Override
-	public Class returnedClass()
-	{
+	public Class returnedClass() {
 		return GregorianCalendar.class;
 	}
 
 	@Override
 	public boolean equals(Object x, Object y)
-		throws HibernateException
-	{
-		if(x == y){
+		throws HibernateException {
+		if (x == y) {
 			return true;
 		}
-		if(x == null || y == null){
+		if (x == null || y == null) {
 			return false;
 		}
 		return x.equals(y);
@@ -63,23 +59,21 @@ public class DateTimeAsIntegerType
 
 	@Override
 	public int hashCode(Object x)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return x.hashCode();
 	}
 
 	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
-		throws HibernateException, SQLException
-	{
+		throws HibernateException, SQLException {
 		int r = rs.getInt(names[0]);
-		if(rs.wasNull()){
+		if (rs.wasNull()) {
 			return null;
 		}
 		GregorianCalendar date = null;
-		if(formatIndex == yyyyMMdd){
+		if (formatIndex == yyyyMMdd) {
 			// 0 相当于 NULL
-			if(r == 0){
+			if (r == 0) {
 				return null;
 			}
 			int year = 0, month = 0, day = 0;
@@ -91,7 +85,7 @@ public class DateTimeAsIntegerType
 			r /= 100;
 			year = r;
 			date = new GregorianCalendar(year, month - 1, day);
-		}else if(formatIndex == HHmmss){
+		} else if (formatIndex == HHmmss) {
 			int hour = 0, minute = 0, second = 0;
 			second = r % 100;
 			r -= second;
@@ -107,19 +101,18 @@ public class DateTimeAsIntegerType
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
-		throws HibernateException, SQLException
-	{
-		if(value == null){
+		throws HibernateException, SQLException {
+		if (value == null) {
 			st.setNull(index, Types.INTEGER);
 			return;
 		}
-		GregorianCalendar date = (GregorianCalendar)value;
+		GregorianCalendar date = (GregorianCalendar) value;
 		int intDate = 0;
-		if(formatIndex == yyyyMMdd){
+		if (formatIndex == yyyyMMdd) {
 			intDate = date.get(Calendar.YEAR) * 10000;
 			intDate += date.get(Calendar.MONTH) * 100 + 100;
 			intDate += date.get(Calendar.DAY_OF_MONTH);
-		}else if(formatIndex == HHmmss){
+		} else if (formatIndex == HHmmss) {
 			intDate = date.get(Calendar.HOUR_OF_DAY) * 10000;
 			intDate += date.get(Calendar.MINUTE) * 100;
 			intDate += date.get(Calendar.SECOND);
@@ -129,55 +122,49 @@ public class DateTimeAsIntegerType
 
 	@Override
 	public Object deepCopy(Object value)
-		throws HibernateException
-	{
-		if(value == null){
+		throws HibernateException {
+		if (value == null) {
 			return null;
 		}
-		return ((GregorianCalendar)value).clone();
+		return ((GregorianCalendar) value).clone();
 	}
 
 	@Override
-	public boolean isMutable()
-	{
+	public boolean isMutable() {
 		return true;
 	}
 
 	@Override
 	public Serializable disassemble(Object value)
-		throws HibernateException
-	{
-		return (Serializable)deepCopy(value);
+		throws HibernateException {
+		return (Serializable) deepCopy(value);
 	}
 
 	@Override
 	public Object assemble(Serializable cached, Object owner)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return deepCopy(cached);
 	}
 
 	@Override
 	public Object replace(Object original, Object target, Object owner)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return deepCopy(original);
 	}
 
 	@Override
-	public void setParameterValues(Properties parameters)
-	{
-		if(parameters == null){
+	public void setParameterValues(Properties parameters) {
+		if (parameters == null) {
 			formatIndex = yyyyMMdd;
 			return;
 		}
-		String format = (String)parameters.get("format");
-		if(format == null){
+		String format = (String) parameters.get("format");
+		if (format == null) {
 			formatIndex = yyyyMMdd;
 			return;
 		}
-		for(int i = 0; i < FORMATS.length; i++){
-			if(FORMATS[i].equals(format)){
+		for (int i = 0; i < FORMATS.length; i++) {
+			if (FORMATS[i].equals(format)) {
 				formatIndex = i;
 				break;
 			}

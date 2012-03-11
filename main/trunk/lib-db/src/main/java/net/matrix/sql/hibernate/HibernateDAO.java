@@ -28,11 +28,13 @@ import net.matrix.lang.Reflections;
 
 /**
  * 封装Hibernate原生API的DAO泛型基类.
- * @param <T> DAO操作的对象类型
- * @param <ID> 主键类型
+ * 
+ * @param <T>
+ *            DAO操作的对象类型
+ * @param <ID>
+ *            主键类型
  */
-public class HibernateDAO<T, ID extends Serializable>
-{
+public class HibernateDAO<T, ID extends Serializable> {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected SessionFactory sessionFactory;
@@ -44,14 +46,12 @@ public class HibernateDAO<T, ID extends Serializable>
 	 * eg.
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
 	 */
-	public HibernateDAO(SessionFactory sessionFactory)
-	{
+	public HibernateDAO(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.entityClass = Reflections.getSuperClassGenricType(getClass());
 	}
 
-	public HibernateDAO(SessionFactory sessionFactory, Class<T> entityClass)
-	{
+	public HibernateDAO(SessionFactory sessionFactory, Class<T> entityClass) {
 		this.sessionFactory = sessionFactory;
 		this.entityClass = entityClass;
 	}
@@ -59,24 +59,21 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 取得sessionFactory.
 	 */
-	public SessionFactory getSessionFactory()
-	{
+	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
 	/**
 	 * 取得当前Session.
 	 */
-	public Session getSession()
-	{
+	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
 	/**
 	 * 保存新增或修改的对象.
 	 */
-	public void save(final T entity)
-	{
+	public void save(final T entity) {
 		Validate.notNull(entity, "entity不能为空");
 		getSession().saveOrUpdate(entity);
 		logger.debug("save entity: {}", entity);
@@ -84,10 +81,11 @@ public class HibernateDAO<T, ID extends Serializable>
 
 	/**
 	 * 删除对象.
-	 * @param entity 对象必须是session中的对象或含id属性的transient对象.
+	 * 
+	 * @param entity
+	 *            对象必须是session中的对象或含id属性的transient对象.
 	 */
-	public void delete(final T entity)
-	{
+	public void delete(final T entity) {
 		Validate.notNull(entity, "entity不能为空");
 		getSession().delete(entity);
 		logger.debug("delete entity: {}", entity);
@@ -96,8 +94,7 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 按id删除对象.
 	 */
-	public void delete(final ID id)
-	{
+	public void delete(final ID id) {
 		Validate.notNull(id, "id不能为空");
 		delete(get(id));
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
@@ -106,37 +103,33 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 按id获取对象.
 	 */
-	public T get(final ID id)
-	{
+	public T get(final ID id) {
 		Validate.notNull(id, "id不能为空");
-		return (T)getSession().load(entityClass, id);
+		return (T) getSession().load(entityClass, id);
 	}
 
 	/**
 	 * 按id列表获取对象列表.
 	 */
-	public List<T> get(final Collection<ID> ids)
-	{
+	public List<T> get(final Collection<ID> ids) {
 		return find(Restrictions.in(getIdName(), ids));
 	}
 
 	/**
 	 * 获取全部对象.
 	 */
-	public List<T> getAll()
-	{
+	public List<T> getAll() {
 		return find();
 	}
 
 	/**
 	 * 获取全部对象, 支持按属性行序.
 	 */
-	public List<T> getAll(String orderByProperty, boolean isAsc)
-	{
+	public List<T> getAll(String orderByProperty, boolean isAsc) {
 		Criteria c = createCriteria();
-		if(isAsc){
+		if (isAsc) {
 			c.addOrder(Order.asc(orderByProperty));
-		}else{
+		} else {
 			c.addOrder(Order.desc(orderByProperty));
 		}
 		return c.list();
@@ -145,8 +138,7 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 按属性查找对象列表, 匹配方式为相等.
 	 */
-	public List<T> findBy(final String propertyName, final Object value)
-	{
+	public List<T> findBy(final String propertyName, final Object value) {
 		Validate.notBlank(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return find(criterion);
@@ -155,80 +147,86 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 按属性查找唯一对象, 匹配方式为相等.
 	 */
-	public T findUniqueBy(final String propertyName, final Object value)
-	{
+	public T findUniqueBy(final String propertyName, final Object value) {
 		Validate.notBlank(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
-		return (T)createCriteria(criterion).uniqueResult();
+		return (T) createCriteria(criterion).uniqueResult();
 	}
 
 	/**
 	 * 按HQL查询对象列表.
-	 * @param values 数量可变的参数,按顺序绑定.
+	 * 
+	 * @param values
+	 *            数量可变的参数,按顺序绑定.
 	 */
-	public <X> List<X> find(final String hql, final Object... values)
-	{
+	public <X> List<X> find(final String hql, final Object... values) {
 		return createQuery(hql, values).list();
 	}
 
 	/**
 	 * 按HQL查询对象列表.
-	 * @param values 命名参数,按名称绑定.
+	 * 
+	 * @param values
+	 *            命名参数,按名称绑定.
 	 */
-	public <X> List<X> find(final String hql, final Map<String, ?> values)
-	{
+	public <X> List<X> find(final String hql, final Map<String, ?> values) {
 		return createQuery(hql, values).list();
 	}
 
 	/**
 	 * 按HQL查询唯一对象.
-	 * @param values 数量可变的参数,按顺序绑定.
+	 * 
+	 * @param values
+	 *            数量可变的参数,按顺序绑定.
 	 */
-	public <X> X findUnique(final String hql, final Object... values)
-	{
-		return (X)createQuery(hql, values).uniqueResult();
+	public <X> X findUnique(final String hql, final Object... values) {
+		return (X) createQuery(hql, values).uniqueResult();
 	}
 
 	/**
 	 * 按HQL查询唯一对象.
-	 * @param values 命名参数,按名称绑定.
+	 * 
+	 * @param values
+	 *            命名参数,按名称绑定.
 	 */
-	public <X> X findUnique(final String hql, final Map<String, ?> values)
-	{
-		return (X)createQuery(hql, values).uniqueResult();
+	public <X> X findUnique(final String hql, final Map<String, ?> values) {
+		return (X) createQuery(hql, values).uniqueResult();
 	}
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
-	 * @param values 数量可变的参数,按顺序绑定.
+	 * 
+	 * @param values
+	 *            数量可变的参数,按顺序绑定.
 	 * @return 更新记录数.
 	 */
-	public int batchExecute(final String hql, final Object... values)
-	{
+	public int batchExecute(final String hql, final Object... values) {
 		return createQuery(hql, values).executeUpdate();
 	}
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
-	 * @param values 命名参数,按名称绑定.
+	 * 
+	 * @param values
+	 *            命名参数,按名称绑定.
 	 * @return 更新记录数.
 	 */
-	public int batchExecute(final String hql, final Map<String, ?> values)
-	{
+	public int batchExecute(final String hql, final Map<String, ?> values) {
 		return createQuery(hql, values).executeUpdate();
 	}
 
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 与find()函数可进行更加灵活的操作.
-	 * @param values 数量可变的参数,按顺序绑定.
+	 * 
+	 * @param values
+	 *            数量可变的参数,按顺序绑定.
 	 */
-	public Query createQuery(final String queryString, final Object... values)
-	{
+	public Query createQuery(final String queryString, final Object... values) {
 		Validate.notBlank(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
-		if(values != null){
-			for(int i = 0; i < values.length; i++){
+		if (values != null) {
+			for (int i = 0; i < values.length; i++) {
 				query.setParameter(i, values[i]);
 			}
 		}
@@ -238,13 +236,14 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 与find()函数可进行更加灵活的操作.
-	 * @param values 命名参数,按名称绑定.
+	 * 
+	 * @param values
+	 *            命名参数,按名称绑定.
 	 */
-	public Query createQuery(final String queryString, final Map<String, ?> values)
-	{
+	public Query createQuery(final String queryString, final Map<String, ?> values) {
 		Validate.notBlank(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
-		if(values != null){
+		if (values != null) {
 			query.setProperties(values);
 		}
 		return query;
@@ -252,31 +251,34 @@ public class HibernateDAO<T, ID extends Serializable>
 
 	/**
 	 * 按Criteria查询对象列表.
-	 * @param criterions 数量可变的Criterion.
+	 * 
+	 * @param criterions
+	 *            数量可变的Criterion.
 	 */
-	public List<T> find(final Criterion... criterions)
-	{
+	public List<T> find(final Criterion... criterions) {
 		return createCriteria(criterions).list();
 	}
 
 	/**
 	 * 按Criteria查询唯一对象.
-	 * @param criterions 数量可变的Criterion.
+	 * 
+	 * @param criterions
+	 *            数量可变的Criterion.
 	 */
-	public T findUnique(final Criterion... criterions)
-	{
-		return (T)createCriteria(criterions).uniqueResult();
+	public T findUnique(final Criterion... criterions) {
+		return (T) createCriteria(criterions).uniqueResult();
 	}
 
 	/**
 	 * 根据Criterion条件创建Criteria.
 	 * 与find()函数可进行更加灵活的操作.
-	 * @param criterions 数量可变的Criterion.
+	 * 
+	 * @param criterions
+	 *            数量可变的Criterion.
 	 */
-	public Criteria createCriteria(final Criterion... criterions)
-	{
+	public Criteria createCriteria(final Criterion... criterions) {
 		Criteria criteria = getSession().createCriteria(entityClass);
-		for(Criterion c : criterions){
+		for (Criterion c : criterions) {
 			criteria.add(c);
 		}
 		return criteria;
@@ -290,16 +292,14 @@ public class HibernateDAO<T, ID extends Serializable>
 	 * Hibernate.initialize(user.getRoles())，初始化User的直接属性和关联集合.
 	 * Hibernate.initialize(user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
 	 */
-	public void initProxyObject(Object proxy)
-	{
+	public void initProxyObject(Object proxy) {
 		Hibernate.initialize(proxy);
 	}
 
 	/**
 	 * Flush当前Session.
 	 */
-	public void flush()
-	{
+	public void flush() {
 		getSession().flush();
 	}
 
@@ -307,8 +307,7 @@ public class HibernateDAO<T, ID extends Serializable>
 	 * 为Query添加distinct transformer.
 	 * 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
 	 */
-	public Query distinct(Query query)
-	{
+	public Query distinct(Query query) {
 		query.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return query;
 	}
@@ -317,8 +316,7 @@ public class HibernateDAO<T, ID extends Serializable>
 	 * 为Criteria添加distinct transformer.
 	 * 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
 	 */
-	public Criteria distinct(Criteria criteria)
-	{
+	public Criteria distinct(Criteria criteria) {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return criteria;
 	}
@@ -326,8 +324,7 @@ public class HibernateDAO<T, ID extends Serializable>
 	/**
 	 * 取得对象的主键名.
 	 */
-	public String getIdName()
-	{
+	public String getIdName() {
 		ClassMetadata meta = getSessionFactory().getClassMetadata(entityClass);
 		return meta.getIdentifierPropertyName();
 	}
@@ -336,9 +333,8 @@ public class HibernateDAO<T, ID extends Serializable>
 	 * 判断对象的属性值在数据库内是否唯一.
 	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
 	 */
-	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue)
-	{
-		if(newValue == null || newValue.equals(oldValue)){
+	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
+		if (newValue == null || newValue.equals(oldValue)) {
 			return true;
 		}
 		Object object = findUniqueBy(propertyName, newValue);

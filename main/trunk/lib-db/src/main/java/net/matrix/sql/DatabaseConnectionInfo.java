@@ -18,8 +18,7 @@ import org.slf4j.LoggerFactory;
  * 数据库连接信息
  */
 public class DatabaseConnectionInfo
-	implements Serializable
-{
+	implements Serializable {
 	private static final long serialVersionUID = -7842286530934311836L;
 
 	private static final Logger LOG = LoggerFactory.getLogger(DatabaseConnectionInfo.class);
@@ -39,8 +38,7 @@ public class DatabaseConnectionInfo
 	private String driverName = null;
 
 	public DatabaseConnectionInfo(String driverClass, String url, String userName, String password)
-		throws SQLException
-	{
+		throws SQLException {
 		this.driverClass = driverClass;
 		this.url = url;
 		this.userName = userName;
@@ -48,59 +46,51 @@ public class DatabaseConnectionInfo
 		setMetaData();
 	}
 
-	public String getDriverClass()
-	{
+	public String getDriverClass() {
 		return driverClass;
 	}
 
-	public String getUrl()
-	{
+	public String getUrl() {
 		return url;
 	}
 
-	public String getUserName()
-	{
+	public String getUserName() {
 		return userName;
 	}
 
-	public String getPassword()
-	{
+	public String getPassword() {
 		return password;
 	}
 
-	public String getDatabaseType()
-	{
+	public String getDatabaseType() {
 		return databaseType;
 	}
 
-	public String getDriverName()
-	{
+	public String getDriverName() {
 		return driverName;
 	}
 
 	public Connection getJDBCConnection()
-		throws SQLException
-	{
-		try{
+		throws SQLException {
+		try {
 			Class.forName(driverClass);
 			return DriverManager.getConnection(url, userName, password);
-		}catch(ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			throw new SQLException(e);
 		}
 	}
 
 	private void setMetaData()
-		throws SQLException
-	{
+		throws SQLException {
 		Connection connection = getJDBCConnection();
-		try{
+		try {
 			DatabaseMetaData metadata = connection.getMetaData();
 			databaseType = metadata.getDatabaseProductName();
 			driverName = metadata.getDriverName();
-		}finally{
-			try{
+		} finally {
+			try {
 				connection.close();
-			}catch(SQLException e){
+			} catch (SQLException e) {
 				LOG.warn("关闭连接失败", e);
 			}
 		}
