@@ -14,11 +14,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 
-public class ConfigurationReloadingListenerTest
-{
+public class ConfigurationReloadingListenerTest {
 	@Test
-	public void testReloadingPerformed()
-	{
+	public void testReloadingPerformed() {
 		// 读取配置
 		TestContainer container = new TestContainer();
 		ConfigurationListener listener = new ConfigurationReloadingListener(container);
@@ -28,8 +26,7 @@ public class ConfigurationReloadingListenerTest
 	}
 
 	@Test
-	public void testReloadingPerformed2()
-	{
+	public void testReloadingPerformed2() {
 		// 读取配置
 		TestContainer container = new TestContainer();
 		ConfigurationListener listener = new ConfigurationReloadingListener(container);
@@ -39,41 +36,34 @@ public class ConfigurationReloadingListenerTest
 	}
 
 	private class TestContainer
-		implements ReloadableConfigurationContainer<Object>
-	{
+		implements ReloadableConfigurationContainer<Object> {
 		private boolean isReloaded = false;
 
-		public boolean isReloaded()
-		{
+		public boolean isReloaded() {
 			return isReloaded;
 		}
 
 		@Override
-		public void reset()
-		{
+		public void reset() {
 			isReloaded = true;
 		}
 
 		@Override
 		public void load(Resource resource)
-			throws ConfigurationException
-		{
+			throws ConfigurationException {
 		}
 
 		@Override
 		public void reload()
-			throws ConfigurationException
-		{
+			throws ConfigurationException {
 		}
 
 		@Override
-		public void checkReload()
-		{
+		public void checkReload() {
 		}
 
 		@Override
-		public Object getConfig()
-		{
+		public Object getConfig() {
 			return null;
 		}
 	}

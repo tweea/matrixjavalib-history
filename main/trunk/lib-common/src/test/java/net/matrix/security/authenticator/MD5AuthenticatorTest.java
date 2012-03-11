@@ -12,15 +12,13 @@ import org.junit.Test;
 /**
  * @since 2007-1-29
  */
-public class MD5AuthenticatorTest
-{
+public class MD5AuthenticatorTest {
 	/**
 	 * Test method for
 	 * {@link net.matrix.security.authenticator.MD5Authenticator#getDigestString(java.lang.String)}.
 	 */
 	@Test
-	public void testGetDigestString()
-	{
+	public void testGetDigestString() {
 		Authenticator a = new MD5Authenticator();
 		assertEquals("D41D8CD98F00B204E9800998ECF8427E", a.getDigestString(""));
 		assertEquals("0CC175B9C0F1B6A831C399E269772661", a.getDigestString("a"));

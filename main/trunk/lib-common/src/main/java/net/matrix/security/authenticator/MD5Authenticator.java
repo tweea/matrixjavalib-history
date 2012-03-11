@@ -13,33 +13,29 @@ import net.matrix.security.Digests;
  * 使用 MD5 算法校验密码
  */
 public class MD5Authenticator
-	implements Authenticator
-{
+	implements Authenticator {
 	@Override
-	public boolean authenticate(String password, String digest)
-	{
+	public boolean authenticate(String password, String digest) {
 		return StringUtils.equals(digest, getDigestString(password));
 	}
 
 	@Override
-	public String getDigestString(String password)
-	{
+	public String getDigestString(String password) {
 		byte[] pass = password.getBytes();
 		byte[] data = Digests.md5(pass);
 		return toHexString(data);
 	}
 
 	// TODO 在所有地方应用 commons-codec
-	private String toHexString(byte[] data)
-	{
+	private String toHexString(byte[] data) {
 		StringBuffer sb = new StringBuffer();
-		for(byte b : data){
+		for (byte b : data) {
 			int i = b;
-			if(i < 0){
+			if (i < 0) {
 				i += 256;
 			}
 			String s = Integer.toHexString(i).toUpperCase();
-			if(s.length() == 1){
+			if (s.length() == 1) {
 				sb.append('0');
 			}
 			sb.append(s);

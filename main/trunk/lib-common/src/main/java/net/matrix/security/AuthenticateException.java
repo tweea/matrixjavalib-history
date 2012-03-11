@@ -11,30 +11,25 @@ import java.security.GeneralSecurityException;
  * 验证错误
  */
 public class AuthenticateException
-	extends GeneralSecurityException
-{
+	extends GeneralSecurityException {
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -8363292424989396451L;
 
-	public AuthenticateException()
-	{
+	public AuthenticateException() {
 		super();
 	}
 
-	public AuthenticateException(String msg)
-	{
+	public AuthenticateException(String msg) {
 		super(msg);
 	}
 
-	public AuthenticateException(Throwable e)
-	{
+	public AuthenticateException(Throwable e) {
 		super(e);
 	}
 
-	public AuthenticateException(String string, Throwable e)
-	{
+	public AuthenticateException(String string, Throwable e) {
 		super(string, e);
 	}
 }

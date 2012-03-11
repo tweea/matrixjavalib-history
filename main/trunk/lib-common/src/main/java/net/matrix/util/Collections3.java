@@ -22,16 +22,13 @@ import net.matrix.lang.ReflectionRuntimeException;
  * Collections工具集。
  * 在JDK的Colllections和Guava的Collections2后，命名为Collections3.
  */
-public class Collections3
-{
-	private Collections3()
-	{
+public class Collections3 {
+	private Collections3() {
 	}
 
-	public static <T> List<T> subtract(final Collection<T> a, final Collection<T> b)
-	{
+	public static <T> List<T> subtract(final Collection<T> a, final Collection<T> b) {
 		ArrayList<T> list = new ArrayList<T>(a);
-		for(Iterator it = b.iterator(); it.hasNext();){
+		for (Iterator it = b.iterator(); it.hasNext();) {
 			list.remove(it.next());
 		}
 		return list;
@@ -39,23 +36,26 @@ public class Collections3
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成Map.
-	 * @param collection 来源集合.
-	 * @param keyPropertyName 要提取为Map中的Key值的属性名.
-	 * @param valuePropertyName 要提取为Map中的Value值的属性名.
+	 * 
+	 * @param collection
+	 *            来源集合.
+	 * @param keyPropertyName
+	 *            要提取为Map中的Key值的属性名.
+	 * @param valuePropertyName
+	 *            要提取为Map中的Value值的属性名.
 	 */
-	public static Map extractToMap(final Collection collection, final String keyPropertyName, final String valuePropertyName)
-	{
+	public static Map extractToMap(final Collection collection, final String keyPropertyName, final String valuePropertyName) {
 		Map map = new HashMap();
 
-		try{
-			for(Object obj : collection){
+		try {
+			for (Object obj : collection) {
 				map.put(PropertyUtils.getProperty(obj, keyPropertyName), PropertyUtils.getProperty(obj, valuePropertyName));
 			}
-		}catch(InvocationTargetException e){
+		} catch (InvocationTargetException e) {
 			throw new ReflectionRuntimeException(e);
-		}catch(IllegalAccessException e){
+		} catch (IllegalAccessException e) {
 			throw new ReflectionRuntimeException(e);
-		}catch(NoSuchMethodException e){
+		} catch (NoSuchMethodException e) {
 			throw new ReflectionRuntimeException(e);
 		}
 
@@ -64,22 +64,24 @@ public class Collections3
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成List.
-	 * @param collection 来源集合.
-	 * @param propertyName 要提取的属性名.
+	 * 
+	 * @param collection
+	 *            来源集合.
+	 * @param propertyName
+	 *            要提取的属性名.
 	 */
-	public static List extractToList(final Collection collection, final String propertyName)
-	{
+	public static List extractToList(final Collection collection, final String propertyName) {
 		List list = new ArrayList();
 
-		try{
-			for(Object obj : collection){
+		try {
+			for (Object obj : collection) {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
 			}
-		}catch(InvocationTargetException e){
+		} catch (InvocationTargetException e) {
 			throw new ReflectionRuntimeException(e);
-		}catch(IllegalAccessException e){
+		} catch (IllegalAccessException e) {
 			throw new ReflectionRuntimeException(e);
-		}catch(NoSuchMethodException e){
+		} catch (NoSuchMethodException e) {
 			throw new ReflectionRuntimeException(e);
 		}
 
@@ -88,12 +90,15 @@ public class Collections3
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成由分割符分隔的字符串.
-	 * @param collection 来源集合.
-	 * @param propertyName 要提取的属性名.
-	 * @param separator 分隔符.
+	 * 
+	 * @param collection
+	 *            来源集合.
+	 * @param propertyName
+	 *            要提取的属性名.
+	 * @param separator
+	 *            分隔符.
 	 */
-	public static String extractToString(final Collection collection, final String propertyName, final String separator)
-	{
+	public static String extractToString(final Collection collection, final String propertyName, final String separator) {
 		List list = extractToList(collection, propertyName);
 		return StringUtils.join(list, separator);
 	}

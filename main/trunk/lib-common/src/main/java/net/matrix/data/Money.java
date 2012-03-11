@@ -12,19 +12,16 @@ import java.util.Locale;
 /**
  * 金额：包括数量和货币
  */
-public class Money
-{
+public class Money {
 	private BigDecimal amount;
 
 	private Currency currency;
 
-	public Money(BigDecimal amount)
-	{
+	public Money(BigDecimal amount) {
 		this(amount, Currency.getInstance(Locale.getDefault()));
 	}
 
-	public Money(BigDecimal amount, Currency currency)
-	{
+	public Money(BigDecimal amount, Currency currency) {
 		this.amount = amount;
 		this.currency = currency;
 	}
@@ -33,25 +30,21 @@ public class Money
 	 * 将一个字符串表示为货币额。
 	 */
 	public Money(String amount)
-		throws NumberFormatException
-	{
+		throws NumberFormatException {
 		this.amount = new BigDecimal(amount);
 		this.currency = Currency.getInstance(Locale.getDefault());
 	}
 
-	public Money(String amount, Currency currency)
-	{
+	public Money(String amount, Currency currency) {
 		this.amount = new BigDecimal(amount);
 		this.currency = currency;
 	}
 
-	public BigDecimal getAmount()
-	{
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public Currency getCurrency()
-	{
+	public Currency getCurrency() {
 		return currency;
 	}
 }

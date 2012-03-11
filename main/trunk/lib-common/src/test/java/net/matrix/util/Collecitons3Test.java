@@ -8,11 +8,9 @@ import org.junit.Test;
 
 import net.matrix.lang.ReflectionsTest.TestBean3;
 
-public class Collecitons3Test
-{
+public class Collecitons3Test {
 	@Test
-	public void convertElementPropertyToString()
-	{
+	public void convertElementPropertyToString() {
 		TestBean3 bean1 = new TestBean3();
 		bean1.setId(1);
 		TestBean3 bean2 = new TestBean3();
@@ -26,8 +24,7 @@ public class Collecitons3Test
 	}
 
 	@Test
-	public void convertElementPropertyToList()
-	{
+	public void convertElementPropertyToList() {
 		TestBean3 bean1 = new TestBean3();
 		bean1.setId(1);
 		TestBean3 bean2 = new TestBean3();

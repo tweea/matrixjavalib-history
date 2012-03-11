@@ -14,28 +14,24 @@ import org.junit.Test;
 /**
  * 负责读取配置文件
  */
-public class HierarchicalConfigurationUtilsTest
-{
+public class HierarchicalConfigurationUtilsTest {
 	private static HierarchicalConfiguration config;
 
 	@BeforeClass
 	public static void setUp()
-		throws ConfigurationException
-	{
+		throws ConfigurationException {
 		config = new XMLConfiguration("./bar.xml");
 	}
 
 	@Test
-	public void parseParameter()
-	{
+	public void parseParameter() {
 		Map<String, String> parameter = HierarchicalConfigurationUtils.parseParameter(config.configurationAt("senders.target(0)"), "properties", "[@name]",
 			"[@value]");
 		Assert.assertEquals("192.168.1.234", parameter.get("hostname"));
 	}
 
 	@Test
-	public void updateParameter()
-	{
+	public void updateParameter() {
 		Map<String, String> parameter = HierarchicalConfigurationUtils.parseParameter(config.configurationAt("senders.target(0)"), "properties", "[@name]",
 			"[@value]");
 		parameter.put("hostname", "192.168.1.1");
@@ -49,15 +45,13 @@ public class HierarchicalConfigurationUtilsTest
 	}
 
 	@Test
-	public void parseAttributes()
-	{
+	public void parseAttributes() {
 		Map<String, String> parameter = HierarchicalConfigurationUtils.parseAttributes(config.configurationAt("senders.target(2).properties(0)"));
 		Assert.assertEquals("url", parameter.get("[@name]"));
 	}
 
 	@Test
-	public void listAllNames()
-	{
+	public void listAllNames() {
 		List<String> names = HierarchicalConfigurationUtils.listAllNames(config.configurationAt("receivers.receiver(0)"), "properties", "[@name]");
 		List<String> testNames = new ArrayList<String>();
 		testNames.add("hostname");
@@ -72,16 +66,14 @@ public class HierarchicalConfigurationUtilsTest
 
 	@Test
 	public void findForName()
-		throws ConfigurationException
-	{
+		throws ConfigurationException {
 		HierarchicalConfiguration subconfig = HierarchicalConfigurationUtils.findForName(config.configurationAt("senders"), "target", "[@name]", "SysA");
 		Assert.assertEquals("WMQ", subconfig.getString("[@protocol]"));
 	}
 
 	@Test(expected = ConfigurationException.class)
 	public void findForName2()
-		throws ConfigurationException
-	{
+		throws ConfigurationException {
 		HierarchicalConfigurationUtils.findForName(config.configurationAt("senders"), "target", "[@name]", "SysX");
 	}
 }

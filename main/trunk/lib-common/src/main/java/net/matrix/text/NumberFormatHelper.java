@@ -9,21 +9,19 @@ import java.text.NumberFormat;
 
 /**
  * 数字工具方法
+ * 
  * @author T.A.Tang
  * @since 2006-1-19
  */
-public class NumberFormatHelper
-{
+public class NumberFormatHelper {
 	private static final ThreadLocal<NumberFormat> LOCAL_FORMAT = new ThreadLocal<NumberFormat>();
 
-	private NumberFormatHelper()
-	{
+	private NumberFormatHelper() {
 	}
 
-	public static NumberFormat getDateFormat()
-	{
+	public static NumberFormat getDateFormat() {
 		NumberFormat df = LOCAL_FORMAT.get();
-		if(df == null){
+		if (df == null) {
 			df = NumberFormat.getInstance();
 			LOCAL_FORMAT.set(df);
 		}

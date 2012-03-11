@@ -17,12 +17,12 @@ import java.util.TreeMap;
 
 /**
  * 树型结构
+ * 
  * @author Tweea
  * @since 2005.10.28
  */
 public class DefaultTree<ID, DATA>
-	implements Serializable, Tree<ID, DATA>
-{
+	implements Serializable, Tree<ID, DATA> {
 	private static final long serialVersionUID = 1853100024141572756L;
 
 	/**
@@ -57,11 +57,13 @@ public class DefaultTree<ID, DATA>
 
 	/**
 	 * 种一棵树
-	 * @param id 数据标识
-	 * @param data 数据对象
+	 * 
+	 * @param id
+	 *            数据标识
+	 * @param data
+	 *            数据对象
 	 */
-	public DefaultTree(ID id, DATA data)
-	{
+	public DefaultTree(ID id, DATA data) {
 		this.key = new Key();
 		this.id = id;
 		this.data = data;
@@ -76,12 +78,15 @@ public class DefaultTree<ID, DATA>
 
 	/**
 	 * 种一棵树
-	 * @param parent 父节点
-	 * @param id 数据标识
-	 * @param data 数据对象
+	 * 
+	 * @param parent
+	 *            父节点
+	 * @param id
+	 *            数据标识
+	 * @param data
+	 *            数据对象
 	 */
-	public DefaultTree(DefaultTree<ID, DATA> parent, ID id, DATA data)
-	{
+	public DefaultTree(DefaultTree<ID, DATA> parent, ID id, DATA data) {
 		this.key = new Key(parent.key, parent.getChildNodes().size());
 		this.id = id;
 		this.data = data;
@@ -95,44 +100,37 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public Key getKey()
-	{
+	public Key getKey() {
 		return key;
 	}
 
 	@Override
-	public void setId(ID id)
-	{
+	public void setId(ID id) {
 		this.id = id;
 	}
 
 	@Override
-	public ID getId()
-	{
+	public ID getId() {
 		return id;
 	}
 
 	@Override
-	public void setData(DATA data)
-	{
+	public void setData(DATA data) {
 		this.data = data;
 	}
 
 	@Override
-	public DATA getData()
-	{
+	public DATA getData() {
 		return data;
 	}
 
 	@Override
-	public Key findKey(ID nodeId)
-	{
+	public Key findKey(ID nodeId) {
 		return keyMap.get(nodeId);
 	}
 
 	@Override
-	public DefaultTree<ID, DATA> getParent()
-	{
+	public DefaultTree<ID, DATA> getParent() {
 		return parent;
 	}
 
@@ -140,8 +138,7 @@ public class DefaultTree<ID, DATA>
 	 * 获得所有节点
 	 */
 	@Override
-	public SortedMap<Key, DefaultTree<ID, DATA>> getAllNodes()
-	{
+	public SortedMap<Key, DefaultTree<ID, DATA>> getAllNodes() {
 		return nodes;
 	}
 
@@ -149,8 +146,7 @@ public class DefaultTree<ID, DATA>
 	 * 获得所有子节点
 	 */
 	@Override
-	public SortedMap<Key, DefaultTree<ID, DATA>> getChildNodes()
-	{
+	public SortedMap<Key, DefaultTree<ID, DATA>> getChildNodes() {
 		return nodes.subMap(new Key(key, 0), new Key(key, Integer.MAX_VALUE));
 	}
 
@@ -158,8 +154,7 @@ public class DefaultTree<ID, DATA>
 	 * 找一个树叉
 	 */
 	@Override
-	public DefaultTree<ID, DATA> getNode(Key nodeKey)
-	{
+	public DefaultTree<ID, DATA> getNode(Key nodeKey) {
 		return nodes.get(nodeKey);
 	}
 
@@ -167,10 +162,9 @@ public class DefaultTree<ID, DATA>
 	 * 找一个树叉
 	 */
 	@Override
-	public DefaultTree<ID, DATA> getNode(ID nodeId)
-	{
+	public DefaultTree<ID, DATA> getNode(ID nodeId) {
 		Key nodeKey = findKey(nodeId);
-		if(nodeKey == null){
+		if (nodeKey == null) {
 			return null;
 		}
 		return getNode(nodeKey);
@@ -180,8 +174,7 @@ public class DefaultTree<ID, DATA>
 	 * 找一个树叉
 	 */
 	@Override
-	public DefaultTree<ID, DATA> getChildNode(Key nodeKey)
-	{
+	public DefaultTree<ID, DATA> getChildNode(Key nodeKey) {
 		return getChildNodes().get(nodeKey);
 	}
 
@@ -189,10 +182,9 @@ public class DefaultTree<ID, DATA>
 	 * 找一个树叉
 	 */
 	@Override
-	public DefaultTree<ID, DATA> getChildNode(ID nodeId)
-	{
+	public DefaultTree<ID, DATA> getChildNode(ID nodeId) {
 		Key nodeKey = findKey(nodeId);
-		if(nodeKey == null){
+		if (nodeKey == null) {
 			return null;
 		}
 		return getChildNode(nodeKey);
@@ -202,8 +194,7 @@ public class DefaultTree<ID, DATA>
 	 * 增加新的子节点
 	 */
 	@Override
-	public DefaultTree<ID, DATA> appendChildNode(ID nodeId, DATA nodeData)
-	{
+	public DefaultTree<ID, DATA> appendChildNode(ID nodeId, DATA nodeData) {
 		return new DefaultTree<ID, DATA>(this, nodeId, nodeData);
 	}
 
@@ -211,13 +202,12 @@ public class DefaultTree<ID, DATA>
 	 * 移除子节点
 	 */
 	@Override
-	public void removeChildNode(Key nodeKey)
-	{
+	public void removeChildNode(Key nodeKey) {
 		DefaultTree<ID, DATA> node = getChildNode(nodeKey);
-		if(node == null){
+		if (node == null) {
 			return;
 		}
-		for(Key childKey : new HashSet<Key>(node.getChildNodes().keySet())){
+		for (Key childKey : new HashSet<Key>(node.getChildNodes().keySet())) {
 			node.removeChildNode(childKey);
 		}
 		keyMap.remove(node.id);
@@ -228,30 +218,26 @@ public class DefaultTree<ID, DATA>
 	 * 移除子节点
 	 */
 	@Override
-	public void removeChildNode(ID nodeId)
-	{
+	public void removeChildNode(ID nodeId) {
 		Key nodeKey = findKey(nodeId);
-		if(nodeKey == null){
+		if (nodeKey == null) {
 			return;
 		}
 		removeChildNode(nodeKey);
 	}
 
 	@Override
-	public boolean isRoot()
-	{
+	public boolean isRoot() {
 		return parent == null;
 	}
 
 	@Override
-	public boolean isLeaf()
-	{
+	public boolean isLeaf() {
 		return getChildNodes().size() == 0;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString()).append("[id=").append(id);
 		sb.append(",key=").append(key);
@@ -263,8 +249,7 @@ public class DefaultTree<ID, DATA>
 	/*
 	 * 从 TreeSource 产生树状结构
 	 */
-	public static synchronized <ID, DATA> DefaultTree<ID, DATA> generate(TreeSource<ID, DATA> source)
-	{
+	public static synchronized <ID, DATA> DefaultTree<ID, DATA> generate(TreeSource<ID, DATA> source) {
 		ID rootId = source.getRootId();
 		DATA rootData = source.getItem(rootId);
 		DefaultTree<ID, DATA> tree = new DefaultTree<ID, DATA>(rootId, rootData);
@@ -275,17 +260,16 @@ public class DefaultTree<ID, DATA>
 	/*
 	 * 从 TreeSource 增加新的节点
 	 */
-	private static <ID, DATA> void generateSubNode(TreeSource<ID, DATA> source, DefaultTree<ID, DATA> node)
-	{
+	private static <ID, DATA> void generateSubNode(TreeSource<ID, DATA> source, DefaultTree<ID, DATA> node) {
 		List<ID> items = source.listChildrenId(node.getId());
-		if(items == null || items.size() == 0){
+		if (items == null || items.size() == 0) {
 			return;
 		}
-		for(ID id : items){
+		for (ID id : items) {
 			DATA item = source.getItem(id);
 			node.appendChildNode(id, item);
 		}
-		for(DefaultTree<ID, DATA> subNode : new ArrayList<DefaultTree<ID, DATA>>(node.getChildNodes().values())){
+		for (DefaultTree<ID, DATA> subNode : new ArrayList<DefaultTree<ID, DATA>>(node.getChildNodes().values())) {
 			generateSubNode(source, subNode);
 		}
 	}
