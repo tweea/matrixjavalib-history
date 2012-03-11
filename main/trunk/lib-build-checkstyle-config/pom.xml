@@ -31,8 +31,8 @@
 		<url>http://sourceforge.net/tracker/?group_id=543402</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-build-checkstyle-config/trunk</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-build-checkstyle-config/trunk</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-build-checkstyle-config/trunk</url>
+		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config</developerConnection>
+		<url>http://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config</url>
 	</scm>
 </project>
