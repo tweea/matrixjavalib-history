@@ -35,7 +35,7 @@ public class HierarchicalConfigurationUtils {
 	 */
 	public static Map<String, String> parseParameter(HierarchicalConfiguration config, String subKey, String nameKey, String valueKey) {
 		Map<String, String> parameters = new HashMap<String, String>();
-		for (HierarchicalConfiguration subConfig : (List<HierarchicalConfiguration>) config.configurationsAt(subKey)) {
+		for (HierarchicalConfiguration subConfig : config.configurationsAt(subKey)) {
 			String name = subConfig.getString(nameKey);
 			String value = subConfig.getString(valueKey);
 			parameters.put(name, value);
@@ -58,7 +58,7 @@ public class HierarchicalConfigurationUtils {
 	 *            <code>Map</code> 对象
 	 */
 	public static void updateParameter(HierarchicalConfiguration config, String subKey, String nameKey, String valueKey, Map<String, String> parameters) {
-		for (HierarchicalConfiguration subConfig : (List<HierarchicalConfiguration>) config.configurationsAt(subKey)) {
+		for (HierarchicalConfiguration subConfig : config.configurationsAt(subKey)) {
 			subConfig.clear();
 		}
 		nameKey = subKey + "(-1)." + nameKey;
@@ -98,7 +98,7 @@ public class HierarchicalConfigurationUtils {
 	 */
 	public static List<String> listAllNames(HierarchicalConfiguration config, String subKey, String nameKey) {
 		List<String> names = new ArrayList<String>();
-		for (HierarchicalConfiguration subConfig : (List<HierarchicalConfiguration>) config.configurationsAt(subKey)) {
+		for (HierarchicalConfiguration subConfig : config.configurationsAt(subKey)) {
 			String name = subConfig.getString(nameKey);
 			names.add(name);
 		}
@@ -122,7 +122,7 @@ public class HierarchicalConfigurationUtils {
 	 */
 	public static HierarchicalConfiguration findForName(HierarchicalConfiguration config, String subKey, String nameKey, String nameValue)
 		throws ConfigurationException {
-		for (HierarchicalConfiguration subConfig : (List<HierarchicalConfiguration>) config.configurationsAt(subKey)) {
+		for (HierarchicalConfiguration subConfig : config.configurationsAt(subKey)) {
 			String name = subConfig.getString(nameKey);
 			if (name.equals(nameValue)) {
 				return subConfig;
