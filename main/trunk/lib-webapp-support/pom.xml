@@ -66,11 +66,11 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/trunk
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-webapp-support
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-webapp-support/trunk
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-webapp-support
 		</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jlib-webapp-support/trunk</url>
+		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/lib-webapp-support</url>
 	</scm>
 </project>

@@ -193,13 +193,13 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-common/trunk
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-common
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/jlib-common/trunk
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-common
 		</developerConnection>
 		<url>
-			http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/jlib-common/trunk
+			http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/lib-common
 		</url>
 	</scm>
 </project>
