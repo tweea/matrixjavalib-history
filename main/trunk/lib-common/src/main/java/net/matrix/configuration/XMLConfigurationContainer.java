@@ -20,7 +20,7 @@ import org.springframework.core.io.Resource;
 public class XMLConfigurationContainer
 	implements ReloadableConfigurationContainer<XMLConfiguration> {
 	/**
-	 * 日志记录器
+	 * 日志记录器。
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(XMLConfigurationContainer.class);
 
