@@ -18,7 +18,7 @@ public class DefaultTreeTest {
 	@Test
 	public void testDefaultTreeIDDATA() {
 		Tree<String, String> tree = new DefaultTree<String, String>("root", "test");
-		Assert.assertEquals(new Tree.Key(), tree.getKey());
+		Assert.assertEquals(new DefaultTree.DefaultKey(), tree.getKey());
 		Assert.assertEquals("root", tree.getId());
 		Assert.assertEquals("test", tree.getData());
 	}
@@ -32,19 +32,19 @@ public class DefaultTreeTest {
 		Tree<String, String> leaf2 = new DefaultTree<String, String>(node2, "leaf2", "value2");
 		Tree<String, String> leaf3 = new DefaultTree<String, String>(node2, "leaf3", "value3");
 
-		Assert.assertEquals(new Tree.Key(new Tree.Key(), 0), node1.getKey());
+		Assert.assertEquals(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(), 0), node1.getKey());
 		Assert.assertEquals("node1", node1.getId());
 		Assert.assertEquals("test1", node1.getData());
-		Assert.assertEquals(new Tree.Key(new Tree.Key(), 1), node2.getKey());
+		Assert.assertEquals(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(), 1), node2.getKey());
 		Assert.assertEquals("node2", node2.getId());
 		Assert.assertEquals("test2", node2.getData());
-		Assert.assertEquals(new Tree.Key(new Tree.Key(new Tree.Key(), 0), 0), leaf1.getKey());
+		Assert.assertEquals(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(), 0), 0), leaf1.getKey());
 		Assert.assertEquals("leaf1", leaf1.getId());
 		Assert.assertEquals("value1", leaf1.getData());
-		Assert.assertEquals(new Tree.Key(new Tree.Key(new Tree.Key(), 1), 0), leaf2.getKey());
+		Assert.assertEquals(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(), 1), 0), leaf2.getKey());
 		Assert.assertEquals("leaf2", leaf2.getId());
 		Assert.assertEquals("value2", leaf2.getData());
-		Assert.assertEquals(new Tree.Key(new Tree.Key(new Tree.Key(), 1), 1), leaf3.getKey());
+		Assert.assertEquals(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(new DefaultTree.DefaultKey(), 1), 1), leaf3.getKey());
 		Assert.assertEquals("leaf3", leaf3.getId());
 		Assert.assertEquals("value3", leaf3.getData());
 	}

@@ -16,10 +16,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
- * 树型结构
- * 
- * @author Tweea
- * @since 2005.10.28
+ * 树型结构的默认实现。
  */
 public class DefaultTree<ID, DATA>
 	implements Serializable, Tree<ID, DATA> {
@@ -56,7 +53,7 @@ public class DefaultTree<ID, DATA>
 	private SortedMap<Key, DefaultTree<ID, DATA>> nodes;
 
 	/**
-	 * 种一棵树
+	 * 构造一棵树。
 	 * 
 	 * @param id
 	 *            数据标识
@@ -64,7 +61,7 @@ public class DefaultTree<ID, DATA>
 	 *            数据对象
 	 */
 	public DefaultTree(ID id, DATA data) {
-		this.key = new Key();
+		this.key = new DefaultKey();
 		this.id = id;
 		this.data = data;
 		this.parent = null;
@@ -77,7 +74,7 @@ public class DefaultTree<ID, DATA>
 	}
 
 	/**
-	 * 种一棵树
+	 * 构造一个树节点。
 	 * 
 	 * @param parent
 	 *            父节点
@@ -87,7 +84,7 @@ public class DefaultTree<ID, DATA>
 	 *            数据对象
 	 */
 	public DefaultTree(DefaultTree<ID, DATA> parent, ID id, DATA data) {
-		this.key = new Key(parent.key, parent.getChildNodes().size());
+		this.key = new DefaultKey(parent.key, parent.getChildNodes().size());
 		this.id = id;
 		this.data = data;
 		this.parent = parent;
@@ -134,33 +131,21 @@ public class DefaultTree<ID, DATA>
 		return parent;
 	}
 
-	/**
-	 * 获得所有节点
-	 */
 	@Override
 	public SortedMap<Key, DefaultTree<ID, DATA>> getAllNodes() {
 		return nodes;
 	}
 
-	/**
-	 * 获得所有子节点
-	 */
 	@Override
 	public SortedMap<Key, DefaultTree<ID, DATA>> getChildNodes() {
-		return nodes.subMap(new Key(key, 0), new Key(key, Integer.MAX_VALUE));
+		return nodes.subMap(new DefaultKey(key, 0), new DefaultKey(key, Integer.MAX_VALUE));
 	}
 
-	/**
-	 * 找一个树叉
-	 */
 	@Override
 	public DefaultTree<ID, DATA> getNode(Key nodeKey) {
 		return nodes.get(nodeKey);
 	}
 
-	/**
-	 * 找一个树叉
-	 */
 	@Override
 	public DefaultTree<ID, DATA> getNode(ID nodeId) {
 		Key nodeKey = findKey(nodeId);
@@ -170,17 +155,11 @@ public class DefaultTree<ID, DATA>
 		return getNode(nodeKey);
 	}
 
-	/**
-	 * 找一个树叉
-	 */
 	@Override
 	public DefaultTree<ID, DATA> getChildNode(Key nodeKey) {
 		return getChildNodes().get(nodeKey);
 	}
 
-	/**
-	 * 找一个树叉
-	 */
 	@Override
 	public DefaultTree<ID, DATA> getChildNode(ID nodeId) {
 		Key nodeKey = findKey(nodeId);
@@ -190,17 +169,11 @@ public class DefaultTree<ID, DATA>
 		return getChildNode(nodeKey);
 	}
 
-	/**
-	 * 增加新的子节点
-	 */
 	@Override
 	public DefaultTree<ID, DATA> appendChildNode(ID nodeId, DATA nodeData) {
 		return new DefaultTree<ID, DATA>(this, nodeId, nodeData);
 	}
 
-	/**
-	 * 移除子节点
-	 */
 	@Override
 	public void removeChildNode(Key nodeKey) {
 		DefaultTree<ID, DATA> node = getChildNode(nodeKey);
@@ -214,9 +187,6 @@ public class DefaultTree<ID, DATA>
 		nodes.remove(nodeKey);
 	}
 
-	/**
-	 * 移除子节点
-	 */
 	@Override
 	public void removeChildNode(ID nodeId) {
 		Key nodeKey = findKey(nodeId);
@@ -233,7 +203,7 @@ public class DefaultTree<ID, DATA>
 
 	@Override
 	public boolean isLeaf() {
-		return getChildNodes().size() == 0;
+		return getChildNodes().isEmpty();
 	}
 
 	@Override
@@ -246,8 +216,152 @@ public class DefaultTree<ID, DATA>
 		return sb.toString();
 	}
 
-	/*
-	 * 从 TreeSource 产生树状结构
+	/**
+	 * 标识节点在树中的位置。
+	 */
+	public static class DefaultKey
+		implements Key {
+		private static final long serialVersionUID = 6009469890625904428L;
+
+		/**
+		 * 父节点标识。
+		 */
+		private Key parent;
+
+		/**
+		 * 级别。
+		 */
+		private int level;
+
+		/**
+		 * 索引。
+		 */
+		private int index;
+
+		/**
+		 * hashCode()
+		 */
+		private int hash;
+
+		/**
+		 * toString()
+		 */
+		private String string;
+
+		/**
+		 * 构造新顶级节点实例。
+		 */
+		public DefaultKey() {
+			this(0);
+		}
+
+		/**
+		 * 使用节点索引构造新顶级节点实例。
+		 * 
+		 * @param index
+		 *            节点索引
+		 */
+		private DefaultKey(int index) {
+			this.parent = null;
+			this.level = 0;
+			this.index = index;
+		}
+
+		/**
+		 * 使用父节点标识和节点索引构造新实例。
+		 * 
+		 * @param parent
+		 *            父节点标识
+		 * @param index
+		 *            节点索引
+		 */
+		public DefaultKey(Key parent, int index) {
+			this.parent = parent;
+			this.level = parent.getLevel() + 1;
+			this.index = index;
+		}
+
+		@Override
+		public Key getParent() {
+			return parent;
+		}
+
+		@Override
+		public int getIndex() {
+			return index;
+		}
+
+		@Override
+		public int getLevel() {
+			return level;
+		}
+
+		@Override
+		public int compareTo(Key o) {
+			if (level < o.getLevel()) {
+				return -1;
+			} else if (level > o.getLevel()) {
+				return 1;
+			}
+			if (level != 0) {
+				int p = parent.compareTo(o.getParent());
+				if (p != 0) {
+					return p;
+				}
+			}
+			if (index < o.getIndex()) {
+				return -1;
+			} else if (index > o.getIndex()) {
+				return 1;
+			}
+			return 0;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof Key) {
+				Key ok = (Key) obj;
+				if (level != ok.getLevel()) {
+					return false;
+				}
+				if (level != 0 && !parent.equals(ok.getParent())) {
+					return false;
+				}
+				return index == ok.getIndex();
+			}
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			if (hash == 0) {
+				if (parent != null) {
+					hash = parent.hashCode() * 31 + index;
+				} else {
+					hash = 31 + index;
+				}
+			}
+			return hash;
+		}
+
+		@Override
+		public String toString() {
+			if (string == null) {
+				if (parent != null) {
+					string = parent.toString() + "," + index;
+				} else {
+					string = Integer.toString(index);
+				}
+			}
+			return string;
+		}
+	}
+
+	/**
+	 * 从 TreeSource 生成树状结构。
+	 * 
+	 * @param source
+	 *            节点构造源
 	 */
 	public static synchronized <ID, DATA> DefaultTree<ID, DATA> generate(TreeSource<ID, DATA> source) {
 		ID rootId = source.getRootId();
@@ -257,8 +371,13 @@ public class DefaultTree<ID, DATA>
 		return tree;
 	}
 
-	/*
-	 * 从 TreeSource 增加新的节点
+	/**
+	 * 向 TreeSource 增加新的节点。
+	 * 
+	 * @param source
+	 *            节点构造源
+	 * @param node
+	 *            父节点
 	 */
 	private static <ID, DATA> void generateSubNode(TreeSource<ID, DATA> source, DefaultTree<ID, DATA> node) {
 		List<ID> items = source.listChildrenId(node.getId());

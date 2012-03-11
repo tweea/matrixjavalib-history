@@ -22,6 +22,6 @@ public interface Configurable<CONFIG> {
 	 * @throws ConfigurationException
 	 *             应用配置失败
 	 */
-	void configure(final CONFIG config)
+	void configure(CONFIG config)
 		throws ConfigurationException;
 }
