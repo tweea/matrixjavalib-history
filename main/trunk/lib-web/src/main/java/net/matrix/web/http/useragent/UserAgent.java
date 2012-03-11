@@ -66,8 +66,7 @@ package net.matrix.web.http.useragent;
  * <a href="http://blogs.msdn.com/iemobile/archive/2006/08/03/Detecting_IE_Mobile.aspx">Detecting
  * Internet Explorer Mobile's User-Agent on the server</a>
  */
-public class UserAgent
-{
+public class UserAgent {
 	private OperatingSystem operatingSystem = OperatingSystem.UNKNOWN;
 
 	private Browser browser = Browser.UNKNOWN;
@@ -76,19 +75,17 @@ public class UserAgent
 
 	private String userAgentString;
 
-	public UserAgent(OperatingSystem operatingSystem, Browser browser)
-	{
+	public UserAgent(OperatingSystem operatingSystem, Browser browser) {
 		this.operatingSystem = operatingSystem;
 		this.browser = browser;
 		this.id = ((operatingSystem.getId() << 16) + browser.getId());
 	}
 
-	public UserAgent(String userAgentString)
-	{
+	public UserAgent(String userAgentString) {
 		this.operatingSystem = OperatingSystem.UNKNOWN;
 		this.browser = Browser.parseUserAgentString(userAgentString);
 		// BOTs don't have an interesting OS for us
-		if(browser != Browser.BOT){
+		if (browser != Browser.BOT) {
 			operatingSystem = OperatingSystem.parseUserAgentString(userAgentString);
 		}
 		this.id = ((operatingSystem.getId() << 16) + browser.getId());
@@ -98,8 +95,7 @@ public class UserAgent
 	/**
 	 * @return UserAgent
 	 */
-	public static UserAgent parseUserAgentString(String userAgentString)
-	{
+	public static UserAgent parseUserAgentString(String userAgentString) {
 		return new UserAgent(userAgentString);
 	}
 
@@ -108,35 +104,33 @@ public class UserAgent
 	 * available.
 	 * Use it only after using UserAgent(String) or UserAgent.parseUserAgent(String).
 	 * Returns null if it can not detect the version information.
+	 * 
 	 * @return Version
 	 */
-	public Version getBrowserVersion()
-	{
+	public Version getBrowserVersion() {
 		return this.browser.getVersion(this.userAgentString);
 	}
 
 	/**
 	 * @return the system
 	 */
-	public OperatingSystem getOperatingSystem()
-	{
+	public OperatingSystem getOperatingSystem() {
 		return operatingSystem;
 	}
 
 	/**
 	 * @return the browser
 	 */
-	public Browser getBrowser()
-	{
+	public Browser getBrowser() {
 		return browser;
 	}
 
 	/**
 	 * Returns an unique integer value of the operating system & browser combination
+	 * 
 	 * @return the id
 	 */
-	public int getId()
-	{
+	public int getId() {
 		return id;
 	}
 
@@ -144,33 +138,30 @@ public class UserAgent
 	 * Combined string representation of both enums
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.operatingSystem.toString() + "-" + this.browser.toString();
 	}
 
 	/**
 	 * Returns UserAgent based on specified unique id
 	 */
-	public static UserAgent valueOf(int id)
-	{
-		OperatingSystem operatingSystem = OperatingSystem.valueOf((short)(id >> 16));
-		Browser browser = Browser.valueOf((short)(id & 0x0FFFF));
+	public static UserAgent valueOf(int id) {
+		OperatingSystem operatingSystem = OperatingSystem.valueOf((short) (id >> 16));
+		Browser browser = Browser.valueOf((short) (id & 0x0FFFF));
 		return new UserAgent(operatingSystem, browser);
 	}
 
 	/**
 	 * Returns UserAgent based on combined string representation
 	 */
-	public static UserAgent valueOf(String name)
-	{
-		if(name == null){
+	public static UserAgent valueOf(String name) {
+		if (name == null) {
 			throw new NullPointerException("Name is null");
 		}
 
 		String[] elements = name.split("-");
 
-		if(elements.length == 2){
+		if (elements.length == 2) {
 			OperatingSystem operatingSystem = OperatingSystem.valueOf(elements[0]);
 			Browser browser = Browser.valueOf(elements[1]);
 			return new UserAgent(operatingSystem, browser);
@@ -184,8 +175,7 @@ public class UserAgent
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((browser == null) ? 0 : browser.hashCode());
@@ -199,26 +189,25 @@ public class UserAgent
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		if(obj == null)
+		if (obj == null)
 			return false;
-		if(getClass() != obj.getClass())
+		if (getClass() != obj.getClass())
 			return false;
-		final UserAgent other = (UserAgent)obj;
-		if(browser == null){
-			if(other.browser != null)
+		final UserAgent other = (UserAgent) obj;
+		if (browser == null) {
+			if (other.browser != null)
 				return false;
-		}else if(!browser.equals(other.browser))
+		} else if (!browser.equals(other.browser))
 			return false;
-		if(id != other.id)
+		if (id != other.id)
 			return false;
-		if(operatingSystem == null){
-			if(other.operatingSystem != null)
+		if (operatingSystem == null) {
+			if (other.operatingSystem != null)
 				return false;
-		}else if(!operatingSystem.equals(other.operatingSystem))
+		} else if (!operatingSystem.equals(other.operatingSystem))
 			return false;
 		return true;
 	}

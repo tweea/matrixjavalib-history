@@ -10,8 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * HTTP 工具类.
  */
-public class HTTPs
-{
+public class HTTPs {
 	public static final String USER_AGENT_HEADER = "user-agent";
 
 	public static final String AUTHENTICATION_HEADER = "Authorization";
@@ -35,8 +34,7 @@ public class HTTPs
 	/**
 	 * 客户端对Http Basic验证的 Header进行编码.
 	 */
-	public static String encodeHttpBasic(String userName, String password)
-	{
+	public static String encodeHttpBasic(String userName, String password) {
 		String encode = userName + ":" + password;
 		return "Basic " + Base64.encodeBase64String(encode.getBytes());
 	}

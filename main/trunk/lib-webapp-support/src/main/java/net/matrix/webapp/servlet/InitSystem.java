@@ -20,23 +20,21 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
 
 /**
  * 系统初始化
+ * 
  * @since 2005-11-16
  */
 public class InitSystem
-	implements ServletContextListener
-{
+	implements ServletContextListener {
 	private static final Logger LOG = LoggerFactory.getLogger(InitSystem.class);
 
 	protected SystemContext context;
 
-	public InitSystem()
-	{
+	public InitSystem() {
 		context = GlobalSystemContext.get();
 	}
 
 	@Override
-	public void contextInitialized(ServletContextEvent sce)
-	{
+	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext servletContext = sce.getServletContext();
 
 		// 加载消息
@@ -57,27 +55,22 @@ public class InitSystem
 		LOG.info(servletContext.getServletContextName() + " 初始化完成");
 	}
 
-	protected void loadMessageDefinitions()
-	{
+	protected void loadMessageDefinitions() {
 		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
 	}
 
-	protected void setResourceLoader()
-	{
+	protected void setResourceLoader() {
 	}
 
-	protected void setConfig()
-	{
+	protected void setConfig() {
 	}
 
-	protected SystemController getController()
-	{
+	protected SystemController getController() {
 		return new DefaultSystemController();
 	}
 
 	@Override
-	public void contextDestroyed(ServletContextEvent sce)
-	{
+	public void contextDestroyed(ServletContextEvent sce) {
 		context.getController().stop();
 	}
 }

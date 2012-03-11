@@ -45,8 +45,7 @@ package net.matrix.web.http.useragent;
  * Enum constants classifying the different types of applications which are common in referrer
  * strings
  */
-public enum ApplicationType
-{
+public enum ApplicationType {
 	/**
 	 * Webmail service like Windows Live Hotmail and Gmail.
 	 */
@@ -56,13 +55,11 @@ public enum ApplicationType
 
 	private String name;
 
-	private ApplicationType(String name)
-	{
+	private ApplicationType(String name) {
 		this.name = name;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 }

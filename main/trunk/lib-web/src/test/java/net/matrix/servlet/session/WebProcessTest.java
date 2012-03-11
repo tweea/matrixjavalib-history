@@ -8,11 +8,9 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-public class WebProcessTest
-{
+public class WebProcessTest {
 	@Test
-	public void getParametersStartingWith()
-	{
+	public void getParametersStartingWith() {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("pre_a", "aa");
 		request.addParameter("pre_b", "bb");

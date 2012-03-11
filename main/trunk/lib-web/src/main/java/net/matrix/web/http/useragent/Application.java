@@ -45,32 +45,31 @@ package net.matrix.web.http.useragent;
  * Enum constants for internet applications like web-application and rich
  * internet application.
  */
-public enum Application
-{
-	HOTMAIL(Manufacturer.MICROSOFT, 1, "Windows Live Hotmail", new String[]{
+public enum Application {
+	HOTMAIL(Manufacturer.MICROSOFT, 1, "Windows Live Hotmail", new String[] {
 		"mail.live.com", "hotmail.msn"
 	}, ApplicationType.WEBMAIL),
 
-	GMAIL(Manufacturer.GOOGLE, 5, "Gmail", new String[]{
+	GMAIL(Manufacturer.GOOGLE, 5, "Gmail", new String[] {
 		"mail.google.com"
 	}, ApplicationType.WEBMAIL),
 
-	YAHOO_MAIL(Manufacturer.YAHOO, 10, "Yahoo Mail", new String[]{
+	YAHOO_MAIL(Manufacturer.YAHOO, 10, "Yahoo Mail", new String[] {
 		"mail.yahoo.com"
 	}, ApplicationType.WEBMAIL),
 
-	COMPUSERVE(Manufacturer.COMPUSERVE, 20, "Compuserve", new String[]{
+	COMPUSERVE(Manufacturer.COMPUSERVE, 20, "Compuserve", new String[] {
 		"csmail.compuserve.com"
 	}, ApplicationType.WEBMAIL),
 
-	AOL_WEBMAIL(Manufacturer.AOL, 30, "AOL webmail", new String[]{
+	AOL_WEBMAIL(Manufacturer.AOL, 30, "AOL webmail", new String[] {
 		"webmail.aol.com"
 	}, ApplicationType.WEBMAIL),
 
 	/**
 	 * MobileMe webmail client by Apple. Previously known as .mac.
 	 */
-	MOBILEME(Manufacturer.APPLE, 40, "MobileMe", new String[]{
+	MOBILEME(Manufacturer.APPLE, 40, "MobileMe", new String[] {
 		"www.me.com"
 	}, ApplicationType.WEBMAIL),
 
@@ -78,18 +77,18 @@ public enum Application
 	 * Mail.com
 	 * Mail.com provides consumers with web-based e-mail services
 	 */
-	MAIL_COM(Manufacturer.MMC, 50, "Mail.com", new String[]{
+	MAIL_COM(Manufacturer.MMC, 50, "Mail.com", new String[] {
 		".mail.com"
 	}, ApplicationType.WEBMAIL),
 
 	/**
 	 * Popular open source webmail client. Often installed by providers or privately.
 	 */
-	HORDE(Manufacturer.OTHER, 50, "horde", new String[]{
+	HORDE(Manufacturer.OTHER, 50, "horde", new String[] {
 		"horde"
 	}, ApplicationType.WEBMAIL),
 
-	OTHER_WEBMAIL(Manufacturer.OTHER, 60, "Other webmail client", new String[]{
+	OTHER_WEBMAIL(Manufacturer.OTHER, 60, "Other webmail client", new String[] {
 		"webmail", "webemail"
 	}, ApplicationType.WEBMAIL),
 
@@ -105,38 +104,33 @@ public enum Application
 
 	private final Manufacturer manufacturer;
 
-	private Application(Manufacturer manufacturer, int versionId, String name, String[] aliases, ApplicationType applicationType)
-	{
-		this.id = (short)((manufacturer.getId() << 8) + (byte)versionId);
+	private Application(Manufacturer manufacturer, int versionId, String name, String[] aliases, ApplicationType applicationType) {
+		this.id = (short) ((manufacturer.getId() << 8) + (byte) versionId);
 		this.name = name;
 		this.aliases = aliases;
 		this.applicationType = applicationType;
 		this.manufacturer = manufacturer;
 	}
 
-	public short getId()
-	{
+	public short getId() {
 		return id;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
 	/**
 	 * @return the applicationType
 	 */
-	public ApplicationType getApplicationType()
-	{
+	public ApplicationType getApplicationType() {
 		return applicationType;
 	}
 
 	/**
 	 * @return the manufacturer
 	 */
-	public Manufacturer getManufacturer()
-	{
+	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
 
@@ -144,10 +138,9 @@ public enum Application
 	 * Checks if the given referrer string matches to the application. Only
 	 * checks for one specific application.
 	 */
-	public boolean isInReferrerString(String referrerString)
-	{
-		for(String alias : aliases){
-			if(referrerString.toLowerCase().indexOf(alias.toLowerCase()) != -1){
+	public boolean isInReferrerString(String referrerString) {
+		for (String alias : aliases) {
+			if (referrerString.toLowerCase().indexOf(alias.toLowerCase()) != -1) {
 				return true;
 			}
 		}
@@ -158,12 +151,11 @@ public enum Application
 	 * Iterates over all Application to compare the signature with the referrer
 	 * string. If no match can be found Application.UNKNOWN will be returned.
 	 */
-	public static Application parseReferrerString(String referrerString)
-	{
+	public static Application parseReferrerString(String referrerString) {
 		// skip the empty and "-" referrer
-		if(referrerString != null && referrerString.length() > 1){
-			for(Application applicationInList : Application.values()){
-				if(applicationInList.isInReferrerString(referrerString)){
+		if (referrerString != null && referrerString.length() > 1) {
+			for (Application applicationInList : Application.values()) {
+				if (applicationInList.isInReferrerString(referrerString)) {
 					return applicationInList;
 				}
 			}
@@ -175,10 +167,9 @@ public enum Application
 	 * Returns the enum constant of this type with the specified id. Throws
 	 * IllegalArgumentException if the value does not exist.
 	 */
-	public static Application valueOf(short id)
-	{
-		for(Application application : Application.values()){
-			if(application.getId() == id){
+	public static Application valueOf(short id) {
+		for (Application application : Application.values()) {
+			if (application.getId() == id) {
 				return application;
 			}
 		}

@@ -46,45 +46,38 @@ package net.matrix.web.http.useragent;
  * All version information is stored as String as sometimes version information includes
  * alphabetical characters.
  */
-public class Version
-{
+public class Version {
 	private String version;
 
 	private String majorVersion;
 
 	private String minorVersion;
 
-	public Version(String version, String majorVersion, String minorVersion)
-	{
+	public Version(String version, String majorVersion, String minorVersion) {
 		this.version = version;
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 	}
 
-	public String getVersion()
-	{
+	public String getVersion() {
 		return version;
 	}
 
-	public String getMajorVersion()
-	{
+	public String getMajorVersion() {
 		return majorVersion;
 	}
 
-	public String getMinorVersion()
-	{
+	public String getMinorVersion() {
 		return minorVersion;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return version;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((majorVersion == null) ? 0 : majorVersion.hashCode());
@@ -94,29 +87,28 @@ public class Version
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
-		if(this == obj)
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		if(obj == null)
+		if (obj == null)
 			return false;
-		if(getClass() != obj.getClass())
+		if (getClass() != obj.getClass())
 			return false;
-		Version other = (Version)obj;
-		if(majorVersion == null){
-			if(other.majorVersion != null)
+		Version other = (Version) obj;
+		if (majorVersion == null) {
+			if (other.majorVersion != null)
 				return false;
-		}else if(!majorVersion.equals(other.majorVersion))
+		} else if (!majorVersion.equals(other.majorVersion))
 			return false;
-		if(minorVersion == null){
-			if(other.minorVersion != null)
+		if (minorVersion == null) {
+			if (other.minorVersion != null)
 				return false;
-		}else if(!minorVersion.equals(other.minorVersion))
+		} else if (!minorVersion.equals(other.minorVersion))
 			return false;
-		if(version == null){
-			if(other.version != null)
+		if (version == null) {
+			if (other.version != null)
 				return false;
-		}else if(!version.equals(other.version))
+		} else if (!version.equals(other.version))
 			return false;
 		return true;
 	}

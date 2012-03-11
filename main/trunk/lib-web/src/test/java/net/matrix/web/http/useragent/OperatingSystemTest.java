@@ -50,8 +50,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class OperatingSystemTest
-{
+public class OperatingSystemTest {
 	String[] tablets = {
 		"Mozilla/5.0 (Linux; U; Android 2.2; es-es; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
 		"Mozilla/5.0 (Linux; U; Android 2.2; en-us; SCH-I800 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
@@ -239,8 +238,7 @@ public class OperatingSystemTest
 	 * Test method for {@link OperatingSystem#isInUserAgentString(java.lang.String)}.
 	 */
 	@Test
-	public void testIsInUserAgentString()
-	{
+	public void testIsInUserAgentString() {
 		assertTrue(OperatingSystem.SYMBIAN9.isInUserAgentString(symbian9phones[0]));
 	}
 
@@ -248,8 +246,7 @@ public class OperatingSystemTest
 	 * Test method for {@link OperatingSystem#parseUserAgentString(java.lang.String)}.
 	 */
 	@Test
-	public void testParseUserAgentString()
-	{
+	public void testParseUserAgentString() {
 		testAgents(windowsCEdivices, OperatingSystem.WINDOWS_MOBILE);
 		testAgents(windowsMobile7, OperatingSystem.WINDOWS_MOBILE7);
 		testAgents(windowsVista, OperatingSystem.WINDOWS_VISTA);
@@ -282,8 +279,7 @@ public class OperatingSystemTest
 	}
 
 	@Test
-	public void testDeviceTypes()
-	{
+	public void testDeviceTypes() {
 		testDeviceTypes(windowsCEdivices, DeviceType.MOBILE);
 		testDeviceTypes(windowsMobile7, DeviceType.MOBILE);
 		testDeviceTypes(windowsVista, DeviceType.COMPUTER);
@@ -294,8 +290,7 @@ public class OperatingSystemTest
 		testDeviceTypes(googleTV, DeviceType.DMR);
 	}
 
-	public void testGroupRecursion()
-	{
+	public void testGroupRecursion() {
 		// 2 levels deep
 		assertEquals(OperatingSystem.ANDROID2_TABLET.getGroup(), OperatingSystem.ANDROID);
 		// one level
@@ -308,14 +303,13 @@ public class OperatingSystemTest
 	 * Test method for {@link OperatingSystem#valueOf(short)}
 	 */
 	@Test
-	public void testValueOf()
-	{
+	public void testValueOf() {
 		OperatingSystem operatingSystem = OperatingSystem.parseUserAgentString(symbian9phones[0]);
 		assertEquals(OperatingSystem.valueOf(operatingSystem.getId()), operatingSystem);
-		try{
-			operatingSystem = OperatingSystem.valueOf((short)0);
+		try {
+			operatingSystem = OperatingSystem.valueOf((short) 0);
 			fail("Should have thrown IllegalArgumentException");
-		}catch(IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			// good
 		}
 	}
@@ -324,14 +318,13 @@ public class OperatingSystemTest
 	 * Test method for {@link OperatingSystem#valueOf(String)}
 	 */
 	@Test
-	public void testValueOfString()
-	{
+	public void testValueOfString() {
 		OperatingSystem operatingSystem = OperatingSystem.parseUserAgentString(symbian9phones[0]);
 		assertEquals(OperatingSystem.valueOf(operatingSystem.toString()), operatingSystem);
-		try{
+		try {
 			operatingSystem = OperatingSystem.valueOf("illegal");
 			fail("Should have thrown IllegalArgumentException");
-		}catch(IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			// good
 		}
 	}
@@ -340,26 +333,23 @@ public class OperatingSystemTest
 	 * Test if generated id values are unique.
 	 */
 	@Test
-	public void testUniqueIdValues()
-	{
+	public void testUniqueIdValues() {
 		List<Short> retrievedIdValues = new ArrayList<Short>();
 
-		for(OperatingSystem operatingSystem : OperatingSystem.values()){
+		for (OperatingSystem operatingSystem : OperatingSystem.values()) {
 			assertTrue(!retrievedIdValues.contains(operatingSystem.getId()));
 			retrievedIdValues.add(operatingSystem.getId());
 		}
 	}
 
-	private void testDeviceTypes(String[] agentStrings, DeviceType expectedDeviceType)
-	{
-		for(String agentString : agentStrings){
+	private void testDeviceTypes(String[] agentStrings, DeviceType expectedDeviceType) {
+		for (String agentString : agentStrings) {
 			assertEquals(expectedDeviceType, OperatingSystem.parseUserAgentString(agentString).getDeviceType());
 		}
 	}
 
-	private void testAgents(String[] agentStrings, OperatingSystem expectedOperatingSystem)
-	{
-		for(String agentString : agentStrings){
+	private void testAgents(String[] agentStrings, OperatingSystem expectedOperatingSystem) {
+		for (String agentString : agentStrings) {
 			assertEquals(expectedOperatingSystem, OperatingSystem.parseUserAgentString(agentString));
 		}
 	}

@@ -44,8 +44,7 @@ package net.matrix.web.http.useragent;
 /**
  * Enum contact for the type of used device
  */
-public enum DeviceType
-{
+public enum DeviceType {
 	/**
 	 * Standard desktop or laptop computer
 	 */
@@ -78,13 +77,11 @@ public enum DeviceType
 
 	private String name;
 
-	private DeviceType(String name)
-	{
+	private DeviceType(String name) {
 		this.name = name;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 }
