@@ -17,61 +17,95 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 反射工具类.
- * 提供调用 getter/setter 方法, 访问私有变量, 调用私有方法, 获取泛型类型 Class, 被 AOP 过的真实类等工具函数.
+ * 反射工具类。
+ * 提供调用 getter/setter 方法，访问私有变量，调用私有方法，获取泛型类型 Class，被 AOP 过的真实类等工具函数。
  */
-public class Reflections {
-	private static final Logger LOG = LoggerFactory.getLogger(Reflections.class);
-
+public final class Reflections {
+	/**
+	 * cgLib 库修饰对象名的标识。
+	 */
 	public static final String CGLIB_CLASS_SEPARATOR = "$$";
 
+	/**
+	 * 日志记录器。
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(Reflections.class);
+
+	/**
+	 * 阻止实例化。
+	 */
 	private Reflections() {
 	}
 
 	/**
-	 * 调用Getter方法.
-	 */
-	public static Object invokeGetter(Object obj, String propertyName) {
-		String getterMethodName = "get" + StringUtils.capitalize(propertyName);
-		return invokeMethod(obj, getterMethodName, new Class[] {}, new Object[] {});
-	}
-
-	/**
-	 * 调用Setter方法.使用value的Class来查找Setter方法.
-	 */
-	public static void invokeSetter(Object obj, String propertyName, Object value) {
-		invokeSetter(obj, propertyName, value, null);
-	}
-
-	/**
-	 * 调用Setter方法.
+	 * 调用 Getter 方法。
 	 * 
-	 * @param propertyType
-	 *            用于查找Setter方法,为空时使用value的Class替代.
+	 * @param target
+	 *            目标对象
+	 * @param name
+	 *            属性名
+	 * @return 属性值
 	 */
-	public static void invokeSetter(Object obj, String propertyName, Object value, Class<?> propertyType) {
-		Class<?> type = propertyType != null ? propertyType : value.getClass();
-		String setterMethodName = "set" + StringUtils.capitalize(propertyName);
-		invokeMethod(obj, setterMethodName, new Class[] {
-			type
+	public static Object invokeGetter(final Object target, final String name) {
+		String getterMethodName = "get" + StringUtils.capitalize(name);
+		return invokeMethod(target, getterMethodName, new Class[] {}, new Object[] {});
+	}
+
+	/**
+	 * 调用 Setter 方法。使用 value 的 Class 来查找 Setter 方法。
+	 * 
+	 * @param target
+	 *            目标对象
+	 * @param name
+	 *            属性名
+	 * @param value
+	 *            属性值
+	 */
+	public static void invokeSetter(final Object target, final String name, final Object value) {
+		invokeSetter(target, name, value, null);
+	}
+
+	/**
+	 * 调用 Setter 方法。
+	 * 
+	 * @param target
+	 *            目标对象
+	 * @param name
+	 *            属性名
+	 * @param value
+	 *            属性值
+	 * @param type
+	 *            用于查找 Setter 方法，为空时使用 value 的 Class 替代。
+	 */
+	public static void invokeSetter(final Object target, final String name, final Object value, final Class<?> type) {
+		Class<?> valueType = type != null ? type : value.getClass();
+		String setterMethodName = "set" + StringUtils.capitalize(name);
+		invokeMethod(target, setterMethodName, new Class[] {
+			valueType
 		}, new Object[] {
 			value
 		});
 	}
 
 	/**
-	 * 直接读取对象属性值, 无视private/protected修饰符, 不经过getter函数.
+	 * 直接读取对象属性值，无视 private/protected 修饰符，不经过 getter 函数。
+	 * 
+	 * @param target
+	 *            目标对象
+	 * @param name
+	 *            成员名
+	 * @return 成员值
 	 */
-	public static Object getFieldValue(final Object obj, final String fieldName) {
-		Field field = FieldUtils.getDeclaredField(obj.getClass(), fieldName, true);
+	public static Object getFieldValue(final Object target, final String name) {
+		Field field = FieldUtils.getDeclaredField(target.getClass(), name, true);
 
 		if (field == null) {
-			throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
+			throw new IllegalArgumentException("Could not find field [" + name + "] on target [" + target + "]");
 		}
 
 		Object result = null;
 		try {
-			result = field.get(obj);
+			result = field.get(target);
 		} catch (IllegalAccessException e) {
 			LOG.error("不可能抛出的异常{}", e.getMessage());
 		}
@@ -79,40 +113,57 @@ public class Reflections {
 	}
 
 	/**
-	 * 直接设置对象属性值, 无视private/protected修饰符, 不经过setter函数.
+	 * 直接设置对象属性值，无视 private/protected 修饰符，不经过 setter 函数。
+	 * 
+	 * @param target
+	 *            目标对象
+	 * @param name
+	 *            成员名
+	 * @param value
+	 *            成员值
 	 */
-	public static void setFieldValue(final Object obj, final String fieldName, final Object value) {
-		Field field = FieldUtils.getDeclaredField(obj.getClass(), fieldName, true);
+	public static void setFieldValue(final Object target, final String name, final Object value) {
+		Field field = FieldUtils.getDeclaredField(target.getClass(), name, true);
 
 		if (field == null) {
-			throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
+			throw new IllegalArgumentException("Could not find field [" + name + "] on target [" + target + "]");
 		}
 
 		try {
-			field.set(obj, value);
+			field.set(target, value);
 		} catch (IllegalAccessException e) {
 			LOG.error("不可能抛出的异常:{}", e.getMessage());
 		}
 	}
 
 	/**
-	 * 直接调用对象方法, 无视private/protected修饰符.
-	 * 用于一次性调用的情况.
+	 * 直接调用对象方法，无视 private/protected 修饰符。
+	 * 用于一次性调用的情况。
+	 * 
+	 * @param target
+	 *            目标对象
+	 * @param name
+	 *            方法名
+	 * @param parameterTypes
+	 *            参数类型
+	 * @param parameterValues
+	 *            参数值
+	 * @return 返回值
 	 */
-	public static Object invokeMethod(final Object obj, final String methodName, final Class<?>[] parameterTypes, final Object[] args) {
+	public static Object invokeMethod(final Object target, final String name, final Class<?>[] parameterTypes, final Object[] parameterValues) {
 		Method method = null;
 		try {
-			method = obj.getClass().getDeclaredMethod(methodName, parameterTypes);
+			method = target.getClass().getDeclaredMethod(name, parameterTypes);
 		} catch (NoSuchMethodException e) {
-			throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
+			throw new IllegalArgumentException("Could not find method [" + name + "] on target [" + target + "]");
 		}
 		if (method == null) {
-			throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
+			throw new IllegalArgumentException("Could not find method [" + name + "] on target [" + target + "]");
 		}
 
 		try {
 			method.setAccessible(true);
-			return method.invoke(obj, args);
+			return method.invoke(target, parameterValues);
 		} catch (IllegalAccessException e) {
 			throw new ReflectionRuntimeException(e);
 		} catch (InvocationTargetException e) {
@@ -121,9 +172,13 @@ public class Reflections {
 	}
 
 	/**
-	 * 对于被cglib AOP过的对象, 取得真实的Class类型.
+	 * 对于被 cglib AOP 过的对象，取得真实的 Class 类型。
+	 * 
+	 * @param clazz
+	 *            cglib 类
+	 * @return 原始类
 	 */
-	public static Class<?> getUserClass(Class<?> clazz) {
+	public static Class<?> getUserClass(final Class<?> clazz) {
 		if (clazz != null && clazz.getName().contains(CGLIB_CLASS_SEPARATOR)) {
 			Class<?> superClass = clazz.getSuperclass();
 			if (superClass != null && !Object.class.equals(superClass)) {
@@ -134,8 +189,8 @@ public class Reflections {
 	}
 
 	/**
-	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型.
-	 * 如无法找到, 返回Object.class.
+	 * 通过反射获得 Class 定义中声明的父类的泛型参数的类型。
+	 * 如无法找到，返回 Object.class。
 	 * eg.
 	 * public UserDao extends HibernateDao<User>
 	 * 
@@ -148,9 +203,10 @@ public class Reflections {
 	}
 
 	/**
-	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型.
-	 * 如无法找到, 返回Object.class.
-	 * 如public UserDao extends HibernateDao<User,Long>
+	 * 通过反射，获得 Class 定义中声明的父类的泛型参数的类型。
+	 * 如无法找到，返回 Object.class。
+	 * 如：
+	 * public UserDao extends HibernateDao<User, Long>
 	 * 
 	 * @param clazz
 	 *            clazz The class to introspect
