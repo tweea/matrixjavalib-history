@@ -8,12 +8,12 @@ package net.matrix.security;
 import java.security.GeneralSecurityException;
 
 /**
- * 验证错误
+ * 身份认证失败异常。
  */
 public class AuthenticateException
 	extends GeneralSecurityException {
 	/**
-	 * serialVersionUID
+	 * serialVersionUID.
 	 */
 	private static final long serialVersionUID = -8363292424989396451L;
 
@@ -21,15 +21,15 @@ public class AuthenticateException
 		super();
 	}
 
-	public AuthenticateException(String msg) {
+	public AuthenticateException(final String msg) {
 		super(msg);
 	}
 
-	public AuthenticateException(Throwable e) {
+	public AuthenticateException(final Throwable e) {
 		super(e);
 	}
 
-	public AuthenticateException(String string, Throwable e) {
+	public AuthenticateException(final String string, final Throwable e) {
 		super(string, e);
 	}
 }

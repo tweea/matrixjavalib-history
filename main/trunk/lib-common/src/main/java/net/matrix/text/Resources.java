@@ -14,17 +14,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 读取多语言资源文件
- * 
- * @since 2005-11-22
+ * 读取多语言资源文件。
  */
-public class Resources {
+public final class Resources {
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(Resources.class);
 
+	/**
+	 * 缓存。
+	 */
 	private static final Map<String, Resources> RESOURCES = new HashMap<String, Resources>();
 
+	/**
+	 * 关联的资源文件。
+	 */
 	private ResourceBundle bundle;
 
+	/**
+	 * 使用资源文件位置实例化。
+	 * 
+	 * @param key
+	 *            资源文件位置
+	 */
 	private Resources(String key) {
 		try {
 			bundle = ResourceBundle.getBundle(key);
@@ -34,13 +47,13 @@ public class Resources {
 	}
 
 	/**
-	 * 根据位置加载资源
+	 * 根据位置加载资源。
 	 * 
 	 * @param key
 	 *            位置
 	 * @return 资源
 	 */
-	public static Resources getResources(String key) {
+	public static Resources getResources(final String key) {
 		Resources res = RESOURCES.get(key);
 		if (res == null) {
 			res = new Resources(key);
@@ -50,13 +63,13 @@ public class Resources {
 	}
 
 	/**
-	 * 获取多语言字符串
+	 * 获取多语言字符串，如果失败直接返回名字。
 	 * 
 	 * @param name
 	 *            字符串名
 	 * @return 字符串
 	 */
-	public String getProperty(String name) {
+	public String getProperty(final String name) {
 		if (bundle == null) {
 			return name;
 		}
@@ -69,7 +82,7 @@ public class Resources {
 	}
 
 	/**
-	 * 加载资源并返回其中指定的字符串
+	 * 加载资源并返回其中指定的字符串。
 	 * 
 	 * @param key
 	 *            位置

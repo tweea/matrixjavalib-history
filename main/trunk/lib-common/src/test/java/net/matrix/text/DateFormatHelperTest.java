@@ -5,20 +5,12 @@
  */
 package net.matrix.text;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.GregorianCalendar;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class DateFormatHelperTest {
-	@Test
-	public void testGetFormat() {
-		DateFormat format = DateFormatHelper.getFormat(DateFormatHelper.ISO_DATE_FORMAT);
-		Assert.assertEquals("2011-01-01", format.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1).getTime()));
-	}
-
 	@Test
 	public void testFormatDateString() {
 		Assert.assertEquals("2011-01-01", DateFormatHelper.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1).getTime(), DateFormatHelper.ISO_DATE_FORMAT));
@@ -36,16 +28,14 @@ public class DateFormatHelperTest {
 	}
 
 	@Test
-	public void testParseString()
-		throws ParseException {
+	public void testParseString() {
 		GregorianCalendar bd1 = DateFormatHelper.parse("2011-12-01T13:15:35");
 		GregorianCalendar bd2 = new GregorianCalendar(2011, 11, 1, 13, 15, 35);
 		Assert.assertEquals(bd2, bd1);
 	}
 
 	@Test
-	public void testParseStringString()
-		throws ParseException {
+	public void testParseStringString() {
 		GregorianCalendar bd1 = DateFormatHelper.parse("2011-12-01", "yyyy-MM-dd");
 		GregorianCalendar bd2 = new GregorianCalendar(2011, 11, 1);
 		Assert.assertEquals(bd2, bd1);

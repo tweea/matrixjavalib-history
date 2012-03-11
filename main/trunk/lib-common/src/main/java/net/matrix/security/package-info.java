@@ -4,6 +4,7 @@
  * All right reserved.
  */
 /**
- * 安全
+ * 安全相关。
  */
 package net.matrix.security;
+
