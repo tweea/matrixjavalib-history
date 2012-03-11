@@ -11,20 +11,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class DateFormatHelperTest {
+	public static final String ISO_DATE_FORMAT = "yyyy-MM-dd";
+
 	@Test
 	public void testFormatDateString() {
-		Assert.assertEquals("2011-01-01", DateFormatHelper.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1).getTime(), DateFormatHelper.ISO_DATE_FORMAT));
+		Assert.assertEquals("2011-01-01", DateFormatHelper.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1).getTime(), ISO_DATE_FORMAT));
 	}
 
 	@Test
 	public void testFormatCalendarString() {
-		Assert.assertEquals("2011-01-01", DateFormatHelper.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1), DateFormatHelper.ISO_DATE_FORMAT));
+		Assert.assertEquals("2011-01-01", DateFormatHelper.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1), ISO_DATE_FORMAT));
 	}
 
 	@Test
 	public void testFormatTime() {
-		Assert.assertEquals("2011-01-01",
-			DateFormatHelper.formatTime(new GregorianCalendar(2011, 0, 1, 1, 1, 1).getTime().getTime(), DateFormatHelper.ISO_DATE_FORMAT));
+		Assert.assertEquals("2011-01-01", DateFormatHelper.format(new GregorianCalendar(2011, 0, 1, 1, 1, 1).getTime().getTime(), ISO_DATE_FORMAT));
 	}
 
 	@Test

@@ -10,40 +10,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 /**
  * 日期格式化工具方法。
  */
-// TODO using JODA-TIME
-public class DateFormatHelper {
-	/**
-	 * ISO 标准中日期时间格式
-	 */
-	public static final String ISO_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-
-	/**
-	 * ISO 标准中日期格式
-	 */
-	public static final String ISO_DATE_FORMAT = "yyyy-MM-dd";
-
-	/**
-	 * ISO 标准中时间格式
-	 */
-	public static final String ISO_TIME_FORMAT = "'T'HH:mm:ss";
-
+public final class DateFormatHelper {
 	private DateFormatHelper() {
-	}
-
-	/**
-	 * 转换日期到字符串
-	 * 
-	 * @param date
-	 *            日期。
-	 * @return 字符串，形式见 SimpleDateFormat。
-	 * @see java.text.SimpleDateFormat
-	 */
-	public static String format(Date date, String format) {
-		return DateTimeFormat.forPattern(format).print(date.getTime());
 	}
 
 	/**
@@ -59,6 +33,18 @@ public class DateFormatHelper {
 	}
 
 	/**
+	 * 转换日期到字符串
+	 * 
+	 * @param date
+	 *            日期。
+	 * @return 字符串，形式见 SimpleDateFormat。
+	 * @see java.text.SimpleDateFormat
+	 */
+	public static String format(Date date, String format) {
+		return format(date.getTime(), format);
+	}
+
+	/**
 	 * 转换日期值到字符串
 	 * 
 	 * @param time
@@ -66,8 +52,26 @@ public class DateFormatHelper {
 	 * @return 字符串，形式见 SimpleDateFormat。
 	 * @see java.text.SimpleDateFormat
 	 */
-	public static String formatTime(long time, String format) {
-		return format(new Date(time), format);
+	public static String format(long time, String format) {
+		return format(time, DateTimeFormat.forPattern(format));
+	}
+
+	public static String format(long time, DateTimeFormatter format) {
+		return format.print(time);
+	}
+
+	/**
+	 * 根据字符串构造实例。
+	 * 
+	 * @param date
+	 *            日期字符串。
+	 */
+	public static GregorianCalendar parse(String date, String format) {
+		return parse(date, DateTimeFormat.forPattern(format));
+	}
+
+	public static GregorianCalendar parse(String date, DateTimeFormatter format) {
+		return format.parseDateTime(date).toGregorianCalendar();
 	}
 
 	/**
@@ -78,21 +82,11 @@ public class DateFormatHelper {
 	 *            日期字符串。
 	 */
 	public static GregorianCalendar parse(String date) {
-		return parse(date, DateFormatHelper.ISO_DATETIME_FORMAT);
-	}
-
-	/**
-	 * 根据字符串构造实例。
-	 * 
-	 * @param dateString
-	 *            日期字符串。
-	 */
-	public static GregorianCalendar parse(String dateString, String format) {
-		return DateTimeFormat.forPattern(format).parseDateTime(dateString).toGregorianCalendar();
+		return parse(date, ISODateTimeFormat.dateHourMinuteSecond());
 	}
 
 	public static String toString(GregorianCalendar date) {
-		return format(date, ISO_DATETIME_FORMAT);
+		return format(date.getTimeInMillis(), ISODateTimeFormat.dateHourMinuteSecond());
 	}
 
 	/**
@@ -127,7 +121,7 @@ public class DateFormatHelper {
 	 * @return 目标字符串，形式为 yyyy-MM-dd。
 	 */
 	public static String toDisplayString(GregorianCalendar date) {
-		return toString(date, ISO_DATE_FORMAT);
+		return format(date.getTimeInMillis(), ISODateTimeFormat.yearMonthDay());
 	}
 
 	/**
