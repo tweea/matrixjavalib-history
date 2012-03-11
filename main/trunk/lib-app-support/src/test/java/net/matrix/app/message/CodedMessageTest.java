@@ -9,18 +9,15 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CodedMessageTest
-{
+public class CodedMessageTest {
 	@BeforeClass
-	public static void setUp()
-	{
+	public static void setUp() {
 		CodedMessageDefinition.define(new CodedMessageDefinition("Test1", "测试消息：{0}"));
 		CodedMessageDefinition.define(new CodedMessageDefinition("Test2", "测试消息 B：{0}{1}"));
 	}
 
 	@Test
-	public void logMessage()
-	{
+	public void logMessage() {
 		CodedMessage message = new CodedMessage("Test1", CodedMessageLevels.INFORMATION);
 		Assert.assertEquals("Test1", message.getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, message.getLevel());
@@ -28,8 +25,7 @@ public class CodedMessageTest
 	}
 
 	@Test
-	public void addArgument()
-	{
+	public void addArgument() {
 		CodedMessage message = new CodedMessage("Test1", CodedMessageLevels.INFORMATION);
 		Assert.assertEquals("Test1", message.getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, message.getLevel());
@@ -40,8 +36,7 @@ public class CodedMessageTest
 	}
 
 	@Test
-	public void format()
-	{
+	public void format() {
 		CodedMessage message = new CodedMessage("Test2", CodedMessageLevels.INFORMATION);
 		message.addArgument("Test");
 		message.addArgument("test2");

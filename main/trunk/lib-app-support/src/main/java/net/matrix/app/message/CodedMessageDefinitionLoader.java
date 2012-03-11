@@ -14,36 +14,33 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * 读取编码消息记录定义
  */
-public class CodedMessageDefinitionLoader
-{
+public class CodedMessageDefinitionLoader {
 	private static final Logger LOG = LoggerFactory.getLogger(CodedMessageDefinitionLoader.class);
 
-	public static void loadDefinitions(ResourcePatternResolver resolver)
-	{
-		try{
+	public static void loadDefinitions(ResourcePatternResolver resolver) {
+		try {
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
-			for(Resource resource : resources){
+			for (Resource resource : resources) {
 				loadDefinitions(resource);
 			}
-		}catch(IOException e){
+		} catch (IOException e) {
 			LOG.error("加载失败", e);
 		}
 	}
 
-	public static void loadDefinitions(Resource resource)
-	{
-		try{
+	public static void loadDefinitions(Resource resource) {
+		try {
 			XMLConfiguration config = new XMLConfiguration();
 			config.setDelimiterParsingDisabled(true);
 			config.load(resource.getInputStream());
-			for(HierarchicalConfiguration definitionConfig : (List<HierarchicalConfiguration>)config.configurationsAt("definition")){
+			for (HierarchicalConfiguration definitionConfig : (List<HierarchicalConfiguration>) config.configurationsAt("definition")) {
 				String code = definitionConfig.getString("[@code]");
 				String template = definitionConfig.getString("[@template]");
 				CodedMessageDefinition.define(new CodedMessageDefinition(code, template));
 			}
-		}catch(IOException e){
+		} catch (IOException e) {
 			LOG.error("加载失败", e);
-		}catch(ConfigurationException e){
+		} catch (ConfigurationException e) {
 			LOG.error("加载失败", e);
 		}
 	}

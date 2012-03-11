@@ -8,11 +8,9 @@ package net.matrix.app;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DefaultSystemContextTest
-{
+public class DefaultSystemContextTest {
 	@Test
-	public void testRegisterObject()
-	{
+	public void testRegisterObject() {
 		DefaultSystemContext context = new DefaultSystemContext();
 		Object obj = new Object();
 		context.registerObject(Object.class, obj);

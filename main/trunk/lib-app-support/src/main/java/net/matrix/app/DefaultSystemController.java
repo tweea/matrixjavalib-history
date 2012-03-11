@@ -6,39 +6,32 @@
 package net.matrix.app;
 
 public class DefaultSystemController
-	implements SystemController
-{
+	implements SystemController {
 	private SystemContext context;
 
 	@Override
-	public void setContext(SystemContext context)
-	{
+	public void setContext(SystemContext context) {
 		this.context = context;
 	}
 
 	@Override
-	public SystemContext getContext()
-	{
+	public SystemContext getContext() {
 		return context;
 	}
 
 	@Override
-	public void init()
-	{
+	public void init() {
 	}
 
 	@Override
-	public void start()
-	{
+	public void start() {
 	}
 
 	@Override
-	public void stop()
-	{
+	public void stop() {
 	}
 
 	@Override
-	public void reset()
-	{
+	public void reset() {
 	}
 }

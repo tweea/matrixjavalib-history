@@ -16,18 +16,15 @@ import org.junit.Test;
 /**
  * 
  */
-public class CodedMessageListTest
-{
+public class CodedMessageListTest {
 	@Test
-	public void logMessageList()
-	{
+	public void logMessageList() {
 		CodedMessageList messageList = new CodedMessageList();
 		Assert.assertEquals(0, messageList.size());
 	}
 
 	@Test
-	public void addLogMessage()
-	{
+	public void addLogMessage() {
 		CodedMessageList messageList = new CodedMessageList();
 		Assert.assertEquals(0, messageList.size());
 		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.INFORMATION);
@@ -37,8 +34,7 @@ public class CodedMessageListTest
 	}
 
 	@Test
-	public void addLogMessageList()
-	{
+	public void addLogMessageList() {
 		CodedMessageList messageList = new CodedMessageList();
 		CodedMessageList messageList2 = new CodedMessageList();
 		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.INFORMATION);
@@ -51,8 +47,7 @@ public class CodedMessageListTest
 
 	@Test
 	public void save()
-		throws IOException, CodedMessageException
-	{
+		throws IOException, CodedMessageException {
 		CodedMessageList messageList = new CodedMessageList();
 		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.INFORMATION);
 		message.addArgument("test1");
@@ -69,7 +64,7 @@ public class CodedMessageListTest
 		CodedMessageList messageList2 = CodedMessageList.load(is);
 		is.close();
 		Assert.assertEquals(messageList.size(), messageList2.size());
-		for(int index = 0; index < messageList.size(); index++){
+		for (int index = 0; index < messageList.size(); index++) {
 			CodedMessage message1 = messageList.get(index);
 			CodedMessage message2 = messageList2.get(index);
 			Assert.assertEquals(message1.getCode(), message2.getCode());

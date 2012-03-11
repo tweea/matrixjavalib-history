@@ -15,28 +15,28 @@ import org.springframework.core.io.Resource;
 /**
  * 资源仓库
  */
-public class ResourceRepository
-{
+public class ResourceRepository {
 	private static final Logger LOG = LoggerFactory.getLogger(ResourceRepository.class);
 
 	private Resource root;
 
 	/**
-	 * @param root 资源仓库位置
+	 * @param root
+	 *            资源仓库位置
 	 */
-	public ResourceRepository(Resource root)
-	{
+	public ResourceRepository(Resource root) {
 		this.root = root;
 	}
 
 	/**
 	 * 定位资源
-	 * @param selection 资源仓库选择
+	 * 
+	 * @param selection
+	 *            资源仓库选择
 	 * @return 资源
 	 */
-	public Resource getResource(ResourceSelection selection)
-	{
-		if(LOG.isTraceEnabled()){
+	public Resource getResource(ResourceSelection selection) {
+		if (LOG.isTraceEnabled()) {
 			LOG.trace("定位资源：" + selection);
 		}
 		String catalog = selection.getCatalog();
@@ -44,23 +44,23 @@ public class ResourceRepository
 		String name = selection.getName();
 
 		String path = catalog;
-		if(StringUtils.isNotBlank(version)){
+		if (StringUtils.isNotBlank(version)) {
 			path += '/' + version;
 		}
-		while(true){
-			try{
+		while (true) {
+			try {
 				Resource resource = root.createRelative(path + '/' + name);
-				if(resource.exists()){
-					if(LOG.isTraceEnabled()){
+				if (resource.exists()) {
+					if (LOG.isTraceEnabled()) {
 						LOG.trace("定位资源到：" + resource);
 					}
 					return resource;
 				}
-			}catch(IOException e){
+			} catch (IOException e) {
 				LOG.warn(root + "/" + path + '/' + name + " 解析失败", e);
 				return null;
 			}
-			if(path.length() <= catalog.length()){
+			if (path.length() <= catalog.length()) {
 				break;
 			}
 			path = path.substring(0, path.lastIndexOf('/'));

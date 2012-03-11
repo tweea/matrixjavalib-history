@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * 编码消息
  */
-public class CodedMessage
-{
+public class CodedMessage {
 	private String code;
 
 	private long time;
@@ -22,18 +21,16 @@ public class CodedMessage
 
 	private List<String> arguments;
 
-	public CodedMessage(String code, int level, String... arguments)
-	{
+	public CodedMessage(String code, int level, String... arguments) {
 		this(code, System.currentTimeMillis(), level, arguments);
 	}
 
-	public CodedMessage(String code, long time, int level, String... arguments)
-	{
+	public CodedMessage(String code, long time, int level, String... arguments) {
 		this.code = code;
 		this.time = time;
 		this.level = level;
 		this.arguments = new ArrayList<String>();
-		for(String argument : arguments){
+		for (String argument : arguments) {
 			addArgument(argument);
 		}
 	}
@@ -41,60 +38,56 @@ public class CodedMessage
 	/**
 	 * @return 编码
 	 */
-	public String getCode()
-	{
+	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * @return 记录时间
 	 */
-	public long getTime()
-	{
+	public long getTime() {
 		return time;
 	}
 
 	/**
 	 * @return 消息级别
 	 */
-	public int getLevel()
-	{
+	public int getLevel() {
 		return level;
 	}
 
 	/**
 	 * @return 参数列表
 	 */
-	public List<String> getArguments()
-	{
+	public List<String> getArguments() {
 		return arguments;
 	}
 
 	/**
-	 * @param index 参数索引
+	 * @param index
+	 *            参数索引
 	 * @return 参数
 	 */
-	public String getArgument(int index)
-	{
+	public String getArgument(int index) {
 		return arguments.get(index);
 	}
 
 	/**
-	 * @param argument 参数
+	 * @param argument
+	 *            参数
 	 */
-	public void addArgument(String argument)
-	{
+	public void addArgument(String argument) {
 		arguments.add(argument);
 	}
 
 	/**
 	 * 格式化为消息字符串
+	 * 
 	 * @return 格式化消息字符串
 	 */
-	public String format()
-	{
+	public String format() {
 		CodedMessageDefinition def = CodedMessageDefinition.getDefinition(code);
-		if(def == null){
+		if (def == null) {
 			def = CodedMessageDefinition.createUnkownDefinition(code, arguments.size());
 			CodedMessageDefinition.define(def);
 		}

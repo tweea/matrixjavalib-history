@@ -11,37 +11,30 @@ import net.matrix.app.SystemException;
  * 配置错误
  */
 public class CodedMessageException
-	extends SystemException
-{
+	extends SystemException {
 	private static final long serialVersionUID = 8050980676195083467L;
 
-	public CodedMessageException()
-	{
+	public CodedMessageException() {
 		super();
 	}
 
-	public CodedMessageException(Throwable cause)
-	{
+	public CodedMessageException(Throwable cause) {
 		super(cause);
 	}
 
-	public CodedMessageException(CodedMessage rootMessage)
-	{
+	public CodedMessageException(CodedMessage rootMessage) {
 		super(rootMessage);
 	}
 
-	public CodedMessageException(String rootMessageCode)
-	{
+	public CodedMessageException(String rootMessageCode) {
 		super(rootMessageCode);
 	}
 
-	public CodedMessageException(Throwable cause, CodedMessage rootMessage)
-	{
+	public CodedMessageException(Throwable cause, CodedMessage rootMessage) {
 		super(cause, rootMessage);
 	}
 
-	public CodedMessageException(Throwable cause, String rootMessageCode)
-	{
+	public CodedMessageException(Throwable cause, String rootMessageCode) {
 		super(cause, rootMessageCode);
 	}
 
@@ -49,8 +42,7 @@ public class CodedMessageException
 	 * @return 根消息
 	 */
 	@Override
-	public String getDefaultMessageCode()
-	{
+	public String getDefaultMessageCode() {
 		return "CodedMessage.Error";
 	}
 }

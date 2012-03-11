@@ -8,20 +8,17 @@ package net.matrix.app;
 /**
  * 系统环境
  */
-public class GlobalSystemContext
-{
+public class GlobalSystemContext {
 	private static SystemContext global;
 
-	public static SystemContext get()
-	{
-		if(global == null){
+	public static SystemContext get() {
+		if (global == null) {
 			global = new DefaultSystemContext();
 		}
 		return global;
 	}
 
-	public static void set(SystemContext context)
-	{
+	public static void set(SystemContext context) {
 		global = context;
 	}
 }

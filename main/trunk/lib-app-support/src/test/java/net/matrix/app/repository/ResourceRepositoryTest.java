@@ -9,11 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
-public class ResourceRepositoryTest
-{
+public class ResourceRepositoryTest {
 	@Test
-	public void getResource0()
-	{
+	public void getResource0() {
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 默认资源名
 		Assert.assertTrue(repo.getResource(new ResourceSelection("test", "1", null)).exists());
@@ -21,8 +19,7 @@ public class ResourceRepositoryTest
 	}
 
 	@Test
-	public void getResource1()
-	{
+	public void getResource1() {
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 分类
 		Assert.assertTrue(repo.getResource(new ResourceSelection("naming", "1", "paths.xml")).exists());
@@ -36,8 +33,7 @@ public class ResourceRepositoryTest
 	}
 
 	@Test
-	public void getResource2()
-	{
+	public void getResource2() {
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 默认版本
 		Assert.assertTrue(repo.getResource(new ResourceSelection("test", null, "small.xml")).exists());
@@ -46,8 +42,7 @@ public class ResourceRepositoryTest
 	}
 
 	@Test
-	public void getResource3()
-	{
+	public void getResource3() {
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		// 多级
 		Assert.assertTrue(repo.getResource(new ResourceSelection("test/orz", "1", "bar.xml")).exists());

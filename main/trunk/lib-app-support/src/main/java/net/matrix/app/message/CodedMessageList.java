@@ -33,71 +33,66 @@ import org.w3c.dom.NodeList;
 /**
  * 编码消息列表
  */
-public class CodedMessageList
-{
+public class CodedMessageList {
 	private static final DocumentBuilderFactory DOM_FACTORY = DocumentBuilderFactory.newInstance();
 
 	private static final TransformerFactory TRANSFORMER_FACTORY = TransformerFactory.newInstance();
 
 	private List<CodedMessage> messages;
 
-	public CodedMessageList()
-	{
+	public CodedMessageList() {
 		this.messages = new ArrayList<CodedMessage>();
 	}
 
 	/**
 	 * @return 消息数量
 	 */
-	public int size()
-	{
+	public int size() {
 		return messages.size();
 	}
 
 	/**
-	 * @param index 消息索引
+	 * @param index
+	 *            消息索引
 	 * @return 消息
 	 */
-	public CodedMessage get(int index)
-	{
+	public CodedMessage get(int index) {
 		return messages.get(index);
 	}
 
 	/**
-	 * @param message 消息
+	 * @param message
+	 *            消息
 	 */
-	public void add(CodedMessage message)
-	{
+	public void add(CodedMessage message) {
 		messages.add(message);
 	}
 
 	/**
-	 * @param messageList 消息记录组
+	 * @param messageList
+	 *            消息记录组
 	 */
-	public void addAll(CodedMessageList messageList)
-	{
-		for(int index = 0; index < messageList.size(); index++){
+	public void addAll(CodedMessageList messageList) {
+		for (int index = 0; index < messageList.size(); index++) {
 			add(messageList.get(index));
 		}
 	}
 
-	public CodedMessageList subList(int fromIndex, int toIndex)
-	{
+	public CodedMessageList subList(int fromIndex, int toIndex) {
 		CodedMessageList result = new CodedMessageList();
-		if(fromIndex >= messages.size()){
+		if (fromIndex >= messages.size()) {
 			return result;
 		}
-		if(toIndex > messages.size()){
+		if (toIndex > messages.size()) {
 			toIndex = messages.size();
 		}
 		result.messages.addAll(messages.subList(fromIndex, toIndex));
 		return result;
 	}
 
-	public boolean hasLevel(int level)
-	{
-		for(CodedMessage message : messages){
-			if(message.getLevel() == level){
+	public boolean hasLevel(int level) {
+		for (CodedMessage message : messages) {
+			if (message.getLevel() == level) {
 				return true;
 			}
 		}
@@ -106,20 +101,22 @@ public class CodedMessageList
 
 	/**
 	 * 从文件加载
-	 * @param reader 输入流
+	 * 
+	 * @param reader
+	 *            输入流
 	 * @return 消息记录组
-	 * @throws CodedMessageException 操作异常
+	 * @throws CodedMessageException
+	 *             操作异常
 	 */
 	public static CodedMessageList load(InputStream reader)
-		throws CodedMessageException
-	{
+		throws CodedMessageException {
 		Document document;
-		try{
+		try {
 			Transformer transformer = TRANSFORMER_FACTORY.newTransformer();
 			DOMResult result = new DOMResult();
 			transformer.transform(new StreamSource(reader), result);
-			document = (Document)result.getNode();
-		}catch(TransformerException e){
+			document = (Document) result.getNode();
+		} catch (TransformerException e) {
 			throw new CodedMessageException(e, "CodedMessage.LoadXMLError");
 		}
 		return load0(document);
@@ -127,30 +124,31 @@ public class CodedMessageList
 
 	/**
 	 * 从文件加载
-	 * @param reader 输入流
+	 * 
+	 * @param reader
+	 *            输入流
 	 * @return 消息记录组
-	 * @throws CodedMessageException 操作异常
+	 * @throws CodedMessageException
+	 *             操作异常
 	 */
 	public static CodedMessageList load(Reader reader)
-		throws CodedMessageException
-	{
+		throws CodedMessageException {
 		Document document;
-		try{
+		try {
 			Transformer transformer = TRANSFORMER_FACTORY.newTransformer();
 			DOMResult result = new DOMResult();
 			transformer.transform(new StreamSource(reader), result);
-			document = (Document)result.getNode();
-		}catch(TransformerException e){
+			document = (Document) result.getNode();
+		} catch (TransformerException e) {
 			throw new CodedMessageException(e, "CodedMessage.LoadXMLError");
 		}
 		return load0(document);
 	}
 
-	private static CodedMessageList load0(Document document)
-	{
+	private static CodedMessageList load0(Document document) {
 		CodedMessageList messageList = new CodedMessageList();
 		NodeList messageNodeList = document.getElementsByTagName("message");
-		for(int i = 0; i < messageNodeList.getLength(); i++){
+		for (int i = 0; i < messageNodeList.getLength(); i++) {
 			Node messageNode = messageNodeList.item(i);
 			NamedNodeMap messageNodeAttributes = messageNode.getAttributes();
 			String code = getCodeNode(messageNodeAttributes).getNodeValue();
@@ -158,9 +156,9 @@ public class CodedMessageList
 			int level = Integer.parseInt(messageNodeAttributes.getNamedItem("level").getNodeValue());
 			CodedMessage message = new CodedMessage(code, time, level);
 			NodeList argumentNodeList = messageNode.getChildNodes();
-			for(int j = 0; j < argumentNodeList.getLength(); j++){
+			for (int j = 0; j < argumentNodeList.getLength(); j++) {
 				Node argumentNode = argumentNodeList.item(j);
-				if(argumentNode.getNodeType() == Node.ELEMENT_NODE && "argument".equals(argumentNode.getNodeName())){
+				if (argumentNode.getNodeType() == Node.ELEMENT_NODE && "argument".equals(argumentNode.getNodeName())) {
 					message.addArgument(argumentNode.getTextContent());
 				}
 			}
@@ -169,10 +167,9 @@ public class CodedMessageList
 		return messageList;
 	}
 
-	private static Node getCodeNode(NamedNodeMap messageNodeAttributes)
-	{
+	private static Node getCodeNode(NamedNodeMap messageNodeAttributes) {
 		Node codeNode = messageNodeAttributes.getNamedItem("logId");
-		if(codeNode == null){
+		if (codeNode == null) {
 			codeNode = messageNodeAttributes.getNamedItem("code");
 		}
 		return codeNode;
@@ -180,63 +177,66 @@ public class CodedMessageList
 
 	/**
 	 * 保存到文件
-	 * @param writer 输出流
-	 * @throws CodedMessageException 操作异常
+	 * 
+	 * @param writer
+	 *            输出流
+	 * @throws CodedMessageException
+	 *             操作异常
 	 */
 	public void save(OutputStream writer)
-		throws CodedMessageException
-	{
-		try{
+		throws CodedMessageException {
+		try {
 			Document document = save0();
 			Transformer transformer = TRANSFORMER_FACTORY.newTransformer();
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
-		}catch(TransformerException e){
+		} catch (TransformerException e) {
 			throw new CodedMessageException(e, "CodedMessage.SaveXMLError");
 		}
 	}
 
 	/**
 	 * 保存到文件
-	 * @param writer 输出流
-	 * @throws CodedMessageException 操作异常
+	 * 
+	 * @param writer
+	 *            输出流
+	 * @throws CodedMessageException
+	 *             操作异常
 	 */
 	public void save(Writer writer)
-		throws CodedMessageException
-	{
-		try{
+		throws CodedMessageException {
+		try {
 			Document document = save0();
 			Transformer transformer = TRANSFORMER_FACTORY.newTransformer();
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
-		}catch(TransformerException e){
+		} catch (TransformerException e) {
 			throw new CodedMessageException(e, "CodedMessage.SaveXMLError");
 		}
 	}
 
 	private Document save0()
-		throws CodedMessageException
-	{
-		try{
+		throws CodedMessageException {
+		try {
 			DocumentBuilder builder = DOM_FACTORY.newDocumentBuilder();
 			Document document = builder.newDocument();
 			Element messagesElement = document.createElement("messages");
 			document.appendChild(messagesElement);
-			for(int i = 0; i < messages.size(); i++){
+			for (int i = 0; i < messages.size(); i++) {
 				CodedMessage message = messages.get(i);
 				Element messageElement = document.createElement("message");
 				messagesElement.appendChild(messageElement);
 				messageElement.setAttribute("time", Long.toString(message.getTime()));
 				messageElement.setAttribute("code", message.getCode());
 				messageElement.setAttribute("level", Integer.toString(message.getLevel()));
-				for(int index = 0; index < message.getArguments().size(); index++){
+				for (int index = 0; index < message.getArguments().size(); index++) {
 					Element argumentElement = document.createElement("argument");
 					messageElement.appendChild(argumentElement);
 					argumentElement.setTextContent(message.getArgument(index));
 				}
 			}
 			return document;
-		}catch(ParserConfigurationException e){
+		} catch (ParserConfigurationException e) {
 			throw new CodedMessageException(e, "CodedMessage.SaveXMLError");
 		}
 	}

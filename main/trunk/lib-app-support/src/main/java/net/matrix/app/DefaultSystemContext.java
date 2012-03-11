@@ -24,8 +24,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  * 系统环境
  */
 public class DefaultSystemContext
-	implements SystemContext
-{
+	implements SystemContext {
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultSystemContext.class);
 
 	private ResourceLoader resourceLoader;
@@ -38,33 +37,29 @@ public class DefaultSystemContext
 
 	private SystemController controller;
 
-	public DefaultSystemContext()
-	{
+	public DefaultSystemContext() {
 		objects = new HashMap<String, Object>();
 	}
 
 	@Override
-	public void setResourceLoader(ResourceLoader loader)
-	{
+	public void setResourceLoader(ResourceLoader loader) {
 		resourceLoader = loader;
 	}
 
 	@Override
-	public ResourceLoader getResourceLoader()
-	{
-		if(resourceLoader == null){
+	public ResourceLoader getResourceLoader() {
+		if (resourceLoader == null) {
 			resourceLoader = new DefaultResourceLoader();
 		}
 		return resourceLoader;
 	}
 
 	@Override
-	public ResourcePatternResolver getResourcePatternResolver()
-	{
-		if(resourceResolver == null){
-			if(getResourceLoader() instanceof ResourcePatternResolver){
-				resourceResolver = (ResourcePatternResolver)getResourceLoader();
-			}else{
+	public ResourcePatternResolver getResourcePatternResolver() {
+		if (resourceResolver == null) {
+			if (getResourceLoader() instanceof ResourcePatternResolver) {
+				resourceResolver = (ResourcePatternResolver) getResourceLoader();
+			} else {
 				resourceResolver = new PathMatchingResourcePatternResolver(getResourceLoader());
 			}
 		}
@@ -72,23 +67,21 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public void setConfig(Configuration config)
-	{
+	public void setConfig(Configuration config) {
 		this.config = config;
 	}
 
 	@Override
-	public Configuration getConfig()
-	{
+	public Configuration getConfig() {
 		// 尝试加载默认位置
-		if(config == null){
+		if (config == null) {
 			LOG.info("加载默认配置");
 			Resource resource = getResourceLoader().getResource("classpath:sysconfig.cfg");
-			try{
+			try {
 				config = new PropertiesConfiguration(resource.getURL());
-			}catch(IOException e){
+			} catch (IOException e) {
 				throw new RuntimeException("sysconfig.cfg 加载失败", e);
-			}catch(ConfigurationException e){
+			} catch (ConfigurationException e) {
 				throw new RuntimeException("sysconfig.cfg 加载失败", e);
 			}
 		}
@@ -96,45 +89,38 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public void registerObject(String name, Object object)
-	{
+	public void registerObject(String name, Object object) {
 		objects.put(name, object);
 	}
 
 	@Override
-	public <T> void registerObject(Class<T> type, T object)
-	{
+	public <T> void registerObject(Class<T> type, T object) {
 		registerObject(type.getName(), object);
 	}
 
 	@Override
-	public Object lookupObject(String name)
-	{
+	public Object lookupObject(String name) {
 		return objects.get(name);
 	}
 
 	@Override
-	public <T> T lookupObject(String name, Class<T> type)
-	{
+	public <T> T lookupObject(String name, Class<T> type) {
 		return type.cast(lookupObject(name));
 	}
 
 	@Override
-	public <T> T lookupObject(Class<T> type)
-	{
+	public <T> T lookupObject(Class<T> type) {
 		return lookupObject(type.getName(), type);
 	}
 
 	@Override
-	public void setController(SystemController controller)
-	{
+	public void setController(SystemController controller) {
 		this.controller = controller;
 	}
 
 	@Override
-	public SystemController getController()
-	{
-		if(controller == null){
+	public SystemController getController() {
+		if (controller == null) {
 			controller = new DefaultSystemController();
 			controller.setContext(this);
 		}

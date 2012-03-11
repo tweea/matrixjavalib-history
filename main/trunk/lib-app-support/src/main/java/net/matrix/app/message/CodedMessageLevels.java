@@ -8,8 +8,7 @@ package net.matrix.app.message;
 /**
  * 编码消息级别
  */
-public interface CodedMessageLevels
-{
+public interface CodedMessageLevels {
 	/**
 	 * 跟踪
 	 */

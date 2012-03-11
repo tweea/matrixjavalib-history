@@ -11,8 +11,7 @@ import net.matrix.lang.Resettable;
  * 系统控制器
  */
 public interface SystemController
-	extends Resettable
-{
+	extends Resettable {
 	void setContext(SystemContext context);
 
 	SystemContext getContext();

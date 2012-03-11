@@ -13,12 +13,10 @@ import org.springframework.core.io.ClassPathResource;
 /**
  * 
  */
-public class ResourceContextTest
-{
+public class ResourceContextTest {
 	@Test
 	public void getResource()
-		throws ConfigurationException
-	{
+		throws ConfigurationException {
 		ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 		ResourceContextConfig selectionSet = new ResourceContextConfig();
 		selectionSet.load(repo.getResource(new ResourceSelection("configset", "set1", "configset.xml")));
