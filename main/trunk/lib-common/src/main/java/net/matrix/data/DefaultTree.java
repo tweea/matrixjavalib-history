@@ -17,38 +17,46 @@ import java.util.TreeMap;
 
 /**
  * 树型结构的默认实现。
+ * 
+ * @param <ID>
+ *            数据标识
+ * @param <DATA>
+ *            数据
  */
 public class DefaultTree<ID, DATA>
 	implements Serializable, Tree<ID, DATA> {
-	private static final long serialVersionUID = 1853100024141572756L;
+	/**
+	 * serialVersionUID.
+	 */
+	private static final long serialVersionUID = -21200598521077549L;
 
 	/**
-	 * 节点标识
+	 * 节点标识。
 	 */
 	private Key key;
 
 	/**
-	 * 数据标识
+	 * 数据标识。
 	 */
 	private ID id;
 
 	/**
-	 * 数据对象
+	 * 数据。
 	 */
 	private DATA data;
 
 	/**
-	 * 父节点
+	 * 父节点。
 	 */
 	private DefaultTree<ID, DATA> parent;
 
 	/**
-	 * 编号映射
+	 * 编号映射。
 	 */
 	private Map<ID, Key> keyMap;
 
 	/**
-	 * 所有节点的列表
+	 * 所有节点的列表。
 	 */
 	private SortedMap<Key, DefaultTree<ID, DATA>> nodes;
 
@@ -60,7 +68,7 @@ public class DefaultTree<ID, DATA>
 	 * @param data
 	 *            数据对象
 	 */
-	public DefaultTree(ID id, DATA data) {
+	public DefaultTree(final ID id, final DATA data) {
 		this.key = new DefaultKey();
 		this.id = id;
 		this.data = data;
@@ -83,7 +91,7 @@ public class DefaultTree<ID, DATA>
 	 * @param data
 	 *            数据对象
 	 */
-	public DefaultTree(DefaultTree<ID, DATA> parent, ID id, DATA data) {
+	public DefaultTree(final DefaultTree<ID, DATA> parent, final ID id, final DATA data) {
 		this.key = new DefaultKey(parent.key, parent.getChildNodes().size());
 		this.id = id;
 		this.data = data;
@@ -102,7 +110,7 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public void setId(ID id) {
+	public void setId(final ID id) {
 		this.id = id;
 	}
 
@@ -112,7 +120,7 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public void setData(DATA data) {
+	public void setData(final DATA data) {
 		this.data = data;
 	}
 
@@ -122,7 +130,7 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public Key findKey(ID nodeId) {
+	public Key findKey(final ID nodeId) {
 		return keyMap.get(nodeId);
 	}
 
@@ -142,12 +150,12 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public DefaultTree<ID, DATA> getNode(Key nodeKey) {
+	public DefaultTree<ID, DATA> getNode(final Key nodeKey) {
 		return nodes.get(nodeKey);
 	}
 
 	@Override
-	public DefaultTree<ID, DATA> getNode(ID nodeId) {
+	public DefaultTree<ID, DATA> getNode(final ID nodeId) {
 		Key nodeKey = findKey(nodeId);
 		if (nodeKey == null) {
 			return null;
@@ -156,12 +164,12 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public DefaultTree<ID, DATA> getChildNode(Key nodeKey) {
+	public DefaultTree<ID, DATA> getChildNode(final Key nodeKey) {
 		return getChildNodes().get(nodeKey);
 	}
 
 	@Override
-	public DefaultTree<ID, DATA> getChildNode(ID nodeId) {
+	public DefaultTree<ID, DATA> getChildNode(final ID nodeId) {
 		Key nodeKey = findKey(nodeId);
 		if (nodeKey == null) {
 			return null;
@@ -170,12 +178,12 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public DefaultTree<ID, DATA> appendChildNode(ID nodeId, DATA nodeData) {
+	public DefaultTree<ID, DATA> appendChildNode(final ID nodeId, final DATA nodeData) {
 		return new DefaultTree<ID, DATA>(this, nodeId, nodeData);
 	}
 
 	@Override
-	public void removeChildNode(Key nodeKey) {
+	public void removeChildNode(final Key nodeKey) {
 		DefaultTree<ID, DATA> node = getChildNode(nodeKey);
 		if (node == null) {
 			return;
@@ -188,7 +196,7 @@ public class DefaultTree<ID, DATA>
 	}
 
 	@Override
-	public void removeChildNode(ID nodeId) {
+	public void removeChildNode(final ID nodeId) {
 		Key nodeKey = findKey(nodeId);
 		if (nodeKey == null) {
 			return;
@@ -221,7 +229,10 @@ public class DefaultTree<ID, DATA>
 	 */
 	public static class DefaultKey
 		implements Key {
-		private static final long serialVersionUID = 6009469890625904428L;
+		/**
+		 * serialVersionUID.
+		 */
+		private static final long serialVersionUID = 35507229935965284L;
 
 		/**
 		 * 父节点标识。
@@ -239,12 +250,12 @@ public class DefaultTree<ID, DATA>
 		private int index;
 
 		/**
-		 * hashCode()
+		 * 缓存 hashCode() 结果。
 		 */
 		private int hash;
 
 		/**
-		 * toString()
+		 * 缓存 toString() 结果。
 		 */
 		private String string;
 
@@ -261,7 +272,7 @@ public class DefaultTree<ID, DATA>
 		 * @param index
 		 *            节点索引
 		 */
-		private DefaultKey(int index) {
+		private DefaultKey(final int index) {
 			this.parent = null;
 			this.level = 0;
 			this.index = index;
@@ -275,7 +286,7 @@ public class DefaultTree<ID, DATA>
 		 * @param index
 		 *            节点索引
 		 */
-		public DefaultKey(Key parent, int index) {
+		public DefaultKey(final Key parent, final int index) {
 			this.parent = parent;
 			this.level = parent.getLevel() + 1;
 			this.index = index;
@@ -297,7 +308,7 @@ public class DefaultTree<ID, DATA>
 		}
 
 		@Override
-		public int compareTo(Key o) {
+		public int compareTo(final Key o) {
 			if (level < o.getLevel()) {
 				return -1;
 			} else if (level > o.getLevel()) {
@@ -318,7 +329,7 @@ public class DefaultTree<ID, DATA>
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(final Object obj) {
 			if (obj instanceof Key) {
 				Key ok = (Key) obj;
 				if (level != ok.getLevel()) {
@@ -362,8 +373,9 @@ public class DefaultTree<ID, DATA>
 	 * 
 	 * @param source
 	 *            节点构造源
+	 * @return 新构造的树
 	 */
-	public static synchronized <ID, DATA> DefaultTree<ID, DATA> generate(TreeSource<ID, DATA> source) {
+	public static synchronized <ID, DATA> DefaultTree<ID, DATA> generate(final TreeSource<ID, DATA> source) {
 		ID rootId = source.getRootId();
 		DATA rootData = source.getItem(rootId);
 		DefaultTree<ID, DATA> tree = new DefaultTree<ID, DATA>(rootId, rootData);
@@ -379,7 +391,7 @@ public class DefaultTree<ID, DATA>
 	 * @param node
 	 *            父节点
 	 */
-	private static <ID, DATA> void generateSubNode(TreeSource<ID, DATA> source, DefaultTree<ID, DATA> node) {
+	private static <ID, DATA> void generateSubNode(final TreeSource<ID, DATA> source, final DefaultTree<ID, DATA> node) {
 		List<ID> items = source.listChildrenId(node.getId());
 		if (items == null || items.size() == 0) {
 			return;

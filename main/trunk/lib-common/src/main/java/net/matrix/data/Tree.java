@@ -127,6 +127,7 @@ public interface Tree<ID, DATA> {
 	 *            数据标识
 	 * @param data
 	 *            数据
+	 * @return 子节点
 	 */
 	Tree<ID, DATA> appendChildNode(ID id, DATA data);
 
