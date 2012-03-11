@@ -11,15 +11,14 @@ import net.matrix.sql.TransactionContext;
 
 /**
  * Hibernate 测试
+ * 
  * @author Tweea
  * @version 2005-11-30
  */
-public class HibernateTest
-{
+public class HibernateTest {
 	@Test
 	public void testContextManager()
-		throws Exception
-	{
+		throws Exception {
 		SessionFactoryManager mm = SessionFactoryManager.getInstance();
 		TransactionContext tc0 = mm.getTransactionContext();
 		TransactionContext tc1 = mm.getTransactionContext();
@@ -34,8 +33,7 @@ public class HibernateTest
 
 	@Test
 	public void testCreateDrop()
-		throws Exception
-	{
+		throws Exception {
 		SessionFactoryManager mm = SessionFactoryManager.getInstance();
 		Assert.assertNotNull(mm.getTransactionContext());
 		mm.dropTransactionContext();
@@ -45,8 +43,7 @@ public class HibernateTest
 
 	@Test
 	public void testTransactionContext()
-		throws Exception
-	{
+		throws Exception {
 		SessionFactoryManager mm = SessionFactoryManager.getInstance();
 		TransactionContext tc = mm.getTransactionContext();
 		tc.begin();
@@ -56,8 +53,7 @@ public class HibernateTest
 
 	@Test
 	public void testSetConfigName()
-		throws Exception
-	{
+		throws Exception {
 		SessionFactoryManager mm = SessionFactoryManager.getInstance();
 		HibernateTransactionContext tc = mm.getTransactionContext();
 		tc.begin();

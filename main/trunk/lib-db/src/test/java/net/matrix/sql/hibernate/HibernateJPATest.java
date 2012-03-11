@@ -19,13 +19,12 @@ import net.matrix.sql.hibernate.entity.UserInfo;
 
 /**
  * Hibernate 测试
+ * 
  * @version 2005-11-30
  */
-public class HibernateJPATest
-{
+public class HibernateJPATest {
 	@Test
-	public void testContextManager()
-	{
+	public void testContextManager() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("test1");
 		Assert.assertNotNull(emf);
 		EntityManager em = emf.createEntityManager();

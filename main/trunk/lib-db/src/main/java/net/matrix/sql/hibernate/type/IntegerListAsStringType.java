@@ -21,9 +21,8 @@ import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
 public class IntegerListAsStringType
-	implements UserType, ParameterizedType
-{
-	private static final int[] TYPES = new int[]{
+	implements UserType, ParameterizedType {
+	private static final int[] TYPES = new int[] {
 		Types.VARCHAR
 	};
 
@@ -31,49 +30,43 @@ public class IntegerListAsStringType
 
 	private Pattern pattern;
 
-	private IntegerListAsStringType()
-	{
+	private IntegerListAsStringType() {
 		separator = ",";
 		pattern = Pattern.compile(separator);
 	}
 
 	@Override
-	public int[] sqlTypes()
-	{
+	public int[] sqlTypes() {
 		return TYPES;
 	}
 
 	@Override
-	public Class returnedClass()
-	{
+	public Class returnedClass() {
 		return List.class;
 	}
 
 	@Override
 	public boolean equals(Object x, Object y)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return x.equals(y);
 	}
 
 	@Override
 	public int hashCode(Object x)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return x.hashCode();
 	}
 
 	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
-		throws HibernateException, SQLException
-	{
+		throws HibernateException, SQLException {
 		String r = rs.getString(names[0]);
-		if(r == null){
+		if (r == null) {
 			return new ArrayList();
 		}
 		List<Integer> l = new ArrayList<Integer>();
 		String[] list = pattern.split(r);
-		for(String item : list){
+		for (String item : list) {
 			l.add(Integer.parseInt(item));
 		}
 		return l;
@@ -81,20 +74,19 @@ public class IntegerListAsStringType
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
-		throws HibernateException, SQLException
-	{
-		if(value == null){
+		throws HibernateException, SQLException {
+		if (value == null) {
 			st.setNull(index, Types.VARCHAR);
 			return;
 		}
-		List<Integer> v = (List)value;
-		if(v.size() == 0){
+		List<Integer> v = (List) value;
+		if (v.size() == 0) {
 			st.setNull(index, Types.VARCHAR);
 			return;
 		}
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < v.size(); i++){
-			if(i != 0){
+		for (int i = 0; i < v.size(); i++) {
+			if (i != 0) {
 				sb.append(separator);
 			}
 			sb.append(v.get(i));
@@ -104,48 +96,42 @@ public class IntegerListAsStringType
 
 	@Override
 	public Object deepCopy(Object value)
-		throws HibernateException
-	{
-		if(value == null){
+		throws HibernateException {
+		if (value == null) {
 			return null;
 		}
-		return new ArrayList((List)value);
+		return new ArrayList((List) value);
 	}
 
 	@Override
-	public boolean isMutable()
-	{
+	public boolean isMutable() {
 		return true;
 	}
 
 	@Override
 	public Serializable disassemble(Object value)
-		throws HibernateException
-	{
-		return (Serializable)deepCopy(value);
+		throws HibernateException {
+		return (Serializable) deepCopy(value);
 	}
 
 	@Override
 	public Object assemble(Serializable cached, Object owner)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return deepCopy(cached);
 	}
 
 	@Override
 	public Object replace(Object original, Object target, Object owner)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return deepCopy(original);
 	}
 
 	@Override
-	public void setParameterValues(Properties parameters)
-	{
-		if(parameters == null){
+	public void setParameterValues(Properties parameters) {
+		if (parameters == null) {
 			return;
 		}
-		if(parameters.get("separator") != null){
+		if (parameters.get("separator") != null) {
 			this.separator = parameters.getProperty("separator");
 			this.pattern = Pattern.compile(separator);
 		}

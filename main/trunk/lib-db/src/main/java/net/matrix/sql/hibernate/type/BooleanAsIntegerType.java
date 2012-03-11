@@ -16,89 +16,77 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 public class BooleanAsIntegerType
-	implements UserType
-{
-	private static final int[] TYPES = new int[]{
+	implements UserType {
+	private static final int[] TYPES = new int[] {
 		Types.INTEGER
 	};
 
 	@Override
-	public int[] sqlTypes()
-	{
+	public int[] sqlTypes() {
 		return TYPES;
 	}
 
 	@Override
-	public Class returnedClass()
-	{
+	public Class returnedClass() {
 		return Boolean.class;
 	}
 
 	@Override
 	public boolean equals(Object x, Object y)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return x.equals(y);
 	}
 
 	@Override
 	public int hashCode(Object x)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return x.hashCode();
 	}
 
 	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
-		throws HibernateException, SQLException
-	{
+		throws HibernateException, SQLException {
 		int r = rs.getInt(names[0]);
 		return r != 0;
 	}
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
-		throws HibernateException, SQLException
-	{
-		if(value == null){
+		throws HibernateException, SQLException {
+		if (value == null) {
 			st.setNull(index, Types.INTEGER);
-		}else{
-			Boolean v = (Boolean)value;
+		} else {
+			Boolean v = (Boolean) value;
 			st.setInt(index, v ? 1 : 0);
 		}
 	}
 
 	@Override
 	public Object deepCopy(Object value)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return value;
 	}
 
 	@Override
-	public boolean isMutable()
-	{
+	public boolean isMutable() {
 		return false;
 	}
 
 	@Override
 	public Serializable disassemble(Object value)
-		throws HibernateException
-	{
-		return (Serializable)value;
+		throws HibernateException {
+		return (Serializable) value;
 	}
 
 	@Override
 	public Object assemble(Serializable cached, Object owner)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return cached;
 	}
 
 	@Override
 	public Object replace(Object original, Object target, Object owner)
-		throws HibernateException
-	{
+		throws HibernateException {
 		return original;
 	}
 }

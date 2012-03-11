@@ -9,15 +9,14 @@ import org.junit.Test;
 
 /**
  * Hibernate 测试
+ * 
  * @author Tweea
  * @version 2005-11-30
  */
-public class HQLBuilderTest
-{
+public class HQLBuilderTest {
 	@Test
 	public void getParameterName()
-		throws Exception
-	{
+		throws Exception {
 		Assert.assertEquals("p0", HQLBuilder.getParameterName(0));
 		Assert.assertEquals("p10", HQLBuilder.getParameterName(10));
 	}
