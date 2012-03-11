@@ -12,8 +12,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * 系统环境
  */
-public interface SystemContext
-{
+public interface SystemContext {
 	void setResourceLoader(ResourceLoader loader);
 
 	ResourceLoader getResourceLoader();

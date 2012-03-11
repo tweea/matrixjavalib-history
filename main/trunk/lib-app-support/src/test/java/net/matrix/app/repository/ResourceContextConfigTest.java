@@ -16,8 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 /**
  * 
  */
-public class ResourceContextConfigTest
-{
+public class ResourceContextConfigTest {
 	private static ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 
 	private static ResourceSelection selection1 = new ResourceSelection("configset", "set1", "configset.xml");
@@ -30,8 +29,7 @@ public class ResourceContextConfigTest
 
 	@BeforeClass
 	public static void setUp()
-		throws ConfigurationException
-	{
+		throws ConfigurationException {
 		set1 = new ResourceContextConfig();
 		set1.load(repo.getResource(selection1));
 		set2 = new ResourceContextConfig();
@@ -39,8 +37,7 @@ public class ResourceContextConfigTest
 	}
 
 	@Test
-	public void new1()
-	{
+	public void new1() {
 		Assert.assertEquals(5, set1.catalogNames().size());
 		Assert.assertTrue(set1.catalogNames().contains("naming"));
 		Assert.assertTrue(set1.catalogNames().contains("test/orz"));
@@ -50,8 +47,7 @@ public class ResourceContextConfigTest
 	}
 
 	@Test
-	public void new2()
-	{
+	public void new2() {
 		Assert.assertEquals(5, set2.catalogNames().size());
 		Assert.assertTrue(set2.catalogNames().contains("naming"));
 		Assert.assertTrue(set2.catalogNames().contains("test/orz"));
@@ -61,8 +57,7 @@ public class ResourceContextConfigTest
 	}
 
 	@Test
-	public void checkDiff()
-	{
+	public void checkDiff() {
 		Set<ResourceSelection> updateInfoList = set1.checkDiff(set2);
 		Assert.assertEquals(5, updateInfoList.size());
 	}

@@ -10,41 +10,40 @@ import org.springframework.core.io.Resource;
 /**
  * 资源仓库加载环境
  */
-public class ResourceContext
-{
+public class ResourceContext {
 	private ResourceRepository repository;
 
 	private ResourceContextConfig contextConfig;
 
 	/**
-	 * @param repository 资源仓库
-	 * @param contextConfig 资源仓库加载环境配置
+	 * @param repository
+	 *            资源仓库
+	 * @param contextConfig
+	 *            资源仓库加载环境配置
 	 */
-	public ResourceContext(ResourceRepository repository, ResourceContextConfig contextConfig)
-	{
+	public ResourceContext(ResourceRepository repository, ResourceContextConfig contextConfig) {
 		this.repository = repository;
 		this.contextConfig = contextConfig;
 	}
 
-	public ResourceRepository getRepository()
-	{
+	public ResourceRepository getRepository() {
 		return repository;
 	}
 
-	public ResourceContextConfig getContextConfig()
-	{
+	public ResourceContextConfig getContextConfig() {
 		return contextConfig;
 	}
 
 	/**
 	 * 定位资源
-	 * @param catalog 类别
+	 * 
+	 * @param catalog
+	 *            类别
 	 * @return 资源
 	 */
-	public Resource getResource(String catalog)
-	{
+	public Resource getResource(String catalog) {
 		ResourceSelection selection = contextConfig.getSelection(catalog);
-		if(selection == null){
+		if (selection == null) {
 			return null;
 		}
 		return repository.getResource(selection);
@@ -52,14 +51,16 @@ public class ResourceContext
 
 	/**
 	 * 定位资源
-	 * @param catalog 类别
-	 * @param name 名称
+	 * 
+	 * @param catalog
+	 *            类别
+	 * @param name
+	 *            名称
 	 * @return 资源
 	 */
-	public Resource getResource(String catalog, String name)
-	{
+	public Resource getResource(String catalog, String name) {
 		ResourceSelection selection = contextConfig.getSelection(catalog, name);
-		if(selection == null){
+		if (selection == null) {
 			return null;
 		}
 		return repository.getResource(selection);
@@ -67,21 +68,22 @@ public class ResourceContext
 
 	/**
 	 * 定位资源
-	 * @param selection 资源选择
+	 * 
+	 * @param selection
+	 *            资源选择
 	 * @return 资源
 	 */
-	public Resource getResource(ResourceSelection selection)
-	{
+	public Resource getResource(ResourceSelection selection) {
 		String catalog = selection.getCatalog();
 		String version = selection.getVersion();
 		String name = selection.getName();
-		if(version == null){
-			if(name == null){
+		if (version == null) {
+			if (name == null) {
 				return getResource(catalog);
-			}else{
+			} else {
 				return getResource(catalog, name);
 			}
-		}else{
+		} else {
 			return repository.getResource(selection);
 		}
 	}

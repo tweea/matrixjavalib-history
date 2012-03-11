@@ -14,53 +14,47 @@ import org.slf4j.LoggerFactory;
 /**
  * 资源仓库选择集合
  */
-public class ResourceSelectionSet
-{
+public class ResourceSelectionSet {
 	private static final Logger LOG = LoggerFactory.getLogger(ResourceSelectionSet.class);
 
 	private Set<ResourceSelection> selections;
 
-	public ResourceSelectionSet()
-	{
+	public ResourceSelectionSet() {
 		this.selections = new HashSet<ResourceSelection>();
 	}
 
-	public void add(ResourceSelection selection)
-	{
+	public void add(ResourceSelection selection) {
 		selections.add(selection);
 	}
 
-	public boolean contains(ResourceSelection selection)
-	{
+	public boolean contains(ResourceSelection selection) {
 		return selections.contains(selection);
 	}
 
-	public boolean remove(ResourceSelection selection)
-	{
+	public boolean remove(ResourceSelection selection) {
 		return selections.remove(selection);
 	}
 
 	/**
 	 * @return 类别名称集合
 	 */
-	public Set<String> catalogNames()
-	{
+	public Set<String> catalogNames() {
 		Set<String> catalogs = new HashSet<String>();
-		for(ResourceSelection selection : selections){
+		for (ResourceSelection selection : selections) {
 			catalogs.add(selection.getCatalog());
 		}
 		return catalogs;
 	}
 
 	/**
-	 * @param catalog 类别
+	 * @param catalog
+	 *            类别
 	 * @return 资源名称集合
 	 */
-	public Set<String> resourceNames(String catalog)
-	{
+	public Set<String> resourceNames(String catalog) {
 		Set<String> resources = new HashSet<String>();
-		for(ResourceSelection selection : selections){
-			if(selection.getCatalog().equals(catalog)){
+		for (ResourceSelection selection : selections) {
+			if (selection.getCatalog().equals(catalog)) {
 				resources.add(selection.getName());
 			}
 		}
@@ -69,33 +63,35 @@ public class ResourceSelectionSet
 
 	/**
 	 * 资源选择
-	 * @param catalog 类别
+	 * 
+	 * @param catalog
+	 *            类别
 	 * @return 资源选择
 	 */
-	public Set<ResourceSelection> getSelections(String catalog)
-	{
+	public Set<ResourceSelection> getSelections(String catalog) {
 		return getSelections(catalog, ResourceSelection.generateName(catalog));
 	}
 
 	/**
 	 * 资源选择
-	 * @param catalog 类别
-	 * @param name 名称
+	 * 
+	 * @param catalog
+	 *            类别
+	 * @param name
+	 *            名称
 	 * @return 资源选择
 	 */
-	public Set<ResourceSelection> getSelections(String catalog, String name)
-	{
+	public Set<ResourceSelection> getSelections(String catalog, String name) {
 		Set<ResourceSelection> result = new HashSet<ResourceSelection>();
-		for(ResourceSelection selection : selections){
-			if(selection.getCatalog().equals(catalog) && selection.getName().equals(name)){
+		for (ResourceSelection selection : selections) {
+			if (selection.getCatalog().equals(catalog) && selection.getName().equals(name)) {
 				result.add(selection);
 			}
 		}
 		return result;
 	}
 
-	public Set<ResourceSelection> checkDiff(ResourceSelectionSet target)
-	{
+	public Set<ResourceSelection> checkDiff(ResourceSelectionSet target) {
 		// 更新信息列表
 		Set<ResourceSelection> diffs = new HashSet<ResourceSelection>();
 
