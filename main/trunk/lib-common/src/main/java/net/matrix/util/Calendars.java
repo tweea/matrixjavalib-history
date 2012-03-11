@@ -119,7 +119,7 @@ public final class Calendars {
 		if (date == null && time != null) {
 			return getJustTime(time);
 		} else if (date != null && time == null) {
-			return getJustDate(time);
+			return getJustDate(date);
 		}
 		return LocalDate.fromCalendarFields(date).toDateTime(LocalTime.fromCalendarFields(time)).toGregorianCalendar();
 	}
