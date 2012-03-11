@@ -5,21 +5,14 @@
  */
 package net.matrix.text;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
-import net.matrix.util.Calendars;
+import org.joda.time.format.DateTimeFormat;
 
 /**
- * 日期工具方法
- * 
- * @since 2005.03.09
+ * 日期格式化工具方法。
  */
 // TODO using JODA-TIME
 public class DateFormatHelper {
@@ -38,30 +31,7 @@ public class DateFormatHelper {
 	 */
 	public static final String ISO_TIME_FORMAT = "'T'HH:mm:ss";
 
-	private static final ThreadLocal<Map<String, DateFormat>> FORMATS = new ThreadLocal<Map<String, DateFormat>>();
-
 	private DateFormatHelper() {
-	}
-
-	/**
-	 * 获得一个 DateFormat 实例
-	 * 
-	 * @param format
-	 *            日期格式。
-	 * @return 一个 DateFormat 实例。
-	 */
-	public static DateFormat getFormat(String format) {
-		Map<String, DateFormat> localFormats = FORMATS.get();
-		if (localFormats == null) {
-			localFormats = new HashMap<String, DateFormat>();
-			FORMATS.set(localFormats);
-		}
-		DateFormat formatObject = localFormats.get(format);
-		if (formatObject == null) {
-			formatObject = new SimpleDateFormat(format);
-			localFormats.put(format, formatObject);
-		}
-		return formatObject;
 	}
 
 	/**
@@ -73,7 +43,7 @@ public class DateFormatHelper {
 	 * @see java.text.SimpleDateFormat
 	 */
 	public static String format(Date date, String format) {
-		return getFormat(format).format(date);
+		return DateTimeFormat.forPattern(format).print(date.getTime());
 	}
 
 	/**
@@ -107,8 +77,7 @@ public class DateFormatHelper {
 	 * @param date
 	 *            日期字符串。
 	 */
-	public static GregorianCalendar parse(String date)
-		throws ParseException {
+	public static GregorianCalendar parse(String date) {
 		return parse(date, DateFormatHelper.ISO_DATETIME_FORMAT);
 	}
 
@@ -118,14 +87,12 @@ public class DateFormatHelper {
 	 * @param dateString
 	 *            日期字符串。
 	 */
-	public static GregorianCalendar parse(String dateString, String format)
-		throws ParseException {
-		Date date = DateFormatHelper.getFormat(format).parse(dateString);
-		return Calendars.create(date);
+	public static GregorianCalendar parse(String dateString, String format) {
+		return DateTimeFormat.forPattern(format).parseDateTime(dateString).toGregorianCalendar();
 	}
 
 	public static String toString(GregorianCalendar date) {
-		return DateFormatHelper.format(date, DateFormatHelper.ISO_DATETIME_FORMAT);
+		return format(date, ISO_DATETIME_FORMAT);
 	}
 
 	/**
@@ -136,7 +103,7 @@ public class DateFormatHelper {
 	 * @return 格式化结果
 	 */
 	public static String toString(GregorianCalendar date, String format) {
-		return DateFormatHelper.format(date, format);
+		return format(date, format);
 	}
 
 	/**
@@ -160,7 +127,7 @@ public class DateFormatHelper {
 	 * @return 目标字符串，形式为 yyyy-MM-dd。
 	 */
 	public static String toDisplayString(GregorianCalendar date) {
-		return toString(date, DateFormatHelper.ISO_DATE_FORMAT);
+		return toString(date, ISO_DATE_FORMAT);
 	}
 
 	/**
