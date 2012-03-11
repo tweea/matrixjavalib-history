@@ -1,7 +1,6 @@
 package net.matrix.app.message;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
@@ -33,7 +32,7 @@ public class CodedMessageDefinitionLoader {
 			XMLConfiguration config = new XMLConfiguration();
 			config.setDelimiterParsingDisabled(true);
 			config.load(resource.getInputStream());
-			for (HierarchicalConfiguration definitionConfig : (List<HierarchicalConfiguration>) config.configurationsAt("definition")) {
+			for (HierarchicalConfiguration definitionConfig : config.configurationsAt("definition")) {
 				String code = definitionConfig.getString("[@code]");
 				String template = definitionConfig.getString("[@template]");
 				CodedMessageDefinition.define(new CodedMessageDefinition(code, template));

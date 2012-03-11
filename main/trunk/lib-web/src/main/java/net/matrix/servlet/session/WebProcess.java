@@ -7,8 +7,6 @@ package net.matrix.servlet.session;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Map;
@@ -17,16 +15,12 @@ import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.matrix.lang.Objects;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
 
 public abstract class WebProcess {
-	private static final Logger LOG = LoggerFactory.getLogger(WebProcess.class);
-
 	private static final String ERROR_KEY = "error_key";
 
 	private static final String MESSAGE_KEY = "message_key";
@@ -134,15 +128,7 @@ public abstract class WebProcess {
 		if ("".equals(value)) {
 			return null;
 		}
-		DateFormat df = DateFormatHelper.getFormat(format);
-		GregorianCalendar gc = new GregorianCalendar(1900, 1, 1);
-		try {
-			gc.setTime(df.parse(value));
-		} catch (ParseException e) {
-			LOG.warn("参数 " + property + "=" + value + " 无法解析为日期", e);
-			return null;
-		}
-		return gc;
+		return (GregorianCalendar) DateFormatHelper.parse(value, format);
 	}
 
 	/**
