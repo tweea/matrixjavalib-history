@@ -1,43 +1,62 @@
+/*
+ * $Id$
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
+ */
 package net.matrix.io;
 
 /**
- * 相对定位的资源
+ * 相对定位的资源。
  */
 public class RelativeResource {
-	private String root;
-
-	private String path;
+	/**
+	 * 根路径名。
+	 */
+	private final String root;
 
 	/**
+	 * 相对路径。
+	 */
+	private final String path;
+
+	/**
+	 * 基于指定根路径名构造资源。
+	 * 
 	 * @param root
 	 *            根路径名
 	 * @param path
 	 *            相对路径
 	 */
-	public RelativeResource(String root, String path) {
+	public RelativeResource(final String root, final String path) {
 		this.root = root;
 		this.path = path;
 	}
 
 	/**
+	 * 基于已有资源构造。
+	 * 
 	 * @param parent
-	 *            关联路径
+	 *            关联资源
 	 * @param path
 	 *            相对路径
 	 */
-	public RelativeResource(RelativeResource parent, String path) {
+	public RelativeResource(final RelativeResource parent, final String path) {
 		this.root = parent.root;
 		this.path = parent.path + '/' + path;
 	}
 
 	/**
-	 * @return 根路径代码
+	 * 获取根路径名。
+	 * 
+	 * @return 根路径名
 	 */
 	public String getRoot() {
 		return root;
 	}
 
 	/**
+	 * 获取相对路径。
+	 * 
 	 * @return 相对路径
 	 */
 	public String getPath() {
@@ -59,7 +78,7 @@ public class RelativeResource {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}

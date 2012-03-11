@@ -6,11 +6,12 @@
 package net.matrix.lang;
 
 /**
- * 字符串实用方法
- * 
- * @since 2006.05.20
+ * 字符串实用方法。
  */
-public class Strings {
+public final class Strings {
+	/**
+	 * 禁止实例化。
+	 */
 	private Strings() {
 	}
 
@@ -29,8 +30,9 @@ public class Strings {
 	 *            替换成的字符串
 	 * @return 结果
 	 */
-	public static String replaceAllBetweenDelimiter(String source, String startStr, String endStr, String replaceSrc, String replaceDest) {
-		StringBuffer str = new StringBuffer(source);
+	public static String replaceAllBetweenDelimiter(final String source, final String startStr, final String endStr, final String replaceSrc,
+		final String replaceDest) {
+		StringBuilder str = new StringBuilder(source);
 		for (int procPointer = 0; procPointer >= 0;) {
 			int start = str.indexOf(startStr, procPointer);
 			int end = -1;
