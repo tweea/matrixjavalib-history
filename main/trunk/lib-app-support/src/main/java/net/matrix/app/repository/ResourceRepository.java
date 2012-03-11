@@ -1,6 +1,6 @@
 /*
  * $Id$
- * Copyright(C) 2010 北航冠新
+ * Copyright(C) 2010 matrix
  * All right reserved.
  */
 package net.matrix.app.repository;

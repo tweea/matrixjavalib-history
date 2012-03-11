@@ -1,6 +1,6 @@
 /*
  * $Id$
- * Copyright(C) 2011 北航冠新
+ * Copyright(C) 2011 matrix
  * All right reserved.
  */
 package net.matrix.web.html;

@@ -1,6 +1,6 @@
 /*
  * $Id$
- * Copyright(C) 2009 北航冠新
+ * Copyright(C) 2009 matrix
  * All right reserved.
  */
 package net.matrix.app.message;
