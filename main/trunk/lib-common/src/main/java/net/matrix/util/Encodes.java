@@ -17,8 +17,14 @@ import org.apache.commons.lang3.Validate;
  * 2.JDK 提供的 URLEncoder
  */
 public final class Encodes {
+	/**
+	 * Base 编码字母表。
+	 */
 	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
+	/**
+	 * 默认 URL 编码。
+	 */
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
 
 	/**
@@ -29,6 +35,10 @@ public final class Encodes {
 
 	/**
 	 * Base62(0_9A_Za_z) 编码数字，long->String。
+	 * 
+	 * @param num
+	 *            数字
+	 * @return 编码结果
 	 */
 	public static String encodeBase62(final long num) {
 		return alphabetEncode(num, 62);
@@ -36,6 +46,10 @@ public final class Encodes {
 
 	/**
 	 * Base62(0_9A_Za_z) 解码数字，String->long。
+	 * 
+	 * @param str
+	 *            编码结果
+	 * @return 数字
 	 */
 	public static long decodeBase62(final String str) {
 		Validate.notBlank(str);
