@@ -12,7 +12,9 @@
 
 2、设置项目的默认文件编码
 	设置 General->Workspace 的 Text file encoding 为 UTF-8
-	确保所有编码设置为 UTF-8，在 filter 中输入 encoding
+	在左上角的文本框（有浅灰色的文字 type filter text）中输入 encoding。
+	点击下方出现的每一项设置，查看右侧配置中内容，确保所有编码设置为 UTF-8。
+	设置完毕后点击左上角的文本框后的 x 号，以显示所有设置。
 
 3、maven 相关的设置
 	为了配合 maven 的标准目录，设置 Java->Build Path 的 Souce and output folder
@@ -23,13 +25,15 @@
 	在 Java->Code Style->Clean Up 中导入 cleanup.xml
 	在 Java->Code Style->Code Templates 中导入 codetemplates.xml
 	设置 Java->Code Style->Code Templates->Automatically add comments for new methods and types 为选中
+	在 Java->Code Style->Formatter 中导入 formatter.xml
 	在 Java->Code Style->Organize Imports 中导入 gs.importorder
 
 5、设置项目默认 Java 版本
 	设置 Java->Compiler 中的 JDK Compliance 的 Compiler compliance level 为 1.6
 
 6、设置输出忽略项目
-	在 Java->Compiler->Building 的 Output folder 的 Filtered Resources 中增加 .svn
+	在 Java->Compiler->Building 的 Output folder 的 Filtered Resources 中增加 .svn，使用英文逗号分隔
+		如：*.launch, .svn
 
 7、错误警告，检查一些常规的编码错误
 	在 Java->Compiler->Errors/Warinings
