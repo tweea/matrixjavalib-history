@@ -467,7 +467,7 @@
 			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
 			<id>sourceforge.site</id>
 			<name>SourceForge Site</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site</url>
+			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site/${project.groupId}/${project.build.finalName}</url>
 		</site>
 	</distributionManagement>
 	<profiles>
