@@ -18,6 +18,9 @@ import org.apache.commons.collections.iterators.EnumerationIterator;
  */
 public class IterableEnumeration<E>
 	implements Iterable<E> {
+	/**
+	 * 目标 Iterator。
+	 */
 	private Iterator<E> it;
 
 	public IterableEnumeration(final Enumeration<E> enumeration) {
