@@ -54,29 +54,29 @@
 	</receivers>
 	<protocols>
 		<protocol name="WMQ">
-			<send factory="net.greatsoft.dataswap.network.wmq.MQTransferrerFactory" />
-			<daemon factory="net.greatsoft.dataswap.network.daemon.ThreadReceiveDaemon" />
-			<receive factory="net.greatsoft.dataswap.network.wmq.MQTransferrerFactory" />
+			<send factory="com.foobar.wmq.MQTransferrerFactory" />
+			<daemon factory="com.foobar.daemon.ThreadReceiveDaemon" />
+			<receive factory="com.foobar.wmq.MQTransferrerFactory" />
 		</protocol>
 		<protocol name="TLQ">
 			<send factory="MQ" />
-			<daemon factory="net.greatsoft.dataswap.network.daemon.DummyReceiveDaemon" />
+			<daemon factory="com.foobar.daemon.DummyReceiveDaemon" />
 			<receive factory="MQ" />
 		</protocol>
 		<protocol name="HTTP">
-			<send factory="net.greatsoft.dataswap.network.http.HttpTransferrerFactory" />
-			<daemon factory="net.greatsoft.dataswap.network.daemon.DummyReceiveDaemon" />
-			<receive factory="net.greatsoft.dataswap.network.http.HttpTransferrerFactory" />
+			<send factory="com.foobar.http.HttpTransferrerFactory" />
+			<daemon factory="com.foobar.daemon.DummyReceiveDaemon" />
+			<receive factory="com.foobar.http.HttpTransferrerFactory" />
 		</protocol>
 		<protocol name="NetworkSendWorkerTest">
-			<send factory="net.greatsoft.dataswap.network.MyTransferrerFactory" />
-			<daemon factory="net.greatsoft.dataswap.network.daemon.DummyReceiveDaemon" />
-			<receive factory="net.greatsoft.dataswap.network.MyTransferrerFactory" />
+			<send factory="com.foobar.MyTransferrerFactory" />
+			<daemon factory="com.foobar.daemon.DummyReceiveDaemon" />
+			<receive factory="com.foobar.MyTransferrerFactory" />
 		</protocol>
 		<protocol name="Test">
-			<send factory="net.greatsoft.dataswap.network.MyTransferrerFactory" />
-			<daemon factory="net.greatsoft.dataswap.network.daemon.DummyReceiveDaemon" />
-			<receive factory="net.greatsoft.dataswap.network.MyTransferrerFactory" />
+			<send factory="com.foobar.MyTransferrerFactory" />
+			<daemon factory="com.foobar.daemon.DummyReceiveDaemon" />
+			<receive factory="com.foobar.MyTransferrerFactory" />
 		</protocol>
 	</protocols>
 </transport>
