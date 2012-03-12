@@ -15,6 +15,9 @@ import java.util.Iterator;
  */
 public class IterableIterator<E>
 	implements Iterable<E> {
+	/**
+	 * 目标 Iterator。
+	 */
 	private Iterator<E> it;
 
 	public IterableIterator(final Iterator<E> it) {
