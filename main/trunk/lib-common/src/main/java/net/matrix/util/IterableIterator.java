@@ -20,6 +20,12 @@ public class IterableIterator<E>
 	 */
 	private Iterator<E> it;
 
+	/**
+	 * 用已有 Iterator 构造。
+	 * 
+	 * @param it
+	 *            Iterator
+	 */
 	public IterableIterator(final Iterator<E> it) {
 		this.it = it;
 	}

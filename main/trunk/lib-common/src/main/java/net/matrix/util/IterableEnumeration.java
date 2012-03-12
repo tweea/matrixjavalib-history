@@ -23,6 +23,12 @@ public class IterableEnumeration<E>
 	 */
 	private Iterator<E> it;
 
+	/**
+	 * 用已有 Enumeration 构造。
+	 * 
+	 * @param enumeration
+	 *            Enumeration
+	 */
 	public IterableEnumeration(final Enumeration<E> enumeration) {
 		this.it = new EnumerationIterator(enumeration);
 	}
