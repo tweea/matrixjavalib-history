@@ -6,7 +6,7 @@
 	<!-- 基本属性 - 项目属性 -->
 	<groupId>net.matrix</groupId>
 	<artifactId>genesis</artifactId>
-	<version>21</version>
+	<version>22-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- 基本属性 - 项目关系 -->
@@ -455,9 +455,9 @@
 		<url>http://192.168.1.100:8082/continuum</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/genesis-21</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/genesis-21</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/tags/genesis-21</url>
+		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/mvn-genesis</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/mvn-genesis</developerConnection>
+		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/mvn-genesis</url>
 	</scm>
 	<distributionManagement>
 		<repository>
