@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>net.matrix</groupId>
 		<artifactId>genesis</artifactId>
-		<version>20</version>
+		<version>21</version>
 	</parent>
 	<dependencies>
 		<!-- compile -->
@@ -170,9 +170,6 @@
 	<!-- 项目信息 -->
 	<name>数据库类库</name>
 	<description>访问数据库的公共方法。</description>
-	<url>
-		http://sourceforge.net/projects/matrixjavalib/
-	</url>
 	<inceptionYear>2008</inceptionYear>
 
 	<!-- 构建环境 -->

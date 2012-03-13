@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>net.matrix</groupId>
 		<artifactId>genesis</artifactId>
-		<version>20</version>
+		<version>21</version>
 	</parent>
 	<dependencies>
 		<!-- compile -->
@@ -82,9 +82,6 @@
 	<!-- 项目信息 -->
 	<name>Web 类库</name>
 	<description>与 Web 相关的实用工具等。</description>
-	<url>
-		http://sourceforge.net/projects/matrixjavalib/
-	</url>
 	<inceptionYear>2008</inceptionYear>
 
 	<!-- 构建环境 -->

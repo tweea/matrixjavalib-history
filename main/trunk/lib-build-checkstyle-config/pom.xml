@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>net.matrix</groupId>
 		<artifactId>genesis</artifactId>
-		<version>20</version>
+		<version>21</version>
 	</parent>
 	<!-- 基本属性 - 属性 -->
 
@@ -22,7 +22,6 @@
 	<!-- 项目信息 -->
 	<name>CheckStyle 配置</name>
 	<description>CheckStyle 配置。</description>
-	<url>http://sourceforge.net/projects/matrixjavalib/</url>
 	<inceptionYear>2008</inceptionYear>
 
 	<!-- 构建环境 -->
