@@ -254,6 +254,13 @@
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-checkstyle-plugin</artifactId>
+								<reportSets>
+									<reportSet>
+										<reports>
+											<report>checkstyle</report>
+										</reports>
+									</reportSet>
+								</reportSets>
 								<configuration>
 									<encoding>UTF-8</encoding>
 									<configLocation>checkstyle.xml</configLocation>
@@ -418,7 +425,7 @@
 	<description>
 		Genesis 提供 Maven3 构建支持，增加共享的配置和公共插件。
 	</description>
-	<url>http://sourceforge.net/projects/matrixjavalib/</url>
+	<url>http://matrixjavalib.sourceforge.net/site/${project.groupId}/${project.artifactId}/${project.version}</url>
 	<inceptionYear>2008</inceptionYear>
 	<licenses>
 		<license>
@@ -467,7 +474,7 @@
 			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
 			<id>sourceforge.site</id>
 			<name>SourceForge Site</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site/${project.groupId}/${project.build.finalName}</url>
+			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site/${project.groupId}/${project.artifactId}/${project.version}</url>
 		</site>
 	</distributionManagement>
 	<profiles>
