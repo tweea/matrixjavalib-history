@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 基本属性 - 项目属性 -->
+	<groupId>xxx</groupId>
+	<artifactId>xxx</artifactId>
+	<version>xxx</version>
+	<packaging>xxx</packaging>
+
+	<!-- 基本属性 - 属性 -->
+	<properties>
+		<xxx>xxx</xxx>
+	</properties>
+
+	<!-- 基本属性 - 项目关系 -->
+	<parent>
+		<groupId>xxx</groupId>
+		<artifactId>xxx</artifactId>
+		<version>xxx</version>
+	</parent>
+	<modules>
+		<module>xxx</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<!-- 按照字母顺序 -->
+			<!-- compile -->
+			<dependency>
+				<groupId>xxx</groupId>
+				<artifactId>xxx</artifactId>
+				<version>xxx</version>
+				<scope>compile</scope>
+			</dependency>
+			<!-- provided -->
+			<dependency>
+				<groupId>xxx</groupId>
+				<artifactId>xxx</artifactId>
+				<version>xxx</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- runtime -->
+			<dependency>
+				<groupId>xxx</groupId>
+				<artifactId>xxx</artifactId>
+				<version>xxx</version>
+				<scope>runtime</scope>
+			</dependency>
+			<!-- test -->
+			<dependency>
+				<groupId>xxx</groupId>
+				<artifactId>xxx</artifactId>
+				<version>xxx</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<!-- 按照字母顺序 -->
+		<!-- compile -->
+		<dependency>
+			<groupId>xxx</groupId>
+			<artifactId>xxx</artifactId>
+			<version>xxx</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- provided -->
+		<dependency>
+			<groupId>xxx</groupId>
+			<artifactId>xxx</artifactId>
+			<version>xxx</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- runtime -->
+		<dependency>
+			<groupId>xxx</groupId>
+			<artifactId>xxx</artifactId>
+			<version>xxx</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- test -->
+		<dependency>
+			<groupId>xxx</groupId>
+			<artifactId>xxx</artifactId>
+			<version>xxx</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- 构建设置 -->
+	<build>
+		<resources>
+			<resource>
+				xxx
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				xxx
+			</testResource>
+		</testResources>
+		<pluginManagement>
+			<plugins>
+				<!-- 按照字母顺序 -->
+				<plugin>
+					<groupId>xxx</groupId>
+					<artifactId>xxx</artifactId>
+					<version>xxx</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<extensions>
+			<!-- 按照字母顺序 -->
+			<extension>
+				<groupId>xxx</groupId>
+				<artifactId>xxx</artifactId>
+				<version>xxx</version>
+			</extension>
+		</extensions>
+		<plugins>
+			<!-- 按照字母顺序 -->
+			<plugin>
+				<groupId>xxx</groupId>
+				<artifactId>xxx</artifactId>
+				<version>xxx</version>
+				<configuration>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		xxx
+	</reporting>
+
+	<!-- 项目信息 -->
+	<name>xxx</name>
+	<description>xxx</description>
+	<url>xxx</url>
+	<inceptionYear>xxx</inceptionYear>
+	<licenses>
+		<license>
+			<name>xxx</name>
+			<url>xxx</url>
+			<distribution>xxx</distribution>
+			<comments>xxx</comments>
+		</license>
+	</licenses>
+	<organization>
+		<name>xxx</name>
+		<url>xxx</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>xxx</name>
+		</developer>
+	</developers>
+	<contributors>
+		xxx
+	</contributors>
+	<mailingLists>
+		xxx
+	</mailingLists>
+
+	<!-- 构建环境 -->
+	<prerequisites>
+		<maven>xxx</maven>
+	</prerequisites>
+	<issueManagement>
+		<system>xxx</system>
+		<url>xxx</url>
+	</issueManagement>
+	<ciManagement>
+		<system>xxx</system>
+		<url>xxx</url>
+	</ciManagement>
+	<scm>
+		<connection>xxx</connection>
+		<developerConnection>xxx</developerConnection>
+		<url>xxx</url>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>xxx</id>
+			<name>xxx</name>
+			<url>xxx</url>
+		</repository>
+		<snapshotRepository>
+			<id>xxx</id>
+			<name>xxx</name>
+			<url>xxx</url>
+		</snapshotRepository>
+		<site>
+			<id>xxx</id>
+			<name>xxx</name>
+			<url>xxx</url>
+		</site>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>xxx</id>
+			<build>
+				<defaultGoal>xxx</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>xxx</groupId>
+						<artifactId>xxx</artifactId>
+						<executions>
+							<execution>
+								<configuration>
+								</configuration>
+								<goals>
+									<goal>xxx</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

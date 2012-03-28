@@ -5,6 +5,8 @@
 	-D属性 定义属性，如 -Duser=frek
 	-X 调试模式
 	-U 强制依赖更新检查
+	跳过测试
+		-Dmaven.test.skip=true
 三、常用命令
 	编译
 		mvn compile
@@ -60,6 +62,8 @@
 5、依赖项插件
 	依赖树
 		mvn dependency:tree
+	下载源代码
+		mvn dependency:sources
 	分析
 		mvn dependency:analyze
 	拷贝
