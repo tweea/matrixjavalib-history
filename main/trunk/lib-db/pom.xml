@@ -8,6 +8,8 @@
 	<version>1.4.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	<!-- 基本属性 - 属性 -->
+
 	<!-- 基本属性 - 项目关系 -->
 	<parent>
 		<groupId>net.matrix</groupId>
@@ -94,6 +96,7 @@
 			<version>3.15.0-GA</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- provided -->
 		<!-- runtime -->
 		<dependency>
 			<!-- 数据库连接池 -->
@@ -144,7 +147,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<!-- 基本属性 - 属性 -->
 
 	<!-- 构建设置 -->
 	<build>

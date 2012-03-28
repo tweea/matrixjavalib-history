@@ -8,6 +8,8 @@
 	<version>1.4.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+	<!-- 基本属性 - 属性 -->
+
 	<!-- 基本属性 - 项目关系 -->
 	<parent>
 		<groupId>net.matrix</groupId>
@@ -116,6 +118,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- provided -->
 		<!-- runtime -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -161,7 +164,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<!-- 基本属性 - 属性 -->
 
 	<!-- 构建设置 -->
 	<build>

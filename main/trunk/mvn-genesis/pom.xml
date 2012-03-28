@@ -9,63 +9,16 @@
 	<version>22-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<!-- 基本属性 - 项目关系 -->
 	<!-- 基本属性 - 属性 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<!-- 基本属性 - 项目关系 -->
+
 	<!-- 构建设置 -->
-	<prerequisites>
-		<maven>3.0</maven>
-	</prerequisites>
 	<build>
 		<defaultGoal>package</defaultGoal>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<!-- Allow any Java >= 1.6 -->
-								<requireJavaVersion>
-									<version>[1.6,)</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -418,6 +371,51 @@
 				<version>2.2</version>
 			</extension>
 		</extensions>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<!-- Allow any Java >= 1.6 -->
+								<requireJavaVersion>
+									<version>[1.6,)</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
 	<!-- 项目信息 -->
@@ -446,6 +444,9 @@
 	</developers>
 
 	<!-- 构建环境 -->
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
 	<issueManagement>
 		<system>sourceforge</system>
 		<url>http://sourceforge.net/tracker/?group_id=543402</url>
