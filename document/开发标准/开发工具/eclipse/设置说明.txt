@@ -31,11 +31,7 @@
 5、设置项目默认 Java 版本
 	设置 Java->Compiler 中的 JDK Compliance 的 Compiler compliance level 为 1.6
 
-6、设置输出忽略项目
-	在 Java->Compiler->Building 的 Output folder 的 Filtered Resources 中增加 .svn，使用英文逗号分隔
-		如：*.launch, .svn
-
-7、错误警告，检查一些常规的编码错误
+6、错误警告，检查一些常规的编码错误
 	在 Java->Compiler->Errors/Warinings
 		增加 Warinings
 		* Potential programming problem
@@ -55,17 +51,19 @@
 		Validate tag arguments 为选中
 		Missing tag descriptions 为 Validate all standard tags
 
-8、设置保存自动格式化、清理代码
+7、设置保存自动格式化、清理代码
 	设置 Java->Editor->SaveAction
 	选择 Format Source Code，Formate All Codes，与 Organize Imports
 
-9、设置 Web 编辑器项目
-	在 Web->CSS Files->Editor 的 Line width 设为 120
-	在 Web->HTML Files->Editor 的 Line width 设为 120
+8、设置 JavaScript 项目
 	在 JavaScript->Code Style->Clean Up 中导入 js.cleanup.xml
 	在 JavaScript->Code Style->Formatter 中导入 js.formatter.xml
 	设置 JavaScript->Editor->SaveAction
 	选择 Perform the seclected actions on save，Format Source Code
+
+9、设置 Web 编辑器项目
+	在 Web->CSS Files->Editor 的 Line width 设为 120
+	在 Web->HTML Files->Editor 的 Line width 设为 120
 
 10、设置 XML 编辑器项目
 	XML->XML Files->Editor Line width 增加到 120 字符
@@ -81,3 +79,18 @@
 	在 Maven->User Settings 中点击 Browse...，选择本地安装的 maven 中的 /conf/settings.xml 文件并确认。
 3、设置编辑器
 	在 Maven->User Interface 中选中 Open XML page in the POM editor by default。
+
+四、checkstyle 设置
+	在 CheckStyle 点击 New...。
+	输入名字，如 Max Checks。
+	点击 Import...，选择 checkstyle-config 项目中的配置文件。
+	点击 OK，出现警告框。
+	点击警告框上的 Edit properties...。
+	在新对话框中选择 Find unresovled properties，点 Yes。
+	编辑已增加的属性值。
+	点击 OK 关闭所有新打开的对话框。
+	点击新增加的条目，点击 Set as Default。
+
+五、MoreUnit 设置
+	设置 Test source folder 为 maven 标准目录 src/test/java
+	设置 Test type 为 Junit 4
