@@ -55,9 +55,15 @@ public final class Resources {
 	 */
 	public static Resources getResources(final String key) {
 		Resources res = RESOURCES.get(key);
-		if (res == null) {
-			res = new Resources(key);
-			RESOURCES.put(key, res);
+		if (res != null) {
+			return res;
+		}
+		synchronized (RESOURCES) {
+			res = RESOURCES.get(key);
+			if (res == null) {
+				res = new Resources(key);
+				RESOURCES.put(key, res);
+			}
 		}
 		return res;
 	}
