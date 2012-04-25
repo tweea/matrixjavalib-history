@@ -371,6 +371,10 @@ public class DefaultTree<ID, DATA>
 	/**
 	 * 从 TreeSource 生成树状结构。
 	 * 
+	 * @param <ID>
+	 *            数据标识
+	 * @param <DATA>
+	 *            数据
 	 * @param source
 	 *            节点构造源
 	 * @return 新构造的树
@@ -386,6 +390,10 @@ public class DefaultTree<ID, DATA>
 	/**
 	 * 向 TreeSource 增加新的节点。
 	 * 
+	 * @param <ID>
+	 *            数据标识
+	 * @param <DATA>
+	 *            数据
 	 * @param source
 	 *            节点构造源
 	 * @param node

@@ -42,9 +42,10 @@ public final class Encodes {
 	 */
 	public static String encodeBase62(final long num) {
 		long index = Math.abs(num);
+		int base = BASE62.length();
 		StringBuilder sb = new StringBuilder();
-		for (; index > 0; index /= 62) {
-			sb.append(BASE62.charAt((int) (index % 62)));
+		for (; index > 0; index /= base) {
+			sb.append(BASE62.charAt((int) (index % base)));
 		}
 
 		return sb.toString();
@@ -61,8 +62,9 @@ public final class Encodes {
 		Validate.notBlank(str);
 
 		long result = 0;
+		int base = BASE62.length();
 		for (int i = 0; i < str.length(); i++) {
-			result += BASE62.indexOf(str.charAt(i)) * Math.pow(62, i);
+			result += BASE62.indexOf(str.charAt(i)) * Math.pow(base, i);
 		}
 
 		return result;
@@ -71,6 +73,9 @@ public final class Encodes {
 	/**
 	 * URL 编码，默认编码为 UTF-8。
 	 * 
+	 * @param part
+	 *            待编码字符串
+	 * @return 编码字符串
 	 * @throws UnsupportedEncodingException
 	 *             编码错误
 	 */
@@ -82,6 +87,9 @@ public final class Encodes {
 	/**
 	 * URL 解码，默认编码为 UTF-8。
 	 * 
+	 * @param part
+	 *            待解码字符串
+	 * @return 解码字符串
 	 * @throws UnsupportedEncodingException
 	 *             编码错误
 	 */

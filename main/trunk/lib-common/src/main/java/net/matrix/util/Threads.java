@@ -42,8 +42,13 @@ public final class Threads {
 
 	/**
 	 * sleep 等待，忽略 InterruptedException。
+	 * 
+	 * @param duration
+	 *            等待时间
+	 * @param unit
+	 *            时间单位
 	 */
-	public static void sleep(long duration, TimeUnit unit) {
+	public static void sleep(final long duration, final TimeUnit unit) {
 		try {
 			Thread.sleep(unit.toMillis(duration));
 		} catch (InterruptedException e) {

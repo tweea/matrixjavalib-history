@@ -36,7 +36,7 @@ public class CryptosTest {
 		String input = "foo message";
 
 		byte[] encryptResult = Cryptos.aesEncrypt(input.getBytes(), key);
-		String descryptResult = Cryptos.aesDecrypt(encryptResult, key);
+		String descryptResult = new String(Cryptos.aesDecrypt(encryptResult, key));
 
 		assertEquals(input, descryptResult);
 	}
@@ -51,7 +51,7 @@ public class CryptosTest {
 		String input = "foo message";
 
 		byte[] encryptResult = Cryptos.aesEncrypt(input.getBytes(), key, iv);
-		String descryptResult = Cryptos.aesDecrypt(encryptResult, key, iv);
+		String descryptResult = new String(Cryptos.aesDecrypt(encryptResult, key, iv));
 
 		assertEquals(input, descryptResult);
 	}

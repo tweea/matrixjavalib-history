@@ -20,13 +20,21 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 支持 HMAC-SHA1 消息签名及 DES/AES 对称加密的工具类。
- * 支持 Hex 与 Base64 两种编码方式。
  */
-public class Cryptos {
+public final class Cryptos {
+	/**
+	 * AES 算法名。
+	 */
 	private static final String AES = "AES";
 
+	/**
+	 * 带随机向量 AES 算法名。
+	 */
 	private static final String AES_CBC = "AES/CBC/PKCS5Padding";
 
+	/**
+	 * HMAC-SHA1 算法名。
+	 */
 	private static final String HMACSHA1 = "HmacSHA1";
 
 	// RFC2401
@@ -34,10 +42,19 @@ public class Cryptos {
 
 	private static final int DEFAULT_AES_KEYSIZE = 128;
 
+	/**
+	 * 默认随机向量长度。
+	 */
 	private static final int DEFAULT_IVSIZE = 16;
 
+	/**
+	 * 内部随机量。
+	 */
 	private static final SecureRandom RANDOM = new SecureRandom();
 
+	/**
+	 * 阻止实例化。
+	 */
 	private Cryptos() {
 	}
 
@@ -49,8 +66,11 @@ public class Cryptos {
 	 *            原始输入字符数组
 	 * @param key
 	 *            HMAC-SHA1 密钥
+	 * @return 签名
+	 * @throws GeneralSecurityException
+	 *             签名失败
 	 */
-	public static byte[] hmacSha1(byte[] input, byte[] key)
+	public static byte[] hmacSha1(final byte[] input, final byte[] key)
 		throws GeneralSecurityException {
 		try {
 			SecretKey secretKey = new SecretKeySpec(key, HMACSHA1);
@@ -71,8 +91,11 @@ public class Cryptos {
 	 *            原始输入字符串
 	 * @param key
 	 *            密钥
+	 * @return true 签名正确
+	 * @throws GeneralSecurityException
+	 *             签名失败
 	 */
-	public static boolean isMacValid(byte[] expected, byte[] input, byte[] key)
+	public static boolean isMacValid(final byte[] expected, final byte[] input, final byte[] key)
 		throws GeneralSecurityException {
 		byte[] actual = hmacSha1(input, key);
 		return Arrays.equals(expected, actual);
@@ -81,6 +104,8 @@ public class Cryptos {
 	/**
 	 * 生成 HMAC-SHA1 密钥，返回字节数组，长度为 160 位(20字节)。
 	 * HMAC-SHA1 算法对密钥无特殊要求，RFC2401 建议最少长度为 160 位(20字节)。
+	 * 
+	 * @return 密钥
 	 */
 	public static byte[] generateHmacSha1Key() {
 		try {
@@ -95,61 +120,71 @@ public class Cryptos {
 
 	// -- AES funciton --//
 	/**
-	 * 使用 AES 加密原始字符串。
+	 * 使用 AES 加密。
 	 * 
 	 * @param input
-	 *            原始输入字符数组
+	 *            明文
 	 * @param key
 	 *            符合 AES 要求的密钥
+	 * @return 密文
+	 * @throws GeneralSecurityException
+	 *             加密失败
 	 */
-	public static byte[] aesEncrypt(byte[] input, byte[] key)
+	public static byte[] aesEncrypt(final byte[] input, final byte[] key)
 		throws GeneralSecurityException {
 		return aes(input, key, Cipher.ENCRYPT_MODE);
 	}
 
 	/**
-	 * 使用 AES 加密原始字符串。
+	 * 使用 AES 加密。
 	 * 
 	 * @param input
-	 *            原始输入字符数组
+	 *            明文
 	 * @param key
 	 *            符合 AES 要求的密钥
 	 * @param iv
 	 *            初始向量
+	 * @return 密文
+	 * @throws GeneralSecurityException
+	 *             加密失败
 	 */
-	public static byte[] aesEncrypt(byte[] input, byte[] key, byte[] iv)
+	public static byte[] aesEncrypt(final byte[] input, final byte[] key, final byte[] iv)
 		throws GeneralSecurityException {
 		return aes(input, key, iv, Cipher.ENCRYPT_MODE);
 	}
 
 	/**
-	 * 使用 AES 解密字符串，返回原始字符串。
+	 * 使用 AES 解密。
 	 * 
 	 * @param input
-	 *            Hex 编码的加密字符串
+	 *            密文
 	 * @param key
 	 *            符合 AES 要求的密钥
+	 * @return 明文
+	 * @throws GeneralSecurityException
+	 *             解密失败
 	 */
-	public static String aesDecrypt(byte[] input, byte[] key)
+	public static byte[] aesDecrypt(final byte[] input, final byte[] key)
 		throws GeneralSecurityException {
-		byte[] decryptResult = aes(input, key, Cipher.DECRYPT_MODE);
-		return new String(decryptResult);
+		return aes(input, key, Cipher.DECRYPT_MODE);
 	}
 
 	/**
-	 * 使用 AES 解密字符串，返回原始字符串。
+	 * 使用 AES 解密。
 	 * 
 	 * @param input
-	 *            Hex 编码的加密字符串
+	 *            密文
 	 * @param key
 	 *            符合 AES 要求的密钥
 	 * @param iv
 	 *            初始向量
+	 * @return 明文
+	 * @throws GeneralSecurityException
+	 *             解密失败
 	 */
-	public static String aesDecrypt(byte[] input, byte[] key, byte[] iv)
+	public static byte[] aesDecrypt(final byte[] input, final byte[] key, final byte[] iv)
 		throws GeneralSecurityException {
-		byte[] decryptResult = aes(input, key, iv, Cipher.DECRYPT_MODE);
-		return new String(decryptResult);
+		return aes(input, key, iv, Cipher.DECRYPT_MODE);
 	}
 
 	/**
@@ -161,8 +196,9 @@ public class Cryptos {
 	 *            符合 AES 要求的密钥
 	 * @param mode
 	 *            Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
+	 * @return 密文或明文
 	 */
-	private static byte[] aes(byte[] input, byte[] key, int mode)
+	private static byte[] aes(final byte[] input, final byte[] key, final int mode)
 		throws GeneralSecurityException {
 		try {
 			SecretKey secretKey = new SecretKeySpec(key, AES);
@@ -187,8 +223,9 @@ public class Cryptos {
 	 *            初始向量
 	 * @param mode
 	 *            Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
+	 * @return 密文或明文
 	 */
-	private static byte[] aes(byte[] input, byte[] key, byte[] iv, int mode)
+	private static byte[] aes(final byte[] input, final byte[] key, final byte[] iv, final int mode)
 		throws GeneralSecurityException {
 		try {
 			SecretKey secretKey = new SecretKeySpec(key, AES);
@@ -205,6 +242,8 @@ public class Cryptos {
 
 	/**
 	 * 生成 AES 密钥，返回字节数组，默认长度为 128 位(16 字节)。
+	 * 
+	 * @return 密钥
 	 */
 	public static byte[] generateAesKey() {
 		return generateAesKey(DEFAULT_AES_KEYSIZE);
@@ -212,8 +251,12 @@ public class Cryptos {
 
 	/**
 	 * 生成 AES 密钥，可选长度为 128,192,256 位。
+	 * 
+	 * @param keysize
+	 *            密钥长度
+	 * @return 密钥
 	 */
-	public static byte[] generateAesKey(int keysize) {
+	public static byte[] generateAesKey(final int keysize) {
 		try {
 			KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
 			keyGenerator.init(keysize);
@@ -225,7 +268,9 @@ public class Cryptos {
 	}
 
 	/**
-	 * 生成随机向量，默认大小为 cipher.getBlockSize()，16字节。
+	 * 生成随机向量，默认大小为 16 字节。
+	 * 
+	 * @return 随机向量
 	 */
 	public static byte[] generateIV() {
 		byte[] bytes = new byte[DEFAULT_IVSIZE];

@@ -29,7 +29,6 @@ public final class Calendars {
 	 *            日
 	 * @return true 日期正确
 	 */
-	@SuppressWarnings("unused")
 	public static boolean isValidDate(final int year, final int month, final int day) {
 		try {
 			new DateTime(year, month, day, 0, 0);
