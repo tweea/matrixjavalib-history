@@ -6,8 +6,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.matrix.lang.ReflectionsTest.TestBean3;
-
 public class Collecitons3Test {
 	@Test
 	public void convertElementPropertyToString() {
@@ -36,5 +34,26 @@ public class Collecitons3Test {
 		List<String> result = Collections3.extractToList(list, "id");
 		Assert.assertEquals(2, result.size());
 		Assert.assertEquals(1, result.get(0));
+	}
+
+	@Test
+	public void convertCollectionToString() {
+		List<String> list = new ArrayList();
+		list.add("aa");
+		list.add("bb");
+		String result = Collections3.convertToString(list, "<li>", "</li>");
+		Assert.assertEquals("<li>aa</li><li>bb</li>", result);
+	}
+
+	public static class TestBean3 {
+		private int id;
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
 	}
 }

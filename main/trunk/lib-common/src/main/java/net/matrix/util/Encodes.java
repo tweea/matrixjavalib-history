@@ -20,7 +20,7 @@ public final class Encodes {
 	/**
 	 * Base 编码字母表。
 	 */
-	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	private static final String BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 	/**
 	 * 默认 URL 编码。
@@ -41,7 +41,13 @@ public final class Encodes {
 	 * @return 编码结果
 	 */
 	public static String encodeBase62(final long num) {
-		return alphabetEncode(num, 62);
+		long index = Math.abs(num);
+		StringBuilder sb = new StringBuilder();
+		for (; index > 0; index /= 62) {
+			sb.append(BASE62.charAt((int) (index % 62)));
+		}
+
+		return sb.toString();
 	}
 
 	/**
@@ -54,23 +60,9 @@ public final class Encodes {
 	public static long decodeBase62(final String str) {
 		Validate.notBlank(str);
 
-		return alphabetDecode(str, 62);
-	}
-
-	private static String alphabetEncode(long num, final int base) {
-		num = Math.abs(num);
-		StringBuilder sb = new StringBuilder();
-		for (; num > 0; num /= base) {
-			sb.append(ALPHABET.charAt((int) (num % base)));
-		}
-
-		return sb.toString();
-	}
-
-	private static long alphabetDecode(final String str, final int base) {
 		long result = 0;
 		for (int i = 0; i < str.length(); i++) {
-			result += ALPHABET.indexOf(str.charAt(i)) * Math.pow(base, i);
+			result += BASE62.indexOf(str.charAt(i)) * Math.pow(62, i);
 		}
 
 		return result;

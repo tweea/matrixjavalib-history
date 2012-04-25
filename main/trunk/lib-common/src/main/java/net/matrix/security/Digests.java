@@ -1,52 +1,115 @@
 /*
  * $Id$
- * Copyright(C) 2011 Matrix
+ * Copyright(C) 2008 Matrix
  * All right reserved.
  */
 package net.matrix.security;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * 支持 SHA-1/MD5 消息摘要的工具类。
+ * 返回 ByteSource，可进一步被编码为 Hex, Base64 或 UrlSafeBase64。
  */
-public final class Digests {
-	public static final String SHA1 = "SHA-1";
+public class Digests {
+	private static final String SHA1 = "SHA-1";
 
-	public static final String MD5 = "MD5";
+	private static final String MD5 = "MD5";
 
-	/**
-	 * 阻止实例化。
-	 */
+	private static final SecureRandom RANDOM = new SecureRandom();
+
 	private Digests() {
 	}
 
-	public static byte[] sha1(final byte[] input) {
-		try {
-			return digest(input, SHA1);
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("Impossible exception", e);
-		}
+	/**
+	 * 对输入字符串进行 sha1 散列。
+	 */
+	public static byte[] sha1(byte[] input) {
+		return digest(input, SHA1, null, 1);
 	}
 
-	public static byte[] md5(final byte[] input) {
-		try {
-			return digest(input, MD5);
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("Impossible exception", e);
-		}
+	public static byte[] sha1(byte[] input, byte[] salt) {
+		return digest(input, SHA1, salt, 1);
+	}
+
+	public static byte[] sha1(byte[] input, byte[] salt, int iterations) {
+		return digest(input, SHA1, salt, iterations);
 	}
 
 	/**
 	 * 对字符串进行散列，支持 md5 与 sha1 算法。
-	 * 
-	 * @throws NoSuchAlgorithmException
-	 *             编码错误
 	 */
-	public static byte[] digest(final byte[] input, final String algorithm)
-		throws NoSuchAlgorithmException {
-		MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-		return messageDigest.digest(input);
+	private static byte[] digest(byte[] input, String algorithm, byte[] salt, int iterations) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance(algorithm);
+
+			if (salt != null) {
+				digest.update(salt);
+			}
+
+			byte[] result = digest.digest(input);
+
+			for (int i = 1; i < iterations; i++) {
+				digest.reset();
+				result = digest.digest(result);
+			}
+			return result;
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 生成随机的 Byte[] 作为 salt。
+	 * 
+	 * @param numBytes
+	 *            byte数组的大小
+	 */
+	public static byte[] generateSalt(int numBytes) {
+		if (numBytes <= 0) {
+			throw new IllegalArgumentException("numBytes argument must be a positive integer (1 or larger)");
+		}
+		byte[] bytes = new byte[numBytes];
+		RANDOM.nextBytes(bytes);
+		return bytes;
+	}
+
+	/**
+	 * 对文件进行 md5 散列。
+	 */
+	public static byte[] md5(InputStream input)
+		throws IOException {
+		return digest(input, MD5);
+	}
+
+	/**
+	 * 对文件进行 sha1 散列。
+	 */
+	public static byte[] sha1(InputStream input)
+		throws IOException {
+		return digest(input, SHA1);
+	}
+
+	private static byte[] digest(InputStream input, String algorithm)
+		throws IOException {
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+			int bufferLength = 8 * 1024;
+			byte[] buffer = new byte[bufferLength];
+			int read = input.read(buffer, 0, bufferLength);
+
+			while (read > -1) {
+				messageDigest.update(buffer, 0, read);
+				read = input.read(buffer, 0, bufferLength);
+			}
+
+			return messageDigest.digest();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

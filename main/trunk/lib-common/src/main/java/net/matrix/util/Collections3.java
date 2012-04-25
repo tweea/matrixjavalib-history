@@ -19,7 +19,7 @@ import net.matrix.lang.ReflectionRuntimeException;
 
 /**
  * Collections 工具集。
- * 在 JDK 的 Colllections 和 Guava 的 Collections2 后，命名为 Collections3。
+ * 在 JDK 的 Collections 和 Guava 的 Collections2 后，命名为 Collections3。
  */
 public final class Collections3 {
 	/**
@@ -28,6 +28,9 @@ public final class Collections3 {
 	private Collections3() {
 	}
 
+	/**
+	 * 返回 a - b 的集合。
+	 */
 	public static <T> List<T> subtract(final Collection<T> a, final Collection<T> b) {
 		List<T> list = new ArrayList<T>(a);
 		for (T item : b) {
@@ -47,7 +50,7 @@ public final class Collections3 {
 	 *            要提取为Map中的Value值的属性名.
 	 */
 	public static Map extractToMap(final Collection collection, final String keyPropertyName, final String valuePropertyName) {
-		Map map = new HashMap();
+		Map map = new HashMap(collection.size());
 
 		try {
 			for (Object obj : collection) {
@@ -73,7 +76,7 @@ public final class Collections3 {
 	 *            要提取的属性名.
 	 */
 	public static List extractToList(final Collection collection, final String propertyName) {
-		List list = new ArrayList();
+		List list = new ArrayList(collection.size());
 
 		try {
 			for (Object obj : collection) {
@@ -103,5 +106,16 @@ public final class Collections3 {
 	public static String extractToString(final Collection collection, final String propertyName, final String separator) {
 		List list = extractToList(collection, propertyName);
 		return StringUtils.join(list, separator);
+	}
+
+	/**
+	 * 转换 Collection 为 String，每个元素的前面加入 prefix，后面加入 postfix，如<div>mymessage</div>。
+	 */
+	public static String convertToString(final Collection collection, final String prefix, final String postfix) {
+		StringBuilder builder = new StringBuilder();
+		for (Object o : collection) {
+			builder.append(prefix).append(o).append(postfix);
+		}
+		return builder.toString();
 	}
 }
