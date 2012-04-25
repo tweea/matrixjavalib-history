@@ -13,37 +13,82 @@ import java.security.SecureRandom;
 
 /**
  * 支持 SHA-1/MD5 消息摘要的工具类。
- * 返回 ByteSource，可进一步被编码为 Hex, Base64 或 UrlSafeBase64。
  */
-public class Digests {
+public final class Digests {
+	/**
+	 * SHA-1 算法名。
+	 */
 	private static final String SHA1 = "SHA-1";
 
+	/**
+	 * MD5 算法名。
+	 */
 	private static final String MD5 = "MD5";
 
+	/**
+	 * 内部随机量。
+	 */
 	private static final SecureRandom RANDOM = new SecureRandom();
 
+	/**
+	 * 阻止实例化。
+	 */
 	private Digests() {
 	}
 
 	/**
-	 * 对输入字符串进行 sha1 散列。
+	 * 对输入字节数组进行 sha1 散列。
+	 * 
+	 * @param input
+	 *            输入
+	 * @return 散列码
 	 */
-	public static byte[] sha1(byte[] input) {
+	public static byte[] sha1(final byte[] input) {
 		return digest(input, SHA1, null, 1);
 	}
 
-	public static byte[] sha1(byte[] input, byte[] salt) {
+	/**
+	 * 对输入字节数组进行 sha1 散列。
+	 * 
+	 * @param input
+	 *            输入
+	 * @param salt
+	 *            扰码
+	 * @return 散列码
+	 */
+	public static byte[] sha1(final byte[] input, final byte[] salt) {
 		return digest(input, SHA1, salt, 1);
 	}
 
-	public static byte[] sha1(byte[] input, byte[] salt, int iterations) {
+	/**
+	 * 对输入字节数组进行 sha1 散列。
+	 * 
+	 * @param input
+	 *            输入
+	 * @param salt
+	 *            扰码
+	 * @param iterations
+	 *            计算轮数
+	 * @return 散列码
+	 */
+	public static byte[] sha1(final byte[] input, final byte[] salt, final int iterations) {
 		return digest(input, SHA1, salt, iterations);
 	}
 
 	/**
-	 * 对字符串进行散列，支持 md5 与 sha1 算法。
+	 * 对字节数组进行散列，支持 md5 与 sha1 算法。
+	 * 
+	 * @param input
+	 *            输入
+	 * @param algorithm
+	 *            算法名
+	 * @param salt
+	 *            扰码
+	 * @param iterations
+	 *            计算轮数
+	 * @return 散列码
 	 */
-	private static byte[] digest(byte[] input, String algorithm, byte[] salt, int iterations) {
+	private static byte[] digest(final byte[] input, final String algorithm, final byte[] salt, final int iterations) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance(algorithm);
 
@@ -67,9 +112,10 @@ public class Digests {
 	 * 生成随机的 Byte[] 作为 salt。
 	 * 
 	 * @param numBytes
-	 *            byte数组的大小
+	 *            byte 数组的大小
+	 * @return 扰码
 	 */
-	public static byte[] generateSalt(int numBytes) {
+	public static byte[] generateSalt(final int numBytes) {
 		if (numBytes <= 0) {
 			throw new IllegalArgumentException("numBytes argument must be a positive integer (1 or larger)");
 		}
@@ -79,22 +125,45 @@ public class Digests {
 	}
 
 	/**
-	 * 对文件进行 md5 散列。
+	 * 对输入流进行 md5 散列。
+	 * 
+	 * @param input
+	 *            输入流
+	 * @return 散列码
+	 * @throws IOException
+	 *             从输入流读取数据失败
 	 */
-	public static byte[] md5(InputStream input)
+	public static byte[] md5(final InputStream input)
 		throws IOException {
 		return digest(input, MD5);
 	}
 
 	/**
-	 * 对文件进行 sha1 散列。
+	 * 对输入流进行 sha1 散列。
+	 * 
+	 * @param input
+	 *            输入流
+	 * @return 散列码
+	 * @throws IOException
+	 *             从输入流读取数据失败
 	 */
-	public static byte[] sha1(InputStream input)
+	public static byte[] sha1(final InputStream input)
 		throws IOException {
 		return digest(input, SHA1);
 	}
 
-	private static byte[] digest(InputStream input, String algorithm)
+	/**
+	 * 对输入流进行散列。
+	 * 
+	 * @param input
+	 *            输入流
+	 * @param algorithm
+	 *            算法名
+	 * @return 散列码
+	 * @throws IOException
+	 *             从输入流读取数据失败
+	 */
+	private static byte[] digest(final InputStream input, final String algorithm)
 		throws IOException {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);

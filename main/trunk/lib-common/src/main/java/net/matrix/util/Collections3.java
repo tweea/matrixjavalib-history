@@ -30,6 +30,14 @@ public final class Collections3 {
 
 	/**
 	 * 返回 a - b 的集合。
+	 * 
+	 * @param <T>
+	 *            集合元素类型
+	 * @param a
+	 *            总集合
+	 * @param b
+	 *            被减集合
+	 * @return 差集合
 	 */
 	public static <T> List<T> subtract(final Collection<T> a, final Collection<T> b) {
 		List<T> list = new ArrayList<T>(a);
@@ -48,6 +56,7 @@ public final class Collections3 {
 	 *            要提取为Map中的Key值的属性名.
 	 * @param valuePropertyName
 	 *            要提取为Map中的Value值的属性名.
+	 * @return 属性集合
 	 */
 	public static Map extractToMap(final Collection collection, final String keyPropertyName, final String valuePropertyName) {
 		Map map = new HashMap(collection.size());
@@ -74,6 +83,7 @@ public final class Collections3 {
 	 *            来源集合.
 	 * @param propertyName
 	 *            要提取的属性名.
+	 * @return 属性列表
 	 */
 	public static List extractToList(final Collection collection, final String propertyName) {
 		List list = new ArrayList(collection.size());
@@ -102,6 +112,7 @@ public final class Collections3 {
 	 *            要提取的属性名.
 	 * @param separator
 	 *            分隔符.
+	 * @return 组合字符串
 	 */
 	public static String extractToString(final Collection collection, final String propertyName, final String separator) {
 		List list = extractToList(collection, propertyName);
@@ -110,6 +121,14 @@ public final class Collections3 {
 
 	/**
 	 * 转换 Collection 为 String，每个元素的前面加入 prefix，后面加入 postfix，如<div>mymessage</div>。
+	 * 
+	 * @param collection
+	 *            来源集合.
+	 * @param prefix
+	 *            前缀
+	 * @param postfix
+	 *            后缀
+	 * @return 组合字符串
 	 */
 	public static String convertToString(final Collection collection, final String prefix, final String postfix) {
 		StringBuilder builder = new StringBuilder();
