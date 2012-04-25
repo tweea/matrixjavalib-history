@@ -41,6 +41,17 @@ public final class Threads {
 	}
 
 	/**
+	 * sleep 等待，忽略 InterruptedException。
+	 */
+	public static void sleep(long duration, TimeUnit unit) {
+		try {
+			Thread.sleep(unit.toMillis(duration));
+		} catch (InterruptedException e) {
+			LOG.warn("thread interrupted.");
+		}
+	}
+
+	/**
 	 * 按照 ExecutorService JavaDoc 示例代码编写的 Graceful Shutdown 方法。
 	 * 先使用 shutdown，停止接收新任务并尝试完成所有已存在任务。
 	 * 如果超时，则调用 shutdownNow，取消在 workQueue 中 Pending 的任务，并中断所有阻塞函数。
@@ -65,7 +76,7 @@ public final class Threads {
 				pool.shutdownNow();
 				// Wait a while for tasks to respond to being cancelled
 				if (!pool.awaitTermination(shutdownNowTimeout, timeUnit)) {
-					LOG.error("Pool did not terminate");
+					LOG.error("Pool did not terminated");
 				}
 			}
 		} catch (InterruptedException ie) {
@@ -90,7 +101,7 @@ public final class Threads {
 		try {
 			pool.shutdownNow();
 			if (!pool.awaitTermination(timeout, timeUnit)) {
-				LOG.error("Pool did not terminate");
+				LOG.error("Pool did not terminated");
 			}
 		} catch (InterruptedException ie) {
 			Thread.currentThread().interrupt();
