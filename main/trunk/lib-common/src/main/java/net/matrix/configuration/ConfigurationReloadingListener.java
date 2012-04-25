@@ -32,11 +32,9 @@ public class ConfigurationReloadingListener
 	@Override
 	public void configurationChanged(final ConfigurationEvent event) {
 		// 当事件类型为重新加载并加载完毕后
-		if (event.getType() == AbstractFileConfiguration.EVENT_RELOAD) {
-			if (!event.isBeforeUpdate()) {
-				// 调用重新加载配置
-				container.reset();
-			}
+		if (event.getType() == AbstractFileConfiguration.EVENT_RELOAD && !event.isBeforeUpdate()) {
+			// 调用重新加载配置
+			container.reset();
 		}
 	}
 }

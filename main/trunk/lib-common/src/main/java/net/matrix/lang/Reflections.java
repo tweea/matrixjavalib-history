@@ -46,9 +46,9 @@ public final class Reflections {
 	 *            属性名
 	 * @return 属性值
 	 */
-	public static Object invokeGetter(final Object target, final String name) {
+	public static <T> T invokeGetter(final Object target, final String name) {
 		String getterMethodName = "get" + StringUtils.capitalize(name);
-		return invokeMethod(target, getterMethodName, new Class[] {}, new Object[] {});
+		return (T) invokeMethod(target, getterMethodName, new Class[] {}, new Object[] {});
 	}
 
 	/**
@@ -96,16 +96,16 @@ public final class Reflections {
 	 *            成员名
 	 * @return 成员值
 	 */
-	public static Object getFieldValue(final Object target, final String name) {
+	public static <T> T getFieldValue(final Object target, final String name) {
 		Field field = FieldUtils.getDeclaredField(target.getClass(), name, true);
 
 		if (field == null) {
 			throw new IllegalArgumentException("Could not find field [" + name + "] on target [" + target + "]");
 		}
 
-		Object result = null;
+		T result = null;
 		try {
-			result = field.get(target);
+			result = (T) field.get(target);
 		} catch (IllegalAccessException e) {
 			LOG.error("不可能抛出的异常{}", e.getMessage());
 		}
@@ -150,7 +150,7 @@ public final class Reflections {
 	 *            参数值
 	 * @return 返回值
 	 */
-	public static Object invokeMethod(final Object target, final String name, final Class<?>[] parameterTypes, final Object[] parameterValues) {
+	public static <T> T invokeMethod(final Object target, final String name, final Class<?>[] parameterTypes, final Object[] parameterValues) {
 		Method method = null;
 		try {
 			method = target.getClass().getDeclaredMethod(name, parameterTypes);
@@ -163,7 +163,7 @@ public final class Reflections {
 
 		try {
 			method.setAccessible(true);
-			return method.invoke(target, parameterValues);
+			return (T) method.invoke(target, parameterValues);
 		} catch (IllegalAccessException e) {
 			throw new ReflectionRuntimeException(e);
 		} catch (InvocationTargetException e) {

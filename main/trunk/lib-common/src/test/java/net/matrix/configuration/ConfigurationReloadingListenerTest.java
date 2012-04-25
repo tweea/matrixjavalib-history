@@ -14,10 +14,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 
+import net.matrix.lang.Reflections;
+
 public class ConfigurationReloadingListenerTest {
 	@Test
-	public void testReloadingPerformed() {
-		// 读取配置
+	public void testConfigurationReloadingListener() {
+		TestContainer container = new TestContainer();
+		ConfigurationListener listener = new ConfigurationReloadingListener(container);
+		TestContainer containerInObject = Reflections.getFieldValue(listener, "container");
+		Assert.assertSame(container, containerInObject);
+	}
+
+	@Test
+	public void testConfigurationChanged() {
 		TestContainer container = new TestContainer();
 		ConfigurationListener listener = new ConfigurationReloadingListener(container);
 		Assert.assertFalse(container.isReloaded());
@@ -26,8 +35,16 @@ public class ConfigurationReloadingListenerTest {
 	}
 
 	@Test
-	public void testReloadingPerformed2() {
-		// 读取配置
+	public void testConfigurationChangedBeforeEvent() {
+		TestContainer container = new TestContainer();
+		ConfigurationListener listener = new ConfigurationReloadingListener(container);
+		Assert.assertFalse(container.isReloaded());
+		listener.configurationChanged(new ConfigurationEvent(this, AbstractFileConfiguration.EVENT_RELOAD, null, null, true));
+		Assert.assertFalse(container.isReloaded());
+	}
+
+	@Test
+	public void testConfigurationChangedOtherEvent() {
 		TestContainer container = new TestContainer();
 		ConfigurationListener listener = new ConfigurationReloadingListener(container);
 		Assert.assertFalse(container.isReloaded());

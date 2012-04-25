@@ -33,6 +33,8 @@ public class XMLConfigurationContainer
 	 * 构造一个空的 {@code XMLConfigurationContainer}。
 	 */
 	public XMLConfigurationContainer() {
+		this.config = new XMLConfiguration();
+		this.config.setDelimiterParsingDisabled(isDelimiterParsingDisabled());
 	}
 
 	@Override
@@ -42,25 +44,24 @@ public class XMLConfigurationContainer
 			LOG.trace("加载配置：" + resource);
 		}
 		try {
-			config = new XMLConfiguration();
-			config.setDelimiterParsingDisabled(isDelimiterParsingDisabled());
-			try {
-				config.load(resource.getFile());
-				config.setReloadingStrategy(new FileChangedReloadingStrategy());
-				config.addConfigurationListener(new ConfigurationReloadingListener(this));
-			} catch (IOException e) {
-				config.load(resource.getInputStream());
-			}
+			config.load(resource.getFile());
+			config.setReloadingStrategy(new FileChangedReloadingStrategy());
+			config.addConfigurationListener(new ConfigurationReloadingListener(this));
 		} catch (IOException e) {
-			throw new ConfigurationException(e);
+			try {
+				config.load(resource.getInputStream());
+			} catch (IOException ise) {
+				throw new ConfigurationException(ise);
+			}
 		}
 		reset();
 	}
 
 	/**
 	 * 是否解析配置内容中的分隔符。如果是配置内容中带分隔符的内容会被解析为数组，否则解析为单个值。
+	 * 默认实现为解析。
 	 * 
-	 * @return true 为解析
+	 * @return true 为不解析
 	 */
 	protected boolean isDelimiterParsingDisabled() {
 		return false;
