@@ -3,14 +3,14 @@ springside Commit:a3f2882aa888f9515546a9fa27c359e4817c9f4f 2012/04/20 00:21:07
 注意异常的抛出和处理
 注意并发处理
 增强 Javadoc
-增强检查规则
-	整理开发规范
-	Sonar
-	应用 JSR305 注解
 测试
 	单元测试
 	Mock
 	derby
+增强检查规则
+	整理开发规范
+	Sonar
+	应用 JSR305 注解
 日志
 	定制日志文件的位置
 	使用 MDC 增强日志
