@@ -30,7 +30,7 @@ public class StringListAsStringType
 
 	private Pattern pattern;
 
-	private StringListAsStringType() {
+	public StringListAsStringType() {
 		separator = ",";
 		pattern = Pattern.compile(separator);
 	}

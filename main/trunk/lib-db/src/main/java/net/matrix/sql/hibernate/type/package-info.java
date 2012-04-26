@@ -4,7 +4,7 @@
  * All right reserved.
  */
 /**
- * 数据库操作。
+ * Hibernate 自定义数据类型。
  */
-package net.matrix.sql;
+package net.matrix.sql.hibernate.type;
 

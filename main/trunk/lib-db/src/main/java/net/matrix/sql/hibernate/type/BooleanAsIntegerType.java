@@ -15,15 +15,22 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
+/**
+ * 将数据库中的整形值作为布尔值处理的类型。
+ */
 public class BooleanAsIntegerType
 	implements UserType {
-	private static final int[] TYPES = new int[] {
-		Types.INTEGER
-	};
+	/**
+	 * 默认构造器。
+	 */
+	public BooleanAsIntegerType() {
+	}
 
 	@Override
 	public int[] sqlTypes() {
-		return TYPES;
+		return new int[] {
+			Types.INTEGER
+		};
 	}
 
 	@Override
@@ -32,26 +39,26 @@ public class BooleanAsIntegerType
 	}
 
 	@Override
-	public boolean equals(Object x, Object y)
+	public boolean equals(final Object x, final Object y)
 		throws HibernateException {
 		return x.equals(y);
 	}
 
 	@Override
-	public int hashCode(Object x)
+	public int hashCode(final Object x)
 		throws HibernateException {
 		return x.hashCode();
 	}
 
 	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
+	public Object nullSafeGet(final ResultSet rs, final String[] names, final SessionImplementor session, final Object owner)
 		throws HibernateException, SQLException {
 		int r = rs.getInt(names[0]);
 		return r != 0;
 	}
 
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
+	public void nullSafeSet(final PreparedStatement st, final Object value, final int index, final SessionImplementor session)
 		throws HibernateException, SQLException {
 		if (value == null) {
 			st.setNull(index, Types.INTEGER);
@@ -62,7 +69,7 @@ public class BooleanAsIntegerType
 	}
 
 	@Override
-	public Object deepCopy(Object value)
+	public Object deepCopy(final Object value)
 		throws HibernateException {
 		return value;
 	}
@@ -73,19 +80,19 @@ public class BooleanAsIntegerType
 	}
 
 	@Override
-	public Serializable disassemble(Object value)
+	public Serializable disassemble(final Object value)
 		throws HibernateException {
 		return (Serializable) value;
 	}
 
 	@Override
-	public Object assemble(Serializable cached, Object owner)
+	public Object assemble(final Serializable cached, final Object owner)
 		throws HibernateException {
 		return cached;
 	}
 
 	@Override
-	public Object replace(Object original, Object target, Object owner)
+	public Object replace(final Object original, final Object target, final Object owner)
 		throws HibernateException {
 		return original;
 	}

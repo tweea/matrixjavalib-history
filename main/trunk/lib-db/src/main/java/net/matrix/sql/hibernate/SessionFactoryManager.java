@@ -98,7 +98,7 @@ public class SessionFactoryManager
 	 * @return true 为已占用
 	 */
 	public static boolean isNameUsed(String name) {
-		return INSTANCES.containsValue(name);
+		return INSTANCES.containsKey(name);
 	}
 
 	/**
