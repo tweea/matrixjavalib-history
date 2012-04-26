@@ -1,3 +1,8 @@
+/*
+ * $Id$
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
+ */
 package net.matrix.app.message;
 
 import java.io.IOException;
@@ -13,7 +18,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * 读取编码消息记录定义。
  */
-public class CodedMessageDefinitionLoader {
+public final class CodedMessageDefinitionLoader {
 	/**
 	 * 日志记录器。
 	 */

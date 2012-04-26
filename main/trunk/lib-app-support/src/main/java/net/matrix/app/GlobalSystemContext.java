@@ -8,7 +8,7 @@ package net.matrix.app;
 /**
  * 全局系统环境，保存系统环境的全局实例。
  */
-public class GlobalSystemContext {
+public final class GlobalSystemContext {
 	/**
 	 * 同步锁。
 	 */
