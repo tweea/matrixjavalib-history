@@ -132,7 +132,7 @@ public abstract class WebProcess {
 	}
 
 	/**
-	 * 取得带相同前缀的Request Parameters.
+	 * 取得带相同前缀的Request Parameters, copy from spring.
 	 * 返回的结果的Parameter名已去除前缀.
 	 */
 	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix) {
