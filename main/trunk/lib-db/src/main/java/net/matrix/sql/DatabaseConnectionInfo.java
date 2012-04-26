@@ -15,12 +15,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 数据库连接信息
+ * 数据库连接信息。
  */
 public class DatabaseConnectionInfo
 	implements Serializable {
+	/**
+	 * serialVersionUID
+	 */
 	private static final long serialVersionUID = -7842286530934311836L;
 
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(DatabaseConnectionInfo.class);
 
 	// 连接信息
@@ -62,6 +68,11 @@ public class DatabaseConnectionInfo
 		return password;
 	}
 
+	/**
+	 * 获得数据库类型。
+	 * 
+	 * @return 数据库类型
+	 */
 	public String getDatabaseType() {
 		return databaseType;
 	}
@@ -70,6 +81,13 @@ public class DatabaseConnectionInfo
 		return driverName;
 	}
 
+	/**
+	 * 使用数据库连接信息建立一个连接。
+	 * 
+	 * @return 新建的连接。
+	 * @throws SQLException
+	 *             找不到驱动类或建立连接失败
+	 */
 	public Connection getJDBCConnection()
 		throws SQLException {
 		try {
@@ -80,6 +98,12 @@ public class DatabaseConnectionInfo
 		}
 	}
 
+	/**
+	 * 从数据库读取元数据。
+	 * 
+	 * @throws SQLException
+	 *             建立连接失败或读取信息失败
+	 */
 	private void setMetaData()
 		throws SQLException {
 		Connection connection = getJDBCConnection();

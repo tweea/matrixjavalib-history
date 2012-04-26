@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import net.matrix.sql.TransactionContext;
 
 /**
- * Hibernate 事务上下文
+ * Hibernate 事务上下文。
  */
 public class HibernateTransactionContext
 	implements TransactionContext {
@@ -29,14 +29,14 @@ public class HibernateTransactionContext
 	private Transaction transaction;
 
 	/**
-	 * 使用默认的 SessionFactory 构建
+	 * 使用默认的 SessionFactory 构建。
 	 */
 	public HibernateTransactionContext() {
 		sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
 	}
 
 	/**
-	 * 使用指定的 SessionFactory 名称构建
+	 * 使用指定的 SessionFactory 名称构建。
 	 * 
 	 * @param sessionFactoryName
 	 *            SessionFactory 名称
@@ -49,7 +49,7 @@ public class HibernateTransactionContext
 	}
 
 	/**
-	 * 获取对应的 Hibernate Session
+	 * 获取对应的 Hibernate Session。
 	 * 
 	 * @return Hibernate Session
 	 * @throws SQLException

@@ -29,13 +29,19 @@ import net.matrix.sql.DatabaseConnectionInfo;
 public class SessionFactoryManager
 	implements Resettable {
 	/**
-	 * 默认的 SessionFactory 名称
+	 * 默认的 SessionFactory 名称。
 	 */
 	public static final String DEFAULT_NAME = "";
 
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(SessionFactoryManager.class);
 
-	private static Map<String, SessionFactoryManager> instances = new HashMap<String, SessionFactoryManager>();
+	/**
+	 * 所有的实例。
+	 */
+	private static final Map<String, SessionFactoryManager> INSTANCES = new HashMap<String, SessionFactoryManager>();
 
 	private String factoryName;
 
@@ -53,10 +59,16 @@ public class SessionFactoryManager
 	 * @return 默认实例
 	 */
 	public static SessionFactoryManager getInstance() {
-		SessionFactoryManager instance = instances.get(DEFAULT_NAME);
-		if (instance == null) {
-			instance = new SessionFactoryManager(DEFAULT_NAME);
-			instances.put(DEFAULT_NAME, instance);
+		SessionFactoryManager instance = INSTANCES.get(DEFAULT_NAME);
+		if (instance != null) {
+			return instance;
+		}
+		synchronized (INSTANCES) {
+			instance = INSTANCES.get(DEFAULT_NAME);
+			if (instance == null) {
+				instance = new SessionFactoryManager(DEFAULT_NAME);
+				INSTANCES.put(DEFAULT_NAME, instance);
+			}
 		}
 		return instance;
 	}
@@ -75,22 +87,22 @@ public class SessionFactoryManager
 		if (!isNameUsed(name)) {
 			throw new IllegalStateException("名称 " + name + " 没有命名");
 		}
-		return instances.get(name);
+		return INSTANCES.get(name);
 	}
 
 	/**
-	 * 判断 SessionFactory 名称是否已被占用
+	 * 判断 SessionFactory 名称是否已被占用。
 	 * 
 	 * @param name
 	 *            SessionFactory 名称
 	 * @return true 为已占用
 	 */
 	public static boolean isNameUsed(String name) {
-		return instances.containsValue(name);
+		return INSTANCES.containsValue(name);
 	}
 
 	/**
-	 * 命名默认配置文件到指定名称
+	 * 命名默认配置文件到指定名称。
 	 * 
 	 * @param name
 	 *            SessionFactory 名称
@@ -98,16 +110,16 @@ public class SessionFactoryManager
 	 *             名称已被占用
 	 */
 	public static void nameSessionFactory(String name) {
-		synchronized (instances) {
+		synchronized (INSTANCES) {
 			if (isNameUsed(name)) {
 				throw new IllegalStateException("名称 " + name + " 已被占用");
 			}
-			instances.put(name, new SessionFactoryManager(name));
+			INSTANCES.put(name, new SessionFactoryManager(name));
 		}
 	}
 
 	/**
-	 * 命名一个配置文件到指定名称
+	 * 命名一个配置文件到指定名称。
 	 * 
 	 * @param name
 	 *            SessionFactory 名称
@@ -117,27 +129,27 @@ public class SessionFactoryManager
 	 *             名称已被占用
 	 */
 	public static void nameSessionFactory(String name, String configResource) {
-		synchronized (instances) {
+		synchronized (INSTANCES) {
 			if (isNameUsed(name)) {
 				throw new IllegalStateException("名称 " + name + " 已被占用");
 			}
-			instances.put(name, new SessionFactoryManager(name, configResource));
+			INSTANCES.put(name, new SessionFactoryManager(name, configResource));
 		}
 	}
 
 	/**
-	 * 清除所有 SessionFactory 配置
+	 * 清除所有 SessionFactory 配置。
 	 */
 	public static void clearAll() {
 		resetAll();
-		instances.clear();
+		INSTANCES.clear();
 	}
 
 	/**
-	 * 重置所有 SessionFactory 配置
+	 * 重置所有 SessionFactory 配置。
 	 */
 	public static void resetAll() {
-		for (SessionFactoryManager instance : instances.values()) {
+		for (SessionFactoryManager instance : INSTANCES.values()) {
 			instance.reset();
 		}
 	}
@@ -155,7 +167,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 关闭 SessionFactory
+	 * 关闭 SessionFactory。
 	 * 
 	 * @see net.matrix.lang.Resettable#reset()
 	 */
@@ -180,7 +192,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 获取 SessionFactory 配置
+	 * 获取 SessionFactory 配置。
 	 * 
 	 * @return SessionFactory 配置
 	 */
@@ -203,7 +215,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 获取 ServiceRegistry
+	 * 获取 ServiceRegistry。
 	 * 
 	 * @return ServiceRegistry
 	 */
@@ -225,7 +237,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 获取 SessionFactory
+	 * 获取 SessionFactory。
 	 * 
 	 * @return SessionFactory
 	 */
@@ -247,7 +259,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 使用 SessionFactory 建立 Session
+	 * 使用 SessionFactory 建立 Session。
 	 * 
 	 * @return 新建的 Session
 	 * @throws SQLException
@@ -263,7 +275,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 获取当前顶层事务上下文，没有则建立
+	 * 获取当前顶层事务上下文，没有则建立。
 	 * 
 	 * @return 当前顶层事务上下文
 	 */
@@ -277,7 +289,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 丢弃顶层事务上下文
+	 * 丢弃顶层事务上下文。
 	 * 
 	 * @throws SQLException
 	 *             回滚发生错误
@@ -297,7 +309,7 @@ public class SessionFactoryManager
 	}
 
 	/**
-	 * 获取 SessionFactory 相关连接信息
+	 * 获取 SessionFactory 相关连接信息。
 	 * 
 	 * @return 连接信息
 	 * @throws SQLException
