@@ -29,16 +29,16 @@ public class Servlets {
 	 * 设置客户端缓存过期时间 的Header.
 	 */
 	public static void setExpiresHeader(HttpServletResponse response, long expiresSeconds) {
-		// Http 1.0 header
+		// Http 1.0 header, set a fix expires date.
 		response.setDateHeader(HTTPs.EXPIRES_HEADER, System.currentTimeMillis() + expiresSeconds * 1000);
-		// Http 1.1 header
+		// Http 1.1 header, set a time after now.
 		response.setHeader(HTTPs.CACHE_CONTROL_HEADER, "private, max-age=" + expiresSeconds);
 	}
 
 	/**
 	 * 设置禁止客户端缓存的Header.
 	 */
-	public static void setDisableCacheHeader(HttpServletResponse response) {
+	public static void setNoCacheHeader(HttpServletResponse response) {
 		// Http 1.0 header
 		response.setDateHeader(HTTPs.EXPIRES_HEADER, 1L);
 		response.addHeader(HTTPs.PRAGMA_HEADER, "no-cache");
