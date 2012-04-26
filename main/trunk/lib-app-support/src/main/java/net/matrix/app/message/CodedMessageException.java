@@ -8,7 +8,7 @@ package net.matrix.app.message;
 import net.matrix.app.SystemException;
 
 /**
- * 配置错误
+ * 编码消息错误。
  */
 public class CodedMessageException
 	extends SystemException {
@@ -18,29 +18,26 @@ public class CodedMessageException
 		super();
 	}
 
-	public CodedMessageException(Throwable cause) {
+	public CodedMessageException(final Throwable cause) {
 		super(cause);
 	}
 
-	public CodedMessageException(CodedMessage rootMessage) {
+	public CodedMessageException(final CodedMessage rootMessage) {
 		super(rootMessage);
 	}
 
-	public CodedMessageException(String rootMessageCode) {
+	public CodedMessageException(final String rootMessageCode) {
 		super(rootMessageCode);
 	}
 
-	public CodedMessageException(Throwable cause, CodedMessage rootMessage) {
+	public CodedMessageException(final Throwable cause, final CodedMessage rootMessage) {
 		super(cause, rootMessage);
 	}
 
-	public CodedMessageException(Throwable cause, String rootMessageCode) {
+	public CodedMessageException(final Throwable cause, final String rootMessageCode) {
 		super(cause, rootMessageCode);
 	}
 
-	/**
-	 * @return 根消息
-	 */
 	@Override
 	public String getDefaultMessageCode() {
 		return "CodedMessage.Error";

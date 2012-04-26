@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 编码消息
+ * 编码消息。
  */
 public class CodedMessage {
 	private String code;
@@ -81,7 +81,7 @@ public class CodedMessage {
 	}
 
 	/**
-	 * 格式化为消息字符串
+	 * 格式化为消息字符串。
 	 * 
 	 * @return 格式化消息字符串
 	 */

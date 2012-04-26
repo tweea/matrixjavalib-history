@@ -8,11 +8,17 @@ package net.matrix.app.repository;
 import org.springframework.core.io.Resource;
 
 /**
- * 资源仓库加载环境
+ * 资源仓库加载环境，根据环境配置在一个资源仓库中定位资源。
  */
 public class ResourceContext {
+	/**
+	 * 资源仓库。
+	 */
 	private ResourceRepository repository;
 
+	/**
+	 * 加载环境配置。
+	 */
 	private ResourceContextConfig contextConfig;
 
 	/**
@@ -21,7 +27,7 @@ public class ResourceContext {
 	 * @param contextConfig
 	 *            资源仓库加载环境配置
 	 */
-	public ResourceContext(ResourceRepository repository, ResourceContextConfig contextConfig) {
+	public ResourceContext(final ResourceRepository repository, final ResourceContextConfig contextConfig) {
 		this.repository = repository;
 		this.contextConfig = contextConfig;
 	}
@@ -35,13 +41,20 @@ public class ResourceContext {
 	}
 
 	/**
-	 * 定位资源
+	 * 重新加载配置。
+	 */
+	public void reload() {
+		contextConfig.checkReload();
+	}
+
+	/**
+	 * 定位资源。
 	 * 
 	 * @param catalog
 	 *            类别
 	 * @return 资源
 	 */
-	public Resource getResource(String catalog) {
+	public Resource getResource(final String catalog) {
 		ResourceSelection selection = contextConfig.getSelection(catalog);
 		if (selection == null) {
 			return null;
@@ -50,7 +63,7 @@ public class ResourceContext {
 	}
 
 	/**
-	 * 定位资源
+	 * 定位资源。
 	 * 
 	 * @param catalog
 	 *            类别
@@ -58,7 +71,7 @@ public class ResourceContext {
 	 *            名称
 	 * @return 资源
 	 */
-	public Resource getResource(String catalog, String name) {
+	public Resource getResource(final String catalog, final String name) {
 		ResourceSelection selection = contextConfig.getSelection(catalog, name);
 		if (selection == null) {
 			return null;
@@ -67,13 +80,13 @@ public class ResourceContext {
 	}
 
 	/**
-	 * 定位资源
+	 * 定位资源。
 	 * 
 	 * @param selection
 	 *            资源选择
 	 * @return 资源
 	 */
-	public Resource getResource(ResourceSelection selection) {
+	public Resource getResource(final ResourceSelection selection) {
 		String catalog = selection.getCatalog();
 		String version = selection.getVersion();
 		String name = selection.getName();

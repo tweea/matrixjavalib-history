@@ -21,7 +21,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * 系统环境
+ * 默认的系统环境。
  */
 public class DefaultSystemContext
 	implements SystemContext {

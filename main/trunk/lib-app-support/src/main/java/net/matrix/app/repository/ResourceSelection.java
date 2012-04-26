@@ -5,20 +5,31 @@
  */
 package net.matrix.app.repository;
 
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * 资源仓库选择
+ * 资源仓库选择，指向资源仓库中的一项资源。
  */
 public class ResourceSelection {
+	/**
+	 * 类别。
+	 */
 	private String catalog;
 
+	/**
+	 * 版本。
+	 */
 	private String version;
 
+	/**
+	 * 名称。
+	 */
 	private String name;
 
 	/**
+	 * 构造一个实例。如果未提供名称，则根据类别生成默认的名称。
+	 * 
 	 * @param catalog
 	 *            分类
 	 * @param version
@@ -26,7 +37,7 @@ public class ResourceSelection {
 	 * @param name
 	 *            名称
 	 */
-	public ResourceSelection(String catalog, String version, String name) {
+	public ResourceSelection(final String catalog, final String version, final String name) {
 		this.catalog = catalog;
 		this.version = version;
 		if (StringUtils.isBlank(name)) {
@@ -36,7 +47,14 @@ public class ResourceSelection {
 		}
 	}
 
-	public static String generateName(String catalog) {
+	/**
+	 * 根据类别生成默认的名称。
+	 * 
+	 * @param catalog
+	 *            类别
+	 * @return 名称
+	 */
+	public static String generateName(final String catalog) {
 		String[] catalogs = catalog.split("/");
 		return catalogs[catalogs.length - 1];
 	}
@@ -78,7 +96,7 @@ public class ResourceSelection {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
