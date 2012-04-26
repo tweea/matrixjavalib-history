@@ -82,9 +82,7 @@ public class DateTimeAsIntegerType
 		}
 
 		String value = Integer.toString(r);
-		if (value.length() < format.length()) {
-			value = StringUtils.repeat('0', format.length() - value.length()) + value;
-		}
+		value = StringUtils.leftPad(value, format.length(), '0');
 		DateTimeFormatter formatter = DateTimeFormat.forPattern(format);
 		return formatter.parseDateTime(value);
 	}
