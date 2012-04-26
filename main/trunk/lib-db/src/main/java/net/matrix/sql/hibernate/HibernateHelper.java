@@ -1392,9 +1392,6 @@ public class HibernateHelper {
 					}
 					return result;
 				} finally {
-					if (rlt != null) {
-						rlt.close();
-					}
 					if (stat != null) {
 						stat.close();
 					}

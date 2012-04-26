@@ -22,22 +22,20 @@ import org.hibernate.usertype.UserType;
 
 public class IntegerListAsStringType
 	implements UserType, ParameterizedType {
-	private static final int[] TYPES = new int[] {
-		Types.VARCHAR
-	};
-
 	private String separator;
 
 	private Pattern pattern;
 
-	private IntegerListAsStringType() {
+	public IntegerListAsStringType() {
 		separator = ",";
 		pattern = Pattern.compile(separator);
 	}
 
 	@Override
 	public int[] sqlTypes() {
-		return TYPES;
+		return new int[] {
+			Types.VARCHAR
+		};
 	}
 
 	@Override

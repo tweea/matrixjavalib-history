@@ -25,7 +25,7 @@ import net.matrix.sql.hibernate.entity.UserInfo;
 public class HibernateJPATest {
 	@Test
 	public void testContextManager() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("test1");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
 		Assert.assertNotNull(emf);
 		EntityManager em = emf.createEntityManager();
 		Assert.assertNotNull(em);

@@ -10,43 +10,53 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
+/**
+ * 将数据库中的整形值作为日期时间值处理的类型。
+ */
 public class DateTimeAsIntegerType
 	implements UserType, ParameterizedType {
-	private static final int[] TYPES = new int[] {
-		Types.INTEGER
-	};
+	/**
+	 * 仅有日期的格式。
+	 */
+	private static final String DATE_ONLY = "yyyyMMdd";
 
-	private static final String[] FORMATS = {
-		"yyyyMMdd", "HHmmss"
-	};
+	/**
+	 * 日期格式。
+	 */
+	private String format;
 
-	private static final int yyyyMMdd = 0;
-
-	private static final int HHmmss = 1;
-
-	private int formatIndex;
+	/**
+	 * 默认构造器，识别数据为仅有日期的格式。
+	 */
+	public DateTimeAsIntegerType() {
+		this.format = DATE_ONLY;
+	}
 
 	@Override
 	public int[] sqlTypes() {
-		return TYPES;
+		return new int[] {
+			Types.INTEGER
+		};
 	}
 
 	@Override
 	public Class returnedClass() {
-		return GregorianCalendar.class;
+		return DateTime.class;
 	}
 
 	@Override
-	public boolean equals(Object x, Object y)
+	public boolean equals(final Object x, final Object y)
 		throws HibernateException {
 		if (x == y) {
 			return true;
@@ -58,75 +68,47 @@ public class DateTimeAsIntegerType
 	}
 
 	@Override
-	public int hashCode(Object x)
+	public int hashCode(final Object x)
 		throws HibernateException {
 		return x.hashCode();
 	}
 
 	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
+	public Object nullSafeGet(final ResultSet rs, final String[] names, final SessionImplementor session, final Object owner)
 		throws HibernateException, SQLException {
 		int r = rs.getInt(names[0]);
 		if (rs.wasNull()) {
 			return null;
 		}
-		GregorianCalendar date = null;
-		if (formatIndex == yyyyMMdd) {
-			// 0 相当于 NULL
-			if (r == 0) {
-				return null;
-			}
-			int year = 0, month = 0, day = 0;
-			day = r % 100;
-			r -= day;
-			r /= 100;
-			month = r % 100;
-			r -= month;
-			r /= 100;
-			year = r;
-			date = new GregorianCalendar(year, month - 1, day);
-		} else if (formatIndex == HHmmss) {
-			int hour = 0, minute = 0, second = 0;
-			second = r % 100;
-			r -= second;
-			r /= 100;
-			minute = r % 100;
-			r -= minute;
-			r /= 100;
-			hour = r;
-			date = new GregorianCalendar(1900, 1, 1, hour, minute, second);
+
+		String value = Integer.toString(r);
+		if (value.length() < format.length()) {
+			value = StringUtils.repeat('0', format.length() - value.length()) + value;
 		}
-		return date;
+		DateTimeFormatter formatter = DateTimeFormat.forPattern(format);
+		return formatter.parseDateTime(value);
 	}
 
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session)
+	public void nullSafeSet(final PreparedStatement st, final Object value, final int index, final SessionImplementor session)
 		throws HibernateException, SQLException {
 		if (value == null) {
 			st.setNull(index, Types.INTEGER);
 			return;
 		}
-		GregorianCalendar date = (GregorianCalendar) value;
-		int intDate = 0;
-		if (formatIndex == yyyyMMdd) {
-			intDate = date.get(Calendar.YEAR) * 10000;
-			intDate += date.get(Calendar.MONTH) * 100 + 100;
-			intDate += date.get(Calendar.DAY_OF_MONTH);
-		} else if (formatIndex == HHmmss) {
-			intDate = date.get(Calendar.HOUR_OF_DAY) * 10000;
-			intDate += date.get(Calendar.MINUTE) * 100;
-			intDate += date.get(Calendar.SECOND);
-		}
+		DateTime date = (DateTime) value;
+		DateTimeFormatter formatter = DateTimeFormat.forPattern(format);
+		int intDate = Integer.parseInt(formatter.print(date));
 		st.setInt(index, intDate);
 	}
 
 	@Override
-	public Object deepCopy(Object value)
+	public Object deepCopy(final Object value)
 		throws HibernateException {
 		if (value == null) {
 			return null;
 		}
-		return ((GregorianCalendar) value).clone();
+		return new DateTime(value);
 	}
 
 	@Override
@@ -135,39 +117,32 @@ public class DateTimeAsIntegerType
 	}
 
 	@Override
-	public Serializable disassemble(Object value)
+	public Serializable disassemble(final Object value)
 		throws HibernateException {
 		return (Serializable) deepCopy(value);
 	}
 
 	@Override
-	public Object assemble(Serializable cached, Object owner)
+	public Object assemble(final Serializable cached, final Object owner)
 		throws HibernateException {
 		return deepCopy(cached);
 	}
 
 	@Override
-	public Object replace(Object original, Object target, Object owner)
+	public Object replace(final Object original, final Object target, final Object owner)
 		throws HibernateException {
 		return deepCopy(original);
 	}
 
 	@Override
-	public void setParameterValues(Properties parameters) {
+	public void setParameterValues(final Properties parameters) {
 		if (parameters == null) {
-			formatIndex = yyyyMMdd;
 			return;
 		}
-		String format = (String) parameters.get("format");
-		if (format == null) {
-			formatIndex = yyyyMMdd;
+		String newFormat = parameters.getProperty("format");
+		if (newFormat == null) {
 			return;
 		}
-		for (int i = 0; i < FORMATS.length; i++) {
-			if (FORMATS[i].equals(format)) {
-				formatIndex = i;
-				break;
-			}
-		}
+		format = newFormat;
 	}
 }
