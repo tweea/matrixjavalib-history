@@ -110,7 +110,7 @@ public final class WebProcess {
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property) {
 		String value = getParameter(request, property);
 		if ("".equals(value)) {
-			return new BigDecimal(0);
+			return BigDecimal.ZERO;
 		}
 		return new BigDecimal(value);
 	}

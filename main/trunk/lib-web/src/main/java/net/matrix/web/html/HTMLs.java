@@ -10,6 +10,11 @@ package net.matrix.web.html;
  */
 public final class HTMLs {
 	/**
+	 * 空格。
+	 */
+	public static final String SPACE = "&nbsp;";
+
+	/**
 	 * 阻止实例化。
 	 */
 	private HTMLs() {
@@ -19,7 +24,7 @@ public final class HTMLs {
 		StringBuilder sb = new StringBuilder();
 		if (str == null) {
 			for (int i = 0; i < length; i++) {
-				sb.append("&nbsp;");
+				sb.append(SPACE);
 			}
 			return sb.toString();
 		}
@@ -29,7 +34,7 @@ public final class HTMLs {
 		} else {
 			sb.append(str);
 			for (int i = 0; i < length - len; i++) {
-				sb.append("&nbsp;");
+				sb.append(SPACE);
 			}
 			return sb.toString();
 		}
