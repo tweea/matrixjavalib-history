@@ -30,7 +30,13 @@ import net.matrix.lang.Objects;
  * 
  * @since 2005.06.15
  */
-public class HibernateHelper {
+public final class HibernateHelper {
+	/**
+	 * 阻止实例化。
+	 */
+	private HibernateHelper() {
+	}
+
 	/**
 	 * 获得 Hibernate 数据库连接管理对象。
 	 */

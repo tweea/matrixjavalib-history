@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public interface TransactionContext {
 	/**
-	 * 启动事务
+	 * 启动事务。
 	 * 
 	 * @throws SQLException
 	 *             启动失败
@@ -23,7 +23,7 @@ public interface TransactionContext {
 		throws SQLException;
 
 	/**
-	 * 提交事务
+	 * 提交事务。
 	 * 
 	 * @throws SQLException
 	 *             提交失败
@@ -32,7 +32,7 @@ public interface TransactionContext {
 		throws SQLException;
 
 	/**
-	 * 撤销事务
+	 * 撤销事务。
 	 * 
 	 * @throws SQLException
 	 *             撤销失败
@@ -41,7 +41,7 @@ public interface TransactionContext {
 		throws SQLException;
 
 	/**
-	 * 释放事务资源
+	 * 释放事务资源。
 	 */
 	void release();
 }
