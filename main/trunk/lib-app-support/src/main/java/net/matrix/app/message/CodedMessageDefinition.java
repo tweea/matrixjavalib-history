@@ -9,9 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 编码消息定义
+ * 编码消息定义。
  */
 public class CodedMessageDefinition {
+	/**
+	 * 所有加载的消息定义。
+	 */
 	private static final Map<String, CodedMessageDefinition> DEFINITIONS = new HashMap<String, CodedMessageDefinition>();
 
 	private String code;
@@ -19,7 +22,7 @@ public class CodedMessageDefinition {
 	private String template;
 
 	/**
-	 * 获取编码消息定义
+	 * 获取编码消息定义。
 	 * 
 	 * @param code
 	 *            编码
@@ -30,7 +33,7 @@ public class CodedMessageDefinition {
 	}
 
 	/**
-	 * 定义编码消息
+	 * 定义编码消息。
 	 * 
 	 * @param definition
 	 *            编码消息定义
@@ -40,7 +43,7 @@ public class CodedMessageDefinition {
 	}
 
 	/**
-	 * 默认构造器
+	 * 默认构造器。
 	 */
 	public CodedMessageDefinition(String code, String template) {
 		this.code = code;
@@ -48,7 +51,7 @@ public class CodedMessageDefinition {
 	}
 
 	/**
-	 * 根据编码建立未知的编码消息定义
+	 * 根据编码建立未知的编码消息定义。
 	 * 
 	 * @param code
 	 *            编号

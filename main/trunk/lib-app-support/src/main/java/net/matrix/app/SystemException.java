@@ -5,7 +5,7 @@ import net.matrix.app.message.CodedMessageLevels;
 import net.matrix.app.message.CodedMessageList;
 
 /**
- * 交换平台的根异常
+ * 应用系统的根异常。
  */
 public class SystemException
 	extends Exception {
@@ -17,7 +17,7 @@ public class SystemException
 		messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR));
 	}
 
-	public SystemException(Throwable cause) {
+	public SystemException(final Throwable cause) {
 		super(cause);
 		if (cause instanceof SystemException) {
 			SystemException se = (SystemException) cause;
@@ -27,15 +27,15 @@ public class SystemException
 		}
 	}
 
-	public SystemException(CodedMessage rootMessage) {
+	public SystemException(final CodedMessage rootMessage) {
 		messages.add(rootMessage);
 	}
 
-	public SystemException(String rootMessageCode) {
+	public SystemException(final String rootMessageCode) {
 		this(new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR));
 	}
 
-	public SystemException(Throwable cause, CodedMessage rootMessage) {
+	public SystemException(final Throwable cause, final CodedMessage rootMessage) {
 		super(cause);
 		messages.add(rootMessage);
 		if (cause instanceof SystemException) {
@@ -44,7 +44,7 @@ public class SystemException
 		}
 	}
 
-	public SystemException(Throwable cause, String rootMessageCode) {
+	public SystemException(final Throwable cause, final String rootMessageCode) {
 		this(cause, new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR, cause.getMessage()));
 	}
 

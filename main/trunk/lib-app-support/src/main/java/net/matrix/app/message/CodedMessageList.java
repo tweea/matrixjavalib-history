@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * 编码消息列表
+ * 编码消息列表。
  */
 public class CodedMessageList {
 	private static final DocumentBuilderFactory DOM_FACTORY = DocumentBuilderFactory.newInstance();
@@ -100,7 +100,7 @@ public class CodedMessageList {
 	}
 
 	/**
-	 * 从文件加载
+	 * 从文件加载。
 	 * 
 	 * @param reader
 	 *            输入流
@@ -123,7 +123,7 @@ public class CodedMessageList {
 	}
 
 	/**
-	 * 从文件加载
+	 * 从文件加载。
 	 * 
 	 * @param reader
 	 *            输入流
@@ -176,7 +176,7 @@ public class CodedMessageList {
 	}
 
 	/**
-	 * 保存到文件
+	 * 保存到文件。
 	 * 
 	 * @param writer
 	 *            输出流
@@ -196,7 +196,7 @@ public class CodedMessageList {
 	}
 
 	/**
-	 * 保存到文件
+	 * 保存到文件。
 	 * 
 	 * @param writer
 	 *            输出流

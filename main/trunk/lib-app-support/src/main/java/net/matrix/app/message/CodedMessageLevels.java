@@ -6,36 +6,36 @@
 package net.matrix.app.message;
 
 /**
- * 编码消息级别
+ * 编码消息级别。
  */
 public interface CodedMessageLevels {
 	/**
-	 * 跟踪
+	 * 跟踪。
 	 */
 	int TRACE = 1;
 
 	/**
-	 * 调试
+	 * 调试。
 	 */
 	int DEBUG = 2;
 
 	/**
-	 * 消息
+	 * 消息。
 	 */
 	int INFORMATION = 3;
 
 	/**
-	 * 警告
+	 * 警告。
 	 */
 	int WARNING = 4;
 
 	/**
-	 * 错误
+	 * 错误。
 	 */
 	int ERROR = 5;
 
 	/**
-	 * 致命错误
+	 * 致命错误。
 	 */
 	int FATAL = 6;
 }

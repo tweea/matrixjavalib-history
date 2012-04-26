@@ -6,16 +6,29 @@
 package net.matrix.app;
 
 /**
- * 系统环境
+ * 全局系统环境，保存系统环境的全局实例。
  */
 public class GlobalSystemContext {
+	/**
+	 * 同步锁。
+	 */
+	private static final Object LOCK = new Object();
+
+	/**
+	 * 系统环境的全局实例。
+	 */
 	private static SystemContext global;
 
 	public static SystemContext get() {
-		if (global == null) {
-			global = new DefaultSystemContext();
+		if (global != null) {
+			return global;
 		}
-		return global;
+		synchronized (LOCK) {
+			if (global == null) {
+				global = new DefaultSystemContext();
+			}
+			return global;
+		}
 	}
 
 	public static void set(SystemContext context) {

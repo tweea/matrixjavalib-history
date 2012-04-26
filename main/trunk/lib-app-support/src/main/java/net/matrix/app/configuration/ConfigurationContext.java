@@ -1,3 +1,8 @@
+/*
+ * $Id$
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
+ */
 package net.matrix.app.configuration;
 
 import java.util.HashMap;
@@ -15,14 +20,31 @@ import net.matrix.app.repository.ResourceSelection;
 import net.matrix.configuration.ReloadableConfigurationContainer;
 
 /**
- * 配置仓库加载环境
+ * 配置仓库加载环境，加载和缓存配置信息。
  */
 public final class ConfigurationContext
 	extends ResourceContext {
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(ConfigurationContext.class);
 
+	/**
+	 * 缓存的配置信息。
+	 */
 	private Map<Resource, ReloadableConfigurationContainer> containerCache;
 
+	/**
+	 * 从资源仓库的某位置加载。
+	 * 
+	 * @param repository
+	 *            资源仓库
+	 * @param selection
+	 *            资源仓库选择
+	 * @return 加载环境
+	 * @throws ConfigurationException
+	 *             加载错误
+	 */
 	public static ConfigurationContext load(ResourceRepository repository, ResourceSelection selection)
 		throws ConfigurationException {
 		LOG.debug("从 " + selection + " 加载配置集合");
@@ -40,14 +62,18 @@ public final class ConfigurationContext
 		this.containerCache = new HashMap<Resource, ReloadableConfigurationContainer>();
 	}
 
+	/**
+	 * 重新加载配置，清空缓存。
+	 */
+	@Override
 	public void reload() {
-		getContextConfig().reload();
+		super.reload();
 		containerCache = new HashMap<Resource, ReloadableConfigurationContainer>();
-		LOG.info("重新加载配置");
+		LOG.info("重新加载配置，清空缓存。");
 	}
 
 	/**
-	 * 定位配置资源
+	 * 定位配置资源。
 	 * 
 	 * @param selection
 	 *            配置资源选择
@@ -55,7 +81,7 @@ public final class ConfigurationContext
 	 * @throws ConfigurationException
 	 *             配置错误
 	 */
-	public Resource getConfigurationResource(ResourceSelection selection)
+	public Resource getConfigurationResource(final ResourceSelection selection)
 		throws ConfigurationException {
 		Resource resource = getResource(selection);
 		if (resource == null) {
@@ -76,30 +102,35 @@ public final class ConfigurationContext
 	 * @throws ConfigurationException
 	 *             配置错误
 	 */
-	public <T extends ReloadableConfigurationContainer> T getConfiguration(Class<T> type, ResourceSelection selection)
+	public <T extends ReloadableConfigurationContainer> T getConfiguration(final Class<T> type, final ResourceSelection selection)
 		throws ConfigurationException {
 		Resource resource = getConfigurationResource(selection);
+		T container = (T) containerCache.get(resource);
+		if (container != null) {
+			container.checkReload();
+			return container;
+		}
 		synchronized (containerCache) {
-			T container = (T) containerCache.get(resource);
-			if (container == null) {
-				try {
-					container = type.newInstance();
-				} catch (InstantiationException e) {
-					throw new ConfigurationException("配置类 " + type.getName() + " 实例化失败", e);
-				} catch (IllegalAccessException e) {
-					throw new ConfigurationException("配置类 " + type.getName() + " 实例化失败", e);
-				}
-				// 加载配置
-				LOG.debug("从 " + selection + "(" + resource + ") 加载配置");
-				try {
-					container.load(resource);
-				} catch (ConfigurationException e) {
-					throw new ConfigurationException("配置 " + resource.getDescription() + " 加载错误", e);
-				}
-				containerCache.put(resource, container);
-			} else {
+			container = (T) containerCache.get(resource);
+			if (container != null) {
 				container.checkReload();
+				return container;
 			}
+			try {
+				container = type.newInstance();
+			} catch (InstantiationException e) {
+				throw new ConfigurationException("配置类 " + type.getName() + " 实例化失败", e);
+			} catch (IllegalAccessException e) {
+				throw new ConfigurationException("配置类 " + type.getName() + " 实例化失败", e);
+			}
+			// 加载配置
+			LOG.debug("从 " + selection + "(" + resource + ") 加载配置");
+			try {
+				container.load(resource);
+			} catch (ConfigurationException e) {
+				throw new ConfigurationException("配置 " + resource.getDescription() + " 加载错误", e);
+			}
+			containerCache.put(resource, container);
 			return container;
 		}
 	}

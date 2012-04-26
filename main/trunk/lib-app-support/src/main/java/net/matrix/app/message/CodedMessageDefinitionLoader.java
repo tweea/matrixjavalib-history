@@ -11,12 +11,21 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * 读取编码消息记录定义
+ * 读取编码消息记录定义。
  */
 public class CodedMessageDefinitionLoader {
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(CodedMessageDefinitionLoader.class);
 
-	public static void loadDefinitions(ResourcePatternResolver resolver) {
+	/**
+	 * 从类路径中加载所有名为 codedMessageDefinition.xml 的配置文件。
+	 * 
+	 * @param resolver
+	 *            资源加载策略
+	 */
+	public static void loadDefinitions(final ResourcePatternResolver resolver) {
 		try {
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
 			for (Resource resource : resources) {
@@ -27,7 +36,13 @@ public class CodedMessageDefinitionLoader {
 		}
 	}
 
-	public static void loadDefinitions(Resource resource) {
+	/**
+	 * 从特定位置加载配置文件。
+	 * 
+	 * @param resource
+	 *            配置文件位置
+	 */
+	public static void loadDefinitions(final Resource resource) {
 		try {
 			XMLConfiguration config = new XMLConfiguration();
 			config.setDelimiterParsingDisabled(true);
