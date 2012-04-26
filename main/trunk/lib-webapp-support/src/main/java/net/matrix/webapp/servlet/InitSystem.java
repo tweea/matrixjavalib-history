@@ -19,16 +19,25 @@ import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
 
 /**
- * 系统初始化
+ * 系统初始化监听器，注册在 web.xml 中被容器调用初始化、启动和停止。
  * 
  * @since 2005-11-16
  */
 public class InitSystem
 	implements ServletContextListener {
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(InitSystem.class);
 
+	/**
+	 * 关联的系统环境。
+	 */
 	protected SystemContext context;
 
+	/**
+	 * 默认与全局系统环境关联。
+	 */
 	public InitSystem() {
 		context = GlobalSystemContext.get();
 	}
@@ -55,6 +64,9 @@ public class InitSystem
 		LOG.info(servletContext.getServletContextName() + " 初始化完成");
 	}
 
+	/**
+	 * 加载消息定义。
+	 */
 	protected void loadMessageDefinitions() {
 		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
 	}
@@ -65,6 +77,11 @@ public class InitSystem
 	protected void setConfig() {
 	}
 
+	/**
+	 * 初始化系统控制器。
+	 * 
+	 * @return 系统控制器
+	 */
 	protected SystemController getController() {
 		return new DefaultSystemController();
 	}
