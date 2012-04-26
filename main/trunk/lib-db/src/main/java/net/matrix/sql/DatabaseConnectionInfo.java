@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class DatabaseConnectionInfo
 	implements Serializable {
 	/**
-	 * serialVersionUID
+	 * serialVersionUID。
 	 */
 	private static final long serialVersionUID = -7842286530934311836L;
 
@@ -30,20 +30,20 @@ public class DatabaseConnectionInfo
 	private static final Logger LOG = LoggerFactory.getLogger(DatabaseConnectionInfo.class);
 
 	// 连接信息
-	private String driverClass = null;
+	private String driverClass;
 
-	private String url = null;
+	private String url;
 
-	private String userName = null;
+	private String userName;
 
-	private String password = null;
+	private String password;
 
 	// 元数据
-	private String databaseType = null;
+	private String databaseType;
 
-	private String driverName = null;
+	private String driverName;
 
-	public DatabaseConnectionInfo(String driverClass, String url, String userName, String password)
+	public DatabaseConnectionInfo(final String driverClass, final String url, final String userName, final String password)
 		throws SQLException {
 		this.driverClass = driverClass;
 		this.url = url;

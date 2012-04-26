@@ -26,7 +26,7 @@ import net.matrix.sql.DatabaseConnectionInfo;
 /**
  * Hibernate SessionFactory 管理器。
  */
-public class SessionFactoryManager
+public final class SessionFactoryManager
 	implements Resettable {
 	/**
 	 * 默认的 SessionFactory 名称。
