@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 
 import net.matrix.lang.Objects;
 
-public abstract class PageUtil {
+public final class PageUtil {
 	public static final String PAGING_KEY = "pagekey";
 
 	public static final String URL_KEY = "pageurl";

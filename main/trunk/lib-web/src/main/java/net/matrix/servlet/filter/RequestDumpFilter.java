@@ -37,7 +37,7 @@ public class RequestDumpFilter
 	 * The filter configuration object we are associated with. If this value is
 	 * null, this filter instance is not currently configured.
 	 */
-	protected FilterConfig filterConfig = null;
+	protected FilterConfig filterConfig;
 
 	private boolean enabled = false;
 

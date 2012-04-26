@@ -10,11 +10,11 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 在会话中设置标示
+ * 在会话中设置标示。
  * 
  * @since 2005.11.10
  */
-public abstract class Token {
+public final class Token {
 	public static String generateToken(HttpServletRequest request, String key) {
 		String token = UUID.randomUUID().toString();
 		request.getSession(true).setAttribute(key, token);
