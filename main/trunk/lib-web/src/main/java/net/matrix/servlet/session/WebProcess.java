@@ -20,7 +20,7 @@ import net.matrix.lang.Objects;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
 
-public abstract class WebProcess {
+public final class WebProcess {
 	private static final String ERROR_KEY = "error_key";
 
 	private static final String MESSAGE_KEY = "message_key";

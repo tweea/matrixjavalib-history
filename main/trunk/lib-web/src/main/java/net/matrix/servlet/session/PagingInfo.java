@@ -5,6 +5,7 @@
  */
 package net.matrix.servlet.session;
 
+// TODO use spring-data-common's model
 public class PagingInfo {
 	private String key;
 

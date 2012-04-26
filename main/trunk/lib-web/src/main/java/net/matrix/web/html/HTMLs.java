@@ -5,8 +5,17 @@
  */
 package net.matrix.web.html;
 
-public abstract class HTMLs {
-	public static String fitToLength(String str, int length) {
+/**
+ * HTML 相关工具。
+ */
+public final class HTMLs {
+	/**
+	 * 阻止实例化。
+	 */
+	private HTMLs() {
+	}
+
+	public static String fitToLength(final String str, final int length) {
 		StringBuilder sb = new StringBuilder();
 		if (str == null) {
 			for (int i = 0; i < length; i++) {
