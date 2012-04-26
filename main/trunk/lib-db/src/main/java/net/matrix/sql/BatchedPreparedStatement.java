@@ -29,26 +29,55 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
- * 批量执行
+ * 可以批量执行的 PreparedStatement。
  */
 public class BatchedPreparedStatement
 	implements PreparedStatement {
+	/**
+	 * 被包装的 PreparedStatement。
+	 */
 	private PreparedStatement statement;
 
+	/**
+	 * 最大批量执行的语句数量。
+	 */
 	private int batchSize;
 
+	/**
+	 * 等待批量执行的语句数量。
+	 */
 	private int batchCount;
 
+	/**
+	 * 包装一个 PreparedStatement，不使用批量执行。
+	 * 
+	 * @param statement
+	 *            被包装的 PreparedStatement
+	 */
 	public BatchedPreparedStatement(PreparedStatement statement) {
 		this(statement, 0);
 	}
 
+	/**
+	 * 包装一个 PreparedStatement，指定最大批量执行数量。
+	 * 
+	 * @param statement
+	 *            被包装的 PreparedStatement
+	 * @param batchSize
+	 *            最大批量执行数量
+	 */
 	public BatchedPreparedStatement(PreparedStatement statement, int batchSize) {
 		this.statement = statement;
 		this.batchSize = batchSize;
 		this.batchCount = 0;
 	}
 
+	/**
+	 * 检查等待批量执行的语句数量，如果已达到最大数量，则向数据库发送执行。
+	 * 
+	 * @throws SQLException
+	 *             数据库执行出错
+	 */
 	private void checkBatchCount()
 		throws SQLException {
 		if (batchSize > 0 && batchCount >= batchSize) {
@@ -57,12 +86,18 @@ public class BatchedPreparedStatement
 		}
 	}
 
+	/**
+	 * 等待批量执行的语句数量加一。
+	 */
 	private void addBatchCount() {
 		if (batchSize > 0) {
 			batchCount++;
 		}
 	}
 
+	/**
+	 * 等待批量执行的语句数量清零。
+	 */
 	private void resetBatchCount() {
 		batchCount = 0;
 	}

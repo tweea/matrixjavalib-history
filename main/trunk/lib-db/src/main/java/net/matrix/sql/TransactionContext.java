@@ -8,7 +8,7 @@ package net.matrix.sql;
 import java.sql.SQLException;
 
 /**
- * 事务处理
+ * 事务处理上下文。
  * 
  * @since 2005.06.15
  */

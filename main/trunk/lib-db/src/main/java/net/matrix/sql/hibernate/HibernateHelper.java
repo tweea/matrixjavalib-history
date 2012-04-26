@@ -26,20 +26,20 @@ import org.hibernate.jdbc.ReturningWork;
 import net.matrix.lang.Objects;
 
 /**
- * Hibernate 实用类
+ * Hibernate 实用类。
  * 
  * @since 2005.06.15
  */
 public class HibernateHelper {
 	/**
-	 * 获得 Hibernate 数据库连接管理对象
+	 * 获得 Hibernate 数据库连接管理对象。
 	 */
 	private static HibernateTransactionContext getTransactionContext() {
 		return SessionFactoryManager.getInstance().getTransactionContext();
 	}
 
 	/**
-	 * 获得 Hibernate 数据库连接管理对象
+	 * 获得 Hibernate 数据库连接管理对象。
 	 */
 	private static HibernateTransactionContext getTransactionContext(String sessionFactoryName) {
 		return SessionFactoryManager.getInstance(sessionFactoryName).getTransactionContext();

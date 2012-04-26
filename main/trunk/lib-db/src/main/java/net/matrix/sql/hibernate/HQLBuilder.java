@@ -8,7 +8,7 @@ package net.matrix.sql.hibernate;
 import java.io.Serializable;
 
 /**
- * HQL 构造器
+ * HQL 构造器。
  * 
  * @since 2005.06.15
  */

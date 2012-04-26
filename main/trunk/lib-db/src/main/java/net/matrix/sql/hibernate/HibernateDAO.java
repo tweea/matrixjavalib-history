@@ -27,10 +27,10 @@ import org.slf4j.LoggerFactory;
 import net.matrix.lang.Reflections;
 
 /**
- * 封装Hibernate原生API的DAO泛型基类.
+ * 封装 Hibernate 原生 API 的 DAO 泛型基类。
  * 
  * @param <T>
- *            DAO操作的对象类型
+ *            DAO 操作的对象类型
  * @param <ID>
  *            主键类型
  */
@@ -42,9 +42,9 @@ public class HibernateDAO<T, ID extends Serializable> {
 	protected Class<T> entityClass;
 
 	/**
-	 * 通过子类的泛型定义取得对象类型Class.
-	 * eg.
-	 * public class UserDao extends SimpleHibernateDao<User, Long>
+	 * 通过子类的泛型定义取得对象类型 Class。
+	 * 如：
+	 * public class UserDao extends HibernateDAO<User, Long>
 	 */
 	public HibernateDAO(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -57,21 +57,21 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 取得sessionFactory.
+	 * 取得 sessionFactory。
 	 */
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
 	/**
-	 * 取得当前Session.
+	 * 取得当前 Session。
 	 */
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
 	/**
-	 * 保存新增或修改的对象.
+	 * 保存新增或修改的对象。
 	 */
 	public void save(final T entity) {
 		Validate.notNull(entity, "entity不能为空");
@@ -80,10 +80,10 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 删除对象.
+	 * 删除对象。
 	 * 
 	 * @param entity
-	 *            对象必须是session中的对象或含id属性的transient对象.
+	 *            对象必须是 session 中的对象或含 id 属性的 transient 对象
 	 */
 	public void delete(final T entity) {
 		Validate.notNull(entity, "entity不能为空");
@@ -92,7 +92,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按id删除对象.
+	 * 按 id 删除对象。
 	 */
 	public void delete(final ID id) {
 		Validate.notNull(id, "id不能为空");
@@ -101,7 +101,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按id获取对象.
+	 * 按 id 获取对象。
 	 */
 	public T get(final ID id) {
 		Validate.notNull(id, "id不能为空");
@@ -109,21 +109,21 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按id列表获取对象列表.
+	 * 按 id 列表获取对象列表。
 	 */
 	public List<T> get(final Collection<ID> ids) {
 		return find(Restrictions.in(getIdName(), ids));
 	}
 
 	/**
-	 * 获取全部对象.
+	 * 获取全部对象。
 	 */
 	public List<T> getAll() {
 		return find();
 	}
 
 	/**
-	 * 获取全部对象, 支持按属性行序.
+	 * 获取全部对象，支持按属性行序。
 	 */
 	public List<T> getAll(String orderByProperty, boolean isAsc) {
 		Criteria c = createCriteria();
@@ -136,7 +136,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按属性查找对象列表, 匹配方式为相等.
+	 * 按属性查找对象列表，匹配方式为相等。
 	 */
 	public List<T> findBy(final String propertyName, final Object value) {
 		Validate.notBlank(propertyName, "propertyName不能为空");
@@ -145,7 +145,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按属性查找唯一对象, 匹配方式为相等.
+	 * 按属性查找唯一对象，匹配方式为相等。
 	 */
 	public T findUniqueBy(final String propertyName, final Object value) {
 		Validate.notBlank(propertyName, "propertyName不能为空");
