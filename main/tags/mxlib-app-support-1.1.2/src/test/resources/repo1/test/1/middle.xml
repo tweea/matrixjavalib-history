@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="gbk"?>
+<test id="middle">
+	<test1 name="c">
+		<field name="334" value="full" />
+	</test1>
+</test>
