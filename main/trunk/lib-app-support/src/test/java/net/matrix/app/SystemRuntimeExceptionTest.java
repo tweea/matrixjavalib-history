@@ -11,10 +11,10 @@ import org.junit.Test;
 import net.matrix.app.message.CodedMessage;
 import net.matrix.app.message.CodedMessageLevels;
 
-public class SystemExceptionTest {
+public class SystemRuntimeExceptionTest {
 	@Test
 	public void DataSwapException() {
-		SystemException exception = new SystemException();
+		SystemRuntimeException exception = new SystemRuntimeException();
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevels.ERROR, exception.getRootMessage().getLevel());
 		Assert.assertEquals(1, exception.getMessageList().size());
@@ -22,11 +22,11 @@ public class SystemExceptionTest {
 
 	@Test
 	public void DataSwapException2() {
-		SystemException exception = new SystemException(new Exception());
+		SystemRuntimeException exception = new SystemRuntimeException(new Exception());
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevels.ERROR, exception.getRootMessage().getLevel());
 		Assert.assertEquals(1, exception.getMessageList().size());
-		exception = new SystemException(exception);
+		exception = new SystemRuntimeException(exception);
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevels.ERROR, exception.getRootMessage().getLevel());
 		Assert.assertEquals(2, exception.getMessageList().size());
@@ -34,7 +34,7 @@ public class SystemExceptionTest {
 
 	@Test
 	public void DataSwapException3() {
-		SystemException exception = new SystemException(new CodedMessage("System.Error", CodedMessageLevels.INFORMATION));
+		SystemRuntimeException exception = new SystemRuntimeException(new CodedMessage("System.Error", CodedMessageLevels.INFORMATION));
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, exception.getRootMessage().getLevel());
 		Assert.assertEquals(1, exception.getMessageList().size());
@@ -42,11 +42,11 @@ public class SystemExceptionTest {
 
 	@Test
 	public void DataSwapException4() {
-		SystemException exception = new SystemException(new Exception(), new CodedMessage("System.Error", CodedMessageLevels.INFORMATION));
+		SystemRuntimeException exception = new SystemRuntimeException(new Exception(), new CodedMessage("System.Error", CodedMessageLevels.INFORMATION));
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, exception.getRootMessage().getLevel());
 		Assert.assertEquals(2, exception.getMessageList().size());
-		exception = new SystemException(exception, new CodedMessage("System.Error", CodedMessageLevels.INFORMATION));
+		exception = new SystemRuntimeException(exception, new CodedMessage("System.Error", CodedMessageLevels.INFORMATION));
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, exception.getRootMessage().getLevel());
 		Assert.assertEquals(3, exception.getMessageList().size());

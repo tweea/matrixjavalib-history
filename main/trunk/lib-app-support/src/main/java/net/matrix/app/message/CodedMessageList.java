@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -33,7 +34,8 @@ import org.w3c.dom.NodeList;
 /**
  * 编码消息列表。
  */
-public class CodedMessageList {
+public class CodedMessageList
+	implements Iterable<CodedMessage> {
 	private static final DocumentBuilderFactory DOM_FACTORY = DocumentBuilderFactory.newInstance();
 
 	private static final TransformerFactory TRANSFORMER_FACTORY = TransformerFactory.newInstance();
@@ -42,6 +44,11 @@ public class CodedMessageList {
 
 	public CodedMessageList() {
 		this.messages = new ArrayList<CodedMessage>();
+	}
+
+	@Override
+	public Iterator<CodedMessage> iterator() {
+		return messages.iterator();
 	}
 
 	/**

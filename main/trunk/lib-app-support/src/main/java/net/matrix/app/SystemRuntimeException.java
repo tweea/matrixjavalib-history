@@ -12,8 +12,8 @@ import net.matrix.app.message.CodedMessageList;
 /**
  * 应用系统的根异常，包含一个或多个编码消息。
  */
-public class SystemException
-	extends Exception
+public class SystemRuntimeException
+	extends RuntimeException
 	implements CodedException {
 	/**
 	 * serialVersionUID。
@@ -25,19 +25,19 @@ public class SystemException
 	 */
 	private CodedMessageList messages = new CodedMessageList();
 
-	public SystemException() {
+	public SystemRuntimeException() {
 		messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR));
 	}
 
-	public SystemException(final String rootMessageCode) {
+	public SystemRuntimeException(final String rootMessageCode) {
 		messages.add(new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR));
 	}
 
-	public SystemException(final CodedMessage rootMessage) {
+	public SystemRuntimeException(final CodedMessage rootMessage) {
 		messages.add(rootMessage);
 	}
 
-	public SystemException(final Throwable cause) {
+	public SystemRuntimeException(final Throwable cause) {
 		super(cause);
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
@@ -48,7 +48,7 @@ public class SystemException
 		}
 	}
 
-	public SystemException(final Throwable cause, final String rootMessageCode) {
+	public SystemRuntimeException(final Throwable cause, final String rootMessageCode) {
 		super(cause);
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
@@ -59,7 +59,7 @@ public class SystemException
 		}
 	}
 
-	public SystemException(final Throwable cause, final CodedMessage rootMessage) {
+	public SystemRuntimeException(final Throwable cause, final CodedMessage rootMessage) {
 		super(cause);
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
