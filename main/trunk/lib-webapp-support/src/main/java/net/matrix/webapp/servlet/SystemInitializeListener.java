@@ -23,12 +23,12 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
  * 
  * @since 2005-11-16
  */
-public class InitSystem
+public class SystemInitializeListener
 	implements ServletContextListener {
 	/**
 	 * 日志记录器。
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(InitSystem.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SystemInitializeListener.class);
 
 	/**
 	 * 关联的系统环境。
@@ -36,15 +36,17 @@ public class InitSystem
 	protected SystemContext context;
 
 	/**
-	 * 默认与全局系统环境关联。
+	 * 默认构造器。
 	 */
-	public InitSystem() {
-		context = GlobalSystemContext.get();
+	public SystemInitializeListener() {
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext servletContext = sce.getServletContext();
+
+		// 默认与全局系统环境关联
+		context = GlobalSystemContext.get();
 
 		// 加载消息
 		loadMessageDefinitions();
