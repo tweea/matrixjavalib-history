@@ -116,9 +116,6 @@ public final class Digests {
 	 * @return 扰码
 	 */
 	public static byte[] generateSalt(final int numBytes) {
-		if (numBytes <= 0) {
-			throw new IllegalArgumentException("numBytes argument must be a positive integer (1 or larger)");
-		}
 		byte[] bytes = new byte[numBytes];
 		RANDOM.nextBytes(bytes);
 		return bytes;

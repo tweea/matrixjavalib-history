@@ -29,26 +29,7 @@ public final class Collections3 {
 	}
 
 	/**
-	 * 返回 a - b 的集合。
-	 * 
-	 * @param <T>
-	 *            集合元素类型
-	 * @param a
-	 *            总集合
-	 * @param b
-	 *            被减集合
-	 * @return 差集合
-	 */
-	public static <T> List<T> subtract(final Collection<T> a, final Collection<T> b) {
-		List<T> list = new ArrayList<T>(a);
-		for (T item : b) {
-			list.remove(item);
-		}
-		return list;
-	}
-
-	/**
-	 * 提取集合中的对象的属性(通过 Getter 函数)，组合成 Map。
+	 * 提取集合中的对象的两个属性(通过 Getter 函数)，组合成 Map。
 	 * 
 	 * @param collection
 	 *            来源集合.
@@ -77,7 +58,7 @@ public final class Collections3 {
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过 Getter 函数)，组合成 List。
+	 * 提取集合中的对象的一个属性(通过 Getter 函数)，组合成 List。
 	 * 
 	 * @param collection
 	 *            来源集合.
@@ -104,14 +85,14 @@ public final class Collections3 {
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过 Getter 函数)，组合成由分割符分隔的字符串。
+	 * 提取集合中的对象的一个属性(通过 Getter 函数)，组合成由分割符分隔的字符串。
 	 * 
 	 * @param collection
-	 *            来源集合.
+	 *            来源集合
 	 * @param propertyName
-	 *            要提取的属性名.
+	 *            要提取的属性名
 	 * @param separator
-	 *            分隔符.
+	 *            分隔符
 	 * @return 组合字符串
 	 */
 	public static String extractToString(final Collection collection, final String propertyName, final String separator) {
@@ -120,10 +101,11 @@ public final class Collections3 {
 	}
 
 	/**
-	 * 转换 Collection 为 String，每个元素的前面加入 prefix，后面加入 postfix，如<div>mymessage</div>。
+	 * 转换 Collection 所有元素(通过 toString())为 String，每个元素的前面加入 prefix，后面加入
+	 * postfix，如<div>mymessage</div>。
 	 * 
 	 * @param collection
-	 *            来源集合.
+	 *            来源集合
 	 * @param prefix
 	 *            前缀
 	 * @param postfix
