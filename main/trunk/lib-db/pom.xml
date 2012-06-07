@@ -47,14 +47,14 @@
 		<dependency>
 			<groupId>net.matrix</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.4.2</version>
+			<version>1.4.3</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.2</version>
+			<version>4.1.4.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -67,7 +67,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.2</version>
+			<version>4.1.4.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -116,14 +116,14 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.1.2</version>
+			<version>4.1.4.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.1.2</version>
+			<version>4.1.4.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- test -->
@@ -137,7 +137,7 @@
 			<!-- MySQL 的 JDBC 驱动 -->
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.19</version>
+			<version>5.1.20</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
