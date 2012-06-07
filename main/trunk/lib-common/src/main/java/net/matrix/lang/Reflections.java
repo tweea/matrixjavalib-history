@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 反射工具类。
- * 提供调用 getter/setter 方法，访问私有变量，调用私有方法，获取泛型类型 Class，被 AOP 过的真实类等工具函数。
+ * 提供调用 getter/setter 方法，访问私有成员，调用私有方法，获取泛型类型 Class，被 AOP 过的真实类等工具函数。
  */
 public final class Reflections {
 	/**
@@ -49,6 +49,8 @@ public final class Reflections {
 	 *            目标对象
 	 * @param name
 	 *            属性名
+	 * @param <T>
+	 *            期待的属性值类型
 	 * @return 属性值
 	 */
 	public static <T> T invokeGetter(final Object target, final String name) {
@@ -74,12 +76,14 @@ public final class Reflections {
 	}
 
 	/**
-	 * 直接读取对象属性值，无视 private/protected 修饰符，不经过 getter 函数。
+	 * 直接读取对象成员值，无视 private/protected 修饰符，不经过 getter 函数。
 	 * 
 	 * @param target
 	 *            目标对象
 	 * @param name
 	 *            成员名
+	 * @param <T>
+	 *            期待的成员值类型
 	 * @return 成员值
 	 */
 	public static <T> T getFieldValue(final Object target, final String name) {
@@ -99,7 +103,7 @@ public final class Reflections {
 	}
 
 	/**
-	 * 直接设置对象属性值，无视 private/protected 修饰符，不经过 setter 函数。
+	 * 直接设置对象成员值，无视 private/protected 修饰符，不经过 setter 函数。
 	 * 
 	 * @param target
 	 *            目标对象
@@ -135,6 +139,8 @@ public final class Reflections {
 	 *            参数类型
 	 * @param parameterValues
 	 *            参数值
+	 * @param <T>
+	 *            期待的返回值类型
 	 * @return 返回值
 	 */
 	public static <T> T invokeMethod(final Object target, final String name, final Class<?>[] parameterTypes, final Object[] parameterValues) {
@@ -161,6 +167,8 @@ public final class Reflections {
 	 *            方法名
 	 * @param parameterValues
 	 *            参数值
+	 * @param <T>
+	 *            期待的返回值类型
 	 * @return 返回值
 	 */
 	public static <T> T invokeMethodByName(final Object target, final String name, final Object[] parameterValues) {
@@ -183,8 +191,8 @@ public final class Reflections {
 	 * @param target
 	 *            目标对象
 	 * @param name
-	 *            属性名
-	 * @return 属性
+	 *            成员名
+	 * @return 成员
 	 */
 	public static Field getAccessibleField(final Object target, final String name) {
 		for (Class<?> superClass = target.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
@@ -264,10 +272,10 @@ public final class Reflections {
 	}
 
 	/**
-	 * 改变 private/protected 的成员变量为 public，尽量不调用实际改动的语句，避免 JDK 的 securityManager 抱怨。
+	 * 改变 private/protected 的成员为 public，尽量不调用实际改动的语句，避免 JDK 的 securityManager 抱怨。
 	 * 
 	 * @param field
-	 *            属性
+	 *            成员
 	 */
 	public static void makeAccessible(final Field field) {
 		if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) || Modifier.isFinal(field.getModifiers()))

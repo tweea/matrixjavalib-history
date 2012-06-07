@@ -22,6 +22,8 @@ public final class Objects {
 	 *            对象
 	 * @param replacement
 	 *            替代对象
+	 * @param <T>
+	 *            对象类型
 	 * @return 结果
 	 */
 	public static <T> T isNull(final T value, final T replacement) {
@@ -35,6 +37,8 @@ public final class Objects {
 	 *            对象 1
 	 * @param value2
 	 *            对象 2
+	 * @param <T>
+	 *            对象类型
 	 * @return 结果
 	 */
 	public static <T> T nullIf(final T value, final T value2) {

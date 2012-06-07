@@ -38,8 +38,14 @@ public final class Cryptos {
 	private static final String HMACSHA1 = "HmacSHA1";
 
 	// RFC2401
+	/**
+	 * 默认的HMAC-SHA1 密钥长度。
+	 */
 	private static final int DEFAULT_HMACSHA1_KEYSIZE = 160;
 
+	/**
+	 * 默认的 AES 算法密钥长度。
+	 */
 	private static final int DEFAULT_AES_KEYSIZE = 128;
 
 	/**
