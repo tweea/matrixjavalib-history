@@ -48,7 +48,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 */
 	public HibernateDAO(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-		this.entityClass = Reflections.getSuperClassGenricType(getClass());
+		this.entityClass = Reflections.getClassGenricType(getClass());
 	}
 
 	public HibernateDAO(SessionFactory sessionFactory, Class<T> entityClass) {
