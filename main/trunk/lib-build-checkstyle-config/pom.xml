@@ -21,7 +21,7 @@
 	<!-- 构建设置 -->
 
 	<!-- 项目信息 -->
-	<name>CheckStyle 配置</name>
+	<name>Matrix :: CheckStyle 配置</name>
 	<description>CheckStyle 配置。</description>
 	<inceptionYear>2008</inceptionYear>
 

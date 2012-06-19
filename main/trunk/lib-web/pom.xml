@@ -81,7 +81,7 @@
 	</build>
 
 	<!-- 项目信息 -->
-	<name>Web 类库</name>
+	<name>Matrix :: Web 类库</name>
 	<description>与 Web 相关的实用工具等。</description>
 	<inceptionYear>2008</inceptionYear>
 

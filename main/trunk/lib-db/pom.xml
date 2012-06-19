@@ -174,7 +174,7 @@
 	</build>
 
 	<!-- 项目信息 -->
-	<name>数据库类库</name>
+	<name>Matrix :: 数据库类库</name>
 	<description>访问数据库的公共方法。</description>
 	<inceptionYear>2008</inceptionYear>
 
