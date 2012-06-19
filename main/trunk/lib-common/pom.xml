@@ -65,6 +65,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<!-- 升级传递依赖 -->
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>

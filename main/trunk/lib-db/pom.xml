@@ -19,6 +19,7 @@
 	<dependencies>
 		<!-- compile -->
 		<dependency>
+			<!-- 升级传递依赖 -->
 			<!-- 文法分析工具，Hibernate 需要 -->
 			<groupId>antlr</groupId>
 			<artifactId>antlr</artifactId>
@@ -26,7 +27,8 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<!-- XML 处理工具 -->
+			<!-- 升级传递依赖 -->
+			<!-- XML 处理工具，Hibernate 需要 -->
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
@@ -84,12 +86,14 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>1.0.1.Final</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<!-- 升级传递依赖 -->
 			<!-- 机器码工具，Hibernate 需要 -->
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
