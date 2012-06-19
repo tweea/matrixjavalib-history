@@ -461,7 +461,7 @@
 	</build>
 
 	<!-- 项目信息 -->
-	<name>Genesis</name>
+	<name>Matrix :: Genesis</name>
 	<description>
 		Genesis 提供 Maven3 构建支持，增加共享的配置和公共插件。
 	</description>
