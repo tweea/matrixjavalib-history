@@ -23,6 +23,7 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
  * 
  * @since 2005-11-16
  */
+// TODO 保存 ServletContext，便于子类使用。
 public class SystemInitializeListener
 	implements ServletContextListener {
 	/**
