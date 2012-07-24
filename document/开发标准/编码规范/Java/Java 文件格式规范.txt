@@ -42,13 +42,13 @@ import net.sf.util.Application;
  * It is observable to allow it to be watched, but only
  * reports changes when the current set is complete
  */
-
+		 
 4 接下来是类定义，包含了在不同的行的 extends 和 implements 
 
 public class CounterSet
 		extends Observable
 		implements Cloneable
-
+		 
 5 接下来是类的成员变量
   通常根据可见性，public 在前，private 在后。
   根据实例化方式，静态成员在前，实例成员在后。
@@ -66,15 +66,13 @@ protected int[] packets;
 
 6 接下来是构造函数，它应该用递增的方式写（比如：参数多的写在后面）。
 
-public CounterSet(int size)
-{
+public CounterSet(int size) {
   this.size = size;
 }
 
 和 finalize 方法
 
-protected void finalize()
-{
+protected void finalize() {
 }
 
 7 存取方法 
@@ -85,35 +83,33 @@ protected void finalize()
  * @return an array containing the statistical data.  This array has been
  * freshly allocated and can be modified by the caller.
  */
-public int[] getPackets()
-{
+public int[] getPackets() {
 	return copyArray(packets, offset);
 }
-public int[] getBytes()
-{
+
+public int[] getBytes() {
 	return copyArray(bytes, offset);
 }
 
-public int[] getPackets()
-{
+public int[] getPackets() {
 	return packets;
 }
-public void setPackets(int[] packets)
-{
+
+public void setPackets(int[] packets) {
 	this.packets = packets;
 }
  
 8 如果这个类是可以被克隆的，那么下一步就是 clone 方法： 
 
-public Object clone()
-{
-	try{
-		CounterSet obj = (CounterSet)super.clone();
-		obj.packets = (int[])packets.clone();
+public Object clone() {
+	try {
+		CounterSet obj = (CounterSet) super.clone();
+		obj.packets = (int[]) packets.clone();
 		obj.size = size;
 		return obj;
-	}catch(CloneNotSupportedException e){
-		throw new InternalError("Unexpected CloneNotSUpportedException: " + e.getMessage());
+	} catch (CloneNotSupportedException e) {
+		throw new InternalError("Unexpected CloneNotSUpportedException: "
+				+ e.getMessage());
 	}
 }
  
@@ -127,21 +123,21 @@ public Object clone()
  * (such as when restoring from a database)
  */
 protected final void setArray(int[] r1, int[] r2, int[] r3, int[] r4)
-	throws IllegalArgumentException
-{
+		throws IllegalArgumentException {
 	//
 	// Ensure the arrays are of equal size
 	//
-	if (r1.length != r2.length || r1.length != r3.length || r1.length != r4.length)
-		throw new IllegalArgumentException("Arrays must be of the same size");
+	if (r1.length != r2.length || r1.length != r3.length
+			|| r1.length != r4.length)
+		throw new IllegalArgumentException(
+				"Arrays must be of the same size");
 	System.arraycopy(r1, 0, r3, 0, r1.length);
 	System.arraycopy(r2, 0, r4, 0, r1.length);
 }
 
 toString 方法：
 
-public String toString()
-{
+public String toString() {
 	String retval = "CounterSet: ";
 	for(int i = 0; i < data.length(); i++){
 		retval += data.bytes.toString();
@@ -156,31 +152,28 @@ main 方法
 
 例子
 /*
-* @(#)Blah.java 1.82 99/03/18
-*
-* Copyright (c) 1994-1999 Sun Microsystems, Inc.
-* 901 San Antonio Road, Palo Alto, California, 94303, U.S.A.
-* All Rights Reserved.
-*
-* This software is the confidential and proprietary information of Sun
-* Microsystems, Inc. ("Confidential Information"). You shall not
-* disclose such Confidential Information and shall use it only in
-* accordance with the terms of the license agreement you entered into
-* with Sun.
-*/
+ * @(#)Blah.java 1.82 99/03/18
+ *
+ * Copyright (c) 1994-1999 Sun Microsystems, Inc.
+ * 901 San Antonio Road, Palo Alto, California, 94303, U.S.A.
+ * All Rights Reserved.
+ *
+ * This software is the confidential and proprietary information of Sun
+ * Microsystems, Inc. ("Confidential Information"). You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with Sun.
+ */
 package java.blah;
 
 import java.blah.blahdy.BlahBlah;
 
 /**
  * Class description goes here.
- *
+ * 
  * @version 1.82 18 Mar 1999
- * @author Firstname Lastname
  */
-public class Blah
-	extends SomeClass
-{
+public class Blah extends SomeClass {
 	/* A class implementation comment can go here. */
 	/** classVar1 documentation comment */
 	public static int classVar1;
@@ -203,25 +196,24 @@ public class Blah
 	/**
 	 * ... constructor Blah documentation comment...
 	 */
-	public Blah()
-	{
+	public Blah() {
 		// ...implementation goes here...
 	}
 
 	/**
 	 * ... method doSomething documentation comment...
 	 */
-	public void doSomething()
-	{
+	public void doSomething() {
 		// ...implementation goes here...
 	}
 
 	/**
 	 * ...method doSomethingElse documentation comment...
-	 * @param someParam description
+	 * 
+	 * @param someParam
+	 *            description
 	 */
-	public void doSomethingElse(Object someParam)
-	{
+	public void doSomethingElse(Object someParam) {
 		// ...implementation goes here...
 	}
 }

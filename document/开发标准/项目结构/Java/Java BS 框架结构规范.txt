@@ -1,23 +1,42 @@
-项目使用 Subversion 作版本控制，Maven做构建系统
+项目使用 Subversion 作为版本控制，Maven 作为构建系统。
+所有文件使用 UTF-8 编码。
 
-文档结构
-src
-+-target		临时目录，不包含在 SVN 中
-+-pom.xml		maven 项目文件
-+-各个模块		每个模块一个目录
+文件结构
+1、多模块项目
+(root)
++-各个模块 每个模块一个目录
++-target 构建目标文件，被版本控制设置为忽略
++-pom.xml Maven 项目描述文件
+2、单模块项目
+(root)
++-src 源文件
+| +-main 运行文件
+| | +-java Java 源代码
+| | +-resources 资源文件
+| | +-webapp Web 源文件
+| |   +-WEB-INF Web 应用文件
+| |     +-web.xml Web 部署描述符
+| +-test 测试文件
+|   +-java Java 测试源代码
+|   +-resources 测试资源文件
++-target 构建目标文件，被版本控制设置为忽略
++-pom.xml Maven 项目描述文件
 
-sources 源代码
+版本控制注意事项：
+不应将 userfiles 目录中的文件加入版本控制。
+应忽略的项目 Thumbs.db。
+target 文件夹是 maven 产生的临时目录，应当忽略。
+
+执行 Java 标准：
+Java 版本：6
+JavaEE 版本：5
+
+Java 包结构
+(默认包)
 +-net
   +-matrix
     +-项目代号
 	  ...
-
-Java 标准：
-Java 版本：6
-JAVAEE 版本：5
-
-编码：
-所有文件使用 UTF-8 编码
 
 包命名：
 每个包中的文件夹和类不宜过多
@@ -27,8 +46,3 @@ JSP：
 原则上所有功能点的 jsp 应该在同样深的目录体系下，并且每个小的功能点的文件在同一个子目录
 	比如 /p_xxx/大的功能模块名称/小的功能模块/
 除非公用的 jsp，不要出现在不同层次的目录下，比如有些在 /p_xxx/xx/xx/?.jsp 有些在/p_xxx/xx/xx/xx/?.jsp 这样以后可能造成维护上的问题
-
-SVN：
-不应将 userfiles 目录中的文件加入版本管理。
-应忽略的项目 Thumbs.db
-target 文件夹是 maven 产生的临时目录，应当忽略。
