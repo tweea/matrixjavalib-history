@@ -64,6 +64,8 @@
 		mvn dependency:tree
 	下载源代码
 		mvn dependency:sources
+	下载依赖、插件等
+		mvn dependency:go-offline
 	分析
 		mvn dependency:analyze
 	拷贝
