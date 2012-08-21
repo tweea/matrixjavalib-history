@@ -7,30 +7,11 @@ package net.matrix.web.http;
 
 import org.apache.commons.codec.binary.Base64;
 
+
 /**
  * HTTP 工具类。
  */
 public final class HTTPs {
-	public static final String USER_AGENT_HEADER = "user-agent";
-
-	public static final String AUTHENTICATION_HEADER = "Authorization";
-
-	public static final String EXPIRES_HEADER = "Expires";
-
-	public static final String PRAGMA_HEADER = "Pragma";
-
-	public static final String CACHE_CONTROL_HEADER = "Cache-Control";
-
-	public static final String LAST_MODIFIED_HEADER = "Last-Modified";
-
-	public static final String IF_MODIFIED_SINCE_HEADER = "If-Modified-Since";
-
-	public static final String E_TAG_HEADER = "ETag";
-
-	public static final String IF_NONE_MATCH_HEADER = "If-None-Match";
-
-	public static final String CONTENT_DISPOSITION_HEADER = "Content-Disposition";
-
 	/**
 	 * 阻止实例化。
 	 */
