@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-common</artifactId>
-	<version>1.4.4</version>
+	<version>1.4.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -199,13 +199,13 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/mxlib-common-1.4.4
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-common
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/mxlib-common-1.4.4
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-common
 		</developerConnection>
 		<url>
-			http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/tags/mxlib-common-1.4.4
+			http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/lib-common
 		</url>
 	</scm>
 </project>
