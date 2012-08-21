@@ -429,14 +429,6 @@
 								<requireJavaVersion>
 									<version>[1.6,)</version>
 								</requireJavaVersion>
-								<bannedDependencies>
-									<searchTransitive>true</searchTransitive>
-									<excludes>
-										<exclude>commons-logging</exclude>
-										<exclude>org.springframework:2.*</exclude>
-										<exclude>org.springframework:3.0.*</exclude>
-									</excludes>
-								</bannedDependencies>
 							</rules>
 							<fail>true</fail>
 						</configuration>
