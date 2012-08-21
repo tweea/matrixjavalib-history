@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>net.matrix</groupId>
 		<artifactId>genesis</artifactId>
-		<version>22</version>
+		<version>23</version>
 	</parent>
 
 	<!-- 构建设置 -->

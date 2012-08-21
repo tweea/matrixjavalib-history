@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>net.matrix</groupId>
 		<artifactId>genesis</artifactId>
-		<version>22</version>
+		<version>23</version>
 	</parent>
 	<dependencies>
 		<!-- compile -->
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>net.matrix</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.4.3</version>
+			<version>1.4.4-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- provided -->

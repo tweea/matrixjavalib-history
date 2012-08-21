@@ -60,6 +60,7 @@ public final class Threads {
 	 * 按照 ExecutorService JavaDoc 示例代码编写的 Graceful Shutdown 方法。
 	 * 先使用 shutdown，停止接收新任务并尝试完成所有已存在任务。
 	 * 如果超时，则调用 shutdownNow，取消在 workQueue 中 Pending 的任务，并中断所有阻塞函数。
+	 * 如果仍然超時，則強制退出。
 	 * 另对在 shutdown 时线程本身被调用中断做了处理。
 	 * 
 	 * @param pool
@@ -93,7 +94,7 @@ public final class Threads {
 	}
 
 	/**
-	 * 直接调用 shutdownNow 的方法，取消在 workQueue 中 Pending 的任务，并中断所有阻塞函数。
+	 * 直接调用 shutdownNow 的方法，有 timeout 控制。取消在 workQueue 中 Pending 的任务，并中断所有阻塞函数。
 	 * 
 	 * @param pool
 	 *            ExecutorService
