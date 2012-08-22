@@ -23,13 +23,17 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
  * 
  * @since 2005-11-16
  */
-// TODO 保存 ServletContext，便于子类使用。
 public class SystemInitializeListener
 	implements ServletContextListener {
 	/**
 	 * 日志记录器。
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(SystemInitializeListener.class);
+
+	/**
+	 * 系统的 Servlet 上下文。
+	 */
+	protected ServletContext servletContext;
 
 	/**
 	 * 关联的系统环境。
@@ -44,7 +48,7 @@ public class SystemInitializeListener
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		ServletContext servletContext = sce.getServletContext();
+		servletContext = sce.getServletContext();
 
 		// 默认与全局系统环境关联
 		context = GlobalSystemContext.get();
