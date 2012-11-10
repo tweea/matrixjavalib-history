@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>net.matrix</groupId>
 		<artifactId>genesis</artifactId>
-		<version>23</version>
+		<version>24-SNAPSHOT</version>
 	</parent>
 	<dependencies>
 		<!-- compile -->
