@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- 基本属性 - 项目属性 -->
-	<groupId>net.matrix</groupId>
+	<groupId>net.greatsoft</groupId>
 	<artifactId>genesis</artifactId>
-	<version>24-SNAPSHOT</version>
+	<version>12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -37,9 +37,9 @@
 					<version>2.9.1</version>
 					<dependencies>
 						<dependency>
-							<groupId>net.matrix.build</groupId>
+							<groupId>net.greatsoft.build</groupId>
 							<artifactId>checkstyle-config</artifactId>
-							<version>1.2-SNAPSHOT</version>
+							<version>1.2</version>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -154,6 +154,33 @@
 						<docencoding>UTF-8</docencoding>
 						<charset>UTF-8</charset>
 						<additionalJOption>-J-Xmx512M</additionalJOption>
+						<tags>
+							<tag>
+								<name>createBy.</name>
+								<placement>a</placement>
+								<head>创建人：</head>
+							</tag>
+							<tag>
+								<name>createDate.</name>
+								<placement>a</placement>
+								<head>创建日期：</head>
+							</tag>
+							<tag>
+								<name>modifyBy.</name>
+								<placement>a</placement>
+								<head>修改人：</head>
+							</tag>
+							<tag>
+								<name>modifyContent.</name>
+								<placement>a</placement>
+								<head>修改内容：</head>
+							</tag>
+							<tag>
+								<name>modifyDate.</name>
+								<placement>a</placement>
+								<head>修改日期：</head>
+							</tag>
+						</tags>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -213,9 +240,9 @@
 					<version>3.2</version>
 					<dependencies>
 						<dependency>
-							<groupId>net.matrix.build</groupId>
+							<groupId>net.greatsoft.build</groupId>
 							<artifactId>checkstyle-config</artifactId>
-							<version>1.2-SNAPSHOT</version>
+							<version>1.2</version>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -246,6 +273,33 @@
 									<docencoding>UTF-8</docencoding>
 									<charset>UTF-8</charset>
 									<additionalJOption>-J-Xmx512M</additionalJOption>
+									<tags>
+										<tag>
+											<name>createBy.</name>
+											<placement>a</placement>
+											<head>创建人：</head>
+										</tag>
+										<tag>
+											<name>createDate.</name>
+											<placement>a</placement>
+											<head>创建日期：</head>
+										</tag>
+										<tag>
+											<name>modifyBy.</name>
+											<placement>a</placement>
+											<head>修改人：</head>
+										</tag>
+										<tag>
+											<name>modifyContent.</name>
+											<placement>a</placement>
+											<head>修改内容：</head>
+										</tag>
+										<tag>
+											<name>modifyDate.</name>
+											<placement>a</placement>
+											<head>修改日期：</head>
+										</tag>
+									</tags>
 								</configuration>
 							</plugin>
 							<plugin>
@@ -415,8 +469,8 @@
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>2.2</version>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.3</version>
 			</extension>
 		</extensions>
 		<plugins>
@@ -468,27 +522,30 @@
 	</build>
 
 	<!-- 项目信息 -->
-	<name>Matrix :: Genesis</name>
-	<description>
-		Genesis 提供 Maven3 构建支持，增加共享的配置和公共插件。
-	</description>
-	<url>http://matrixjavalib.sourceforge.net/site/${project.groupId}/${project.artifactId}/${project.version}</url>
-	<inceptionYear>2008</inceptionYear>
+	<name>北航冠新 :: GreatFramework :: 构建支持 :: Genesis</name>
+	<description>Genesis 提供 Maven3 构建支持，在项目间共享信息。</description>
+	<url>http://192.168.1.234/mvnsite/${project.groupId}/${project.artifactId}/${project.version}</url>
+	<inceptionYear>2012</inceptionYear>
 	<licenses>
 		<license>
-			<name>GNU General Public License</name>
-			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<name>GreatSoft</name>
+			<url>http://www.greatsoft.net/greatsoft/action/gotoresult_frame.do?tem=result&amp;fid=1&amp;zid=1&amp;flag=</url>
 			<distribution>manual</distribution>
-			<comments>Matrix 版权所有</comments>
+			<comments>北航冠新版权所有</comments>
 		</license>
 	</licenses>
 	<organization>
-		<name>Matrix</name>
-		<url>http://www.matrix.net</url>
+		<name>GreatSoft</name>
+		<url>http://www.greatsoft.net/</url>
 	</organization>
 	<developers>
 		<developer>
-			<name>Tweea Tang</name>
+			<name>未列举</name>
+			<organization>研发一部</organization>
+		</developer>
+		<developer>
+			<name>未列举</name>
+			<organization>研发二部</organization>
 		</developer>
 	</developers>
 
@@ -497,34 +554,33 @@
 		<maven>3.0</maven>
 	</prerequisites>
 	<issueManagement>
-		<system>sourceforge</system>
-		<url>http://sourceforge.net/tracker/?group_id=543402</url>
+		<system>QC</system>
+		<url>http://192.168.1.65:8080/qcbin/start_a.htm</url>
 	</issueManagement>
 	<ciManagement>
-		<system>continuum</system>
-		<url>http://192.168.1.100:8082/continuum</url>
+		<system>Jenkins</system>
+		<url>http://192.168.1.234:8082</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/mvn-genesis</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/mvn-genesis</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/mvn-genesis</url>
+		<connection>scm:svn:https://192.168.1.91/svn/great-framework/main/trunk/net.greatsoft.genesis</connection>
+		<developerConnection>scm:svn:https://192.168.1.91/svn/great-framework/main/trunk/net.greatsoft.genesis</developerConnection>
+		<url>https://192.168.1.91/svn/great-framework/main/trunk/net.greatsoft.genesis</url>
 	</scm>
 	<distributionManagement>
 		<repository>
-			<id>sourceforge.release</id>
-			<name>SourceForge Release</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/release</url>
+			<id>internal.release</id>
+			<name>Internal Release</name>
+			<url>dav:http://192.168.1.234:8081/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>sourceforge.snapshot</id>
-			<name>SourceForge Snapshot</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/snapshot</url>
+			<id>internal.snapshot</id>
+			<name>Internal Snapshot</name>
+			<url>dav:http://192.168.1.234:8081/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<site>
-			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
-			<id>sourceforge.site</id>
-			<name>SourceForge Site</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site/${project.groupId}/${project.artifactId}/${project.version}</url>
+			<id>internal.site</id>
+			<name>Internal Site</name>
+			<url>dav:http://192.168.1.234/mvnsite/${project.groupId}/${project.artifactId}/${project.version}</url>
 		</site>
 	</distributionManagement>
 	<profiles>
@@ -556,19 +612,6 @@
 											</pluginExecutionFilter>
 											<action>
 												<ignore>true</ignore>
-											</action>
-										</pluginExecution>
-										<pluginExecution>
-											<pluginExecutionFilter>
-												<groupId>org.codehaus.mojo</groupId>
-												<artifactId>native2ascii-maven-plugin</artifactId>
-												<versionRange>[1.0-beta-1,)</versionRange>
-												<goals>
-													<goal>native2ascii</goal>
-												</goals>
-											</pluginExecutionFilter>
-											<action>
-												<execute />
 											</action>
 										</pluginExecution>
 									</pluginExecutions>
