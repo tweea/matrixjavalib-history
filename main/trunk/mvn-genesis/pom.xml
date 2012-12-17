@@ -15,11 +15,11 @@
 	</properties>
 
 	<!-- 基本属性 - 项目关系 -->
-	<dependency>
+	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
-	</dependency>
+	</parent>
 
 	<!-- 构建设置 -->
 	<build>
@@ -529,16 +529,6 @@
 		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/mvn-genesis</url>
 	</scm>
 	<distributionManagement>
-		<repository>
-			<id>sourceforge.release</id>
-			<name>SourceForge Release</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/release</url>
-		</repository>
-		<snapshotRepository>
-			<id>sourceforge.snapshot</id>
-			<name>SourceForge Snapshot</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/snapshot</url>
-		</snapshotRepository>
 		<site>
 			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
 			<id>sourceforge.site</id>
