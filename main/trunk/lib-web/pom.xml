@@ -12,14 +12,14 @@
 
 	<!-- 基本属性 - 项目关系 -->
 	<parent>
-		<groupId>net.matrix</groupId>
+		<groupId>net.sf.matrixjavalib</groupId>
 		<artifactId>genesis</artifactId>
 		<version>23</version>
 	</parent>
 	<dependencies>
 		<!-- compile -->
 		<dependency>
-			<groupId>net.matrix</groupId>
+			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-common</artifactId>
 			<version>1.4.4</version>
 			<scope>compile</scope>
