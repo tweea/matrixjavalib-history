@@ -15,6 +15,11 @@
 	</properties>
 
 	<!-- 基本属性 - 项目关系 -->
+	<dependency>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</dependency>
 
 	<!-- 构建设置 -->
 	<build>
