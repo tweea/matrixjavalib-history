@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gbk"?>
+<set>
+	<catalog name="configset" version="set2/1">
+		<file name="configset.xml" />
+	</catalog>
+	<catalog name="naming" version="1">
+		<file name="paths.xml" />
+	</catalog>
+	<catalog name="test" version="1">
+		<file name="big.xml" branch="rat" />
+		<file name="small.xml" branch="mouse" />
+	</catalog>
+	<catalog name="test/orz" version="1">
+		<file name="foo.xml" />
+		<file name="bar.xml" />
+	</catalog>
+	<catalog name="test/virtual" version="2">
+		<file name="foo.xml" />
+	</catalog>
+</set>
