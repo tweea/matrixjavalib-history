@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- 基本属性 - 项目属性 -->
-	<groupId>net.matrix.build</groupId>
+	<groupId>net.sf.matrixjavalib.build</groupId>
 	<artifactId>checkstyle-config</artifactId>
 	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>net.sf.matrixjavalib</groupId>
 		<artifactId>genesis</artifactId>
-		<version>23</version>
+		<version>24</version>
 	</parent>
 
 	<!-- 构建设置 -->
