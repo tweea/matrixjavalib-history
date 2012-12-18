@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-web</artifactId>
-	<version>1.4.3-SNAPSHOT</version>
+	<version>1.4.3</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -86,11 +86,11 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-web
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/mxlib-web-1.4.3
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-web
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/mxlib-web-1.4.3
 		</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/lib-web</url>
+		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/tags/mxlib-web-1.4.3</url>
 	</scm>
 </project>
