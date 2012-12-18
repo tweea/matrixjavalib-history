@@ -8,17 +8,17 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * 负责读取配置文件
  */
 public class HierarchicalConfigurationUtilsTest {
-	private static HierarchicalConfiguration config;
+	private HierarchicalConfiguration config;
 
-	@BeforeClass
-	public static void setUp()
+	@Before
+	public void setUp()
 		throws ConfigurationException {
 		config = new XMLConfiguration("./bar.xml");
 	}
