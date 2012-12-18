@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.4.4</version>
+			<version>1.4.5</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- provided -->
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>3.1.2.RELEASE</version>
+			<version>3.2.0.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
