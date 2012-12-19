@@ -1,5 +1,6 @@
 springside Commit:fa8a54bb6434af45c2d1df80f296b722587348fc 2012/12/17 11:02:23
 https://github.com/springside/springside4/wiki
+https://oss.sonatype.org
 ---- next ------
 使用 dbutils、unitils
 注意异常的抛出和处理
@@ -9,6 +10,7 @@ https://github.com/springside/springside4/wiki
 	Mock
 	derby
 增强检查规则
+	测试更新 CheckStyle 检验规则
 	整理开发规范
 	Sonar
 	应用 JSR305 注解
