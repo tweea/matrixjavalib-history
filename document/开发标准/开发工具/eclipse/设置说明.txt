@@ -35,7 +35,7 @@
 	在 Java->Compiler->Errors/Warinings
 		增加 Warinings
 		* Code Style
-		  增加 Parameter assignment，Undocumented empty block，Resource not managed via try-with-resource
+		  增加 Undocumented empty block，Resource not managed via try-with-resource
 		* Potential programming problem
 		  增加全部，除 Boxing and UnBoxing
 		* Name shadowing and confict
@@ -43,7 +43,7 @@
 		* Unecessary Code
 		  增加全部，除 Unecessary else
 		* Generic types
-		  增加全部
+		  增加全部（除前两项）
 		  选中 Ignore unavoidable generic type problems
 		* Annotation
 		  增加全部
