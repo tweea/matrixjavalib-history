@@ -34,17 +34,22 @@
 6、错误警告，检查一些常规的编码错误
 	在 Java->Compiler->Errors/Warinings
 		增加 Warinings
+		* Code Style
+		  增加 Parameter assignment，Undocumented empty block，Resource not managed via try-with-resource
 		* Potential programming problem
 		  增加全部，除 Boxing and UnBoxing
 		* Name shadowing and confict
 		  增加全部
 		* Unecessary Code
 		  增加全部，除 Unecessary else
-		* Annoatation
-		  增加全部
-		去除 Waringings
 		* Generic types
-		  前两个
+		  增加全部
+		  选中 Ignore unavoidable generic type problems
+		* Annotation
+		  增加全部
+		  取消 Enable '@SuppressWarnings' annotations
+		* Null analysis
+		  增加全部
 	设置 Java->Compiler->Javadoc
 		Malformed Javadoc Comments 为 Warning
 		Only consider members as visible as 为 Default
@@ -52,14 +57,15 @@
 		Missing tag descriptions 为 Validate all standard tags
 
 7、设置保存自动格式化、清理代码
-	设置 Java->Editor->SaveAction
-	选择 Format Source Code，Formate All Codes，与 Organize Imports
+	设置 Java->Editor->Save Actions
+	选中 Perform the selected action on save
+	选择 Format source code，Formate all lines，与 Organize Imports
 
 8、设置 JavaScript 项目
 	在 JavaScript->Code Style->Clean Up 中导入 js.cleanup.xml
 	在 JavaScript->Code Style->Formatter 中导入 js.formatter.xml
-	设置 JavaScript->Editor->SaveAction
-	选择 Perform the seclected actions on save，Format Source Code
+	设置 JavaScript->Editor->Save Actions
+	选中 Perform the selected action on save，Format source code
 
 9、设置 Web 编辑器项目
 	在 Web->CSS Files->Editor 的 Line width 设为 120
@@ -82,13 +88,9 @@
 
 四、checkstyle 设置
 	在 CheckStyle 点击 New...。
-	输入名字，如 Max Checks。
-	点击 Import...，选择 checkstyle-config 项目中的配置文件。
-	点击 OK，出现警告框。
-	点击警告框上的 Edit properties...。
-	在新对话框中选择 Find unresovled properties，点 Yes。
-	编辑已增加的属性值。
-	点击 OK 关闭所有新打开的对话框。
+	输入名字，Matrix Checks。
+	点击 Import...，选择 checkstyle-config 项目中的配置文件（https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config/src/main/resources/checkstyle.xml）。
+	点击 OK。
 	点击新增加的条目，点击 Set as Default。
 
 五、MoreUnit 设置
