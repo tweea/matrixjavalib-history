@@ -296,13 +296,6 @@
 							</plugin>
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
-								<artifactId>cobertura-maven-plugin</artifactId>
-								<configuration>
-									<encoding>UTF-8</encoding>
-								</configuration>
-							</plugin>
-							<plugin>
-								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>findbugs-maven-plugin</artifactId>
 							</plugin>
 							<plugin>
@@ -332,6 +325,11 @@
 										</tagClasses>
 									</tagListOptions>
 								</configuration>
+							</plugin>
+							<plugin>
+								<groupId>org.jacoco</groupId>
+								<artifactId>jacoco-maven-plugin</artifactId>
+								<version>0.6.1.201212231917</version>
 							</plugin>
 						</reportPlugins>
 					</configuration>
@@ -369,14 +367,6 @@
 								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							</manifest>
 						</archive>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>2.5.2</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -431,6 +421,28 @@
 					<groupId>org.codehaus.sonar</groupId>
 					<artifactId>sonar-maven3-plugin</artifactId>
 					<version>3.4.1</version>
+				</plugin>
+				<plugin>
+					<!-- TODO 配置该插件和相应报告 -->
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.6.1.201212231917</version>
+					<executions>
+						<execution>
+							<id>JaCoCo Agent</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>JaCoCo Report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
