@@ -344,7 +344,8 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.13</version>
 					<configuration>
-						<argLine>-Xmx512m -Dfile.encoding=UTF-8 ${jacoco.agent.argLine}</argLine>
+						<!-- TODO wait for bug fix #40 in jacoco ${jacoco.agent.argLine} -->
+						<argLine>-Xmx512m -Dfile.encoding=UTF-8</argLine>
 						<includes>
 							<include>**/*Test.java</include>
 						</includes>
@@ -625,6 +626,19 @@
 											</pluginExecutionFilter>
 											<action>
 												<execute />
+											</action>
+										</pluginExecution>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.jacoco</groupId>
+												<artifactId>jacoco-maven-plugin</artifactId>
+												<versionRange>[0.6.1.201212231917,)</versionRange>
+												<goals>
+													<goal>prepare-agent</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
 											</action>
 										</pluginExecution>
 									</pluginExecutions>
