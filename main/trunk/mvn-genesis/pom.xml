@@ -344,7 +344,7 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.13</version>
 					<configuration>
-						<argLine>-Xmx512m -Dfile.encoding=UTF-8</argLine>
+						<argLine>-Xmx512m -Dfile.encoding=UTF-8 ${jacoco.agent.argLine}</argLine>
 						<includes>
 							<include>**/*Test.java</include>
 						</includes>
@@ -423,21 +423,22 @@
 					<version>3.4.1</version>
 				</plugin>
 				<plugin>
-					<!-- TODO 配置该插件和相应报告 -->
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.6.1.201212231917</version>
+					<configuration>
+						<propertyName>jacoco.agent.argLine</propertyName>
+					</configuration>
 					<executions>
 						<execution>
-							<id>JaCoCo Agent</id>
-							<phase>test-compile</phase>
+							<id>jacoco-initialize</id>
 							<goals>
 								<goal>prepare-agent</goal>
 							</goals>
 						</execution>
 						<execution>
-							<id>JaCoCo Report</id>
-							<phase>test</phase>
+							<id>jacoco-site</id>
+							<phase>package</phase>
 							<goals>
 								<goal>report</goal>
 							</goals>
@@ -497,6 +498,10 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
