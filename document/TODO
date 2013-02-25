@@ -4,6 +4,7 @@ https://oss.sonatype.org
 ---- next ------
 使用 dbutils、unitils
 注意异常的抛出和处理
+volatile 代替双次检查
 增强 Javadoc
 测试
 	单元测试
