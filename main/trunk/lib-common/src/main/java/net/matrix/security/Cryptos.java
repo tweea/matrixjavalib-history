@@ -203,6 +203,8 @@ public final class Cryptos {
 	 * @param mode
 	 *            Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
 	 * @return 密文或明文
+	 * @throws GeneralSecurityException
+	 *             加密或解密出现错误
 	 */
 	private static byte[] aes(final byte[] input, final byte[] key, final int mode)
 		throws GeneralSecurityException {
@@ -212,9 +214,9 @@ public final class Cryptos {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(input);
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new GeneralSecurityException(e);
 		} catch (NoSuchPaddingException e) {
-			throw new RuntimeException(e);
+			throw new GeneralSecurityException(e);
 		}
 	}
 
@@ -230,6 +232,8 @@ public final class Cryptos {
 	 * @param mode
 	 *            Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
 	 * @return 密文或明文
+	 * @throws GeneralSecurityException
+	 *             加密或解密出现错误
 	 */
 	private static byte[] aes(final byte[] input, final byte[] key, final byte[] iv, final int mode)
 		throws GeneralSecurityException {
@@ -240,9 +244,9 @@ public final class Cryptos {
 			cipher.init(mode, secretKey, ivSpec);
 			return cipher.doFinal(input);
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new GeneralSecurityException(e);
 		} catch (NoSuchPaddingException e) {
-			throw new RuntimeException(e);
+			throw new GeneralSecurityException(e);
 		}
 	}
 
