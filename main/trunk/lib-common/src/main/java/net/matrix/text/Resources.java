@@ -56,6 +56,9 @@ public final class Resources {
 	 */
 	private static class XMLResourceBundleControl
 		extends ResourceBundle.Control {
+		/**
+		 * 支持资源格式。
+		 */
 		private static final List<String> FORMATS = Arrays.asList("xml");
 
 		@Override
@@ -106,6 +109,9 @@ public final class Resources {
 	 */
 	private static class XMLResourceBundle
 		extends ResourceBundle {
+		/**
+		 * 资源中的属性。
+		 */
 		private Properties props;
 
 		private XMLResourceBundle(final InputStream stream)
