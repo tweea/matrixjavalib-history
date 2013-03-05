@@ -379,7 +379,7 @@ public class DefaultTree<ID, DATA>
 	 *            节点构造源
 	 * @return 新构造的树
 	 */
-	public static synchronized <ID, DATA> DefaultTree<ID, DATA> generate(final TreeSource<ID, DATA> source) {
+	public static <ID, DATA> DefaultTree<ID, DATA> generate(final TreeSource<ID, DATA> source) {
 		ID rootId = source.getRootId();
 		DATA rootData = source.getItem(rootId);
 		DefaultTree<ID, DATA> tree = new DefaultTree<ID, DATA>(rootId, rootData);

@@ -61,7 +61,7 @@ public class ReflectionsTest {
 	public void invokeMethod() {
 		TestBean bean = new TestBean();
 		// 使用函数名+参数类型的匹配
-		assertEquals("hello calvin", Reflections.invokeMethod(bean, "privateMethod", new Class[] {
+		assertEquals(bean.privateMethod("calvin"), Reflections.invokeMethod(bean, "privateMethod", new Class[] {
 			String.class
 		}, new Object[] {
 			"calvin"
@@ -150,7 +150,6 @@ public class ReflectionsTest {
 			return publicField;
 		}
 
-		@SuppressWarnings("unused")
 		private String privateMethod(String text) {
 			return "hello " + text;
 		}
@@ -161,7 +160,6 @@ public class ReflectionsTest {
 	}
 
 	public static class TestBean3 {
-
 		private int id;
 
 		public int getId() {

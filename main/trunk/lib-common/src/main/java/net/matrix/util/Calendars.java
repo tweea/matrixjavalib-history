@@ -31,11 +31,26 @@ public final class Calendars {
 	 */
 	public static boolean isValidDate(final int year, final int month, final int day) {
 		try {
-			new DateTime(year, month, day, 0, 0);
+			buildDate(year, month, day);
 			return true;
 		} catch (IllegalFieldValueException e) {
 			return false;
 		}
+	}
+
+	/**
+	 * 构造日期对象。
+	 * 
+	 * @param year
+	 *            年
+	 * @param month
+	 *            月
+	 * @param day
+	 *            日
+	 * @return
+	 */
+	private static DateTime buildDate(final int year, final int month, final int day) {
+		return new DateTime(year, month, day, 0, 0);
 	}
 
 	/**

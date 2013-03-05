@@ -11,7 +11,7 @@ import org.springframework.core.io.Resource;
 import net.matrix.lang.Resettable;
 
 /**
- * 支持重新加载的配置对象容器，用于从指定资源加载内容形成配置对象。
+ * 支持重置状态的配置对象容器，用于从指定资源加载内容形成配置对象。
  * 
  * @param <CONFIG>
  *            原始配置对象类型。
