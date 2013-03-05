@@ -97,7 +97,7 @@ public final class Reflections {
 		try {
 			result = (T) field.get(target);
 		} catch (IllegalAccessException e) {
-			LOG.error("不可能抛出的异常{}", e.getMessage());
+			LOG.error("不可能抛出的异常：{}", e.getMessage());
 		}
 		return result;
 	}
@@ -122,7 +122,7 @@ public final class Reflections {
 		try {
 			field.set(target, value);
 		} catch (IllegalAccessException e) {
-			LOG.error("不可能抛出的异常:{}", e.getMessage());
+			LOG.error("不可能抛出的异常：{}", e.getMessage());
 		}
 	}
 

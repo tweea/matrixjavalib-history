@@ -10,20 +10,20 @@ import org.apache.commons.configuration.event.ConfigurationEvent;
 import org.apache.commons.configuration.event.ConfigurationListener;
 
 /**
- * 配置重新加载监听器，当收到配置重新加载事件后重新加载相应的配置对象容器。
+ * 监听配置对象容器原始配置对象的重新加载事件，事件发生后重置相应配置对象容器的状态。
  */
 public class ConfigurationReloadingListener
 	implements ConfigurationListener {
 	/**
-	 * 需要重新加载的配置对象容器。
+	 * 需要重置状态的配置对象容器。
 	 */
 	private final ReloadableConfigurationContainer container;
 
 	/**
-	 * 构造一个 {@code ConfigurationReloadingListener}，指定需要重新加载的配置对象容器。
+	 * 构造一个 {@code ConfigurationReloadingListener}，指定需要重置状态的配置对象容器。
 	 * 
 	 * @param container
-	 *            需要重新加载的配置对象容器
+	 *            需要重置状态的配置对象容器
 	 */
 	public ConfigurationReloadingListener(final ReloadableConfigurationContainer container) {
 		this.container = container;
