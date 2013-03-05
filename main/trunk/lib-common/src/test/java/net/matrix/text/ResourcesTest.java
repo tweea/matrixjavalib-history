@@ -1,12 +1,14 @@
 package net.matrix.text;
 
+import java.util.ResourceBundle;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ResourcesTest {
 	@Test
-	public void testResources() {
-		Resources res = Resources.getResources("global");
-		Assert.assertEquals("男性", res.getProperty("male"));
+	public void testGetBundle() {
+		ResourceBundle bundle = Resources.getBundle("global");
+		Assert.assertEquals("男性", bundle.getString("male"));
 	}
 }

@@ -5,16 +5,25 @@
  */
 package net.matrix.text;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 读取多语言资源文件。
+ * 读取多语言资源。
  */
 public final class Resources {
 	/**
@@ -23,80 +32,171 @@ public final class Resources {
 	private static final Logger LOG = LoggerFactory.getLogger(Resources.class);
 
 	/**
-	 * 缓存。
+	 * 当读取资源出错后使用的 {@code ResourceBundle}，直接返回键值。
 	 */
-	private static final Map<String, Resources> RESOURCES = new HashMap<String, Resources>();
+	private static final ResourceBundle FALLBACK_BUNDLE = new ResourceBundle() {
+		@Override
+		protected Object handleGetObject(final String key) {
+			return key;
+		}
+
+		@Override
+		public Enumeration<String> getKeys() {
+			return Collections.emptyEnumeration();
+		}
+	};
 
 	/**
-	 * 关联的资源文件。
+	 * 加载 XML 资源的控制对象。
 	 */
-	private ResourceBundle bundle;
+	private static final ResourceBundle.Control XML_BUNDLE_CONTROL = new XMLResourceBundleControl();
 
 	/**
-	 * 使用资源文件位置实例化。
-	 * 
-	 * @param key
-	 *            资源文件位置
+	 * 支持读取 XML 资源。
 	 */
-	private Resources(final String key) {
-		try {
-			bundle = ResourceBundle.getBundle(key);
-		} catch (MissingResourceException e) {
-			LOG.warn(key + " 资源加载失败", e);
+	private static class XMLResourceBundleControl
+		extends ResourceBundle.Control {
+		private static final List<String> FORMATS = Arrays.asList("xml");
+
+		@Override
+		public List<String> getFormats(final String baseName) {
+			if (baseName == null) {
+				throw new NullPointerException("baseName");
+			}
+			return FORMATS;
+		}
+
+		@Override
+		public ResourceBundle newBundle(final String baseName, final Locale locale, final String format, final ClassLoader loader, final boolean reload)
+			throws IllegalAccessException, InstantiationException, IOException {
+			if (baseName == null || locale == null || format == null || loader == null) {
+				throw new NullPointerException("参数不能为空");
+			}
+			ResourceBundle bundle = null;
+			if (format.equals("xml")) {
+				String bundleName = toBundleName(baseName, locale);
+				String resourceName = toResourceName(bundleName, format);
+				InputStream stream = null;
+				if (reload) {
+					URL url = loader.getResource(resourceName);
+					if (url != null) {
+						URLConnection connection = url.openConnection();
+						if (connection != null) {
+							// Disable caches to get fresh data for
+							// reloading.
+							connection.setUseCaches(false);
+							stream = connection.getInputStream();
+						}
+					}
+				} else {
+					stream = loader.getResourceAsStream(resourceName);
+				}
+				if (stream != null) {
+					BufferedInputStream bis = new BufferedInputStream(stream);
+					bundle = new XMLResourceBundle(bis);
+					bis.close();
+				}
+			}
+			return bundle;
 		}
 	}
 
 	/**
-	 * 根据位置加载资源。
+	 * 支持读取 XML 资源。
+	 */
+	private static class XMLResourceBundle
+		extends ResourceBundle {
+		private Properties props;
+
+		private XMLResourceBundle(final InputStream stream)
+			throws IOException {
+			props = new Properties();
+			props.loadFromXML(stream);
+		}
+
+		@Override
+		protected Object handleGetObject(final String key) {
+			return props.getProperty(key);
+		}
+
+		@Override
+		public Enumeration<String> getKeys() {
+			return Collections.enumeration(props.stringPropertyNames());
+		}
+	}
+
+	/**
+	 * 使用默认区域和类加载器加载资源。
 	 * 
-	 * @param key
-	 *            位置
+	 * @param baseName
+	 *            资源名
 	 * @return 资源
 	 */
-	public static Resources getResources(final String key) {
-		Resources res = RESOURCES.get(key);
-		if (res != null) {
-			return res;
+	public static ResourceBundle getBundle(final String baseName) {
+		try {
+			return ResourceBundle.getBundle(baseName, XML_BUNDLE_CONTROL);
+		} catch (MissingResourceException e) {
+			LOG.warn(baseName + " 资源加载失败", e);
+			return FALLBACK_BUNDLE;
 		}
-		synchronized (RESOURCES) {
-			res = RESOURCES.get(key);
-			if (res == null) {
-				res = new Resources(key);
-				RESOURCES.put(key, res);
-			}
-		}
-		return res;
 	}
 
 	/**
-	 * 获取多语言字符串，如果失败直接返回名字。
+	 * 使用默认类加载器加载资源。
 	 * 
-	 * @param name
-	 *            字符串名
+	 * @param baseName
+	 *            资源名
+	 * @param locale
+	 *            区域
+	 * @return 资源
+	 */
+	public static ResourceBundle getBundle(final String baseName, final Locale locale) {
+		try {
+			return ResourceBundle.getBundle(baseName, locale, XML_BUNDLE_CONTROL);
+		} catch (MissingResourceException e) {
+			LOG.warn(baseName + " 资源加载失败", e);
+			return FALLBACK_BUNDLE;
+		}
+	}
+
+	/**
+	 * 加载资源。
+	 * 
+	 * @param baseName
+	 *            资源名
+	 * @param locale
+	 *            区域
+	 * @param loader
+	 *            类加载器
+	 * @return 资源
+	 */
+	public static ResourceBundle getBundle(final String baseName, final Locale locale, final ClassLoader loader) {
+		try {
+			return ResourceBundle.getBundle(baseName, locale, loader, XML_BUNDLE_CONTROL);
+		} catch (MissingResourceException e) {
+			LOG.warn(baseName + " 资源加载失败", e);
+			return FALLBACK_BUNDLE;
+		}
+	}
+
+	/**
+	 * 获取多语言字符串，如果失败直接返回键值。
+	 * 
+	 * @param bundle
+	 *            资源
+	 * @param key
+	 *            键值
 	 * @return 字符串
 	 */
-	public String getProperty(final String name) {
+	public static String getProperty(final ResourceBundle bundle, final String key) {
 		if (bundle == null) {
-			return name;
+			return key;
 		}
 		try {
-			return bundle.getString(name);
+			return bundle.getString(key);
 		} catch (MissingResourceException e) {
-			LOG.warn("找不到名为 " + name + " 的资源项");
-			return name;
+			LOG.warn("找不到名为 " + key + " 的资源项", e);
+			return key;
 		}
-	}
-
-	/**
-	 * 加载资源并返回其中指定的字符串。
-	 * 
-	 * @param key
-	 *            位置
-	 * @param name
-	 *            字符串名
-	 * @return 字符串
-	 */
-	public static String getProperty(final String key, final String name) {
-		return getResources(key).getProperty(name);
 	}
 }
