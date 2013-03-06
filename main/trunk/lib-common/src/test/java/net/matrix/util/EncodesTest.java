@@ -1,7 +1,5 @@
 package net.matrix.util;
 
-import java.io.UnsupportedEncodingException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,8 +14,7 @@ public class EncodesTest {
 	}
 
 	@Test
-	public void urlEncode()
-		throws UnsupportedEncodingException {
+	public void urlEncode() {
 		String input = "http://locahost/?q=中文&t=1";
 		String result = Encodes.urlEncode(input);
 		System.out.println(result);
