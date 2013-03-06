@@ -12,6 +12,12 @@ import net.matrix.lang.Resettable;
  */
 public interface SystemController
 	extends Resettable {
+	/**
+	 * 设置与控制器关联的系统环境。
+	 * 
+	 * @param context
+	 *            系统环境
+	 */
 	void setContext(SystemContext context);
 
 	/**

@@ -19,6 +19,11 @@ public final class GlobalSystemContext {
 	 */
 	private volatile static SystemContext global;
 
+	/**
+	 * 获取系统环境的全局实例，如果不存在则建立默认的系统环境实例。
+	 * 
+	 * @return 系统环境的全局实例
+	 */
 	public static SystemContext get() {
 		if (global != null) {
 			return global;
@@ -31,6 +36,12 @@ public final class GlobalSystemContext {
 		}
 	}
 
+	/**
+	 * 设置系统环境的全局实例。
+	 * 
+	 * @param context
+	 *            系统环境
+	 */
 	public static void set(final SystemContext context) {
 		global = context;
 	}
