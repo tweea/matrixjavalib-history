@@ -1,5 +1,5 @@
 /*
- * $Id: DateFormatHelper.java 349 2012-03-11 16:22:44Z tweea $
+ * $Id$
  * Copyright(C) 2008 Matrix
  * All right reserved.
  */

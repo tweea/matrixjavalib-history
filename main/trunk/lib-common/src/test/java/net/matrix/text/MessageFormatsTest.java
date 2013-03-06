@@ -1,5 +1,5 @@
 /*
- * $Id: ResourcesTest.java 546 2013-03-06 03:18:38Z tweea $
+ * $Id$
  * Copyright(C) 2008 Matrix
  * All right reserved.
  */
