@@ -10,7 +10,7 @@ import java.util.Locale;
 /**
  * 区域工具。
  */
-public class Locales {
+public final class Locales {
 	/**
 	 * 保存当前设定区域。
 	 */
@@ -42,7 +42,7 @@ public class Locales {
 	 * @param current
 	 *            当前设定区域
 	 */
-	public static void current(Locale current) {
+	public static void current(final Locale current) {
 		currentHolder.set(current);
 	}
 }
