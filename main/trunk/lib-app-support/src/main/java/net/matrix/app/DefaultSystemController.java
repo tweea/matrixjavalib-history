@@ -5,8 +5,14 @@
  */
 package net.matrix.app;
 
+/**
+ * 默认的系统控制器，在应用中继承本类以扩展功能。
+ */
 public class DefaultSystemController
 	implements SystemController {
+	/**
+	 * 关联的系统环境。
+	 */
 	private SystemContext context;
 
 	@Override

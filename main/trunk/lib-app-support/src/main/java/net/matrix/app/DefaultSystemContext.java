@@ -25,6 +25,9 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  */
 public class DefaultSystemContext
 	implements SystemContext {
+	/**
+	 * 日志记录器。
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultSystemContext.class);
 
 	private ResourceLoader resourceLoader;
@@ -67,7 +70,7 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public void setConfig(Configuration config) {
+	public void setConfig(final Configuration config) {
 		this.config = config;
 	}
 
@@ -99,7 +102,7 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public Object lookupObject(String name) {
+	public Object lookupObject(final String name) {
 		return objects.get(name);
 	}
 
@@ -109,12 +112,12 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public <T> T lookupObject(Class<T> type) {
+	public <T> T lookupObject(final Class<T> type) {
 		return lookupObject(type.getName(), type);
 	}
 
 	@Override
-	public void setController(SystemController controller) {
+	public void setController(final SystemController controller) {
 		this.controller = controller;
 	}
 
