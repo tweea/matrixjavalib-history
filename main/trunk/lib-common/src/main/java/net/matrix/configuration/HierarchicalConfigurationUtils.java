@@ -13,12 +13,19 @@ import java.util.Map;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 
+import net.matrix.text.MessageFormats;
+import net.matrix.text.Resources;
 import net.matrix.util.IterableIterator;
 
 /**
  * 配置对象实用工具。
  */
 public final class HierarchicalConfigurationUtils {
+	/**
+	 * 资源位置。
+	 */
+	private static final String RESOURCE_BASENAME = "net.matrix.configuration.Messages";
+
 	/**
 	 * 阻止实例化。
 	 */
@@ -136,6 +143,6 @@ public final class HierarchicalConfigurationUtils {
 			}
 		}
 		// 没有找到
-		throw new ConfigurationException("未找到属性 " + nameKey + " 的值为 " + nameValue + " 的 " + subKey + " 配置节点");
+		throw new ConfigurationException(MessageFormats.format(Resources.getBundle(RESOURCE_BASENAME), "subnodeNotFound", nameKey, nameValue, subKey));
 	}
 }

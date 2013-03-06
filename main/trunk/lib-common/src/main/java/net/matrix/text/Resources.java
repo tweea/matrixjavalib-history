@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -117,7 +116,7 @@ public final class Resources {
 	/**
 	 * 支持读取 XML 资源。
 	 */
-	private static class XMLResourceBundle
+	private static final class XMLResourceBundle
 		extends ResourceBundle {
 		/**
 		 * 资源中的属性。
@@ -217,43 +216,5 @@ public final class Resources {
 			LOG.warn("找不到名为 " + key + " 的资源项", e);
 			return key;
 		}
-	}
-
-	/**
-	 * 格式化消息。
-	 * 
-	 * @param bundle
-	 *            资源
-	 * @param key
-	 *            键值
-	 * @param arguments
-	 *            参数
-	 * @return 消息字符串
-	 */
-	public static String formatMessage(final ResourceBundle bundle, final String key, final Object... arguments) {
-		String pattern = getProperty(bundle, key);
-		if (pattern.equals(key)) {
-			return formatFallbackMessage(key, arguments);
-		}
-		MessageFormat format = new MessageFormat(pattern, bundle.getLocale());
-		return format.format(arguments);
-	}
-
-	/**
-	 * 当出现错误后，格式化消息。
-	 * 
-	 * @param key
-	 *            键值
-	 * @param arguments
-	 *            参数
-	 * @return 消息字符串
-	 */
-	public static String formatFallbackMessage(final String key, final Object... arguments) {
-		StringBuilder sb = new StringBuilder(key);
-		for (Object argument : arguments) {
-			sb.append(", ");
-			sb.append(argument);
-		}
-		return sb.toString();
 	}
 }
