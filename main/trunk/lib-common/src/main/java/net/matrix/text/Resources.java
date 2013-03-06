@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -30,6 +31,12 @@ public final class Resources {
 	 * 日志记录器。
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(Resources.class);
+
+	/**
+	 * 阻止实例化。
+	 */
+	private Resources() {
+	}
 
 	/**
 	 * 当读取资源出错后使用的 {@code ResourceBundle}，直接返回键值。
@@ -96,8 +103,11 @@ public final class Resources {
 				}
 				if (stream != null) {
 					BufferedInputStream bis = new BufferedInputStream(stream);
-					bundle = new XMLResourceBundle(bis);
-					bis.close();
+					try {
+						bundle = new XMLResourceBundle(bis);
+					} finally {
+						bis.close();
+					}
 				}
 			}
 			return bundle;
@@ -114,6 +124,14 @@ public final class Resources {
 		 */
 		private Properties props;
 
+		/**
+		 * 从输入流读取资源。
+		 * 
+		 * @param stream
+		 *            输入流
+		 * @throws IOException
+		 *             读取失败
+		 */
 		private XMLResourceBundle(final InputStream stream)
 			throws IOException {
 			props = new Properties();
@@ -132,19 +150,14 @@ public final class Resources {
 	}
 
 	/**
-	 * 使用默认区域和类加载器加载资源。
+	 * 使用当前区域和默认类加载器加载资源。
 	 * 
 	 * @param baseName
 	 *            资源名
 	 * @return 资源
 	 */
 	public static ResourceBundle getBundle(final String baseName) {
-		try {
-			return ResourceBundle.getBundle(baseName, XML_BUNDLE_CONTROL);
-		} catch (MissingResourceException e) {
-			LOG.warn(baseName + " 资源加载失败", e);
-			return FALLBACK_BUNDLE;
-		}
+		return getBundle(baseName, Locales.current());
 	}
 
 	/**
@@ -204,5 +217,49 @@ public final class Resources {
 			LOG.warn("找不到名为 " + key + " 的资源项", e);
 			return key;
 		}
+	}
+
+	/**
+	 * 格式化消息。
+	 * 
+	 * @param bundle
+	 *            资源
+	 * @param key
+	 *            键值
+	 * @param arguments
+	 *            参数
+	 * @return 消息字符串
+	 */
+	public static String formatMessage(final ResourceBundle bundle, final String key, final Object... arguments) {
+		String pattern;
+		if (bundle == null) {
+			return formatFallbackMessage(key, arguments);
+		}
+		try {
+			pattern = bundle.getString(key);
+		} catch (MissingResourceException e) {
+			LOG.warn("找不到名为 " + key + " 的资源项", e);
+			return formatFallbackMessage(key, arguments);
+		}
+		MessageFormat format = new MessageFormat(pattern, bundle.getLocale());
+		return format.format(arguments);
+	}
+
+	/**
+	 * 当出现错误后，格式化消息。
+	 * 
+	 * @param key
+	 *            键值
+	 * @param arguments
+	 *            参数
+	 * @return 消息字符串
+	 */
+	public static String formatFallbackMessage(final String key, final Object... arguments) {
+		StringBuilder sb = new StringBuilder(key);
+		for (Object argument : arguments) {
+			sb.append(", ");
+			sb.append(argument);
+		}
+		return sb.toString();
 	}
 }

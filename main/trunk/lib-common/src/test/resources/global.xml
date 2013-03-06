@@ -6,4 +6,6 @@
 
 	<entry key="yes">是</entry>
 	<entry key="no">否</entry>
+
+	<entry key="message">一双{0}</entry>
 </properties>
