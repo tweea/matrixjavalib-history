@@ -1,5 +1,5 @@
 /*
- * $Id: codetemplates.xml 310 2012-03-10 14:21:09Z tweea $
+ * $Id$
  * 版权所有 2013 Matrix。
  * 保留所有权利。
  */
