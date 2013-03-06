@@ -18,6 +18,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import net.matrix.lang.ImpossibleException;
+
 /**
  * 支持 HMAC-SHA1 消息签名及 DES/AES 对称加密的工具类。
  */
@@ -84,7 +86,7 @@ public final class Cryptos {
 			mac.init(secretKey);
 			return mac.doFinal(input);
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 
@@ -120,7 +122,7 @@ public final class Cryptos {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 
@@ -214,9 +216,9 @@ public final class Cryptos {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(input);
 		} catch (NoSuchAlgorithmException e) {
-			throw new GeneralSecurityException(e);
+			throw new ImpossibleException(e);
 		} catch (NoSuchPaddingException e) {
-			throw new GeneralSecurityException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 
@@ -244,9 +246,9 @@ public final class Cryptos {
 			cipher.init(mode, secretKey, ivSpec);
 			return cipher.doFinal(input);
 		} catch (NoSuchAlgorithmException e) {
-			throw new GeneralSecurityException(e);
+			throw new ImpossibleException(e);
 		} catch (NoSuchPaddingException e) {
-			throw new GeneralSecurityException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 
@@ -273,7 +275,7 @@ public final class Cryptos {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 

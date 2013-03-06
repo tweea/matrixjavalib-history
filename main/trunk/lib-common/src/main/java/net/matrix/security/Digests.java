@@ -11,6 +11,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import net.matrix.lang.ImpossibleException;
+
 /**
  * 支持 SHA-1/MD5 消息摘要的工具类。
  */
@@ -104,7 +106,7 @@ public final class Digests {
 			}
 			return result;
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 
@@ -164,7 +166,7 @@ public final class Digests {
 		throws IOException {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
-			int bufferLength = 8 * 1024;
+			final int bufferLength = 8 * 1024;
 			byte[] buffer = new byte[bufferLength];
 			int read = input.read(buffer, 0, bufferLength);
 
@@ -175,7 +177,7 @@ public final class Digests {
 
 			return messageDigest.digest();
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new ImpossibleException(e);
 		}
 	}
 }

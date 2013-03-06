@@ -76,7 +76,7 @@ public class RelativeResourceRootRegister {
 		throws IOException {
 		Resource root = getRoot(relativeResource.getRoot());
 		if (root == null) {
-			throw new IllegalStateException("根 " + relativeResource.getRoot() + " 未注册");
+			throw new IllegalStateException("根路径 " + relativeResource.getRoot() + " 未注册");
 		}
 		return root.createRelative(relativeResource.getPath());
 	}
@@ -95,7 +95,10 @@ public class RelativeResourceRootRegister {
 		File file = getResource(relativeFile).getFile();
 		if (file.exists()) {
 			LOG.debug("删除旧文件：" + file);
-			file.delete();
+			boolean success = file.delete();
+			if (!success) {
+				LOG.warn("删除文件失败：" + file);
+			}
 		}
 		return file;
 	}
@@ -122,7 +125,10 @@ public class RelativeResourceRootRegister {
 			throw new FileNotFoundException(srcFile.getAbsolutePath());
 		}
 		if (destFile.exists()) {
-			destFile.delete();
+			boolean success = destFile.delete();
+			if (!success) {
+				LOG.warn("删除文件失败：" + destFile);
+			}
 		}
 		FileUtils.moveFile(srcFile, destFile);
 	}
@@ -149,7 +155,10 @@ public class RelativeResourceRootRegister {
 			throw new FileNotFoundException(srcFile.getAbsolutePath());
 		}
 		if (destFile.exists()) {
-			destFile.delete();
+			boolean success = destFile.delete();
+			if (!success) {
+				LOG.warn("删除文件失败：" + destFile);
+			}
 		}
 		FileUtils.copyFile(srcFile, destFile);
 	}

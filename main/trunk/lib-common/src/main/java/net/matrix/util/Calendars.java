@@ -19,7 +19,7 @@ public final class Calendars {
 	}
 
 	/**
-	 * 校验日期。
+	 * 校验日期的年、月、日数值是否符合历法。
 	 * 
 	 * @param year
 	 *            年
@@ -27,7 +27,7 @@ public final class Calendars {
 	 *            月 1-12
 	 * @param day
 	 *            日
-	 * @return true 日期正确
+	 * @return true 符合历法
 	 */
 	public static boolean isValidDate(final int year, final int month, final int day) {
 		try {
@@ -54,13 +54,13 @@ public final class Calendars {
 	}
 
 	/**
-	 * 判断是否闰年。
+	 * 判断某年是否闰年。
 	 * 
 	 * @param year
 	 *            年份
 	 * @return true 是闰年
 	 */
 	public static boolean isLeapYear(final int year) {
-		return new DateTime(year, 1, 1, 0, 0).year().isLeap();
+		return buildDate(year, 1, 1).year().isLeap();
 	}
 }
