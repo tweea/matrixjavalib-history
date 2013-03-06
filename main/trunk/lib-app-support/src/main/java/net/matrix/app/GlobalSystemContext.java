@@ -17,7 +17,7 @@ public final class GlobalSystemContext {
 	/**
 	 * 系统环境的全局实例。
 	 */
-	private static SystemContext global;
+	private volatile static SystemContext global;
 
 	public static SystemContext get() {
 		if (global != null) {
@@ -31,7 +31,7 @@ public final class GlobalSystemContext {
 		}
 	}
 
-	public static void set(SystemContext context) {
+	public static void set(final SystemContext context) {
 		global = context;
 	}
 }
