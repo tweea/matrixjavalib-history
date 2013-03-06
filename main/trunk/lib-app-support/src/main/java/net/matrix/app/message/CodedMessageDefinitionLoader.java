@@ -32,7 +32,7 @@ public final class CodedMessageDefinitionLoader {
 	 */
 	public static void loadDefinitions(final ResourcePatternResolver resolver) {
 		try {
-			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition.xml");
+			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition*.xml");
 			for (Resource resource : resources) {
 				loadDefinitions(resource);
 			}
