@@ -231,14 +231,8 @@ public final class Resources {
 	 * @return 消息字符串
 	 */
 	public static String formatMessage(final ResourceBundle bundle, final String key, final Object... arguments) {
-		String pattern;
-		if (bundle == null) {
-			return formatFallbackMessage(key, arguments);
-		}
-		try {
-			pattern = bundle.getString(key);
-		} catch (MissingResourceException e) {
-			LOG.warn("找不到名为 " + key + " 的资源项", e);
+		String pattern = getProperty(bundle, key);
+		if (pattern.equals(key)) {
 			return formatFallbackMessage(key, arguments);
 		}
 		MessageFormat format = new MessageFormat(pattern, bundle.getLocale());
