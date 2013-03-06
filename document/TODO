@@ -4,10 +4,11 @@ https://oss.sonatype.org
 ---- next ------
 volatile 代替双次检查
 增强 Javadoc
-支持国际化和本地化
 异常
-	注意异常的抛出和处理
+	抛出和处理
+	异常文档
 	建立异常体系
+	国际化和本地化
 数据库
 	使用 dbutils、unitils
 	使用内嵌数据库
@@ -22,6 +23,7 @@ volatile 代替双次检查
 日志
 	定制日志文件的位置
 	使用 MDC 增强日志
+	国际化和本地化
 依赖
 	OSGi
 发展计划
