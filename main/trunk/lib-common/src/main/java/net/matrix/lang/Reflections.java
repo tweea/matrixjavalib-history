@@ -6,6 +6,7 @@
 package net.matrix.lang;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -97,7 +98,7 @@ public final class Reflections {
 		try {
 			result = (T) field.get(target);
 		} catch (IllegalAccessException e) {
-			LOG.error("不可能抛出的异常：{}", e.getMessage());
+			throw new ImpossibleException(e);
 		}
 		return result;
 	}
@@ -122,7 +123,7 @@ public final class Reflections {
 		try {
 			field.set(target, value);
 		} catch (IllegalAccessException e) {
-			LOG.error("不可能抛出的异常：{}", e.getMessage());
+			throw new ImpossibleException(e);
 		}
 	}
 
@@ -151,7 +152,11 @@ public final class Reflections {
 
 		try {
 			return (T) method.invoke(target, parameterValues);
-		} catch (Exception e) {
+		} catch (IllegalAccessException e) {
+			throw new ReflectionRuntimeException(e);
+		} catch (IllegalArgumentException e) {
+			throw new ReflectionRuntimeException(e);
+		} catch (InvocationTargetException e) {
 			throw new ReflectionRuntimeException(e);
 		}
 	}
@@ -179,7 +184,11 @@ public final class Reflections {
 
 		try {
 			return (T) method.invoke(target, parameterValues);
-		} catch (Exception e) {
+		} catch (IllegalAccessException e) {
+			throw new ReflectionRuntimeException(e);
+		} catch (IllegalArgumentException e) {
+			throw new ReflectionRuntimeException(e);
+		} catch (InvocationTargetException e) {
 			throw new ReflectionRuntimeException(e);
 		}
 	}

@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 线程相关工具类。
+ * 线程相关工具。
  */
 public final class Threads {
 	/**

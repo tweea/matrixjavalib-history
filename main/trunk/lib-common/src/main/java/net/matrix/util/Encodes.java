@@ -11,6 +11,8 @@ import java.net.URLEncoder;
 
 import org.apache.commons.lang3.Validate;
 
+import net.matrix.lang.ImpossibleException;
+
 /**
  * 封装各种格式的编码解码工具类。
  * 1.自行编写的，将 long 进行 base62 编码以缩短其长度
@@ -76,12 +78,13 @@ public final class Encodes {
 	 * @param part
 	 *            待编码字符串
 	 * @return 编码字符串
-	 * @throws UnsupportedEncodingException
-	 *             编码错误
 	 */
-	public static String urlEncode(final String part)
-		throws UnsupportedEncodingException {
-		return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
+	public static String urlEncode(final String part) {
+		try {
+			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			throw new ImpossibleException(e);
+		}
 	}
 
 	/**
@@ -90,11 +93,12 @@ public final class Encodes {
 	 * @param part
 	 *            待解码字符串
 	 * @return 解码字符串
-	 * @throws UnsupportedEncodingException
-	 *             编码错误
 	 */
-	public static String urlDecode(final String part)
-		throws UnsupportedEncodingException {
-		return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
+	public static String urlDecode(final String part) {
+		try {
+			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			throw new ImpossibleException(e);
+		}
 	}
 }
