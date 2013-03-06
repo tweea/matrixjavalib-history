@@ -5,8 +5,8 @@
  */
 package net.matrix.app.configuration;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.slf4j.Logger;
@@ -59,7 +59,7 @@ public final class ConfigurationContext
 
 	public ConfigurationContext(ResourceRepository repository, ResourceContextConfig contextConfig) {
 		super(repository, contextConfig);
-		this.containerCache = new HashMap<Resource, ReloadableConfigurationContainer>();
+		this.containerCache = new ConcurrentHashMap<Resource, ReloadableConfigurationContainer>();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public final class ConfigurationContext
 	@Override
 	public void reload() {
 		super.reload();
-		containerCache = new HashMap<Resource, ReloadableConfigurationContainer>();
+		containerCache = new ConcurrentHashMap<Resource, ReloadableConfigurationContainer>();
 		LOG.info("重新加载配置，清空缓存。");
 	}
 

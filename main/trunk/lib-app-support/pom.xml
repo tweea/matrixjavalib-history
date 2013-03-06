@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.4.5</version>
+			<version>1.5.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- provided -->
@@ -42,25 +42,6 @@
 	</dependencies>
 
 	<!-- 构建设置 -->
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-						<configuration>
-							<workDir>${project.build.testOutputDirectory}</workDir>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 	<!-- 项目信息 -->
 	<name>Matrix :: 应用程序辅助</name>
