@@ -6,10 +6,8 @@
 package net.matrix.app.message;
 
 import java.io.IOException;
+import java.util.Properties;
 
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.HierarchicalConfiguration;
-import org.apache.commons.configuration.XMLConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -49,17 +47,14 @@ public final class CodedMessageDefinitionLoader {
 	 */
 	public static void loadDefinitions(final Resource resource) {
 		try {
-			XMLConfiguration config = new XMLConfiguration();
-			config.setDelimiterParsingDisabled(true);
-			config.load(resource.getInputStream());
-			for (HierarchicalConfiguration definitionConfig : config.configurationsAt("definition")) {
-				String code = definitionConfig.getString("[@code]");
-				String template = definitionConfig.getString("[@template]");
+			Properties props = new Properties();
+			props.loadFromXML(resource.getInputStream());
+			for (String key : props.stringPropertyNames()) {
+				String code = key;
+				String template = props.getProperty(key);
 				CodedMessageDefinition.define(new CodedMessageDefinition(code, template));
 			}
 		} catch (IOException e) {
-			LOG.error("加载失败", e);
-		} catch (ConfigurationException e) {
 			LOG.error("加载失败", e);
 		}
 	}
