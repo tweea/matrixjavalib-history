@@ -24,6 +24,6 @@ public class CodedMessageDefinitionLoaderTest {
 	public void getDefinition() {
 		CodedMessageDefinition part = CodedMessageDefinition.getDefinition("System.Error");
 		Assert.assertEquals("System.Error", part.getCode());
-		Assert.assertEquals("系统发生错误：{0}", part.getTemplate());
+		Assert.assertEquals("系统错误：{0}", part.getTemplate());
 	}
 }
