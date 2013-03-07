@@ -14,22 +14,22 @@ import org.junit.Test;
 public class CodedMessageTest {
 	@BeforeClass
 	public static void setUp() {
-		CodedMessageDefinition.define(new CodedMessageDefinition("Test1", Locale.CHINA, "测试消息：{0}"));
-		CodedMessageDefinition.define(new CodedMessageDefinition("Test2", Locale.CHINA, "测试消息 B：{0}{1}"));
+		CodedMessageDefinition.define(new CodedMessageDefinition("Message.Test1", Locale.ROOT, "测试消息：{0}"));
+		CodedMessageDefinition.define(new CodedMessageDefinition("Message.Test2", Locale.ROOT, "测试消息 B：{0}{1}"));
 	}
 
 	@Test
 	public void logMessage() {
-		CodedMessage message = new CodedMessage("Test1", CodedMessageLevels.INFORMATION);
-		Assert.assertEquals("Test1", message.getCode());
+		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevels.INFORMATION);
+		Assert.assertEquals("Message.Test1", message.getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, message.getLevel());
 		Assert.assertEquals(0, message.getArguments().size());
 	}
 
 	@Test
 	public void addArgument() {
-		CodedMessage message = new CodedMessage("Test1", CodedMessageLevels.INFORMATION);
-		Assert.assertEquals("Test1", message.getCode());
+		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevels.INFORMATION);
+		Assert.assertEquals("Message.Test1", message.getCode());
 		Assert.assertEquals(CodedMessageLevels.INFORMATION, message.getLevel());
 		Assert.assertEquals(0, message.getArguments().size());
 		message.addArgument("abc");
@@ -39,7 +39,7 @@ public class CodedMessageTest {
 
 	@Test
 	public void format() {
-		CodedMessage message = new CodedMessage("Test2", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("Message.Test2", CodedMessageLevels.INFORMATION);
 		message.addArgument("Test");
 		message.addArgument("test2");
 		String formatString = message.format();

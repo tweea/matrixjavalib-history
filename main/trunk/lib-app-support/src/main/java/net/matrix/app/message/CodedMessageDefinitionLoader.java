@@ -39,7 +39,7 @@ public final class CodedMessageDefinitionLoader {
 				String filename = resource.getFilename();
 				Locale locale = Locale.ROOT;
 				String filenamePrefix = "codedMessageDefinition_";
-				if (filename.indexOf(filenamePrefix) > 0) {
+				if (filename.startsWith(filenamePrefix)) {
 					locale = LocaleUtils.toLocale(filename.substring(filenamePrefix.length(), filename.lastIndexOf(".xml")));
 				}
 				loadDefinitions(locale, resource);
