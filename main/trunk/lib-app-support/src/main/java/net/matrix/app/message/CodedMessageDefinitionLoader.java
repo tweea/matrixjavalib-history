@@ -6,10 +6,12 @@
 package net.matrix.app.message;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.lang3.LocaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -34,7 +36,13 @@ public final class CodedMessageDefinitionLoader {
 		try {
 			Resource[] resources = resolver.getResources("classpath*:codedMessageDefinition*.xml");
 			for (Resource resource : resources) {
-				loadDefinitions(resource);
+				String filename = resource.getFilename();
+				Locale locale = Locale.ROOT;
+				String filenamePrefix = "codedMessageDefinition_";
+				if (filename.indexOf(filenamePrefix) > 0) {
+					locale = LocaleUtils.toLocale(filename.substring(filenamePrefix.length(), filename.lastIndexOf(".xml")));
+				}
+				loadDefinitions(locale, resource);
 			}
 		} catch (IOException e) {
 			LOG.error("加载失败", e);
@@ -44,10 +52,12 @@ public final class CodedMessageDefinitionLoader {
 	/**
 	 * 从特定位置加载配置文件。
 	 * 
+	 * @param locale
+	 *            区域
 	 * @param resource
 	 *            配置文件位置
 	 */
-	public static void loadDefinitions(final Resource resource) {
+	public static void loadDefinitions(final Locale locale, final Resource resource) {
 		try {
 			XMLConfiguration config = new XMLConfiguration();
 			config.setDelimiterParsingDisabled(true);
@@ -55,7 +65,7 @@ public final class CodedMessageDefinitionLoader {
 			for (HierarchicalConfiguration definitionConfig : config.configurationsAt("definition")) {
 				String code = definitionConfig.getString("[@code]");
 				String template = definitionConfig.getString("[@template]");
-				CodedMessageDefinition.define(new CodedMessageDefinition(code, template));
+				CodedMessageDefinition.define(new CodedMessageDefinition(code, locale, template));
 			}
 		} catch (IOException e) {
 			LOG.error("加载失败", e);
