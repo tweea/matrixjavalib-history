@@ -18,8 +18,8 @@ public class CodedMessageDefinitionTest {
 
 	@Test
 	public void createUnkownDefinition() {
-		CodedMessageDefinition part = CodedMessageDefinition.createUnkownDefinition("10", 1);
-		Assert.assertEquals("10", part.getCode());
-		Assert.assertEquals("未定义的消息，编号：10，内容：{0}", part.getTemplate());
+		CodedMessageDefinition part = CodedMessageDefinition.getDefinition("Test1");
+		Assert.assertEquals("Test1", part.getCode());
+		Assert.assertEquals("测试消息：{0}", part.getTemplate());
 	}
 }

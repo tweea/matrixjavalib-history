@@ -51,30 +51,6 @@ public class CodedMessageDefinition {
 	}
 
 	/**
-	 * 根据编码建立未知的编码消息定义。
-	 * 
-	 * @param code
-	 *            编号
-	 * @param argumentSize
-	 *            参数数目
-	 * @return 编码消息定义
-	 */
-	public static CodedMessageDefinition createUnkownDefinition(String code, int argumentSize) {
-		StringBuilder sb = new StringBuilder("未定义的消息，编号：");
-		sb.append(code);
-		sb.append("，内容：");
-		for (int i = 0; i < argumentSize; i++) {
-			sb.append("{");
-			sb.append(i);
-			sb.append("}");
-			if (i < argumentSize - 1) {
-				sb.append("，");
-			}
-		}
-		return new CodedMessageDefinition(code, sb.toString());
-	}
-
-	/**
 	 * @return 编码
 	 */
 	public String getCode() {
@@ -98,18 +74,23 @@ public class CodedMessageDefinition {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CodedMessageDefinition other = (CodedMessageDefinition) obj;
 		if (code == null) {
-			if (other.code != null)
+			if (other.code != null) {
 				return false;
-		} else if (!code.equals(other.code))
+			}
+		} else if (!code.equals(other.code)) {
 			return false;
+		}
 		return true;
 	}
 }
