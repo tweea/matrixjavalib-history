@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-db</artifactId>
-	<version>1.4.4-SNAPSHOT</version>
+	<version>1.5.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -50,14 +50,14 @@
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.4.5</version>
+			<version>1.5.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.9.Final</version>
+			<version>4.1.10.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -70,7 +70,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.9.Final</version>
+			<version>4.1.10.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -114,21 +114,21 @@
 			<!-- 缓存工具 -->
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
-			<version>2.6.2</version>
+			<version>2.6.5</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.1.9.Final</version>
+			<version>4.1.10.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.1.9.Final</version>
+			<version>4.1.10.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- test -->
@@ -142,7 +142,7 @@
 			<!-- MySQL 的 JDBC 驱动 -->
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.22</version>
+			<version>5.1.23</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -154,25 +154,6 @@
 	</dependencies>
 
 	<!-- 构建设置 -->
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-						<configuration>
-							<workDir>${project.build.testOutputDirectory}</workDir>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 	<!-- 项目信息 -->
 	<name>Matrix :: 数据库类库</name>
