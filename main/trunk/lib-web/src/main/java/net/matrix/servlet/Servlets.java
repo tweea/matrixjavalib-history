@@ -5,14 +5,10 @@
  */
 package net.matrix.servlet;
 
-import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.net.HttpHeaders;
 
@@ -22,11 +18,6 @@ import net.matrix.util.Encodes;
  * Servlet 工具类。
  */
 public final class Servlets {
-	/**
-	 * 日志记录器。
-	 */
-	private static final Logger LOG = LoggerFactory.getLogger(Servlets.class);
-
 	/**
 	 * 阻止实例化。
 	 */
@@ -130,12 +121,8 @@ public final class Servlets {
 	 *            下载后的文件名
 	 */
 	public static void setFileDownloadHeader(final HttpServletResponse response, final String filename) {
-		try {
-			// 中文文件名支持
-			String encodedFilename = Encodes.urlEncode(filename);
-			response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"");
-		} catch (UnsupportedEncodingException e) {
-			LOG.warn("", e);
-		}
+		// 中文文件名支持
+		String encodedFilename = Encodes.urlEncode(filename);
+		response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"");
 	}
 }
