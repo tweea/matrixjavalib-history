@@ -9,6 +9,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.matrix.text.MessageFormats;
+
 /**
  * 编码消息。
  */
@@ -88,8 +90,7 @@ public class CodedMessage {
 	public String format() {
 		CodedMessageDefinition def = CodedMessageDefinition.getDefinition(code);
 		if (def == null) {
-			def = CodedMessageDefinition.createUnkownDefinition(code, arguments.size());
-			CodedMessageDefinition.define(def);
+			return MessageFormats.formatFallback(code, arguments);
 		}
 		return MessageFormat.format(def.getTemplate(), arguments.toArray());
 	}

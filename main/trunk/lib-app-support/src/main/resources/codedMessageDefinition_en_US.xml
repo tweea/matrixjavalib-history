@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-	<entry key="System.Error">System error: {0}</entry>
-	<entry key="CodedMessage.Error">处理编码消息发生错误：{0}</entry>
-	<entry key="CodedMessage.LoadXMLError">从 XML 解析编码消息失败：{0}</entry>
-	<entry key="CodedMessage.SaveXMLError">编码消息转化为 XML 失败：{0}</entry>
-</properties>
+<definitions>
+	<definition code="System.Error" template="System error：{0}" />
+	<definition code="CodedMessage.Error" template="处理编码消息发生错误：{0}" />
+	<definition code="CodedMessage.LoadXMLError" template="从 XML 解析编码消息失败：{0}" />
+	<definition code="CodedMessage.SaveXMLError" template="编码消息转化为 XML 失败：{0}" />
+</definitions>
