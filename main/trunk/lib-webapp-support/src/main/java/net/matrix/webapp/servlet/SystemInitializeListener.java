@@ -47,7 +47,7 @@ public class SystemInitializeListener
 	}
 
 	@Override
-	public void contextInitialized(ServletContextEvent sce) {
+	public void contextInitialized(final ServletContextEvent sce) {
 		servletContext = sce.getServletContext();
 
 		// 默认与全局系统环境关联
@@ -94,7 +94,7 @@ public class SystemInitializeListener
 	}
 
 	@Override
-	public void contextDestroyed(ServletContextEvent sce) {
+	public void contextDestroyed(final ServletContextEvent sce) {
 		context.getController().stop();
 	}
 }
