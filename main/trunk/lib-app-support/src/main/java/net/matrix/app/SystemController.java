@@ -8,7 +8,7 @@ package net.matrix.app;
 import net.matrix.lang.Resettable;
 
 /**
- * 系统控制器。
+ * 系统控制器，负责系统的初始化、启动、停止。
  */
 public interface SystemController
 	extends Resettable {
