@@ -14,6 +14,6 @@ public class DefaultSystemContextTest {
 		DefaultSystemContext context = new DefaultSystemContext();
 		Object obj = new Object();
 		context.registerObject(Object.class, obj);
-		Assert.assertEquals(obj, context.lookupObject(Object.class));
+		Assert.assertSame(obj, context.lookupObject(Object.class));
 	}
 }
