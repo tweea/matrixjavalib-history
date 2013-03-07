@@ -5,6 +5,8 @@
  */
 package net.matrix.app.message;
 
+import java.util.Locale;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,8 +14,8 @@ import org.junit.Test;
 public class CodedMessageTest {
 	@BeforeClass
 	public static void setUp() {
-		CodedMessageDefinition.define(new CodedMessageDefinition("Test1", "测试消息：{0}"));
-		CodedMessageDefinition.define(new CodedMessageDefinition("Test2", "测试消息 B：{0}{1}"));
+		CodedMessageDefinition.define(new CodedMessageDefinition("Test1", Locale.CHINA, "测试消息：{0}"));
+		CodedMessageDefinition.define(new CodedMessageDefinition("Test2", Locale.CHINA, "测试消息 B：{0}{1}"));
 	}
 
 	@Test

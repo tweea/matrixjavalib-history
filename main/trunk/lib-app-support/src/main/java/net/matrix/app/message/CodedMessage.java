@@ -5,7 +5,6 @@
  */
 package net.matrix.app.message;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +14,31 @@ import net.matrix.text.MessageFormats;
  * 编码消息。
  */
 public class CodedMessage {
+	/**
+	 * 编码。
+	 */
 	private String code;
 
+	/**
+	 * 记录时间。
+	 */
 	private long time;
 
+	/**
+	 * 消息级别。
+	 */
 	private int level;
 
+	/**
+	 * 参数列表。
+	 */
 	private List<String> arguments;
 
-	public CodedMessage(String code, int level, String... arguments) {
+	public CodedMessage(final String code, final int level, final String... arguments) {
 		this(code, System.currentTimeMillis(), level, arguments);
 	}
 
-	public CodedMessage(String code, long time, int level, String... arguments) {
+	public CodedMessage(final String code, final long time, final int level, final String... arguments) {
 		this.code = code;
 		this.time = time;
 		this.level = level;
@@ -75,6 +86,8 @@ public class CodedMessage {
 	}
 
 	/**
+	 * 在参数列表中增加一个参数。
+	 * 
 	 * @param argument
 	 *            参数
 	 */
@@ -83,15 +96,15 @@ public class CodedMessage {
 	}
 
 	/**
-	 * 格式化为消息字符串。
+	 * 将消息格式化为字符串。
 	 * 
-	 * @return 格式化消息字符串
+	 * @return 消息字符串
 	 */
 	public String format() {
 		CodedMessageDefinition def = CodedMessageDefinition.getDefinition(code);
 		if (def == null) {
 			return MessageFormats.formatFallback(code, arguments);
 		}
-		return MessageFormat.format(def.getTemplate(), arguments.toArray());
+		return MessageFormats.format(def.getTemplate(), def.getLocale(), arguments.toArray());
 	}
 }
