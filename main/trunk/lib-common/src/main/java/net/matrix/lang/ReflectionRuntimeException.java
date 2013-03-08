@@ -5,6 +5,8 @@
  */
 package net.matrix.lang;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * 反射调用异常，可以将反射调用过程中产生的异常包装为本异常。
  */
@@ -39,7 +41,8 @@ public class ReflectionRuntimeException
 	 *            原因异常（使用 {@link #getCause()} 方法获取）。可以使用 <tt>null</tt> 值，指原因异常不存在或未知。
 	 */
 	public ReflectionRuntimeException(final Throwable cause) {
-		super(cause);
+		super();
+		initCause(cause);
 	}
 
 	/**
@@ -53,6 +56,15 @@ public class ReflectionRuntimeException
 	 *            原因异常（使用 {@link #getCause()} 方法获取）。可以使用 <tt>null</tt> 值，指原因异常不存在或未知。
 	 */
 	public ReflectionRuntimeException(final String message, final Throwable cause) {
-		super(message, cause);
+		super(message);
+		initCause(cause);
+	}
+
+	@Override
+	public synchronized Throwable initCause(final Throwable cause) {
+		if (cause instanceof InvocationTargetException) {
+			return super.initCause(((InvocationTargetException) cause).getTargetException());
+		}
+		return super.initCause(cause);
 	}
 }
