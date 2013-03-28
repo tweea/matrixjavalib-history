@@ -103,7 +103,7 @@ public class CodedMessage {
 	public String format() {
 		CodedMessageDefinition def = CodedMessageDefinition.getDefinition(code);
 		if (def == null) {
-			return MessageFormats.formatFallback(code, arguments);
+			return MessageFormats.formatFallback(code, arguments.toArray());
 		}
 		return MessageFormats.format(def.getTemplate(), def.getLocale(), arguments.toArray());
 	}

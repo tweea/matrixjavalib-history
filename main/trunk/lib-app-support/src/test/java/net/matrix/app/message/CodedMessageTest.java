@@ -45,4 +45,13 @@ public class CodedMessageTest {
 		String formatString = message.format();
 		Assert.assertEquals("测试消息 B：Testtest2", formatString);
 	}
+
+	@Test
+	public void formatFallback() {
+		CodedMessage message = new CodedMessage("Message.Fallback", CodedMessageLevels.INFORMATION);
+		message.addArgument("Test");
+		message.addArgument("test2");
+		String formatString = message.format();
+		Assert.assertEquals("Message.Fallback, Test, test2", formatString);
+	}
 }
