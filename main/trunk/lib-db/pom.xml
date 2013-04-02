@@ -57,7 +57,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.10.Final</version>
+			<version>4.2.0.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -70,7 +70,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.10.Final</version>
+			<version>4.2.0.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -121,14 +121,14 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.1.10.Final</version>
+			<version>4.2.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.1.10.Final</version>
+			<version>4.2.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- test -->
