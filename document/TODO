@@ -1,15 +1,12 @@
-springside Commit:fa8a54bb6434af45c2d1df80f296b722587348fc 2013/02/08 13:55:48
+springside Commit:d0a28fc94bd45f9146f07e772a5d634936792d6a 2013/05/01 19:15:02
 https://github.com/springside/springside4/wiki
 https://oss.sonatype.org
 ------ next ------
 文档、异常、测试、规则、兼容性、提升
 ------ next ------
-DelimitedString 构造器支持分隔符
-消息中增加消息默认级别
 增强 Javadoc
 异常
 	抛出和处理
-	异常文档
 	建立异常体系
 	国际化和本地化
 数据库
