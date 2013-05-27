@@ -1,10 +1,11 @@
 springside Commit:fa8a54bb6434af45c2d1df80f296b722587348fc 2013/02/08 13:55:48
 https://github.com/springside/springside4/wiki
 https://oss.sonatype.org
----- next ------
+------ next ------
+文档、异常、测试、规则、兼容性、提升
+------ next ------
 DelimitedString 构造器支持分隔符
 消息中增加消息默认级别
-配置版本校验规则
 增强 Javadoc
 异常
 	抛出和处理
