@@ -37,8 +37,8 @@ public class DelimitedString
 	 * 构造一个使用默认分隔符的空字符串。
 	 */
 	public DelimitedString() {
-		delimiter = DEFAULT_DELIMITER;
-		content = new ArrayList<String>();
+		this.delimiter = DEFAULT_DELIMITER;
+		this.content = new ArrayList<String>();
 	}
 
 	/**
@@ -48,7 +48,20 @@ public class DelimitedString
 	 *            默认分隔符分割的字符串
 	 */
 	public DelimitedString(final String value) {
-		this();
+		this(value, DEFAULT_DELIMITER);
+	}
+
+	/**
+	 * 构造一个使用指定分隔符的字符串。
+	 * 
+	 * @param value
+	 *            字符串
+	 * @param delimiter
+	 *            分隔符
+	 */
+	public DelimitedString(final String value, final String delimiter) {
+		this.delimiter = delimiter;
+		this.content = new ArrayList<String>();
 		String[] array = value.split(delimiter, -1);
 		for (String item : array) {
 			content.add(StringUtils.trim(item));
@@ -62,7 +75,20 @@ public class DelimitedString
 	 *            已有的字符串数组
 	 */
 	public DelimitedString(final String[] values) {
-		this();
+		this(values, DEFAULT_DELIMITER);
+	}
+
+	/**
+	 * 构造一个使用指定分隔符的字符串，使用已有的字符串数组作为内容。
+	 * 
+	 * @param values
+	 *            已有的字符串数组
+	 * @param delimiter
+	 *            分隔符
+	 */
+	public DelimitedString(final String[] values, final String delimiter) {
+		this.delimiter = delimiter;
+		this.content = new ArrayList<String>();
 		for (String item : values) {
 			content.add(StringUtils.trim(item));
 		}
@@ -75,7 +101,20 @@ public class DelimitedString
 	 *            已有的字符串列表
 	 */
 	public DelimitedString(final List<String> list) {
-		this();
+		this(list, DEFAULT_DELIMITER);
+	}
+
+	/**
+	 * 构造一个使用指定分隔符的字符串，使用已有的字符串列表作为内容。
+	 * 
+	 * @param list
+	 *            已有的字符串列表
+	 * @param delimiter
+	 *            分隔符
+	 */
+	public DelimitedString(final List<String> list, final String delimiter) {
+		this.delimiter = delimiter;
+		this.content = new ArrayList<String>();
 		for (String item : list) {
 			content.add(StringUtils.trim(item));
 		}
@@ -228,7 +267,6 @@ public class DelimitedString
 			buffer.append(content.get(i));
 			if (i < content.size() - 1) {
 				buffer.append(delimiter);
-				buffer.append(' ');
 			}
 		}
 		return buffer.toString();
