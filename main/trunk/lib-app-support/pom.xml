@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-app-support</artifactId>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.2.1</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -55,11 +55,11 @@
 	</issueManagement>
 	<scm>
 		<connection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-app-support
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/mxlib-app-support-1.2.1
 		</connection>
 		<developerConnection>
-			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-app-support
+			scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/tags/mxlib-app-support-1.2.1
 		</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/lib-app-support</url>
+		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/tags/mxlib-app-support-1.2.1</url>
 	</scm>
 </project>
