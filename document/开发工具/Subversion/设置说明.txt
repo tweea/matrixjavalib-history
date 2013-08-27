@@ -2,7 +2,8 @@
 1、安装 TortoiseSVN 后，安装中文包，重启后设置语言为中文。
 2、设置忽略文件
 应在 TortoiseSVN 的设置界面常规设置中全局忽略模式增加 Thumbs.db 文件，这是图片缓存文件。
-3、自动属性设置
+3、选择将文件设置为最后提交时间
+4、自动属性设置
 在 TortoiseSVN 的设置界面常规设置中点击 Subversion 配置文件后的编辑，在打开的文本配置中设置 Subversion 自动属性
 修改 config 文件中的配置
 去掉 # enable-auto-props = yes 的注释（井号和空格）
