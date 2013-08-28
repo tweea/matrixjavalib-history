@@ -4,7 +4,6 @@ https://oss.sonatype.org
 ------ next ------
 文档、异常、测试、规则、兼容性、提升
 ------ next ------
-迁移到 GoogleCode
 增强 Javadoc
 异常
 	抛出和处理
@@ -17,8 +16,6 @@ https://oss.sonatype.org
 	单元测试
 	Mock
 增强检查规则
-	Sonar
-	测试更新 CheckStyle 检验规则
 	整理开发规范
 	应用 JSR305 注解
 日志
