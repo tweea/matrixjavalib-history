@@ -17,10 +17,9 @@ https://oss.sonatype.org
 	单元测试
 	Mock
 增强检查规则
-	测试更新 CheckStyle 检验规则
-	检查更新 eclipse 配置
-	整理开发规范
 	Sonar
+	测试更新 CheckStyle 检验规则
+	整理开发规范
 	应用 JSR305 注解
 日志
 	定制日志文件的位置
