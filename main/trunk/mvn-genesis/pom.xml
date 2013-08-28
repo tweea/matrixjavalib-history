@@ -517,17 +517,17 @@
 		<maven>3.0.5</maven>
 	</prerequisites>
 	<issueManagement>
-		<system>sourceforge</system>
-		<url>http://sourceforge.net/tracker/?group_id=543402</url>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
 	</issueManagement>
 	<ciManagement>
 		<system>continuum</system>
 		<url>http://192.168.1.100:8082/continuum</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/mvn-genesis</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/mvn-genesis</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/viewvc/matrixjavalib/main/trunk/mvn-genesis</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/mvn-genesis</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/mvn-genesis</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/mvn-genesis</url>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
