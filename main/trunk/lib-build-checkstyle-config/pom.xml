@@ -27,12 +27,12 @@
 
 	<!-- 构建环境 -->
 	<issueManagement>
-		<system>sourceforge</system>
-		<url>http://sourceforge.net/tracker/?group_id=543402</url>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config</developerConnection>
-		<url>http://matrixjavalib.svn.sourceforge.net/svnroot/matrixjavalib/main/trunk/lib-build-checkstyle-config</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/lib-build-checkstyle-config</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/lib-build-checkstyle-config</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/lib-build-checkstyle-config</url>
 	</scm>
 </project>
