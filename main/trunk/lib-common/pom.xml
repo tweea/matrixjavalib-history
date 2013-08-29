@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>net.sf.matrixjavalib</groupId>
 		<artifactId>genesis</artifactId>
-		<version>27</version>
+		<version>28</version>
 	</parent>
 	<dependencies>
 		<!-- compile -->
