@@ -428,13 +428,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh</artifactId>
-				<version>2.4</version>
-			</extension>
-		</extensions>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -492,7 +485,7 @@
 	<description>
 		Genesis 提供 Maven3 构建支持，增加共享的配置和公共插件。
 	</description>
-	<url>http://matrixjavalib.sourceforge.net/site/${project.groupId}/${project.artifactId}/${project.version}</url>
+	<url>http://code.google.com/p/matrixjavalib/site/${project.groupId}/${project.artifactId}/${project.version}</url>
 	<inceptionYear>2008</inceptionYear>
 	<licenses>
 		<license>
@@ -540,12 +533,7 @@
 			<name>Nexus Release Repository</name>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
-		<site>
-			<!-- FIXME: a bug on Wagon cause unable to deploy the site -->
-			<id>sourceforge.site</id>
-			<name>SourceForge Site</name>
-			<url>sftp://web.sourceforge.net/home/project-web/m/ma/matrixjavalib/htdocs/site/${project.groupId}/${project.artifactId}/${project.version}</url>
-		</site>
+		<!-- TODO find a host to deploy the site -->
 	</distributionManagement>
 	<profiles>
 		<profile>
