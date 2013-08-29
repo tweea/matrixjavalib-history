@@ -6,7 +6,7 @@
 	<!-- 基本属性 - 项目属性 -->
 	<groupId>net.sf.matrixjavalib</groupId>
 	<artifactId>genesis</artifactId>
-	<version>28</version>
+	<version>29-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -518,9 +518,9 @@
 		<url>http://192.168.1.100:8082/continuum</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/tags/genesis-28</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/tags/genesis-28</developerConnection>
-		<url>http://code.google.com/p/matrixjavalib/source/browse/main/tags/genesis-28</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/mvn-genesis</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/mvn-genesis</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/mvn-genesis</url>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
