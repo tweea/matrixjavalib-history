@@ -27,21 +27,21 @@ public final class Threads {
 	}
 
 	/**
-	 * sleep 等待，忽略 InterruptedException。
+	 * sleep 等待，单位为毫秒。
 	 * 
-	 * @param millis
+	 * @param durationMillis
 	 *            等待毫秒数
 	 */
-	public static void sleep(final long millis) {
+	public static void sleep(final long durationMillis) {
 		try {
-			Thread.sleep(millis);
+			Thread.sleep(durationMillis);
 		} catch (InterruptedException e) {
-			LOG.warn("thread interrupted.");
+			Thread.currentThread().interrupt();
 		}
 	}
 
 	/**
-	 * sleep 等待，忽略 InterruptedException。
+	 * sleep 等待。
 	 * 
 	 * @param duration
 	 *            等待时间
@@ -52,7 +52,7 @@ public final class Threads {
 		try {
 			Thread.sleep(unit.toMillis(duration));
 		} catch (InterruptedException e) {
-			LOG.warn("thread interrupted.");
+			Thread.currentThread().interrupt();
 		}
 	}
 
@@ -111,6 +111,29 @@ public final class Threads {
 			}
 		} catch (InterruptedException ie) {
 			Thread.currentThread().interrupt();
+		}
+	}
+
+	/**
+	 * 保证不会有 Exception 抛出到线程池的 Runnable，防止用户没有捕捉异常导致中断了线程池中的线程。
+	 */
+	public static class WrapExceptionRunnable
+		implements Runnable {
+		private Runnable runnable;
+
+		public WrapExceptionRunnable(Runnable runnable) {
+			this.runnable = runnable;
+		}
+
+		@Override
+		public void run() {
+			try {
+				runnable.run();
+			} catch (Exception e) {
+				// catch any exception, because the scheduled thread will break if the excetpion
+				// thrown outside
+				LOG.error("Unexpected error occurred in task", e);
+			}
 		}
 	}
 }
