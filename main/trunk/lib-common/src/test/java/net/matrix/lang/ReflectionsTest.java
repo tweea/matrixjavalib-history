@@ -121,6 +121,12 @@ public class ReflectionsTest {
 		assertEquals(Object.class, Reflections.getClassGenricType(TestBean3.class));
 	}
 
+	/**
+	 * @param <T>
+	 *            T
+	 * @param <ID>
+	 *            ID
+	 */
 	public static class ParentBean<T, ID> {
 	}
 
