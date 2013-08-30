@@ -401,7 +401,7 @@ public class DefaultTree<ID, DATA>
 	 */
 	private static <ID, DATA> void generateSubNode(final TreeSource<ID, DATA> source, final DefaultTree<ID, DATA> node) {
 		List<ID> items = source.listChildrenId(node.getId());
-		if (items == null || items.size() == 0) {
+		if (items == null || items.isEmpty()) {
 			return;
 		}
 		for (ID id : items) {

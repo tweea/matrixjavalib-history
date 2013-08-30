@@ -18,7 +18,7 @@ public class IterableIterator<E>
 	/**
 	 * 目标 Iterator。
 	 */
-	private Iterator<E> it;
+	private final Iterator<E> it;
 
 	/**
 	 * 用已有 Iterator 构造。

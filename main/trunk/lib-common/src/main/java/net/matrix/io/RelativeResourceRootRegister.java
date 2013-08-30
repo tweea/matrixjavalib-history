@@ -29,7 +29,7 @@ public class RelativeResourceRootRegister {
 	/**
 	 * 保存所有注册的根路径的绝对位置。
 	 */
-	private Map<String, Resource> roots;
+	private final Map<String, Resource> roots;
 
 	/**
 	 * 构造空的根注册。
