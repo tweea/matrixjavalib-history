@@ -50,14 +50,14 @@
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.5.1</version>
+			<version>1.5.2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.2.2.Final</version>
+			<version>4.2.5.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -70,7 +70,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.2.Final</version>
+			<version>4.2.5.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -98,7 +98,7 @@
 			<!-- 机器码工具，Hibernate 需要 -->
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.17.1-GA</version>
+			<version>3.18.0-GA</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- provided -->
@@ -121,7 +121,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.2.2.Final</version>
+			<version>4.2.5.Final</version>
 			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
@@ -134,7 +134,7 @@
 			<!-- 关系数据库映射工具 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.2.2.Final</version>
+			<version>4.2.5.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- test -->
