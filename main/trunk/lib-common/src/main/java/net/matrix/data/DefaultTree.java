@@ -33,7 +33,7 @@ public class DefaultTree<ID, DATA>
 	/**
 	 * 节点标识。
 	 */
-	private Key key;
+	private final Key key;
 
 	/**
 	 * 数据标识。
@@ -237,17 +237,17 @@ public class DefaultTree<ID, DATA>
 		/**
 		 * 父节点标识。
 		 */
-		private Key parent;
+		private final Key parent;
 
 		/**
 		 * 级别。
 		 */
-		private int level;
+		private final int level;
 
 		/**
 		 * 索引。
 		 */
-		private int index;
+		private final int index;
 
 		/**
 		 * 缓存 hashCode() 结果。

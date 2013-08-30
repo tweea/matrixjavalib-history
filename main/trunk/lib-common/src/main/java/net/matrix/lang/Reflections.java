@@ -301,6 +301,8 @@ public final class Reflections {
 	 * 
 	 * @param clazz
 	 *            The class to introspect
+	 * @param <T>
+	 *            自动转型
 	 * @return the first generic declaration, or Object.class if cannot be determined
 	 */
 	public static <T> Class<T> getClassGenricType(final Class clazz) {

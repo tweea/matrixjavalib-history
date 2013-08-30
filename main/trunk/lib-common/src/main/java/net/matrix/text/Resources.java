@@ -82,7 +82,7 @@ public final class Resources {
 				throw new NullPointerException("参数不能为空");
 			}
 			ResourceBundle bundle = null;
-			if (format.equals("xml")) {
+			if ("xml".equals(format)) {
 				String bundleName = toBundleName(baseName, locale);
 				String resourceName = toResourceName(bundleName, format);
 				InputStream stream = null;

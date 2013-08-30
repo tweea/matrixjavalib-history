@@ -119,9 +119,18 @@ public final class Threads {
 	 */
 	public static class WrapExceptionRunnable
 		implements Runnable {
-		private Runnable runnable;
+		/**
+		 * 被包装的 Runnable。
+		 */
+		private final Runnable runnable;
 
-		public WrapExceptionRunnable(Runnable runnable) {
+		/**
+		 * 包装构造器。
+		 * 
+		 * @param runnable
+		 *            被包装的 Runnable
+		 */
+		public WrapExceptionRunnable(final Runnable runnable) {
 			this.runnable = runnable;
 		}
 
