@@ -27,7 +27,10 @@ public final class Objects {
 	 * @return 结果
 	 */
 	public static <T> T isNull(final T value, final T replacement) {
-		return value == null ? replacement : value;
+		if (value == null) {
+			return replacement;
+		}
+		return value;
 	}
 
 	/**
@@ -45,6 +48,9 @@ public final class Objects {
 		if (value == null || value2 == null) {
 			return null;
 		}
-		return value.equals(value2) ? null : value;
+		if (value.equals(value2)) {
+			return null;
+		}
+		return value;
 	}
 }
