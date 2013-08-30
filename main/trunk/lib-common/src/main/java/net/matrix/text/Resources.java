@@ -121,7 +121,7 @@ public final class Resources {
 		/**
 		 * 资源中的属性。
 		 */
-		private Properties props;
+		private final Properties props;
 
 		/**
 		 * 从输入流读取资源。
