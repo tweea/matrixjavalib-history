@@ -11,7 +11,9 @@ https://oss.sonatype.org
 	国际化和本地化
 数据库
 	使用 dbutils、unitils
+	测试事务性
 	使用内嵌数据库
+	测试 Joda-Time 映射
 测试
 	单元测试
 	Mock
