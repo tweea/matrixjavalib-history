@@ -98,7 +98,7 @@
 			<!-- 机器码工具，Hibernate 需要 -->
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.18.0-GA</version>
+			<version>3.18.1-GA</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- provided -->
