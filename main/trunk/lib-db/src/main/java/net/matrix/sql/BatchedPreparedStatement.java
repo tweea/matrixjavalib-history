@@ -36,12 +36,12 @@ public class BatchedPreparedStatement
 	/**
 	 * 被包装的 PreparedStatement。
 	 */
-	private PreparedStatement statement;
+	private final PreparedStatement statement;
 
 	/**
 	 * 最大批量执行的语句数量。
 	 */
-	private int batchSize;
+	private final int batchSize;
 
 	/**
 	 * 等待批量执行的语句数量。
