@@ -28,6 +28,8 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 /**
  * 可以批量执行的 PreparedStatement。
  */
@@ -47,6 +49,11 @@ public class BatchedPreparedStatement
 	 * 等待批量执行的语句数量。
 	 */
 	private int batchCount;
+
+	/**
+	 * 记录的批量执行结果。
+	 */
+	private int[] batchResult;
 
 	/**
 	 * 包装一个 PreparedStatement，不使用批量执行。
@@ -70,6 +77,7 @@ public class BatchedPreparedStatement
 		this.statement = statement;
 		this.batchSize = batchSize;
 		this.batchCount = 0;
+		this.batchResult = ArrayUtils.EMPTY_INT_ARRAY;
 	}
 
 	/**
@@ -81,8 +89,9 @@ public class BatchedPreparedStatement
 	private void checkBatchCount()
 		throws SQLException {
 		if (batchSize > 0 && batchCount >= batchSize) {
-			batchCount = 0;
-			statement.executeBatch();
+			int[] result = statement.executeBatch();
+			resetBatchCount();
+			addBatchResult(result);
 		}
 	}
 
@@ -100,6 +109,23 @@ public class BatchedPreparedStatement
 	 */
 	private void resetBatchCount() {
 		batchCount = 0;
+	}
+
+	/**
+	 * 将新的执行结果加入记录。
+	 * 
+	 * @param result
+	 *            新的执行结果
+	 */
+	private void addBatchResult(int[] result) {
+		batchResult = ArrayUtils.addAll(batchResult, result);
+	}
+
+	/**
+	 * 等待批量执行的语句数量清零。
+	 */
+	private void resetBatchResult() {
+		batchResult = ArrayUtils.EMPTY_INT_ARRAY;
 	}
 
 	@Override
@@ -129,6 +155,7 @@ public class BatchedPreparedStatement
 		throws SQLException {
 		statement.clearBatch();
 		resetBatchCount();
+		resetBatchResult();
 	}
 
 	@Override
@@ -148,6 +175,7 @@ public class BatchedPreparedStatement
 		throws SQLException {
 		statement.close();
 		resetBatchCount();
+		resetBatchResult();
 	}
 
 	@Override
@@ -184,7 +212,10 @@ public class BatchedPreparedStatement
 	public int[] executeBatch()
 		throws SQLException {
 		int[] result = statement.executeBatch();
+		addBatchResult(result);
+		result = batchResult;
 		resetBatchCount();
+		resetBatchResult();
 		return result;
 	}
 
@@ -347,6 +378,9 @@ public class BatchedPreparedStatement
 	@Override
 	public boolean isWrapperFor(final Class<?> iface)
 		throws SQLException {
+		if (iface.isAssignableFrom(statement.getClass())) {
+			return true;
+		}
 		return statement.isWrapperFor(iface);
 	}
 
@@ -690,6 +724,9 @@ public class BatchedPreparedStatement
 	@Override
 	public <T> T unwrap(final Class<T> iface)
 		throws SQLException {
+		if (iface.isAssignableFrom(statement.getClass())) {
+			return (T) statement;
+		}
 		return statement.unwrap(iface);
 	}
 
