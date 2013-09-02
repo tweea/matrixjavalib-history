@@ -81,18 +81,10 @@ public class BatchedPreparedStatement
 	}
 
 	/**
-	 * 检查等待批量执行的语句数量，如果已达到最大数量，则向数据库发送执行。
-	 * 
-	 * @throws SQLException
-	 *             数据库执行出错
+	 * 检查等待批量执行的语句数量，如果已达到最大数量，则返回 true。
 	 */
-	private void checkBatchCount()
-		throws SQLException {
-		if (batchSize > 0 && batchCount >= batchSize) {
-			int[] result = statement.executeBatch();
-			resetBatchCount();
-			addBatchResult(result);
-		}
+	private boolean checkBatchCount() {
+		return batchSize > 0 && batchCount >= batchSize;
 	}
 
 	/**
@@ -131,17 +123,20 @@ public class BatchedPreparedStatement
 	@Override
 	public void addBatch()
 		throws SQLException {
-		checkBatchCount();
 		statement.addBatch();
 		addBatchCount();
+		if (checkBatchCount()) {
+			int[] result = statement.executeBatch();
+			addBatchResult(result);
+			resetBatchCount();
+		}
 	}
 
 	@Override
 	public void addBatch(final String sql)
 		throws SQLException {
-		checkBatchCount();
+		// 这里会抛出异常
 		statement.addBatch(sql);
-		addBatchCount();
 	}
 
 	@Override
