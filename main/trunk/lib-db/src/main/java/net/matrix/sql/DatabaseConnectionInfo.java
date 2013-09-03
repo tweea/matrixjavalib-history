@@ -30,26 +30,80 @@ public class DatabaseConnectionInfo
 	private static final Logger LOG = LoggerFactory.getLogger(DatabaseConnectionInfo.class);
 
 	// 连接信息
-	private String driverClass;
+	/**
+	 * Driver 类名称。
+	 */
+	private final String driverClass;
 
-	private String url;
+	/**
+	 * 连接 URL。
+	 */
+	private final String url;
 
-	private String userName;
+	/**
+	 * 用户名。
+	 */
+	private final String username;
 
-	private String password;
+	/**
+	 * 密码。
+	 */
+	private final String password;
 
 	// 元数据
+	/**
+	 * 数据库类型。
+	 */
 	private String databaseType;
 
+	/**
+	 * Driver 名称。
+	 */
 	private String driverName;
 
+	/**
+	 * 构造并获取连接信息。
+	 * 
+	 * @param driverClass
+	 *            Driver 类名称
+	 * @param url
+	 *            连接 URL
+	 * @param userName
+	 *            用户名
+	 * @param password
+	 *            密码
+	 * @throws SQLException
+	 *             获取信息时出错
+	 */
 	public DatabaseConnectionInfo(final String driverClass, final String url, final String userName, final String password)
 		throws SQLException {
 		this.driverClass = driverClass;
 		this.url = url;
-		this.userName = userName;
+		this.username = userName;
 		this.password = password;
-		setMetaData();
+		readMetaData();
+	}
+
+	/**
+	 * 从数据库读取元数据。
+	 * 
+	 * @throws SQLException
+	 *             建立连接失败或读取信息失败
+	 */
+	private void readMetaData()
+		throws SQLException {
+		Connection connection = getJDBCConnection();
+		try {
+			DatabaseMetaData metadata = connection.getMetaData();
+			databaseType = metadata.getDatabaseProductName();
+			driverName = metadata.getDriverName();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				LOG.warn("关闭连接失败", e);
+			}
+		}
 	}
 
 	public String getDriverClass() {
@@ -61,7 +115,7 @@ public class DatabaseConnectionInfo
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
 	public String getPassword() {
@@ -92,31 +146,9 @@ public class DatabaseConnectionInfo
 		throws SQLException {
 		try {
 			Class.forName(driverClass);
-			return DriverManager.getConnection(url, userName, password);
+			return DriverManager.getConnection(url, username, password);
 		} catch (ClassNotFoundException e) {
 			throw new SQLException(e);
-		}
-	}
-
-	/**
-	 * 从数据库读取元数据。
-	 * 
-	 * @throws SQLException
-	 *             建立连接失败或读取信息失败
-	 */
-	private void setMetaData()
-		throws SQLException {
-		Connection connection = getJDBCConnection();
-		try {
-			DatabaseMetaData metadata = connection.getMetaData();
-			databaseType = metadata.getDatabaseProductName();
-			driverName = metadata.getDriverName();
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				LOG.warn("关闭连接失败", e);
-			}
 		}
 	}
 }
