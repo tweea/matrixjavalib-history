@@ -7,8 +7,6 @@ package net.matrix.sql.hibernate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.matrix.sql.TransactionContext;
-
 /**
  * Hibernate 测试
  * 
@@ -20,12 +18,12 @@ public class HibernateTest {
 	public void testContextManager()
 		throws Exception {
 		SessionFactoryManager mm = SessionFactoryManager.getInstance();
-		TransactionContext tc0 = mm.getTransactionContext();
-		TransactionContext tc1 = mm.getTransactionContext();
-		TransactionContext tc2 = mm.getTransactionContext();
-		TransactionContext tc01 = mm.getTransactionContext();
-		TransactionContext tc11 = mm.getTransactionContext();
-		TransactionContext tc21 = mm.getTransactionContext();
+		HibernateTransactionContext tc0 = mm.getTransactionContext();
+		HibernateTransactionContext tc1 = mm.getTransactionContext();
+		HibernateTransactionContext tc2 = mm.getTransactionContext();
+		HibernateTransactionContext tc01 = mm.getTransactionContext();
+		HibernateTransactionContext tc11 = mm.getTransactionContext();
+		HibernateTransactionContext tc21 = mm.getTransactionContext();
 		Assert.assertSame(tc0, tc01);
 		Assert.assertSame(tc1, tc11);
 		Assert.assertSame(tc2, tc21);
@@ -45,7 +43,7 @@ public class HibernateTest {
 	public void testTransactionContext()
 		throws Exception {
 		SessionFactoryManager mm = SessionFactoryManager.getInstance();
-		TransactionContext tc = mm.getTransactionContext();
+		HibernateTransactionContext tc = mm.getTransactionContext();
 		tc.begin();
 		tc.commit();
 		tc.release();
