@@ -8,11 +8,11 @@ package net.matrix.lang;
 /**
  * 对象操作实用工具。
  */
-public final class Objects {
+public final class Objects2 {
 	/**
 	 * 阻止实例化。
 	 */
-	private Objects() {
+	private Objects2() {
 	}
 
 	/**
