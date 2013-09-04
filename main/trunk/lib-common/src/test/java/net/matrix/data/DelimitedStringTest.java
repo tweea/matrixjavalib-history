@@ -64,4 +64,11 @@ public class DelimitedStringTest {
 		Assert.assertEquals(3, list.size());
 		Assert.assertEquals("a-bc-d", list.toString());
 	}
+
+	@Test
+	public void testSubList() {
+		List<String> list = new DelimitedString(Arrays.asList("a", "bc", "d"), "-").subList(0, 2);
+		Assert.assertEquals(2, list.size());
+		Assert.assertEquals("a-bc", list.toString());
+	}
 }

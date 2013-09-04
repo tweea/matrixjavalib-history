@@ -93,13 +93,7 @@ public class RelativeResourceRootRegister {
 	public File getNewFile(final RelativeResource relativeFile)
 		throws IOException {
 		File file = getResource(relativeFile).getFile();
-		if (file.exists()) {
-			LOG.debug("删除旧文件：" + file);
-			boolean success = file.delete();
-			if (!success) {
-				LOG.warn("删除文件失败：" + file);
-			}
-		}
+		deleteOldFile(file);
 		return file;
 	}
 
@@ -118,18 +112,13 @@ public class RelativeResourceRootRegister {
 		if (src.equals(dest)) {
 			return;
 		}
-		LOG.debug("搬移文件从  " + src + " 到 " + dest);
+		LOG.debug("搬移文件从 {} 到 {}", src, dest);
 		File srcFile = getResource(src).getFile();
 		File destFile = getResource(dest).getFile();
 		if (!srcFile.exists()) {
 			throw new FileNotFoundException(srcFile.getAbsolutePath());
 		}
-		if (destFile.exists()) {
-			boolean success = destFile.delete();
-			if (!success) {
-				LOG.warn("删除文件失败：" + destFile);
-			}
-		}
+		deleteOldFile(destFile);
 		FileUtils.moveFile(srcFile, destFile);
 	}
 
@@ -148,18 +137,29 @@ public class RelativeResourceRootRegister {
 		if (src.equals(dest)) {
 			return;
 		}
-		LOG.debug("复制文件从  " + src + " 到 " + dest);
+		LOG.debug("复制文件从 {} 到 {}", src, dest);
 		File srcFile = getResource(src).getFile();
 		File destFile = getResource(dest).getFile();
 		if (!srcFile.exists()) {
 			throw new FileNotFoundException(srcFile.getAbsolutePath());
 		}
-		if (destFile.exists()) {
-			boolean success = destFile.delete();
+		deleteOldFile(destFile);
+		FileUtils.copyFile(srcFile, destFile);
+	}
+
+	/**
+	 * 删除旧文件。
+	 * 
+	 * @param file
+	 *            旧文件
+	 */
+	private void deleteOldFile(final File file) {
+		if (file.exists()) {
+			LOG.debug("删除旧文件：{}", file);
+			boolean success = file.delete();
 			if (!success) {
-				LOG.warn("删除文件失败：" + destFile);
+				LOG.warn("删除文件失败：{}", file);
 			}
 		}
-		FileUtils.copyFile(srcFile, destFile);
 	}
 }
