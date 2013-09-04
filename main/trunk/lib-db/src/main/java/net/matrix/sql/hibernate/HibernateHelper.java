@@ -23,7 +23,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.jdbc.ReturningWork;
 
-import net.matrix.lang.Objects;
+import net.matrix.lang.Objects2;
 
 /**
  * Hibernate 实用类。
@@ -1296,7 +1296,7 @@ public final class HibernateHelper {
 					while (rs.next() && j < numPerPage) {
 						HashMap<String, String> row = new HashMap<String, String>();
 						for (i = 0; i < count; i++) {
-							String tem = Objects.isNull(rs.getString(i + 1), "");
+							String tem = Objects2.isNull(rs.getString(i + 1), "");
 							row.put(str[i], tem);
 						}
 						table.add(row);
