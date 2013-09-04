@@ -8,7 +8,7 @@ package net.matrix.data;
 import java.util.List;
 
 /**
- * 用以生成树型结构的节点的接口。
+ * 产生树型结构上各个节点的接口。
  * 
  * @param <ID>
  *            数据标识
