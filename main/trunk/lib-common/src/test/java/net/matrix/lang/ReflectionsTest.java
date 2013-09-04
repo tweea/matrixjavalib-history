@@ -11,7 +11,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 public class ReflectionsTest {
-
 	@Test
 	public void getAndSetFieldValue() {
 		TestBean bean = new TestBean();
@@ -43,7 +42,6 @@ public class ReflectionsTest {
 		} catch (IllegalArgumentException e) {
 
 		}
-
 	}
 
 	@Test
@@ -105,7 +103,6 @@ public class ReflectionsTest {
 		} catch (IllegalArgumentException e) {
 
 		}
-
 	}
 
 	@Test

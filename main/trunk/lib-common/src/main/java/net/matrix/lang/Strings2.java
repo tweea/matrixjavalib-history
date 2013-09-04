@@ -8,11 +8,11 @@ package net.matrix.lang;
 /**
  * 字符串实用方法。
  */
-public final class Strings {
+public final class Strings2 {
 	/**
 	 * 禁止实例化。
 	 */
-	private Strings() {
+	private Strings2() {
 	}
 
 	/**
