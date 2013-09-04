@@ -25,16 +25,16 @@ import org.slf4j.LoggerFactory;
 /**
  * 读取多语言资源。
  */
-public final class Resources {
+public final class ResourceBundles {
 	/**
 	 * 日志记录器。
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(Resources.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ResourceBundles.class);
 
 	/**
 	 * 阻止实例化。
 	 */
-	private Resources() {
+	private ResourceBundles() {
 	}
 
 	/**

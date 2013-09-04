@@ -24,13 +24,13 @@ public class MessageFormatsTest {
 
 	@Test
 	public void testFormatBundle() {
-		ResourceBundle bundle = Resources.getBundle("global", Locale.CHINA);
+		ResourceBundle bundle = ResourceBundles.getBundle("global", Locale.CHINA);
 		Assert.assertEquals("一双绣花鞋", MessageFormats.format(bundle, "message", "绣花鞋"));
 	}
 
 	@Test
 	public void testFormatBundle_fallback() {
-		ResourceBundle bundle = Resources.getBundle("global", Locale.CHINA);
+		ResourceBundle bundle = ResourceBundles.getBundle("global", Locale.CHINA);
 		Assert.assertEquals("1, 2, 3", MessageFormats.format(bundle, "1", "2", 3));
 	}
 }

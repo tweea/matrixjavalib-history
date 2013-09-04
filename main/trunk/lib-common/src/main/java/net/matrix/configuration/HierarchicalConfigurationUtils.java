@@ -14,7 +14,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalConfiguration;
 
 import net.matrix.text.MessageFormats;
-import net.matrix.text.Resources;
+import net.matrix.text.ResourceBundles;
 import net.matrix.util.IterableIterator;
 
 /**
@@ -143,6 +143,6 @@ public final class HierarchicalConfigurationUtils {
 			}
 		}
 		// 没有找到
-		throw new ConfigurationException(MessageFormats.format(Resources.getBundle(RESOURCE_BASENAME), "subnodeNotFound", nameKey, nameValue, subKey));
+		throw new ConfigurationException(MessageFormats.format(ResourceBundles.getBundle(RESOURCE_BASENAME), "subnodeNotFound", nameKey, nameValue, subKey));
 	}
 }
