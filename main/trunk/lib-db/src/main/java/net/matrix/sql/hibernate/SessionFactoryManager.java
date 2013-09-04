@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.matrix.lang.Resettable;
-import net.matrix.sql.DatabaseConnectionInfo;
+import net.matrix.sql.ConnectionInfo;
 
 /**
  * Hibernate SessionFactory 管理器。
@@ -315,13 +315,13 @@ public final class SessionFactoryManager
 	 * @throws SQLException
 	 *             信息获取失败
 	 */
-	public DatabaseConnectionInfo getConnectionInfo()
+	public ConnectionInfo getConnectionInfo()
 		throws SQLException {
 		Properties properties = getConfiguration().getProperties();
 		String driver = properties.getProperty(AvailableSettings.DRIVER);
 		String url = properties.getProperty(AvailableSettings.URL);
 		String user = properties.getProperty(AvailableSettings.USER);
 		String pass = properties.getProperty(AvailableSettings.PASS);
-		return new DatabaseConnectionInfo(driver, url, user, pass);
+		return new ConnectionInfo(driver, url, user, pass);
 	}
 }

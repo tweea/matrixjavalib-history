@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 数据库连接信息。
  */
-public class DatabaseConnectionInfo
+public class ConnectionInfo
 	implements Serializable {
 	/**
 	 * serialVersionUID。
@@ -27,7 +27,7 @@ public class DatabaseConnectionInfo
 	/**
 	 * 日志记录器。
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(DatabaseConnectionInfo.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ConnectionInfo.class);
 
 	// 连接信息
 	/**
@@ -68,18 +68,18 @@ public class DatabaseConnectionInfo
 	 *            Driver 类名称
 	 * @param url
 	 *            连接 URL
-	 * @param userName
+	 * @param username
 	 *            用户名
 	 * @param password
 	 *            密码
 	 * @throws SQLException
 	 *             获取信息时出错
 	 */
-	public DatabaseConnectionInfo(final String driverClass, final String url, final String userName, final String password)
+	public ConnectionInfo(final String driverClass, final String url, final String username, final String password)
 		throws SQLException {
 		this.driverClass = driverClass;
 		this.url = url;
-		this.username = userName;
+		this.username = username;
 		this.password = password;
 		readMetaData();
 	}
@@ -92,7 +92,7 @@ public class DatabaseConnectionInfo
 	 */
 	private void readMetaData()
 		throws SQLException {
-		Connection connection = getJDBCConnection();
+		Connection connection = getConnection();
 		try {
 			DatabaseMetaData metadata = connection.getMetaData();
 			databaseType = metadata.getDatabaseProductName();
@@ -114,7 +114,7 @@ public class DatabaseConnectionInfo
 		return url;
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 
@@ -142,7 +142,7 @@ public class DatabaseConnectionInfo
 	 * @throws SQLException
 	 *             找不到驱动类或建立连接失败
 	 */
-	public Connection getJDBCConnection()
+	public Connection getConnection()
 		throws SQLException {
 		try {
 			Class.forName(driverClass);
