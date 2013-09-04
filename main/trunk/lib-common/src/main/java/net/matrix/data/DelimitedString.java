@@ -120,11 +120,6 @@ public class DelimitedString
 		}
 	}
 
-	@Override
-	public void add(final int index, final String element) {
-		content.add(index, element);
-	}
-
 	/**
 	 * @return the delimiter
 	 */
@@ -138,6 +133,11 @@ public class DelimitedString
 	 */
 	public void setDelimiter(final String delimiter) {
 		this.delimiter = delimiter;
+	}
+
+	@Override
+	public void add(final int index, final String element) {
+		content.add(index, element);
 	}
 
 	@Override
@@ -247,7 +247,7 @@ public class DelimitedString
 
 	@Override
 	public List<String> subList(final int i, final int j) {
-		return content.subList(i, j);
+		return new DelimitedString(content.subList(i, j), delimiter);
 	}
 
 	@Override
