@@ -13,13 +13,10 @@ import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.matrix.sql.TransactionContext;
-
 /**
  * Hibernate 事务上下文。
  */
-public class HibernateTransactionContext
-	implements TransactionContext {
+public class HibernateTransactionContext {
 	private static final Logger LOG = LoggerFactory.getLogger(HibernateTransactionContext.class);
 
 	private String sessionFactoryName;
@@ -67,7 +64,12 @@ public class HibernateTransactionContext
 		return session;
 	}
 
-	@Override
+	/**
+	 * 启动事务。
+	 * 
+	 * @throws SQLException
+	 *             启动失败
+	 */
 	public void begin()
 		throws SQLException {
 		if (transaction == null) {
@@ -79,7 +81,12 @@ public class HibernateTransactionContext
 		}
 	}
 
-	@Override
+	/**
+	 * 提交事务。
+	 * 
+	 * @throws SQLException
+	 *             提交失败
+	 */
 	public void commit()
 		throws SQLException {
 		if (transaction != null) {
@@ -92,7 +99,12 @@ public class HibernateTransactionContext
 		}
 	}
 
-	@Override
+	/**
+	 * 撤销事务。
+	 * 
+	 * @throws SQLException
+	 *             撤销失败
+	 */
 	public void rollback()
 		throws SQLException {
 		if (transaction != null) {
@@ -106,7 +118,9 @@ public class HibernateTransactionContext
 		}
 	}
 
-	@Override
+	/**
+	 * 释放事务资源。
+	 */
 	public void release() {
 		if (transaction != null) {
 			try {
