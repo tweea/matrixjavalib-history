@@ -48,17 +48,17 @@ public class DefaultTree<ID, DATA>
 	/**
 	 * 父节点。
 	 */
-	private DefaultTree<ID, DATA> parent;
+	private final DefaultTree<ID, DATA> parent;
 
 	/**
-	 * 编号映射。
+	 * 标识映射。
 	 */
-	private Map<ID, Key> keyMap;
+	private final Map<ID, Key> keyMap;
 
 	/**
-	 * 所有节点的列表。
+	 * 存储所有的节点。
 	 */
-	private SortedMap<Key, DefaultTree<ID, DATA>> nodes;
+	private final SortedMap<Key, DefaultTree<ID, DATA>> nodes;
 
 	/**
 	 * 构造一棵树。
@@ -74,7 +74,7 @@ public class DefaultTree<ID, DATA>
 		this.data = data;
 		this.parent = null;
 
-		this.keyMap = new HashMap<ID, Key>();
+		this.keyMap = Collections.synchronizedMap(new HashMap<ID, Key>());
 		this.nodes = Collections.synchronizedSortedMap(new TreeMap<Key, DefaultTree<ID, DATA>>());
 
 		keyMap.put(id, key);
@@ -111,7 +111,9 @@ public class DefaultTree<ID, DATA>
 
 	@Override
 	public void setId(final ID id) {
+		keyMap.remove(this.id);
 		this.id = id;
+		keyMap.put(id, key);
 	}
 
 	@Override
