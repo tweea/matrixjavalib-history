@@ -18,6 +18,10 @@ https://oss.sonatype.org
 	单元测试
 	Mock
 增强检查规则
+	Sonar 规则
+		通用命名
+		不要使用线程
+		测试类没包含测试用例（仅对应JUnit 3.x）
 	整理开发规范
 	应用 JSR305 注解
 日志
