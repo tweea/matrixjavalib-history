@@ -10,19 +10,17 @@ import org.apache.commons.configuration.AbstractFileConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.event.ConfigurationEvent;
 import org.apache.commons.configuration.event.ConfigurationListener;
+import org.fest.reflect.core.Reflection;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
-
-import net.matrix.lang.Reflections;
 
 public class ConfigurationReloadingListenerTest {
 	@Test
 	public void testConfigurationReloadingListener() {
 		TestContainer container = new TestContainer();
 		ConfigurationListener listener = new ConfigurationReloadingListener(container);
-		TestContainer containerInObject = Reflections.getFieldValue(listener, "container");
-		Assert.assertSame(container, containerInObject);
+		Assert.assertSame(container, Reflection.field("container").ofType(ReloadableConfigurationContainer.class).in(listener).get());
 	}
 
 	@Test
