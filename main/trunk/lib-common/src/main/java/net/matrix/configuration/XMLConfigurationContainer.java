@@ -27,7 +27,7 @@ public class XMLConfigurationContainer
 	/**
 	 * 原始 XML 格式配置对象。
 	 */
-	private XMLConfiguration config;
+	private final XMLConfiguration config;
 
 	/**
 	 * 构造一个空的 {@code XMLConfigurationContainer}。
@@ -40,9 +40,7 @@ public class XMLConfigurationContainer
 	@Override
 	public void load(final Resource resource)
 		throws ConfigurationException {
-		if (LOG.isTraceEnabled()) {
-			LOG.trace("加载配置：" + resource);
-		}
+		LOG.debug("加载配置：{}", resource);
 		try {
 			config.load(resource.getFile());
 			config.setReloadingStrategy(new FileChangedReloadingStrategy());
@@ -79,7 +77,7 @@ public class XMLConfigurationContainer
 
 	@Override
 	public void reset() {
-		LOG.debug(this.getClass().getName() + ": 重新加载");
+		LOG.debug("配置对象 {} 状态重置", this);
 	}
 
 	@Override

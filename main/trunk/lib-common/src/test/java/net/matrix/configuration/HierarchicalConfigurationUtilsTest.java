@@ -1,3 +1,8 @@
+/*
+ * $Id$
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
+ */
 package net.matrix.configuration;
 
 import java.util.ArrayList;
@@ -11,9 +16,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * 负责读取配置文件
- */
 public class HierarchicalConfigurationUtilsTest {
 	private HierarchicalConfiguration config;
 
