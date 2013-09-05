@@ -14,6 +14,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+
 /**
  * 用户信息。
  */
@@ -36,7 +39,8 @@ public class UserInfo
 
 	private String mm;
 
-	private Long nl;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	private LocalDate csrq;
 
 	private String xb;
 
@@ -56,12 +60,12 @@ public class UserInfo
 		this.mm = mm;
 	}
 
-	public Long getNl() {
-		return nl;
+	public LocalDate getCsrq() {
+		return csrq;
 	}
 
-	public void setNl(Long nl) {
-		this.nl = nl;
+	public void setCsrq(LocalDate csrq) {
+		this.csrq = csrq;
 	}
 
 	public String getXb() {
