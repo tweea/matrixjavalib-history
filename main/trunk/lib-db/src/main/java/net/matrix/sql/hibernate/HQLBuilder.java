@@ -20,10 +20,10 @@ public class HQLBuilder
 		':', 'p'
 	};
 
-	private StringBuffer sb;
+	private StringBuilder sb;
 
 	public HQLBuilder() {
-		sb = new StringBuffer();
+		sb = new StringBuilder();
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class HQLBuilder
 	}
 
 	public void clear() {
-		sb = new StringBuffer();
+		sb = new StringBuilder();
 	}
 
 	@Override
