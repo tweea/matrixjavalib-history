@@ -13,7 +13,6 @@ https://oss.sonatype.org
 数据库
 	使用 dbutils、unitils
 	测试事务性
-	测试 Joda-Time 映射
 测试
 	单元测试
 	Mock
