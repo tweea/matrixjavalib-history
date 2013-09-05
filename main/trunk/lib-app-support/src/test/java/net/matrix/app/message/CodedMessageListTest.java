@@ -13,9 +13,6 @@ import java.io.StringWriter;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * 
- */
 public class CodedMessageListTest {
 	@Test
 	public void logMessageList() {

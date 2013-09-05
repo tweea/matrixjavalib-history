@@ -45,7 +45,7 @@ public final class ConfigurationContext
 	 * @throws ConfigurationException
 	 *             加载错误
 	 */
-	public static ConfigurationContext load(ResourceRepository repository, ResourceSelection selection)
+	public static ConfigurationContext load(final ResourceRepository repository, final ResourceSelection selection)
 		throws ConfigurationException {
 		LOG.debug("从 " + selection + " 加载配置集合");
 		Resource resource = repository.getResource(selection);
@@ -57,7 +57,7 @@ public final class ConfigurationContext
 		return new ConfigurationContext(repository, contextConfig);
 	}
 
-	public ConfigurationContext(ResourceRepository repository, ResourceContextConfig contextConfig) {
+	public ConfigurationContext(final ResourceRepository repository, final ResourceContextConfig contextConfig) {
 		super(repository, contextConfig);
 		this.containerCache = new ConcurrentHashMap<Resource, ReloadableConfigurationContainer>();
 	}

@@ -15,17 +15,17 @@ public class ResourceSelection {
 	/**
 	 * 类别。
 	 */
-	private String catalog;
+	private final String catalog;
 
 	/**
 	 * 版本。
 	 */
-	private String version;
+	private final String version;
 
 	/**
 	 * 名称。
 	 */
-	private String name;
+	private final String name;
 
 	/**
 	 * 构造一个实例。如果未提供名称，则根据类别生成默认的名称。
