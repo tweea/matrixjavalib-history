@@ -13,6 +13,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -36,6 +37,7 @@ public class HibernateJPATest {
 		UserInfo user = new UserInfo();
 		user.setYhm("abc");
 		user.setMm("abc");
+		user.setCsrq(new LocalDate(2011, 1, 18));
 		em.persist(user);
 		et.commit();
 		// 查询
@@ -43,6 +45,10 @@ public class HibernateJPATest {
 		Assert.assertNotNull(query);
 		List<UserInfo> result = query.getResultList();
 		Assert.assertNotNull(result);
-		Assert.assertTrue(result.size() > 0);
+		Assert.assertFalse(result.isEmpty());
+		user = result.get(0);
+		Assert.assertEquals("abc", user.getYhm());
+		Assert.assertEquals("abc", user.getMm());
+		Assert.assertEquals(new LocalDate(2011, 1, 18), user.getCsrq());
 	}
 }
