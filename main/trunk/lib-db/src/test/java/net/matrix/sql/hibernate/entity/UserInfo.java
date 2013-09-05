@@ -1,6 +1,6 @@
-/**
- * ClassName: StYhxx
- * Copyright(C) 2008 北航冦新
+/*
+ * $Id$
+ * Copyright(C) 2008 Matrix
  * All right reserved.
  */
 package net.matrix.sql.hibernate.entity;
