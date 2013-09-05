@@ -101,6 +101,18 @@
 			<version>3.18.1-GA</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>3.0.0.GA</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.joda</groupId>
+					<artifactId>joda-money</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- provided -->
 		<!-- runtime -->
 		<dependency>
