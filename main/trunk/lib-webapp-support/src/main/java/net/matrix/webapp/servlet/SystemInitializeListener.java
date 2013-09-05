@@ -58,8 +58,8 @@ public class SystemInitializeListener
 
 		// 初始化系统环境
 		context.registerObject(ServletContext.class, servletContext);
-		setResourceLoader();
-		setConfig();
+		setupResourceLoader();
+		loadConfig();
 
 		// 初始化控制器
 		SystemController controller = getController();
@@ -78,10 +78,16 @@ public class SystemInitializeListener
 		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
 	}
 
-	protected void setResourceLoader() {
+	/**
+	 * 装配系统资源加载器。
+	 */
+	protected void setupResourceLoader() {
 	}
 
-	protected void setConfig() {
+	/**
+	 * 加载系统配置。
+	 */
+	protected void loadConfig() {
 	}
 
 	/**
