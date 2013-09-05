@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * 
  * @since 2005.11.10
  */
-public final class Token {
+public final class Tokens {
 	public static String generateToken(HttpServletRequest request, String key) {
 		String token = UUID.randomUUID().toString();
 		request.getSession(true).setAttribute(key, token);

@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.matrix.lang.Objects;
+import net.matrix.lang.Objects2;
 
-public final class PageUtil {
+public final class Pages {
 	public static final String PAGING_KEY = "pagekey";
 
 	public static final String URL_KEY = "pageurl";
@@ -78,7 +78,7 @@ public final class PageUtil {
 		int pageIndex = 0;
 		String page = request.getParameter(INDEX_KEY);
 		if (StringUtils.isEmpty(page)) {
-			pageIndex = Objects.isNull((Integer) request.getAttribute(INDEX_KEY), 0);
+			pageIndex = Objects2.isNull((Integer) request.getAttribute(INDEX_KEY), 0);
 		} else {
 			try {
 				pageIndex = Integer.parseInt(page);
@@ -96,7 +96,7 @@ public final class PageUtil {
 		int pageIndex = 0;
 		String page = request.getParameter(NUM_PER_PAGE_KEY);
 		if (StringUtils.isEmpty(page)) {
-			pageIndex = Objects.isNull((Integer) request.getAttribute(NUM_PER_PAGE_KEY), defaultValue);
+			pageIndex = Objects2.isNull((Integer) request.getAttribute(NUM_PER_PAGE_KEY), defaultValue);
 		} else {
 			try {
 				pageIndex = Integer.parseInt(page);
@@ -111,7 +111,7 @@ public final class PageUtil {
 		long pageIndex = 0;
 		String page = request.getParameter(TATAL_NUM_KEY);
 		if (StringUtils.isEmpty(page)) {
-			pageIndex = Objects.isNull((Long) request.getAttribute(TATAL_NUM_KEY), 0L);
+			pageIndex = Objects2.isNull((Long) request.getAttribute(TATAL_NUM_KEY), 0L);
 		} else {
 			try {
 				pageIndex = Integer.parseInt(page);
