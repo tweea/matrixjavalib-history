@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * 用户信息
+ * 用户信息。
  */
 @Entity
 @NamedQueries({
@@ -26,7 +26,7 @@ import javax.persistence.Table;
 public class UserInfo
 	implements Serializable {
 	/**
-	 * 
+	 * serialVersionUID.
 	 */
 	private static final long serialVersionUID = -1218387201153161009L;
 
@@ -39,6 +39,14 @@ public class UserInfo
 	private Long nl;
 
 	private String xb;
+
+	public String getYhm() {
+		return yhm;
+	}
+
+	public void setYhm(String yhm) {
+		this.yhm = yhm;
+	}
 
 	public String getMm() {
 		return mm;
@@ -62,13 +70,5 @@ public class UserInfo
 
 	public void setXb(String xb) {
 		this.xb = xb;
-	}
-
-	public String getYhm() {
-		return yhm;
-	}
-
-	public void setYhm(String yhm) {
-		this.yhm = yhm;
 	}
 }
