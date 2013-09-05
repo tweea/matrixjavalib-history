@@ -16,7 +16,7 @@ public class DefaultSystemController
 	private SystemContext context;
 
 	@Override
-	public void setContext(SystemContext context) {
+	public void setContext(final SystemContext context) {
 		this.context = context;
 	}
 

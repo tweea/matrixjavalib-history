@@ -13,9 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
-/**
- * 
- */
 public class ResourceContextConfigTest {
 	private static ResourceRepository repo = new ResourceRepository(new ClassPathResource("repo1/"));
 

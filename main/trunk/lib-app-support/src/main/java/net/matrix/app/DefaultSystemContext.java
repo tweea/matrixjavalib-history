@@ -45,7 +45,7 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public void setResourceLoader(ResourceLoader loader) {
+	public void setResourceLoader(final ResourceLoader loader) {
 		resourceLoader = loader;
 	}
 
@@ -92,12 +92,12 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public void registerObject(String name, Object object) {
+	public void registerObject(final String name, final Object object) {
 		objects.put(name, object);
 	}
 
 	@Override
-	public <T> void registerObject(Class<T> type, T object) {
+	public <T> void registerObject(final Class<T> type, final T object) {
 		registerObject(type.getName(), object);
 	}
 
@@ -107,7 +107,7 @@ public class DefaultSystemContext
 	}
 
 	@Override
-	public <T> T lookupObject(String name, Class<T> type) {
+	public <T> T lookupObject(final String name, final Class<T> type) {
 		return type.cast(lookupObject(name));
 	}
 

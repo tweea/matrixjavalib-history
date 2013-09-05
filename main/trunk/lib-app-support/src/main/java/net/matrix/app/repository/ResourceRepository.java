@@ -24,7 +24,7 @@ public class ResourceRepository {
 	/**
 	 * 资源根位置。
 	 */
-	private Resource root;
+	private final Resource root;
 
 	/**
 	 * @param root
