@@ -1,3 +1,8 @@
+/*
+ * $Id$
+ * Copyright(C) 2008 Matrix
+ * All right reserved.
+ */
 package net.matrix.servlet;
 
 import static org.junit.Assert.assertEquals;

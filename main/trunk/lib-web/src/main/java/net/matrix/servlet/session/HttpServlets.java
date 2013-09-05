@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.Validate;
 
-import net.matrix.lang.Objects;
+import net.matrix.lang.Objects2;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
 
-public final class WebProcess {
+public final class HttpServlets {
 	private static final String ERROR_KEY = "error_key";
 
 	private static final String MESSAGE_KEY = "message_key";
@@ -162,6 +162,6 @@ public final class WebProcess {
 	// 其它
 	// /////////////////////////////////////////////////////////////////////////////////////
 	public static String getDisplayString(String string) {
-		return Objects.isNull(string, "");
+		return Objects2.isNull(string, "");
 	}
 }
