@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions>
+	<definition code="System.Error" template="System error: {0}" />
+	<definition code="CodedMessage.Error" template="处理编码消息发生错误：{0}" />
+	<definition code="CodedMessage.LoadXMLError" template="从 XML 解析编码消息失败：{0}" />
+	<definition code="CodedMessage.SaveXMLError" template="编码消息转化为 XML 失败：{0}" />
+</definitions>

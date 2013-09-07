@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="gbk"?>
+<test id="big">
+	<test1 name="b">
+		<field name="2" value="fdsad" />
+	</test1>
+</test>
