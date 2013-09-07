@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-common</artifactId>
-	<version>1.6.1-SNAPSHOT</version>
+	<version>1.6.1</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -144,8 +144,8 @@
 		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/lib-common</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/lib-common</developerConnection>
-		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/lib-common</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/tags/mxlib-common-1.6.1</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/tags/mxlib-common-1.6.1</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/tags/mxlib-common-1.6.1</url>
 	</scm>
 </project>
