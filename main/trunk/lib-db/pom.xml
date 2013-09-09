@@ -68,14 +68,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<!-- 升级 Hibernate 传递依赖 -->
-			<!-- 字节码操作工具 -->
-			<groupId>org.javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.18.1-GA</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.core</artifactId>
 			<version>3.0.0.GA</version>
@@ -86,6 +78,14 @@
 					<artifactId>joda-money</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<!-- 升级 Hibernate 传递依赖 -->
+			<!-- 字节码操作工具 -->
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1-GA</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<!-- 升级 Hibernate 传递依赖 -->
