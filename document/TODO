@@ -6,6 +6,7 @@ https://oss.sonatype.org
 ------ next ------
 增强 Javadoc
 整理依赖库使用
+应用异常构造器 cause 为 null 时 NPE
 使系统消息能够自动处理异常信息，避免使用多余的格式化参数
 异常
 	抛出和处理
