@@ -5,21 +5,6 @@
 	<rules>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.ParameterAssignmentCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanExpressionCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.naming.StaticVariableNameCheck</key>
 			<priority>MAJOR</priority>
 			<parameters>
@@ -47,53 +32,7 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.modifier.ModifierOrderCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>allowClassName</key>
-					<value>false</value>
-				</parameter>
-				<parameter>
-					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.design.FinalClassCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.EmptyStatementCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.InnerAssignmentCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck</key>
-			<priority>INFO</priority>
-			<parameters>
-				<parameter>
-					<key>processJavadoc</key>
-					<value>false</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.StringLiteralEqualityCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -103,226 +42,16 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.RedundantThrowsCheck</key>
-			<priority>MINOR</priority>
-			<parameters>
-				<parameter>
-					<key>suppressLoadErrors</key>
-					<value>true</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.IllegalThrowsCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.sizes.AnonInnerLengthCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>applyToPublic</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>applyToProtected</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>applyToPackage</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>applyToPrivate</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.ConstantNameCheck</key>
-			<priority>MINOR</priority>
-			<parameters>
-				<parameter>
-					<key>applyToPublic</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>applyToProtected</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>applyToPackage</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>applyToPrivate</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>format</key>
-					<value>^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[a-z]+(\.[a-zA-Z_][a-zA-Z0-9_]*)*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.DefaultComesLastCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.EqualsHashCodeCheck</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.SimplifyBooleanReturnCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>ignoreAbstractMethods</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>tokens</key>
-					<value>VARIABLE_DEF</value>
-				</parameter>
-				<parameter>
-					<key>ignoreConstructorParameter</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>ignoreSetter</key>
-					<value>true</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>packageAllowed</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
-					<key>protectedAllowed</key>
-					<value>true</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck</key>
 			<priority>MINOR</priority>
 			<parameters>
 				<parameter>
 					<key>ignoreHashCodeMethod</key>
-					<value>false</value>
+					<value>true</value>
 				</parameter>
 				<parameter>
 					<key>ignoreAnnotation</key>
-					<value>false</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.ParameterNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.metrics.BooleanExpressionComplexityCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.ClassTypeParameterNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[A-Z]+$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.MethodTypeParameterNameCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[A-Z]+$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.TrailingCommentCheck</key>
-			<priority>MINOR</priority>
-			<parameters>
-				<parameter>
-					<key>format</key>
-					<value>^[\s\}\);]*$</value>
+					<value>true</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -348,27 +77,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidRethrowingException</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ReplaceEnumerationWithIterator</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AvoidArrayLoops</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
 			<key>UnusedFormalParameter</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptySwitchStatements</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -403,32 +117,7 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>FinalFieldCouldBeStatic</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>IfStmtsMustUseBraces</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SuspiciousEqualsMethodName</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>InstantiationToGetClass</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SuspiciousHashcodeMethodName</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>LooseCoupling</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -438,23 +127,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>UnnecessaryCaseChange</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptySynchronizedBlock</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>SingularField</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UnusedPrivateMethod</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -463,33 +137,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidCatchingThrowable</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyWhileStmt</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>CollapsibleIfStatements</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>UselessOperationOnImmutable</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>CloneMethodMustImplementCloneable</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UselessOverridingMethod</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -498,38 +147,13 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>PreserveStackTrace</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>UseArraysAsList</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidThrowingRawExceptionTypes</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyIfStmt</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EqualsNull</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>BrokenNullCheck</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UseCorrectExceptionLogging</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -543,26 +167,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>FinalizeOverloaded</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ClassNamingConventions</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>DontImportSun</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>DontImportJavaLang</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>MissingStaticMethodInNonInstantiatableClass</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -573,53 +177,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>UseArrayListInsteadOfVector</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>WhileLoopsMustUseBraces</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>StringToString</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
 			<key>SimplifyConditional</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ReplaceVectorWithList</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>NcssMethodCount</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>minimum</key>
-					<value>50</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidPrintStackTrace</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>MethodWithSameNameAsEnclosingClass</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SuspiciousConstantFieldName</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -635,23 +198,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidInstanceofChecksInCatchClause</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyFinallyBlock</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>IntegerInstantiation</key>
 			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidDollarSigns</key>
-			<priority>MINOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -665,42 +213,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidCallingFinalize</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>BooleanInstantiation</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>UnconditionalIfStatement</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ReplaceHashtableWithMap</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AvoidDecimalLiteralsInBigDecimalConstructor</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ForLoopsMustUseBraces</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyTryBlock</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SignatureDeclareThrowsException</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -715,48 +233,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>ExceptionAsFlowControl</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyStaticInitializer</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>FinalizeDoesNotCallSuperFinalize</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>UseStringBufferLength</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidEnumAsIdentifier</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>IfElseStmtsMustUseBraces</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SystemPrintln</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UselessStringValueOf</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidDuplicateLiterals</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>squid</repositoryKey>
@@ -841,11 +319,6 @@
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>IJU_SUITE_NOT_STATIC</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>HE_HASHCODE_USE_OBJECT_EQUALS</key>
 			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
@@ -1030,11 +503,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>EQ_SELF_USE_OBJECT</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -1097,11 +565,6 @@
 			<repositoryKey>findbugs</repositoryKey>
 			<key>EC_UNRELATED_TYPES_USING_POINTER_EQUALITY</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>RU_INVOKE_RUN</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
@@ -1205,11 +668,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>HE_EQUALS_NO_HASHCODE</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>NP_CLONE_COULD_RETURN_NULL</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -1307,11 +765,6 @@
 			<repositoryKey>findbugs</repositoryKey>
 			<key>SC_START_IN_CTOR</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>PZLA_PREFER_ZERO_LENGTH_ARRAYS</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
@@ -1660,11 +1113,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>HE_EQUALS_USE_HASHCODE</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>RV_ABSOLUTE_VALUE_OF_RANDOM_INT</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -1795,11 +1243,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>SF_SWITCH_FALLTHROUGH</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>DMI_LONG_BITS_TO_DOUBLE_INVOKED_ON_INT</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -1855,11 +1298,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>EQ_COMPARETO_USE_OBJECT_EQUALS</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>LI_LAZY_INIT_UPDATE_STATIC</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -1877,11 +1315,6 @@
 			<repositoryKey>findbugs</repositoryKey>
 			<key>RC_REF_COMPARISON_BAD_PRACTICE</key>
 			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>NM_LCASE_HASHCODE</key>
-			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
@@ -1961,11 +1394,6 @@
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>NP_BOOLEAN_RETURN_NULL</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>DM_GC</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -2050,11 +1478,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>EQ_OTHER_NO_OBJECT</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>NP_NONNULL_PARAM_VIOLATION</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -2086,11 +1509,6 @@
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>NM_SAME_SIMPLE_NAME_AS_SUPERCLASS</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>EQ_ABSTRACT_SELF</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -2135,11 +1553,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>FI_EXPLICIT_INVOCATION</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>EC_ARRAY_AND_NONARRAY</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -2156,11 +1569,6 @@
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>SE_TRANSIENT_FIELD_NOT_RESTORED</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>EQ_DONT_DEFINE_EQUALS_FOR_ENUM</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -2182,11 +1590,6 @@
 			<repositoryKey>findbugs</repositoryKey>
 			<key>INT_VACUOUS_BIT_OPERATION</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>SF_SWITCH_NO_DEFAULT</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
@@ -2221,11 +1624,6 @@
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>DMI_HARDCODED_ABSOLUTE_FILENAME</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>HE_HASHCODE_NO_EQUALS</key>
 			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
@@ -2265,22 +1663,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>NM_CLASS_NAMING_CONVENTION</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE</key>
 			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>EQ_DOESNT_OVERRIDE_EQUALS</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>SA_LOCAL_SELF_ASSIGNMENT_INSTEAD_OF_FIELD</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -2357,11 +1745,6 @@
 			<repositoryKey>findbugs</repositoryKey>
 			<key>PS_PUBLIC_SEMAPHORES</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>SKIPPED_CLASS_TOO_BIG</key>
-			<priority>MINOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
@@ -2495,11 +1878,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>CN_IDIOM_NO_SUPER_CALL</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>DLS_DEAD_STORE_OF_CLASS_LITERAL</key>
 			<priority>CRITICAL</priority>
 		</rule>
@@ -2580,11 +1958,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
-			<key>DM_EXIT</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
 			<key>RV_RETURN_VALUE_OF_PUTIFABSENT_IGNORED</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -2617,11 +1990,6 @@
 			<repositoryKey>findbugs</repositoryKey>
 			<key>ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>EQ_SELF_NO_OBJECT</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
@@ -2845,60 +2213,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.SuperCloneCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>allowUnknownTags</key>
-					<value>true</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyForIteratorPadCheck</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.CovariantEqualsCheck</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck</key>
-			<priority>MINOR</priority>
-			<parameters>
-				<parameter>
-					<key>lineSeparator</key>
-					<value>lf</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>max</key>
-					<value>160</value>
-				</parameter>
-				<parameter>
-					<key>tabWidth</key>
-					<value>4</value>
-				</parameter>
-			</parameters>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
@@ -2928,44 +2244,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.UnnecessaryParenthesesCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.coding.IllegalTypeCheck</key>
 			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.OneStatementPerLineCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.NestedTryDepthCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>max</key>
-					<value>3</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.UpperEllCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.sizes.ParameterNumberCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.DeclarationOrderCheck</key>
-			<priority>INFO</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
@@ -2974,64 +2254,13 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.FallThroughCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.sizes.FileLengthCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.metrics.NPathComplexityCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.design.MutableExceptionCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck</key>
-			<priority>MINOR</priority>
-			<parameters>
-				<parameter>
-					<key>javaStyle</key>
-					<value>true</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
@@ -3046,16 +2275,6 @@
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.imports.IllegalImportCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3076,22 +2295,6 @@
 				<parameter>
 					<key>header</key>
 					<value>^/\*$\n^ \* \$Id.+\$$</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.EqualsAvoidNullCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.NestedIfDepthCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>max</key>
-					<value>3</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -3133,11 +2336,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.design.InterfaceIsTypeCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.whitespace.MethodParamPadCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -3153,19 +2351,14 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.NestedForDepthCheck</key>
+			<key>com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck</key>
 			<priority>MAJOR</priority>
 			<parameters>
 				<parameter>
-					<key>max</key>
-					<value>3</value>
+					<key>javaFiveCompatibility</key>
+					<value>false</value>
 				</parameter>
 			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
@@ -3209,18 +2402,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.annotation.PackageAnnotationCheck</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.MultipleStringLiteralsCheck</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
@@ -3248,28 +2431,7 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.design.ThrowsCountCheck</key>
-			<priority>MAJOR</priority>
-			<parameters>
-				<parameter>
-					<key>max</key>
-					<value>3</value>
-				</parameter>
-			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.ModifiedControlVariableCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.PackageDeclarationCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3279,32 +2441,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.SuperFinalizeCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck</key>
 			<priority>MINOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.whitespace.TypecastParenPadCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.naming.TypeNameCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.blocks.EmptyBlockCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3319,28 +2461,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>CyclomaticComplexity</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>NonStaticInitializer</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AppendCharacterWithChar</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidConstantsInterface</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ProperCloneImplementation</key>
-			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -3349,23 +2471,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>MethodArgumentCouldBeFinal</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AvoidSynchronizedAtMethodLevel</key>
 			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>NcssConstructorCount</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyCatchBlock</key>
-			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -3374,52 +2481,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>DefaultLabelNotLastInSwitchStmt</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>TooFewBranchesForASwitchStatement</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>EmptyMethodInAbstractClassShouldBeAbstract</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>DuplicateImports</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ExcessiveMethodLength</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ProperLogger</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AddEmptyString</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>NonCaseLabelInSwitchStatement</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SimplifyBooleanExpressions</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>DoNotExtendJavaLangError</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3454,37 +2521,7 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidUsingOctalValues</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ReturnEmptyArrayRatherThanNull</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UnnecessaryConversionTemporary</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SimplifyBooleanReturns</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AvoidMultipleUnaryOperators</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>GenericsNaming</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>DoNotUseThreads</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3509,47 +2546,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>NoPackage</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>FinalizeOnlyCallsSuperFinalize</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>JumbledIncrementer</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>MissingBreakInSwitch</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>PositionLiteralsFirstInComparisons</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>OverrideBothEqualsAndHashcode</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>SimpleDateFormatNeedsLocale</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
 			<key>DontNestJsfInJstlIteration</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyInitializer</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3574,11 +2576,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>MisleadingVariableName</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AvoidStringBufferField</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -3594,43 +2591,13 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>ReturnFromFinallyBlock</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>NonThreadSafeSingleton</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ExcessiveImports</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>VariableNamingConventions</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>PackageCase</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
 			<key>UnnecessaryFinalModifier</key>
 			<priority>INFO</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>DontCallThreadRun</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>FinalizeShouldBeProtected</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -3644,11 +2611,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>MoreThanOneLogger</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>LocalInterfaceSessionNamingConvention</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -3659,32 +2621,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>DoNotCallGarbageCollectionExplicitly</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>ImmutableField</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>EmptyStatementNotInLoop</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>DoNotThrowExceptionInFinally</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>UseLocaleWithCaseConversions</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>MethodNamingConventions</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3709,11 +2651,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>UseSingleton</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>SuspiciousOctalEscape</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -3734,17 +2671,7 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>SwitchDensity</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>BadComparison</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidLosingExceptionInformation</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3759,11 +2686,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AssignmentInOperand</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>TooManyMethods</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -3774,38 +2696,13 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>AvoidReassigningParameters</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UseEqualsToCompareStrings</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>ConsecutiveLiteralAppends</key>
 			<priority>MINOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>DoNotCallSystemExit</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>SwitchStmtsShouldHaveDefault</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>MisplacedNullCheck</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>LoggerIsNotStaticFinal</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -3819,37 +2716,12 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>ImportFromSamePackage</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ExcessiveParameterList</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>BooleanInversion</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>UnnecessaryParentheses</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UncommentedEmptyMethod</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>InsufficientStringBufferDeclaration</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>CouplingBetweenObjects</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3874,18 +2746,8 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>StaticEJBFieldShouldBeFinal</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>UnsynchronizedStaticDateFormatter</key>
 			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UseCollectionIsEmpty</key>
-			<priority>MINOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
@@ -3896,11 +2758,6 @@
 			<repositoryKey>pmd</repositoryKey>
 			<key>BooleanGetMethodName</key>
 			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>UnusedImports</key>
-			<priority>INFO</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd-unit-tests</repositoryKey>
@@ -3916,11 +2773,6 @@
 			<repositoryKey>pmd-unit-tests</repositoryKey>
 			<key>UseAssertNullInsteadOfAssertTrue</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd-unit-tests</repositoryKey>
-			<key>TestClassWithoutTestCases</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd-unit-tests</repositoryKey>
@@ -4013,11 +2865,6 @@
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
 			<repositoryKey>squid</repositoryKey>
 			<key>S00121</key>
 			<priority>MAJOR</priority>
@@ -4102,6 +2949,465 @@
 			<repositoryKey>squid</repositoryKey>
 			<key>S00122</key>
 			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1190</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1206</key>
+			<priority>BLOCKER</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1210</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1194</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1318</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1219</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1195</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1197</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>AssignmentInSubExpressionCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1125</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1157</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1315</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ClassVariableVisibilityCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1191</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1155</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>TrailingCommentCheck</key>
+			<priority>MINOR</priority>
+			<parameters>
+				<parameter>
+					<key>legalCommentPattern</key>
+					<value>^\s*+[^\s]++$</value>
+				</parameter>
+			</parameters>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1170</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1133</key>
+			<priority>INFO</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1168</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>EmptyStatementUsageCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1150</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1165</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1166</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1193</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1163</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1215</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1134</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>pmd</repositoryKey>
+			<key>ForLoopShouldBeWhileLoop</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1145</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1319</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>LabelsShouldNotBeUsedCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>LeftCurlyBraceEndLineCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>HiddenFieldCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1312</key>
+			<priority>MAJOR</priority>
+			<parameters>
+				<parameter>
+					<key>format</key>
+					<value>LOG(?:GER)?</value>
+				</parameter>
+			</parameters>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>LowerCaseLongSuffixCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ForLoopCounterChangedCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1226</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1201</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1221</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ModifiersOrderCheck</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1223</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1171</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1310</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1175</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1174</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1185</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1158</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1126</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1143</key>
+			<priority>BLOCKER</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>RightCurlyBraceSameLineAsNextBlockCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>RightCurlyBraceStartLineCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1192</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1153</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1132</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>StringEqualityComparisonCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1182</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ObjectFinalizeOverridenCallsSuperFinalizeCheck</key>
+			<priority>BLOCKER</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S128</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>SwitchLastCaseIsDefaultCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1149</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1147</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S106</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1220</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1231</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ObjectFinalizeCheck</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ObjectFinalizeOverridenCheck</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1217</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1181</key>
+			<priority>BLOCKER</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1148</key>
+			<priority>CRITICAL</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>RedundantThrowsDeclarationCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1135</key>
+			<priority>INFO</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>UselessImportCheck</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>UselessParenthesesCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1118</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S00112</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>pmd</repositoryKey>
+			<key>AssignmentToNonFinalStatic</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S00100</key>
+			<priority>MAJOR</priority>
+			<parameters>
+				<parameter>
+					<key>format</key>
+					<value>^[a-z][a-zA-Z0-9]*$</value>
+				</parameter>
+			</parameters>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S00119</key>
+			<priority>MAJOR</priority>
+			<parameters>
+				<parameter>
+					<key>format</key>
+					<value>^[A-Z]+$</value>
+				</parameter>
+			</parameters>
+		</rule>
+		<rule>
+			<repositoryKey>pmd</repositoryKey>
+			<key>ShortVariable</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>ArchitecturalConstraint</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>checkstyle</repositoryKey>
+			<key>com.puppycrawl.tools.checkstyle.checks.coding.MissingCtorCheck</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>pmd</repositoryKey>
+			<key>AtLeastOneConstructor</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S00113</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>findbugs</repositoryKey>
+			<key>TQ_UNKNOWN_VALUE_USED_WHERE_ALWAYS_STRICTLY_REQUIRED</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>pmd</repositoryKey>
+			<key>StaticEJBFieldShouldBeFinal</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1301</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>findbugs</repositoryKey>
+			<key>SKIPPED_CLASS_TOO_BIG</key>
+			<priority>MINOR</priority>
 		</rule>
 	</rules>
 </profile>
