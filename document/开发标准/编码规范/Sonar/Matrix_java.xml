@@ -2883,7 +2883,7 @@
 			<parameters>
 				<parameter>
 					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
+					<value>^[a-z\u4E00-\u9FA5][a-zA-Z0-9\u4E00-\u9FA5]*$</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -2894,7 +2894,7 @@
 			<parameters>
 				<parameter>
 					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
+					<value>^[a-z\u4E00-\u9FA5][a-zA-Z0-9\u4E00-\u9FA5]*$</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -2905,7 +2905,7 @@
 			<parameters>
 				<parameter>
 					<key>format</key>
-					<value>^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$</value>
+					<value>^[A-Z\u4E00-\u9FA5][A-Z0-9\u4E00-\u9FA5]*(_[A-Z0-9\u4E00-\u9FA5]+)*$</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -3345,7 +3345,7 @@
 			<parameters>
 				<parameter>
 					<key>format</key>
-					<value>^[a-z][a-zA-Z0-9]*$</value>
+					<value>^[a-z\u4E00-\u9FA5][a-zA-Z0-9\u4E00-\u9FA5]*$</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -3363,7 +3363,7 @@
 		<rule>
 			<repositoryKey>squid</repositoryKey>
 			<key>ArchitecturalConstraint</key>
-			<priority>MAJOR</priority>
+			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
