@@ -8,6 +8,7 @@
 	</module>
 	<module name="JavadocPackage">
 		<property name="severity" value="info" />
+		<property name="allowLegacy" value="false" />
 	</module>
 	<module name="TreeWalker">
 		<module name="FileContentsHolder" />
