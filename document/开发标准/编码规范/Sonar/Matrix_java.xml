@@ -2438,6 +2438,12 @@
 			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck</key>
 			<priority>MINOR</priority>
+			<parameters>
+				<parameter>
+					<key>allowLegacy</key>
+					<value>false</value>
+				</parameter>
+			</parameters>
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
@@ -2561,11 +2567,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>CallSuperInConstructor</key>
-			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>ExcessivePublicCount</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -2652,11 +2653,6 @@
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
 			<key>SuspiciousOctalEscape</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>NullAssignment</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3363,11 +3359,6 @@
 					<value>^[A-Z]+$</value>
 				</parameter>
 			</parameters>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>ShortVariable</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>squid</repositoryKey>
