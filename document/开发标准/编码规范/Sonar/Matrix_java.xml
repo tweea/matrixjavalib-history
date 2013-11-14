@@ -21,12 +21,12 @@
 					<value>true</value>
 				</parameter>
 				<parameter>
-					<key>applyToPrivate</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
 					<key>format</key>
 					<value>^[a-z][a-zA-Z0-9]*$</value>
+				</parameter>
+				<parameter>
+					<key>applyToPrivate</key>
+					<value>true</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -2234,11 +2234,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.annotation.MissingDeprecatedCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyForInitializerPadCheck</key>
 			<priority>MINOR</priority>
 		</rule>
@@ -2393,11 +2388,6 @@
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.sizes.MethodCountCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -2567,11 +2557,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>ExcessivePublicCount</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>RemoteSessionInterfaceNamingConvention</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -2632,11 +2617,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>ExcessiveClassLength</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>AvoidFieldNameMatchingTypeName</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -2682,11 +2662,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
-			<key>TooManyMethods</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
 			<key>ShortInstantiation</key>
 			<priority>MAJOR</priority>
 		</rule>
@@ -2723,11 +2698,6 @@
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
 			<key>ConfusingTernary</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>pmd</repositoryKey>
-			<key>TooManyFields</key>
 			<priority>MAJOR</priority>
 		</rule>
 		<rule>
@@ -3364,11 +3334,6 @@
 			<repositoryKey>squid</repositoryKey>
 			<key>ArchitecturalConstraint</key>
 			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.coding.MissingCtorCheck</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>pmd</repositoryKey>
