@@ -103,13 +103,10 @@
 		<module name="MultipleVariableDeclarations">
 			<property name="severity" value="warning" />
 		</module>
-		<module name="MethodParamPad">
-			<property name="severity" value="warning" />
-		</module>
 		<module name="GenericWhitespace">
 			<property name="severity" value="info" />
 		</module>
-		<module name="MissingCtor">
+		<module name="MethodParamPad">
 			<property name="severity" value="warning" />
 		</module>
 		<module name="SuppressWarnings">
@@ -121,12 +118,6 @@
 		<module name="JavadocStyle">
 			<property name="severity" value="warning" />
 			<property name="checkFirstSentence" value="false" />
-		</module>
-		<module name="MethodCount">
-			<property name="severity" value="warning" />
-		</module>
-		<module name="MissingDeprecated">
-			<property name="severity" value="warning" />
 		</module>
 		<module name="NoWhitespaceAfter">
 			<property name="severity" value="info" />
