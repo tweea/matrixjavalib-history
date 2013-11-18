@@ -3175,11 +3175,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>squid</repositoryKey>
-			<key>RightCurlyBraceSameLineAsNextBlockCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>squid</repositoryKey>
 			<key>RightCurlyBraceStartLineCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
