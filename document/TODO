@@ -12,6 +12,7 @@ https://oss.sonatype.org
 	应用异常构造器 cause 为 null 时 NPE
 	使系统消息能够自动处理异常信息，避免使用多余的格式化参数
 异常
+	明确初始化 cause 为 null
 	抛出和处理
 	建立异常体系
 	国际化和本地化
