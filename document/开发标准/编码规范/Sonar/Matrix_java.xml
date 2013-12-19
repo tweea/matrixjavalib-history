@@ -2269,11 +2269,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.metrics.JavaNCSSCheck</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAfterCheck</key>
 			<priority>MINOR</priority>
 		</rule>
@@ -2774,21 +2769,6 @@
 			<repositoryKey>squid</repositoryKey>
 			<key>CallToDeprecatedMethod</key>
 			<priority>MINOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>squid</repositoryKey>
-			<key>MethodCyclomaticComplexity</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>squid</repositoryKey>
-			<key>ClassCyclomaticComplexity</key>
-			<priority>MAJOR</priority>
-		</rule>
-		<rule>
-			<repositoryKey>squid</repositoryKey>
-			<key>MaximumLackOfCohesionOfMethods</key>
-			<priority>MAJOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>squid</repositoryKey>
