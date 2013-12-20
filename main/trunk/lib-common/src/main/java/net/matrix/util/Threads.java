@@ -139,7 +139,7 @@ public final class Threads {
 			try {
 				runnable.run();
 			} catch (Exception e) {
-				// catch any exception, because the scheduled thread will break if the excetpion
+				// catch any exception, because the scheduled thread will break if the exception
 				// thrown outside
 				LOG.error("Unexpected error occurred in task", e);
 			}
