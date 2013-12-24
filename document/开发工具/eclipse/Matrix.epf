@@ -1,4 +1,4 @@
-#Wed Aug 28 23:57:14 CST 2013
+#Tue Dec 24 14:49:25 CST 2013
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.staticFieldPrefixes=
 /instance/org.eclipse.jdt.ui/cleanup.make_parameters_final=false
 /instance/org.eclipse.jdt.ui/cleanup.always_use_parentheses_in_expressions=false
@@ -15,9 +15,8 @@
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
 /instance/org.eclipse.jdt.ui/cleanup.make_private_fields_final=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.unusedObjectAllocation=warning
-/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.taskPriorities=NORMAL,HIGH,NORMAL
 /instance/org.eclipse.jdt.ui/cleanup.add_missing_override_annotations_interface_methods=true
-@org.eclipse.jdt.ui=3.9.0.v20130605-1748
+@org.eclipse.jdt.ui=3.9.1.v20130820-1427
 /instance/org.eclipse.jdt.ui/cleanup.add_missing_nls_tags=false
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.ignorelowercasenames=true
 /instance/org.eclipse.jdt.ui/cleanup.remove_private_constructors=true
@@ -43,7 +42,6 @@ file_export_version=3.0
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance=1.6
 /instance/org.eclipse.jdt.ui/cleanup.sort_members=false
 /instance/org.eclipse.jdt.ui/cleanup.use_this_for_non_static_field_access_only_if_necessary=true
-/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.staticondemandthreshold=99
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.missingSynchronizedOnInheritedMethod=warning
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.missingDefaultCase=warning
@@ -65,11 +63,9 @@ file_export_version=3.0
 /instance/org.eclipse.jdt.ui/cleanup.organize_imports=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=warning
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.formatterprofiles.version=12
-/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.taskTags=TODO,FIXME,XXX
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
-@org.eclipse.jdt.core=3.9.0.v20130604-1421
+@org.eclipse.jdt.core=3.9.1.v20130905-0837
 /instance/org.eclipse.jdt.ui/cleanup.remove_unused_private_types=true
-/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.taskCaseSensitive=enabled
 /instance/org.eclipse.jdt.ui/cleanup.remove_unused_imports=true
 /instance/org.eclipse.jdt.ui/cleanup.add_missing_methods=false
 /instance/org.eclipse.jdt.ui/cleanup.qualify_static_member_accesses_through_subtypes_with_declaring_class=true
@@ -95,6 +91,7 @@ file_export_version=3.0
 /instance/org.eclipse.jdt.ui/cleanup.remove_unused_private_fields=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=warning
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.potentialNullReference=warning
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=
 /instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.overrideannotation=true
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=warning
 /instance/org.eclipse.jdt.core/org.eclipse.jdt.core.codeComplete.staticFinalFieldPrefixes=
