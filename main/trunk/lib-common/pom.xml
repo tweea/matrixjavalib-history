@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-common</artifactId>
-	<version>1.6.2-SNAPSHOT</version>
+	<version>1.7.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.3</version>
+			<version>1.9.0</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -87,7 +87,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>3.2.5.RELEASE</version>
+			<version>4.0.0.RELEASE</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
