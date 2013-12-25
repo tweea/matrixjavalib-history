@@ -13,10 +13,10 @@ import java.util.Properties;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -184,7 +184,7 @@ public final class SessionFactoryManager
 			}
 		}
 		if (serviceRegistry != null) {
-			ServiceRegistryBuilder.destroy(serviceRegistry);
+			StandardServiceRegistryBuilder.destroy(serviceRegistry);
 			LOG.info(factoryName + " 配置的 Hibernate ServiceRegistry 已销毁。");
 			serviceRegistry = null;
 		}
@@ -228,7 +228,7 @@ public final class SessionFactoryManager
 				} else {
 					LOG.info("以 " + factoryName + " 配置构建 Hibernate ServiceRegistry。");
 				}
-				serviceRegistry = new ServiceRegistryBuilder().applySettings(getConfiguration().getProperties()).buildServiceRegistry();
+				serviceRegistry = new StandardServiceRegistryBuilder().applySettings(getConfiguration().getProperties()).buildServiceRegistry();
 			}
 			return serviceRegistry;
 		} catch (HibernateException e) {
