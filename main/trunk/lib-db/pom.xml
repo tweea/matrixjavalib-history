@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-db</artifactId>
-	<version>1.6.3-SNAPSHOT</version>
+	<version>1.7.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -21,20 +21,20 @@
 		<dependency>
 			<!-- 替代 Hibernate 依赖 -->
 			<groupId>javax.transaction</groupId>
-			<artifactId>transaction-api</artifactId>
-			<version>1.1</version>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>1.2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-common</artifactId>
-			<version>1.6.1</version>
+			<version>1.7.0-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.2.6.Final</version>
+			<version>4.3.0.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.6.Final</version>
+			<version>4.3.0.Final</version>
 			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
@@ -107,13 +107,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.2.6.Final</version>
+			<version>4.3.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.2.6.Final</version>
+			<version>4.3.0.Final</version>
 			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
