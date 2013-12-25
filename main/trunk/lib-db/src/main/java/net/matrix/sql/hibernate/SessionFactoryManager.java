@@ -228,7 +228,7 @@ public final class SessionFactoryManager
 				} else {
 					LOG.info("以 " + factoryName + " 配置构建 Hibernate ServiceRegistry。");
 				}
-				serviceRegistry = new StandardServiceRegistryBuilder().applySettings(getConfiguration().getProperties()).buildServiceRegistry();
+				serviceRegistry = new StandardServiceRegistryBuilder().applySettings(getConfiguration().getProperties()).build();
 			}
 			return serviceRegistry;
 		} catch (HibernateException e) {
