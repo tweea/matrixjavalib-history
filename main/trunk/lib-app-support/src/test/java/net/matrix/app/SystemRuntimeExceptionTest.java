@@ -8,8 +8,8 @@ package net.matrix.app;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.matrix.app.message.CodedMessage;
 import net.matrix.app.message.CodedMessageLevel;
+import net.matrix.app.message.CodedMessages;
 
 public class SystemRuntimeExceptionTest {
 	@Test
@@ -34,7 +34,7 @@ public class SystemRuntimeExceptionTest {
 
 	@Test
 	public void testSystemRuntimeException3() {
-		SystemRuntimeException exception = new SystemRuntimeException(new CodedMessage("System.Error", CodedMessageLevel.INFORMATION));
+		SystemRuntimeException exception = new SystemRuntimeException(CodedMessages.information("System.Error"));
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevel.INFORMATION, exception.getRootMessage().getLevel());
 		Assert.assertEquals(1, exception.getMessageList().size());
@@ -42,11 +42,11 @@ public class SystemRuntimeExceptionTest {
 
 	@Test
 	public void testSystemRuntimeException4() {
-		SystemRuntimeException exception = new SystemRuntimeException(new Exception(), new CodedMessage("System.Error", CodedMessageLevel.INFORMATION));
+		SystemRuntimeException exception = new SystemRuntimeException(new Exception(), CodedMessages.information("System.Error"));
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevel.INFORMATION, exception.getRootMessage().getLevel());
 		Assert.assertEquals(2, exception.getMessageList().size());
-		exception = new SystemRuntimeException(exception, new CodedMessage("System.Error", CodedMessageLevel.INFORMATION));
+		exception = new SystemRuntimeException(exception, CodedMessages.information("System.Error"));
 		Assert.assertEquals("System.Error", exception.getRootMessage().getCode());
 		Assert.assertEquals(CodedMessageLevel.INFORMATION, exception.getRootMessage().getLevel());
 		Assert.assertEquals(3, exception.getMessageList().size());
