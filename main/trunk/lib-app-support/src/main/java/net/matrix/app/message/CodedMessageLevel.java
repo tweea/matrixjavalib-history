@@ -5,37 +5,69 @@
  */
 package net.matrix.app.message;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 编码消息级别。
  */
-public interface CodedMessageLevel {
+public enum CodedMessageLevel {
 	/**
 	 * 跟踪。
 	 */
-	int TRACE = 1;
+	TRACE(1),
 
 	/**
 	 * 调试。
 	 */
-	int DEBUG = 2;
+	DEBUG(2),
 
 	/**
 	 * 消息。
 	 */
-	int INFORMATION = 3;
+	INFORMATION(3),
 
 	/**
 	 * 警告。
 	 */
-	int WARNING = 4;
+	WARNING(4),
 
 	/**
 	 * 错误。
 	 */
-	int ERROR = 5;
+	ERROR(5),
 
 	/**
 	 * 致命错误。
 	 */
-	int FATAL = 6;
+	FATAL(6);
+
+	/**
+	 * 用于按编码查找。
+	 */
+	private static final Map<Integer, CodedMessageLevel> CODE_MAP;
+
+	/**
+	 * 编码。
+	 */
+	private final Integer code;
+
+	static {
+		CODE_MAP = new HashMap<Integer, CodedMessageLevel>();
+		for (CodedMessageLevel level : values()) {
+			CODE_MAP.put(level.code, level);
+		}
+	}
+
+	private CodedMessageLevel(final Integer code) {
+		this.code = code;
+	}
+
+	public static CodedMessageLevel forCode(final Integer code) {
+		return CODE_MAP.get(code);
+	}
+
+	public Integer getCode() {
+		return code;
+	}
 }
