@@ -8,7 +8,7 @@ package net.matrix.util;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-import org.apache.commons.collections.iterators.EnumerationIterator;
+import org.apache.commons.collections4.iterators.EnumerationIterator;
 
 /**
  * 把 Enumeration 接口转化为一个 Iterable 接口。

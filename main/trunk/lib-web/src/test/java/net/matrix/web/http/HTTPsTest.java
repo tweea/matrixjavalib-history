@@ -5,17 +5,13 @@
  */
 package net.matrix.web.http;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
 
-/**
- * 
- */
 public class HTTPsTest {
 	@Test
 	public void encodeParameterStringWithPrefix() {
@@ -24,17 +20,17 @@ public class HTTPsTest {
 		params.put("age", "1");
 
 		String queryString = HTTPs.encodeParameterStringWithPrefix(params, "search_");
-		assertEquals("search_name=foo&search_age=1", queryString);
+		Assert.assertEquals("search_name=foo&search_age=1", queryString);
 
 		// data type is not String
 		params.clear();
 		params.put("name", "foo");
 		params.put("age", 1);
 		queryString = HTTPs.encodeParameterStringWithPrefix(params, "search_");
-		assertEquals("search_name=foo&search_age=1", queryString);
+		Assert.assertEquals("search_name=foo&search_age=1", queryString);
 
 		// prefix is empty
 		queryString = HTTPs.encodeParameterStringWithPrefix(params, "");
-		assertEquals("name=foo&age=1", queryString);
+		Assert.assertEquals("name=foo&age=1", queryString);
 	}
 }
