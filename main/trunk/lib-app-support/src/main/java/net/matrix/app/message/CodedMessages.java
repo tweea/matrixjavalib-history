@@ -6,7 +6,7 @@
 package net.matrix.app.message;
 
 /**
- * 编码消息。
+ * 编码消息实用工具。
  */
 public final class CodedMessages {
 	/**
