@@ -6,7 +6,7 @@
 package net.matrix.app;
 
 import net.matrix.app.message.CodedMessage;
-import net.matrix.app.message.CodedMessageLevels;
+import net.matrix.app.message.CodedMessageLevel;
 import net.matrix.app.message.CodedMessageList;
 
 /**
@@ -29,7 +29,7 @@ public class SystemRuntimeException
 	 * 使用默认消息构造异常。原因异常没有初始化，可以随后调用 {@link #initCause} 进行初始化。
 	 */
 	public SystemRuntimeException() {
-		messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR));
+		messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR));
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class SystemRuntimeException
 	 *            消息编码。
 	 */
 	public SystemRuntimeException(final String rootMessageCode) {
-		messages.add(new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR));
+		messages.add(new CodedMessage(rootMessageCode, CodedMessageLevel.ERROR));
 	}
 
 	/**
@@ -62,10 +62,10 @@ public class SystemRuntimeException
 		super(cause);
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
-			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR));
+			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR));
 			messages.addAll(se.getMessageList());
 		} else {
-			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR, cause.getMessage()));
+			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR, cause.getMessage()));
 		}
 	}
 
@@ -83,10 +83,10 @@ public class SystemRuntimeException
 		super(cause);
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
-			messages.add(new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR));
+			messages.add(new CodedMessage(rootMessageCode, CodedMessageLevel.ERROR));
 			messages.addAll(se.getMessageList());
 		} else {
-			messages.add(new CodedMessage(rootMessageCode, CodedMessageLevels.ERROR, cause.getMessage()));
+			messages.add(new CodedMessage(rootMessageCode, CodedMessageLevel.ERROR, cause.getMessage()));
 		}
 	}
 
@@ -108,7 +108,7 @@ public class SystemRuntimeException
 			messages.addAll(se.getMessageList());
 		} else {
 			messages.add(rootMessage);
-			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevels.ERROR, cause.getMessage()));
+			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR, cause.getMessage()));
 		}
 	}
 

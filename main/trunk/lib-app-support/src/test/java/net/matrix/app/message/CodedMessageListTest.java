@@ -24,7 +24,7 @@ public class CodedMessageListTest {
 	public void addLogMessage() {
 		CodedMessageList messageList = new CodedMessageList();
 		Assert.assertEquals(0, messageList.size());
-		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevel.INFORMATION);
 		messageList.add(message);
 		Assert.assertEquals(1, messageList.size());
 		Assert.assertEquals(message, messageList.get(0));
@@ -34,7 +34,7 @@ public class CodedMessageListTest {
 	public void addLogMessageList() {
 		CodedMessageList messageList = new CodedMessageList();
 		CodedMessageList messageList2 = new CodedMessageList();
-		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevel.INFORMATION);
 		messageList.add(message);
 		messageList2.add(message);
 		messageList2.addAll(messageList);
@@ -46,11 +46,11 @@ public class CodedMessageListTest {
 	public void save()
 		throws IOException, CodedMessageException {
 		CodedMessageList messageList = new CodedMessageList();
-		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("System.Error", CodedMessageLevel.INFORMATION);
 		message.addArgument("test1");
 		message.addArgument("test2");
 		messageList.add(message);
-		message = new CodedMessage("100000000", CodedMessageLevels.INFORMATION);
+		message = new CodedMessage("100000000", CodedMessageLevel.INFORMATION);
 		message.addArgument("test3");
 		messageList.add(message);
 		StringWriter os = new StringWriter();

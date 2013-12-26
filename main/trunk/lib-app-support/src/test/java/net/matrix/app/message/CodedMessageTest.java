@@ -20,17 +20,17 @@ public class CodedMessageTest {
 
 	@Test
 	public void logMessage() {
-		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevel.INFORMATION);
 		Assert.assertEquals("Message.Test1", message.getCode());
-		Assert.assertEquals(CodedMessageLevels.INFORMATION, message.getLevel());
+		Assert.assertEquals(CodedMessageLevel.INFORMATION, message.getLevel());
 		Assert.assertEquals(0, message.getArguments().size());
 	}
 
 	@Test
 	public void addArgument() {
-		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevel.INFORMATION);
 		Assert.assertEquals("Message.Test1", message.getCode());
-		Assert.assertEquals(CodedMessageLevels.INFORMATION, message.getLevel());
+		Assert.assertEquals(CodedMessageLevel.INFORMATION, message.getLevel());
 		Assert.assertEquals(0, message.getArguments().size());
 		message.addArgument("abc");
 		Assert.assertEquals(1, message.getArguments().size());
@@ -39,7 +39,7 @@ public class CodedMessageTest {
 
 	@Test
 	public void format() {
-		CodedMessage message = new CodedMessage("Message.Test2", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("Message.Test2", CodedMessageLevel.INFORMATION);
 		message.addArgument("Test");
 		message.addArgument("test2");
 		String formatString = message.format();
@@ -48,7 +48,7 @@ public class CodedMessageTest {
 
 	@Test
 	public void formatFallback() {
-		CodedMessage message = new CodedMessage("Message.Fallback", CodedMessageLevels.INFORMATION);
+		CodedMessage message = new CodedMessage("Message.Fallback", CodedMessageLevel.INFORMATION);
 		message.addArgument("Test");
 		message.addArgument("test2");
 		String formatString = message.format();
