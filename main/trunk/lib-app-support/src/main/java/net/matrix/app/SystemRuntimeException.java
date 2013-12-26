@@ -64,6 +64,8 @@ public class SystemRuntimeException
 			CodedException se = (CodedException) cause;
 			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR));
 			messages.addAll(se.getMessageList());
+		} else if (cause == null) {
+			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR));
 		} else {
 			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR, cause.getMessage()));
 		}
@@ -81,11 +83,11 @@ public class SystemRuntimeException
 	 */
 	public SystemRuntimeException(final Throwable cause, final String rootMessageCode) {
 		super(cause);
+		messages.add(new CodedMessage(rootMessageCode, CodedMessageLevel.ERROR));
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
-			messages.add(new CodedMessage(rootMessageCode, CodedMessageLevel.ERROR));
 			messages.addAll(se.getMessageList());
-		} else {
+		} else if (cause != null) {
 			messages.add(new CodedMessage(rootMessageCode, CodedMessageLevel.ERROR, cause.getMessage()));
 		}
 	}
@@ -102,12 +104,11 @@ public class SystemRuntimeException
 	 */
 	public SystemRuntimeException(final Throwable cause, final CodedMessage rootMessage) {
 		super(cause);
+		messages.add(rootMessage);
 		if (cause instanceof CodedException) {
 			CodedException se = (CodedException) cause;
-			messages.add(rootMessage);
 			messages.addAll(se.getMessageList());
-		} else {
-			messages.add(rootMessage);
+		} else if (cause != null) {
 			messages.add(new CodedMessage(getDefaultMessageCode(), CodedMessageLevel.ERROR, cause.getMessage()));
 		}
 	}
