@@ -5,15 +5,19 @@
  */
 package net.matrix.lang;
 
-// TODO 整理并应用
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 /**
- * 关于异常的工具类.
+ * 关于异常的工具类。
  */
 public class Exceptions {
 	/**
-	 * 将CheckedException转换为UncheckedException.
+	 * 将 Exception 转换为 RuntimeException。
+	 * 
+	 * @param e
+	 *            原始异常
 	 */
-	public static RuntimeException unchecked(Exception e) {
+	public static RuntimeException unchecked(final Exception e) {
 		if (e instanceof RuntimeException) {
 			return (RuntimeException) e;
 		} else {
@@ -22,26 +26,28 @@ public class Exceptions {
 	}
 
 	/**
-	 * 获取组合本异常信息与底层异常信息的异常描述, 适用于本异常为统一包装异常类，底层异常才是根本原因的情况。
+	 * 获取组合本异常信息与底层异常信息的异常描述， 适用于本异常为统一包装异常类，底层异常才是根本原因的情况。
+	 * 
+	 * @param t
+	 *            异常
 	 */
-	public static String getErrorMessageWithNestedException(Exception e) {
-		Throwable nestedException = e.getCause();
-		return new StringBuilder().append(e.getMessage()).append(" nested exception is ").append(nestedException.getClass().getName()).append(":")
-			.append(nestedException.getMessage()).toString();
+	public static String getMessageWithRootCause(final Throwable t) {
+		return ExceptionUtils.getMessage(t) + " root cause is " + ExceptionUtils.getRootCauseMessage(t);
 	}
 
 	/**
-	 * 判断异常是否由某些底层的异常引起.
+	 * 判断异常是否由某些底层的异常引起。
+	 * 
+	 * @param t
+	 *            异常
+	 * @param causeTypes
+	 *            异常类型
 	 */
-	public static boolean isCausedBy(Exception ex, Class<? extends Exception>... causeExceptionClasses) {
-		Throwable cause = ex;
-		while (cause != null) {
-			for (Class<? extends Exception> causeClass : causeExceptionClasses) {
-				if (causeClass.isInstance(cause)) {
-					return true;
-				}
+	public static boolean isCausedBy(final Throwable t, final Class<? extends Throwable>... causeTypes) {
+		for (Class<? extends Throwable> type : causeTypes) {
+			if (ExceptionUtils.indexOfType(t, type) >= 0) {
+				return true;
 			}
-			cause = cause.getCause();
 		}
 		return false;
 	}

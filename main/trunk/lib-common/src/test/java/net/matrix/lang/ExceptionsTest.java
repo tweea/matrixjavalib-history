@@ -5,24 +5,20 @@
  */
 package net.matrix.lang;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-//TODO 整理并应用
 public class ExceptionsTest {
 	@Test
 	public void unchecked() {
 		Exception exception = new Exception("my exception");
 		RuntimeException runtimeException = Exceptions.unchecked(exception);
-		assertEquals(exception, runtimeException.getCause());
+		Assert.assertEquals(exception, runtimeException.getCause());
 
 		RuntimeException runtimeException2 = Exceptions.unchecked(runtimeException);
-		assertEquals(runtimeException, runtimeException2);
+		Assert.assertEquals(runtimeException, runtimeException2);
 	}
 
 	@Test
@@ -31,9 +27,9 @@ public class ExceptionsTest {
 		IllegalStateException illegalStateException = new IllegalStateException(ioexception);
 		RuntimeException runtimeException = new RuntimeException(illegalStateException);
 
-		assertTrue(Exceptions.isCausedBy(runtimeException, IOException.class));
-		assertTrue(Exceptions.isCausedBy(runtimeException, IllegalStateException.class, IOException.class));
-		assertTrue(Exceptions.isCausedBy(runtimeException, Exception.class));
-		assertFalse(Exceptions.isCausedBy(runtimeException, IllegalAccessException.class));
+		Assert.assertTrue(Exceptions.isCausedBy(runtimeException, IOException.class));
+		Assert.assertTrue(Exceptions.isCausedBy(runtimeException, IllegalStateException.class, IOException.class));
+		Assert.assertTrue(Exceptions.isCausedBy(runtimeException, Exception.class));
+		Assert.assertFalse(Exceptions.isCausedBy(runtimeException, IllegalAccessException.class));
 	}
 }
