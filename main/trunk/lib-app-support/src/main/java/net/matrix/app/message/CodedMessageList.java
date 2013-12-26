@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -97,9 +98,9 @@ public class CodedMessageList
 		return result;
 	}
 
-	public boolean hasLevel(int level) {
+	public boolean hasLevel(CodedMessageLevel level) {
 		for (CodedMessage message : messages) {
-			if (message.getLevel() == level) {
+			if (Objects.equals(message.getLevel(), level)) {
 				return true;
 			}
 		}
@@ -160,7 +161,7 @@ public class CodedMessageList
 			NamedNodeMap messageNodeAttributes = messageNode.getAttributes();
 			String code = getCodeNode(messageNodeAttributes).getNodeValue();
 			long time = Long.parseLong(messageNodeAttributes.getNamedItem("time").getNodeValue());
-			int level = Integer.parseInt(messageNodeAttributes.getNamedItem("level").getNodeValue());
+			CodedMessageLevel level = CodedMessageLevel.forCode(Integer.valueOf(messageNodeAttributes.getNamedItem("level").getNodeValue()));
 			CodedMessage message = new CodedMessage(code, time, level);
 			NodeList argumentNodeList = messageNode.getChildNodes();
 			for (int j = 0; j < argumentNodeList.getLength(); j++) {
@@ -235,7 +236,7 @@ public class CodedMessageList
 				messagesElement.appendChild(messageElement);
 				messageElement.setAttribute("time", Long.toString(message.getTime()));
 				messageElement.setAttribute("code", message.getCode());
-				messageElement.setAttribute("level", Integer.toString(message.getLevel()));
+				messageElement.setAttribute("level", Integer.toString(message.getLevel().getCode()));
 				for (int index = 0; index < message.getArguments().size(); index++) {
 					Element argumentElement = document.createElement("argument");
 					messageElement.appendChild(argumentElement);

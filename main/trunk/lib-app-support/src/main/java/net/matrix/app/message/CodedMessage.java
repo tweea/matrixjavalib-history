@@ -17,34 +17,34 @@ public class CodedMessage {
 	/**
 	 * 编码。
 	 */
-	private String code;
+	private final String code;
 
 	/**
 	 * 记录时间。
 	 */
-	private long time;
+	private final long time;
 
 	/**
 	 * 消息级别。
 	 */
-	private int level;
+	private final CodedMessageLevel level;
 
 	/**
 	 * 参数列表。
 	 */
-	private List<String> arguments;
+	private final List<String> arguments;
 
-	public CodedMessage(final String code, final int level, final String... arguments) {
+	public CodedMessage(final String code, final CodedMessageLevel level, final String... arguments) {
 		this(code, System.currentTimeMillis(), level, arguments);
 	}
 
-	public CodedMessage(final String code, final long time, final int level, final String... arguments) {
+	public CodedMessage(final String code, final long time, final CodedMessageLevel level, final String... arguments) {
 		this.code = code;
 		this.time = time;
 		this.level = level;
 		this.arguments = new ArrayList<String>();
 		for (String argument : arguments) {
-			addArgument(argument);
+			this.arguments.add(argument);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class CodedMessage {
 	/**
 	 * @return 消息级别
 	 */
-	public int getLevel() {
+	public CodedMessageLevel getLevel() {
 		return level;
 	}
 
