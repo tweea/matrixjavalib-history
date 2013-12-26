@@ -12,7 +12,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -26,6 +25,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -100,7 +100,7 @@ public class CodedMessageList
 
 	public boolean hasLevel(CodedMessageLevel level) {
 		for (CodedMessage message : messages) {
-			if (Objects.equals(message.getLevel(), level)) {
+			if (ObjectUtils.equals(message.getLevel(), level)) {
 				return true;
 			}
 		}
