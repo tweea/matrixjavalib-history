@@ -31,14 +31,12 @@ public class ReflectionsTest {
 			Reflections.getFieldValue(bean, "notExist");
 			Assert.fail("should throw exception here");
 		} catch (IllegalArgumentException e) {
-
 		}
 
 		try {
 			Reflections.setFieldValue(bean, "notExist", 2);
 			Assert.fail("should throw exception here");
 		} catch (IllegalArgumentException e) {
-
 		}
 	}
 
@@ -77,7 +75,6 @@ public class ReflectionsTest {
 			});
 			Assert.fail("should throw exception here");
 		} catch (IllegalArgumentException e) {
-
 		}
 
 		// 参数类型错
@@ -89,7 +86,6 @@ public class ReflectionsTest {
 			});
 			Assert.fail("should throw exception here");
 		} catch (RuntimeException e) {
-
 		}
 
 		// 函数名错
@@ -99,7 +95,6 @@ public class ReflectionsTest {
 			});
 			Assert.fail("should throw exception here");
 		} catch (IllegalArgumentException e) {
-
 		}
 	}
 
