@@ -23,17 +23,17 @@ public class CodedMessageDefinition {
 	/**
 	 * 编码。
 	 */
-	private String code;
+	private final String code;
 
 	/**
 	 * 区域。
 	 */
-	private Locale locale;
+	private final Locale locale;
 
 	/**
 	 * 模板。
 	 */
-	private String template;
+	private final String template;
 
 	/**
 	 * 获取编码消息定义。
