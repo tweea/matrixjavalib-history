@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -75,7 +77,7 @@ public final class CodedMessages {
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static CodedMessageList load(InputStream reader)
+	public static List<CodedMessage> load(InputStream reader)
 		throws CodedMessageException {
 		Document document;
 		try {
@@ -86,7 +88,7 @@ public final class CodedMessages {
 		} catch (TransformerException e) {
 			throw new CodedMessageException(e, "CodedMessage.LoadXMLError");
 		}
-		return load0(document);
+		return load0(document.getDocumentElement());
 	}
 
 	/**
@@ -98,7 +100,7 @@ public final class CodedMessages {
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static CodedMessageList load(Reader reader)
+	public static List<CodedMessage> load(Reader reader)
 		throws CodedMessageException {
 		Document document;
 		try {
@@ -109,14 +111,20 @@ public final class CodedMessages {
 		} catch (TransformerException e) {
 			throw new CodedMessageException(e, "CodedMessage.LoadXMLError");
 		}
-		return load0(document);
+		return load0(document.getDocumentElement());
 	}
 
-	private static CodedMessageList load0(Document document) {
-		CodedMessageList messageList = new CodedMessageList();
-		NodeList messageNodeList = document.getElementsByTagName("message");
+	private static List<CodedMessage> load0(Node node) {
+		List<CodedMessage> messageList = new ArrayList<CodedMessage>();
+		NodeList messageNodeList = node.getChildNodes();
 		for (int i = 0; i < messageNodeList.getLength(); i++) {
 			Node messageNode = messageNodeList.item(i);
+			if (messageNode.getNodeType() != Node.ELEMENT_NODE) {
+				continue;
+			}
+			if (!"message".equals(messageNode.getNodeName())) {
+				continue;
+			}
 			NamedNodeMap messageNodeAttributes = messageNode.getAttributes();
 			String code = getCodeNode(messageNodeAttributes).getNodeValue();
 			long time = Long.parseLong(messageNodeAttributes.getNamedItem("time").getNodeValue());
@@ -125,9 +133,13 @@ public final class CodedMessages {
 			NodeList argumentNodeList = messageNode.getChildNodes();
 			for (int j = 0; j < argumentNodeList.getLength(); j++) {
 				Node argumentNode = argumentNodeList.item(j);
-				if (argumentNode.getNodeType() == Node.ELEMENT_NODE && "argument".equals(argumentNode.getNodeName())) {
-					message.addArgument(argumentNode.getTextContent());
+				if (argumentNode.getNodeType() != Node.ELEMENT_NODE) {
+					continue;
 				}
+				if (!"argument".equals(argumentNode.getNodeName())) {
+					continue;
+				}
+				message.addArgument(argumentNode.getTextContent());
 			}
 			messageList.add(message);
 		}
@@ -150,7 +162,7 @@ public final class CodedMessages {
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static void save(CodedMessageList messageList, OutputStream writer)
+	public static void save(List<CodedMessage> messageList, OutputStream writer)
 		throws CodedMessageException {
 		try {
 			Document document = save0(messageList);
@@ -170,7 +182,7 @@ public final class CodedMessages {
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static void save(CodedMessageList messageList, Writer writer)
+	public static void save(List<CodedMessage> messageList, Writer writer)
 		throws CodedMessageException {
 		try {
 			Document document = save0(messageList);
@@ -182,7 +194,7 @@ public final class CodedMessages {
 		}
 	}
 
-	private static Document save0(CodedMessageList messageList)
+	private static Document save0(List<CodedMessage> messageList)
 		throws CodedMessageException {
 		try {
 			DocumentBuilder builder = DOM_FACTORY.newDocumentBuilder();

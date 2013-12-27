@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +19,7 @@ public class CodedMessagesTest {
 	@Test
 	public void save()
 		throws IOException, CodedMessageException {
-		CodedMessageList messageList = new CodedMessageList();
+		List<CodedMessage> messageList = new ArrayList<CodedMessage>();
 		CodedMessage message = CodedMessages.information("System.Error");
 		message.addArgument("test1");
 		message.addArgument("test2");
@@ -30,7 +32,7 @@ public class CodedMessagesTest {
 		os.close();
 		// 读取
 		Reader is = new StringReader(os.toString());
-		CodedMessageList messageList2 = CodedMessages.load(is);
+		List<CodedMessage> messageList2 = CodedMessages.load(is);
 		is.close();
 		Assert.assertEquals(messageList.size(), messageList2.size());
 		for (int index = 0; index < messageList.size(); index++) {
