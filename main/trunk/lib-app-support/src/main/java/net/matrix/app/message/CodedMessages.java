@@ -122,28 +122,32 @@ public final class CodedMessages {
 			if (messageNode.getNodeType() != Node.ELEMENT_NODE) {
 				continue;
 			}
-			if (!"message".equals(messageNode.getNodeName())) {
-				continue;
+			if ("message".equals(messageNode.getNodeName())) {
+				messageList.add(load1(messageNode));
 			}
-			NamedNodeMap messageNodeAttributes = messageNode.getAttributes();
-			String code = getCodeNode(messageNodeAttributes).getNodeValue();
-			long time = Long.parseLong(messageNodeAttributes.getNamedItem("time").getNodeValue());
-			CodedMessageLevel level = CodedMessageLevel.forCode(Integer.valueOf(messageNodeAttributes.getNamedItem("level").getNodeValue()));
-			CodedMessage message = new CodedMessage(code, time, level);
-			NodeList argumentNodeList = messageNode.getChildNodes();
-			for (int j = 0; j < argumentNodeList.getLength(); j++) {
-				Node argumentNode = argumentNodeList.item(j);
-				if (argumentNode.getNodeType() != Node.ELEMENT_NODE) {
-					continue;
-				}
-				if (!"argument".equals(argumentNode.getNodeName())) {
-					continue;
-				}
-				message.addArgument(argumentNode.getTextContent());
-			}
-			messageList.add(message);
 		}
 		return messageList;
+	}
+
+	private static CodedMessage load1(Node node) {
+		NamedNodeMap messageNodeAttributes = node.getAttributes();
+		String code = getCodeNode(messageNodeAttributes).getNodeValue();
+		long time = Long.parseLong(messageNodeAttributes.getNamedItem("time").getNodeValue());
+		CodedMessageLevel level = CodedMessageLevel.forCode(Integer.valueOf(messageNodeAttributes.getNamedItem("level").getNodeValue()));
+		CodedMessage message = new CodedMessage(code, time, level);
+		NodeList childNodeList = node.getChildNodes();
+		for (int j = 0; j < childNodeList.getLength(); j++) {
+			Node childNode = childNodeList.item(j);
+			if (childNode.getNodeType() != Node.ELEMENT_NODE) {
+				continue;
+			}
+			if ("argument".equals(childNode.getNodeName())) {
+				message.addArgument(childNode.getTextContent());
+			} else if ("message".equals(childNode.getNodeName())) {
+				message.getMessages().add(load1(childNode));
+			}
+		}
+		return message;
 	}
 
 	private static Node getCodeNode(NamedNodeMap messageNodeAttributes) {
@@ -202,20 +206,27 @@ public final class CodedMessages {
 			Element messagesElement = document.createElement("messages");
 			document.appendChild(messagesElement);
 			for (CodedMessage message : messageList) {
-				Element messageElement = document.createElement("message");
-				messagesElement.appendChild(messageElement);
-				messageElement.setAttribute("time", Long.toString(message.getTime()));
-				messageElement.setAttribute("code", message.getCode());
-				messageElement.setAttribute("level", Integer.toString(message.getLevel().getCode()));
-				for (int index = 0; index < message.getArguments().size(); index++) {
-					Element argumentElement = document.createElement("argument");
-					messageElement.appendChild(argumentElement);
-					argumentElement.setTextContent(message.getArgument(index));
-				}
+				messagesElement.appendChild(save1(message, document));
 			}
 			return document;
 		} catch (ParserConfigurationException e) {
 			throw new CodedMessageException(e, "CodedMessage.SaveXMLError");
 		}
+	}
+
+	private static Element save1(CodedMessage message, Document document) {
+		Element messageElement = document.createElement("message");
+		messageElement.setAttribute("time", Long.toString(message.getTime()));
+		messageElement.setAttribute("code", message.getCode());
+		messageElement.setAttribute("level", Integer.toString(message.getLevel().getCode()));
+		for (String argument : message.getArguments()) {
+			Element argumentElement = document.createElement("argument");
+			messageElement.appendChild(argumentElement);
+			argumentElement.setTextContent(argument);
+		}
+		for (CodedMessage childMessage : message.getMessages()) {
+			messageElement.appendChild(save1(childMessage, document));
+		}
+		return messageElement;
 	}
 }
