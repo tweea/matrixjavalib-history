@@ -17,16 +17,12 @@ import org.junit.Test;
 
 public class CodedMessagesTest {
 	@Test
-	public void save()
+	public void testSaveAndLoad()
 		throws IOException, CodedMessageException {
 		List<CodedMessage> messageList = new ArrayList<CodedMessage>();
-		CodedMessage message = CodedMessages.information("System.Error");
-		message.addArgument("test1");
-		message.addArgument("test2");
-		messageList.add(message);
-		message = CodedMessages.information("100000000");
-		message.addArgument("test3");
-		messageList.add(message);
+		messageList.add(CodedMessages.information("System.Error", "test1", "test2"));
+		messageList.add(CodedMessages.information("100000000", "test3"));
+		messageList.get(1).getMessages().add(CodedMessages.debug("12345", "moo..."));
 		StringWriter os = new StringWriter();
 		CodedMessages.save(messageList, os);
 		os.close();
@@ -40,7 +36,8 @@ public class CodedMessagesTest {
 			CodedMessage message2 = messageList2.get(index);
 			Assert.assertEquals(message1.getCode(), message2.getCode());
 			Assert.assertEquals(message1.getTime(), message2.getTime());
-			Assert.assertEquals(message1.getArguments().size(), message2.getArguments().size());
+			Assert.assertEquals(message1.getArguments(), message2.getArguments());
+			Assert.assertEquals(message1.getMessages().size(), message2.getMessages().size());
 		}
 	}
 }
