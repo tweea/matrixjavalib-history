@@ -6,7 +6,6 @@
 package net.matrix.app;
 
 import net.matrix.app.message.CodedMessage;
-import net.matrix.app.message.CodedMessageList;
 
 /**
  * 包含编码消息的异常。
@@ -20,16 +19,9 @@ public interface CodedException {
 	String getDefaultMessageCode();
 
 	/**
-	 * 获取异常的根消息，每个异常都必须包含一个根消息。
+	 * 获取编码消息。
 	 * 
-	 * @return 根消息
+	 * @return 编码消息
 	 */
-	CodedMessage getRootMessage();
-
-	/**
-	 * 获取异常的所有消息，包括根消息。
-	 * 
-	 * @return 所有消息
-	 */
-	CodedMessageList getMessageList();
+	CodedMessage getCodedMessage();
 }

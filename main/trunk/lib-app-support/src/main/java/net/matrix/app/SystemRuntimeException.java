@@ -6,7 +6,6 @@
 package net.matrix.app;
 
 import net.matrix.app.message.CodedMessage;
-import net.matrix.app.message.CodedMessageList;
 import net.matrix.app.message.CodedMessages;
 
 /**
@@ -23,33 +22,33 @@ public class SystemRuntimeException
 	/**
 	 * 异常包含的消息。
 	 */
-	private CodedMessageList messages = new CodedMessageList();
+	private final CodedMessage message;
 
 	/**
 	 * 使用默认消息构造异常。原因异常没有初始化，可以随后调用 {@link #initCause} 进行初始化。
 	 */
 	public SystemRuntimeException() {
-		messages.add(CodedMessages.error(getDefaultMessageCode()));
+		this.message = CodedMessages.error(getDefaultMessageCode());
 	}
 
 	/**
 	 * 使用指定消息编码构造异常。原因异常没有初始化，可以随后调用 {@link #initCause} 进行初始化。
 	 * 
-	 * @param rootMessageCode
+	 * @param messageCode
 	 *            消息编码。
 	 */
-	public SystemRuntimeException(final String rootMessageCode) {
-		messages.add(CodedMessages.error(rootMessageCode));
+	public SystemRuntimeException(final String messageCode) {
+		this.message = CodedMessages.error(messageCode);
 	}
 
 	/**
 	 * 使用指定消息构造异常。原因异常没有初始化，可以随后调用 {@link #initCause} 进行初始化。
 	 * 
-	 * @param rootMessage
+	 * @param message
 	 *            消息。
 	 */
-	public SystemRuntimeException(final CodedMessage rootMessage) {
-		messages.add(rootMessage);
+	public SystemRuntimeException(final CodedMessage message) {
+		this.message = message;
 	}
 
 	/**
@@ -60,14 +59,12 @@ public class SystemRuntimeException
 	 */
 	public SystemRuntimeException(final Throwable cause) {
 		super(cause);
+		this.message = CodedMessages.error(getDefaultMessageCode());
 		if (cause instanceof CodedException) {
-			CodedException se = (CodedException) cause;
-			messages.add(CodedMessages.error(getDefaultMessageCode()));
-			messages.addAll(se.getMessageList());
-		} else if (cause == null) {
-			messages.add(CodedMessages.error(getDefaultMessageCode()));
-		} else {
-			messages.add(CodedMessages.error(getDefaultMessageCode(), cause.getMessage()));
+			CodedException ce = (CodedException) cause;
+			this.message.getMessages().add(ce.getCodedMessage());
+		} else if (cause != null) {
+			this.message.addArgument(cause.getMessage());
 		}
 	}
 
@@ -78,17 +75,17 @@ public class SystemRuntimeException
 	 * 
 	 * @param cause
 	 *            原因异常（使用 {@link #getCause()} 方法获取）。可以使用 <tt>null</tt> 值，指原因异常不存在或未知。
-	 * @param rootMessageCode
+	 * @param messageCode
 	 *            消息编码。
 	 */
-	public SystemRuntimeException(final Throwable cause, final String rootMessageCode) {
+	public SystemRuntimeException(final Throwable cause, final String messageCode) {
 		super(cause);
-		messages.add(CodedMessages.error(rootMessageCode));
+		this.message = CodedMessages.error(messageCode);
 		if (cause instanceof CodedException) {
-			CodedException se = (CodedException) cause;
-			messages.addAll(se.getMessageList());
+			CodedException ce = (CodedException) cause;
+			this.message.getMessages().add(ce.getCodedMessage());
 		} else if (cause != null) {
-			messages.add(CodedMessages.error(rootMessageCode, cause.getMessage()));
+			this.message.addArgument(cause.getMessage());
 		}
 	}
 
@@ -99,17 +96,17 @@ public class SystemRuntimeException
 	 * 
 	 * @param cause
 	 *            原因异常（使用 {@link #getCause()} 方法获取）。可以使用 <tt>null</tt> 值，指原因异常不存在或未知。
-	 * @param rootMessage
+	 * @param message
 	 *            消息。
 	 */
-	public SystemRuntimeException(final Throwable cause, final CodedMessage rootMessage) {
+	public SystemRuntimeException(final Throwable cause, final CodedMessage message) {
 		super(cause);
-		messages.add(rootMessage);
+		this.message = message;
 		if (cause instanceof CodedException) {
-			CodedException se = (CodedException) cause;
-			messages.addAll(se.getMessageList());
+			CodedException ce = (CodedException) cause;
+			this.message.getMessages().add(ce.getCodedMessage());
 		} else if (cause != null) {
-			messages.add(CodedMessages.error(getDefaultMessageCode(), cause.getMessage()));
+			this.message.addArgument(cause.getMessage());
 		}
 	}
 
@@ -119,23 +116,12 @@ public class SystemRuntimeException
 	}
 
 	@Override
-	public final CodedMessage getRootMessage() {
-		return messages.get(0);
-	}
-
-	@Override
-	public CodedMessageList getMessageList() {
-		return messages;
+	public final CodedMessage getCodedMessage() {
+		return message;
 	}
 
 	@Override
 	public String getMessage() {
-		StringBuilder sb = new StringBuilder();
-		for (CodedMessage message : messages) {
-			sb.append(message.format());
-			sb.append('\n');
-		}
-		sb.deleteCharAt(sb.length() - 1);
-		return sb.toString();
+		return message.formatAll();
 	}
 }
