@@ -64,7 +64,7 @@ public class SystemException
 			CodedException ce = (CodedException) cause;
 			this.message.getMessages().add(ce.getCodedMessage());
 		} else if (cause != null) {
-			this.message.addArgument(cause.getMessage());
+			this.message.addUnformattedArgument(cause.getMessage());
 		}
 	}
 
@@ -85,7 +85,7 @@ public class SystemException
 			CodedException ce = (CodedException) cause;
 			this.message.getMessages().add(ce.getCodedMessage());
 		} else if (cause != null) {
-			this.message.addArgument(cause.getMessage());
+			this.message.addUnformattedArgument(cause.getMessage());
 		}
 	}
 
@@ -106,7 +106,7 @@ public class SystemException
 			CodedException ce = (CodedException) cause;
 			this.message.getMessages().add(ce.getCodedMessage());
 		} else if (cause != null) {
-			this.message.addArgument(cause.getMessage());
+			this.message.addUnformattedArgument(cause.getMessage());
 		}
 	}
 

@@ -18,24 +18,24 @@ public class CodedMessageException
 		super();
 	}
 
-	public CodedMessageException(final Throwable cause) {
-		super(cause);
+	public CodedMessageException(final String rootMessageCode) {
+		super(rootMessageCode);
 	}
 
 	public CodedMessageException(final CodedMessage rootMessage) {
 		super(rootMessage);
 	}
 
-	public CodedMessageException(final String rootMessageCode) {
-		super(rootMessageCode);
-	}
-
-	public CodedMessageException(final Throwable cause, final CodedMessage rootMessage) {
-		super(cause, rootMessage);
+	public CodedMessageException(final Throwable cause) {
+		super(cause);
 	}
 
 	public CodedMessageException(final Throwable cause, final String rootMessageCode) {
 		super(cause, rootMessageCode);
+	}
+
+	public CodedMessageException(final Throwable cause, final CodedMessage rootMessage) {
+		super(cause, rootMessage);
 	}
 
 	@Override
