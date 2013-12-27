@@ -25,11 +25,11 @@ public class CodedMessageDefinitionLoaderTest {
 		Locales.current(Locale.CHINA);
 		CodedMessageDefinition part = CodedMessageDefinition.getDefinition("System.Error");
 		Assert.assertEquals("System.Error", part.getCode());
-		Assert.assertEquals("系统错误：{0}", part.getTemplate());
+		Assert.assertEquals("系统错误", part.getTemplate());
 
 		Locales.current(Locale.US);
 		part = CodedMessageDefinition.getDefinition("System.Error");
 		Assert.assertEquals("System.Error", part.getCode());
-		Assert.assertEquals("System error: {0}", part.getTemplate());
+		Assert.assertEquals("System error", part.getTemplate());
 	}
 }
