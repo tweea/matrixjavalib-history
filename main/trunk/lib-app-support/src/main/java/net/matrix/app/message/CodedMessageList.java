@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 /**
  * 编码消息列表。
  */
@@ -59,14 +57,5 @@ public class CodedMessageList
 		for (int index = 0; index < messageList.size(); index++) {
 			add(messageList.get(index));
 		}
-	}
-
-	public boolean hasLevel(CodedMessageLevel level) {
-		for (CodedMessage message : messages) {
-			if (ObjectUtils.equals(message.getLevel(), level)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

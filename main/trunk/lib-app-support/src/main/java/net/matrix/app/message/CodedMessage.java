@@ -8,6 +8,8 @@ package net.matrix.app.message;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import net.matrix.text.MessageFormats;
 
 /**
@@ -34,6 +36,11 @@ public class CodedMessage {
 	 */
 	private final List<String> arguments;
 
+	/**
+	 * 依附消息列表。
+	 */
+	private final List<CodedMessage> messages;
+
 	public CodedMessage(final String code, final CodedMessageLevel level, final String... arguments) {
 		this(code, System.currentTimeMillis(), level, arguments);
 	}
@@ -46,6 +53,7 @@ public class CodedMessage {
 		for (String argument : arguments) {
 			this.arguments.add(argument);
 		}
+		this.messages = new ArrayList<CodedMessage>();
 	}
 
 	/**
@@ -77,6 +85,13 @@ public class CodedMessage {
 	}
 
 	/**
+	 * @return 依附消息列表
+	 */
+	public List<CodedMessage> getMessages() {
+		return messages;
+	}
+
+	/**
 	 * @param index
 	 *            参数索引
 	 * @return 参数
@@ -91,8 +106,27 @@ public class CodedMessage {
 	 * @param argument
 	 *            参数
 	 */
-	public void addArgument(String argument) {
+	public void addArgument(final String argument) {
 		arguments.add(argument);
+	}
+
+	/**
+	 * 判断消息中是否包含指定级别的消息。
+	 * 
+	 * @param targetLevel
+	 *            目标级别
+	 * @return true 包含
+	 */
+	public boolean hasLevel(final CodedMessageLevel targetLevel) {
+		if (ObjectUtils.equals(level, targetLevel)) {
+			return true;
+		}
+		for (CodedMessage message : messages) {
+			if (message.hasLevel(targetLevel)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
