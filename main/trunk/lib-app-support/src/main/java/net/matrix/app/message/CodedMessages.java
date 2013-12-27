@@ -143,6 +143,8 @@ public final class CodedMessages {
 			}
 			if ("argument".equals(childNode.getNodeName())) {
 				message.addArgument(childNode.getTextContent());
+			} else if ("unformattedArgument".equals(childNode.getNodeName())) {
+				message.addUnformattedArgument(childNode.getTextContent());
 			} else if ("message".equals(childNode.getNodeName())) {
 				message.getMessages().add(load1(childNode));
 			}
@@ -223,6 +225,11 @@ public final class CodedMessages {
 			Element argumentElement = document.createElement("argument");
 			messageElement.appendChild(argumentElement);
 			argumentElement.setTextContent(argument);
+		}
+		for (String unformattedArgument : message.getUnformattedArguments()) {
+			Element unformattedArgumentElement = document.createElement("unformattedArgument");
+			messageElement.appendChild(unformattedArgumentElement);
+			unformattedArgumentElement.setTextContent(unformattedArgument);
 		}
 		for (CodedMessage childMessage : message.getMessages()) {
 			messageElement.appendChild(save1(childMessage, document));
