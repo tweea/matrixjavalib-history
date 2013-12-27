@@ -141,4 +141,30 @@ public class CodedMessage {
 		}
 		return MessageFormats.format(def.getTemplate(), def.getLocale(), arguments.toArray());
 	}
+
+	/**
+	 * 将所有消息格式化为字符串。
+	 * 
+	 * @return 消息字符串
+	 */
+	public String formatAll() {
+		StringBuilder sb = new StringBuilder();
+		formatAll(sb, 0);
+		sb.deleteCharAt(sb.length() - 1);
+		return sb.toString();
+	}
+
+	/**
+	 * 将所有消息格式化为字符串。
+	 */
+	private void formatAll(final StringBuilder sb, final int depth) {
+		for (int i = 0; i < depth; i++) {
+			sb.append('\t');
+		}
+		sb.append(format());
+		sb.append('\n');
+		for (CodedMessage message : messages) {
+			message.formatAll(sb, depth + 1);
+		}
+	}
 }
