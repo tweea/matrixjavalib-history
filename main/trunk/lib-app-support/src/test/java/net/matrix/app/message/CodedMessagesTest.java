@@ -22,6 +22,7 @@ public class CodedMessagesTest {
 		List<CodedMessage> messageList = new ArrayList<CodedMessage>();
 		messageList.add(CodedMessages.information("System.Error", "test1", "test2"));
 		messageList.add(CodedMessages.information("100000000", "test3"));
+		messageList.get(1).getUnformattedArguments().add("unformatted");
 		messageList.get(1).getMessages().add(CodedMessages.debug("12345", "moo..."));
 		StringWriter os = new StringWriter();
 		CodedMessages.save(messageList, os);
@@ -37,6 +38,7 @@ public class CodedMessagesTest {
 			Assert.assertEquals(message1.getCode(), message2.getCode());
 			Assert.assertEquals(message1.getTime(), message2.getTime());
 			Assert.assertEquals(message1.getArguments(), message2.getArguments());
+			Assert.assertEquals(message1.getUnformattedArguments(), message2.getUnformattedArguments());
 			Assert.assertEquals(message1.getMessages().size(), message2.getMessages().size());
 		}
 	}
