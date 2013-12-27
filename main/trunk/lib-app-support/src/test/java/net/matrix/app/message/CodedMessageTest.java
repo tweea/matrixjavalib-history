@@ -24,6 +24,7 @@ public class CodedMessageTest {
 		Assert.assertEquals("Message.Test1", message.getCode());
 		Assert.assertEquals(CodedMessageLevel.INFORMATION, message.getLevel());
 		Assert.assertEquals(0, message.getArguments().size());
+		Assert.assertEquals(0, message.getUnformattedArguments().size());
 		Assert.assertEquals(0, message.getMessages().size());
 	}
 
@@ -35,7 +36,18 @@ public class CodedMessageTest {
 		Assert.assertEquals(0, message.getArguments().size());
 		message.addArgument("abc");
 		Assert.assertEquals(1, message.getArguments().size());
-		Assert.assertEquals("abc", message.getArgument(0));
+		Assert.assertEquals("abc", message.getArguments().get(0));
+	}
+
+	@Test
+	public void testAddUnformattedArgument() {
+		CodedMessage message = new CodedMessage("Message.Test1", CodedMessageLevel.INFORMATION);
+		Assert.assertEquals("Message.Test1", message.getCode());
+		Assert.assertEquals(CodedMessageLevel.INFORMATION, message.getLevel());
+		Assert.assertEquals(0, message.getArguments().size());
+		message.addUnformattedArgument("abc");
+		Assert.assertEquals(1, message.getUnformattedArguments().size());
+		Assert.assertEquals("abc", message.getUnformattedArguments().get(0));
 	}
 
 	@Test
@@ -57,6 +69,14 @@ public class CodedMessageTest {
 		CodedMessage message = new CodedMessage("Message.Fallback", CodedMessageLevel.INFORMATION, "Test", "test2");
 		String formatString = message.format();
 		Assert.assertEquals("Message.Fallback, Test, test2", formatString);
+	}
+
+	@Test
+	public void testFormatUnformatted() {
+		CodedMessage message = new CodedMessage("Message.Test2", CodedMessageLevel.INFORMATION, "Test", "test2");
+		message.addUnformattedArgument("12345");
+		String formatString = message.format();
+		Assert.assertEquals("测试消息 B：Testtest2，12345", formatString);
 	}
 
 	@Test

@@ -37,6 +37,11 @@ public class CodedMessage {
 	private final List<String> arguments;
 
 	/**
+	 * 不参与格式化的参数列表。
+	 */
+	private final List<String> unformattedArguments;
+
+	/**
 	 * 依附消息列表。
 	 */
 	private final List<CodedMessage> messages;
@@ -53,6 +58,7 @@ public class CodedMessage {
 		for (String argument : arguments) {
 			this.arguments.add(argument);
 		}
+		this.unformattedArguments = new ArrayList<String>();
 		this.messages = new ArrayList<CodedMessage>();
 	}
 
@@ -85,19 +91,17 @@ public class CodedMessage {
 	}
 
 	/**
+	 * @return 不参与格式化的参数列表。
+	 */
+	public List<String> getUnformattedArguments() {
+		return unformattedArguments;
+	}
+
+	/**
 	 * @return 依附消息列表
 	 */
 	public List<CodedMessage> getMessages() {
 		return messages;
-	}
-
-	/**
-	 * @param index
-	 *            参数索引
-	 * @return 参数
-	 */
-	public String getArgument(int index) {
-		return arguments.get(index);
 	}
 
 	/**
@@ -108,6 +112,16 @@ public class CodedMessage {
 	 */
 	public void addArgument(final String argument) {
 		arguments.add(argument);
+	}
+
+	/**
+	 * 在不参与格式化的参数列表中增加一个参数。
+	 * 
+	 * @param argument
+	 *            参数
+	 */
+	public void addUnformattedArgument(final String argument) {
+		unformattedArguments.add(argument);
 	}
 
 	/**
@@ -135,11 +149,25 @@ public class CodedMessage {
 	 * @return 消息字符串
 	 */
 	public String format() {
+		StringBuilder sb = new StringBuilder();
+		format(sb);
+		return sb.toString();
+	}
+
+	/**
+	 * 将消息格式化为字符串。
+	 */
+	private void format(final StringBuilder sb) {
 		CodedMessageDefinition def = CodedMessageDefinition.getDefinition(code);
 		if (def == null) {
-			return MessageFormats.formatFallback(code, arguments.toArray());
+			sb.append(MessageFormats.formatFallback(code, arguments.toArray()));
+		} else {
+			sb.append(MessageFormats.format(def.getTemplate(), def.getLocale(), arguments.toArray()));
 		}
-		return MessageFormats.format(def.getTemplate(), def.getLocale(), arguments.toArray());
+		for (String unformattedArgument : unformattedArguments) {
+			sb.append('，');
+			sb.append(unformattedArgument);
+		}
 	}
 
 	/**
@@ -161,7 +189,7 @@ public class CodedMessage {
 		for (int i = 0; i < depth; i++) {
 			sb.append('\t');
 		}
-		sb.append(format());
+		format(sb);
 		sb.append('\n');
 		for (CodedMessage message : messages) {
 			message.formatAll(sb, depth + 1);
