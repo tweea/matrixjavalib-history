@@ -16,7 +16,7 @@ import org.apache.commons.lang3.ObjectUtils;
  */
 public class CodedMessageList
 	implements Iterable<CodedMessage> {
-	private List<CodedMessage> messages;
+	private final List<CodedMessage> messages;
 
 	public CodedMessageList() {
 		this.messages = new ArrayList<CodedMessage>();
@@ -59,18 +59,6 @@ public class CodedMessageList
 		for (int index = 0; index < messageList.size(); index++) {
 			add(messageList.get(index));
 		}
-	}
-
-	public CodedMessageList subList(int fromIndex, int toIndex) {
-		CodedMessageList result = new CodedMessageList();
-		if (fromIndex >= messages.size()) {
-			return result;
-		}
-		if (toIndex > messages.size()) {
-			toIndex = messages.size();
-		}
-		result.messages.addAll(messages.subList(fromIndex, toIndex));
-		return result;
 	}
 
 	public boolean hasLevel(CodedMessageLevel level) {
