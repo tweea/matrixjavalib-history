@@ -211,6 +211,7 @@ public final class Reflections {
 				return field;
 			} catch (NoSuchFieldException e) {
 				// Field 不在当前类定义，继续向上转型
+				LOG.trace("", e);
 			}
 		}
 		return null;
@@ -238,6 +239,7 @@ public final class Reflections {
 				return method;
 			} catch (NoSuchMethodException e) {
 				// Method不在当前类定义,继续向上转型
+				LOG.trace("", e);
 			}
 		}
 		return null;

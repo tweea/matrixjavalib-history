@@ -88,6 +88,7 @@ public final class Threads {
 				}
 			}
 		} catch (InterruptedException ie) {
+			LOG.trace("", ie);
 			// (Re-)Cancel if current thread also interrupted
 			pool.shutdownNow();
 			// Preserve interrupt status
