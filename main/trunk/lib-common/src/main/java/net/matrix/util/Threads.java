@@ -36,6 +36,7 @@ public final class Threads {
 		try {
 			Thread.sleep(durationMillis);
 		} catch (InterruptedException e) {
+			LOG.trace("", e);
 			Thread.currentThread().interrupt();
 		}
 	}
@@ -52,6 +53,7 @@ public final class Threads {
 		try {
 			Thread.sleep(unit.toMillis(duration));
 		} catch (InterruptedException e) {
+			LOG.trace("", e);
 			Thread.currentThread().interrupt();
 		}
 	}
@@ -110,6 +112,7 @@ public final class Threads {
 				LOG.error("Pool did not terminated");
 			}
 		} catch (InterruptedException ie) {
+			LOG.trace("", ie);
 			Thread.currentThread().interrupt();
 		}
 	}
@@ -138,7 +141,7 @@ public final class Threads {
 		public void run() {
 			try {
 				runnable.run();
-			} catch (Exception e) {
+			} catch (RuntimeException e) {
 				// catch any exception, because the scheduled thread will break if the exception
 				// thrown outside
 				LOG.error("Unexpected error occurred in task", e);
