@@ -10,7 +10,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 /**
  * 关于异常的工具类。
  */
-public class Exceptions {
+public final class Exceptions {
 	/**
 	 * 阻止实例化。
 	 */
@@ -22,6 +22,7 @@ public class Exceptions {
 	 * 
 	 * @param e
 	 *            原始异常
+	 * @return 运行时异常
 	 */
 	public static RuntimeException unchecked(final Exception e) {
 		if (e instanceof RuntimeException) {
@@ -36,6 +37,7 @@ public class Exceptions {
 	 * 
 	 * @param t
 	 *            异常
+	 * @return 组合异常信息
 	 */
 	public static String getMessageWithRootCause(final Throwable t) {
 		return ExceptionUtils.getMessage(t) + " root cause is " + ExceptionUtils.getRootCauseMessage(t);
@@ -48,6 +50,7 @@ public class Exceptions {
 	 *            异常
 	 * @param causeTypes
 	 *            异常类型
+	 * @return 异常链中包含参数中的类型为 true
 	 */
 	public static boolean isCausedBy(final Throwable t, final Class<? extends Throwable>... causeTypes) {
 		for (Class<? extends Throwable> type : causeTypes) {
