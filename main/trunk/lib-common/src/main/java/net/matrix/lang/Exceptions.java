@@ -12,6 +12,12 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
  */
 public class Exceptions {
 	/**
+	 * 阻止实例化。
+	 */
+	private Exceptions() {
+	}
+
+	/**
 	 * 将 Exception 转换为 RuntimeException。
 	 * 
 	 * @param e
