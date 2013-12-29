@@ -70,7 +70,7 @@ public final class ResourceBundles {
 		@Override
 		public List<String> getFormats(final String baseName) {
 			if (baseName == null) {
-				throw new NullPointerException("baseName");
+				throw new IllegalArgumentException("baseName");
 			}
 			return FORMATS;
 		}
@@ -79,7 +79,7 @@ public final class ResourceBundles {
 		public ResourceBundle newBundle(final String baseName, final Locale locale, final String format, final ClassLoader loader, final boolean reload)
 			throws IllegalAccessException, InstantiationException, IOException {
 			if (baseName == null || locale == null || format == null || loader == null) {
-				throw new NullPointerException("参数不能为空");
+				throw new IllegalArgumentException("参数不能为空");
 			}
 			ResourceBundle bundle = null;
 			if ("xml".equals(format)) {
@@ -131,7 +131,7 @@ public final class ResourceBundles {
 		 * @throws IOException
 		 *             读取失败
 		 */
-		private XMLResourceBundle(final InputStream stream)
+		public XMLResourceBundle(final InputStream stream)
 			throws IOException {
 			props = new Properties();
 			props.loadFromXML(stream);
