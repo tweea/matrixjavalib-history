@@ -6,6 +6,7 @@
 	-X 调试模式
 	-U 强制依赖更新检查
 	跳过测试
+		-DskipTests
 		-Dmaven.test.skip=true
 三、常用命令
 	编译
