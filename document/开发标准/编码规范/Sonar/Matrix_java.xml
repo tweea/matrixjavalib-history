@@ -3340,5 +3340,65 @@
 			<key>SKIPPED_CLASS_TOO_BIG</key>
 			<priority>MINOR</priority>
 		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1068</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1317</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1452</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1481</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S881</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1444</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>findbugs</repositoryKey>
+			<key>DM_BOXED_PRIMITIVE_FOR_PARSING</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>findbugs</repositoryKey>
+			<key>NP_METHOD_RETURN_RELAXING_ANNOTATION</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>findbugs</repositoryKey>
+			<key>NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>findbugs</repositoryKey>
+			<key>DLS_DEAD_LOCAL_INCREMENT_IN_RETURN</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>common-java</repositoryKey>
+			<key>FailedUnitTests</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1186</key>
+			<priority>MAJOR</priority>
+		</rule>
 	</rules>
 </profile>
