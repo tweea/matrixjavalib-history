@@ -40,7 +40,7 @@
 						<dependency>
 							<groupId>net.sf.matrixjavalib.build</groupId>
 							<artifactId>checkstyle-config</artifactId>
-							<version>1.5</version>
+							<version>1.6</version>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -225,7 +225,7 @@
 						<dependency>
 							<groupId>net.sf.matrixjavalib.build</groupId>
 							<artifactId>checkstyle-config</artifactId>
-							<version>1.5</version>
+							<version>1.6</version>
 						</dependency>
 					</dependencies>
 					<configuration>
