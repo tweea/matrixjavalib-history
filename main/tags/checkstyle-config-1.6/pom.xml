@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- $Id$ -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 基本属性 - 项目属性 -->
+	<groupId>net.sf.matrixjavalib.build</groupId>
+	<artifactId>checkstyle-config</artifactId>
+	<version>1.6</version>
+	<packaging>jar</packaging>
+
+	<!-- 基本属性 - 属性 -->
+
+	<!-- 基本属性 - 项目关系 -->
+	<parent>
+		<groupId>net.sf.matrixjavalib</groupId>
+		<artifactId>genesis</artifactId>
+		<version>29</version>
+	</parent>
+
+	<!-- 构建设置 -->
+
+	<!-- 项目信息 -->
+	<name>Matrix :: CheckStyle 配置</name>
+	<description>CheckStyle 配置。</description>
+	<inceptionYear>2008</inceptionYear>
+
+	<!-- 构建环境 -->
+	<issueManagement>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/tags/checkstyle-config-1.6</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/tags/checkstyle-config-1.6</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/tags/checkstyle-config-1.6</url>
+	</scm>
+</project>
