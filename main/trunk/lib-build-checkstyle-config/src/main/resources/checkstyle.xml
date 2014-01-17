@@ -20,6 +20,7 @@
 		</module>
 		<module name="ClassDataAbstractionCoupling">
 			<property name="severity" value="warning" />
+			<property name="max" value="15" />
 		</module>
 		<module name="Regexp">
 			<property name="severity" value="warning" />
@@ -93,6 +94,7 @@
 		</module>
 		<module name="NPathComplexity">
 			<property name="severity" value="warning" />
+			<property name="max" value="512" />
 		</module>
 		<module name="AvoidInlineConditionals">
 			<property name="severity" value="info" />
