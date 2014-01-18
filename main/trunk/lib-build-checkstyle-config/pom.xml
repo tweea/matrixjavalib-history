@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>net.sf.matrixjavalib</groupId>
 		<artifactId>genesis</artifactId>
-		<version>30</version>
+		<version>32</version>
 	</parent>
 
 	<!-- 构建设置 -->
