@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,7 +19,6 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.metadata.ClassMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -370,25 +368,6 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 初始化对象.
-	 * 使用load()方法得到的仅是对象Proxy, 在传到View层前需要进行初始化.
-	 * 如果传入entity, 则只初始化entity的直接属性,但不会初始化延迟加载的关联集合和属性.
-	 * 如需初始化关联属性,需执行:
-	 * Hibernate.initialize(user.getRoles())，初始化User的直接属性和关联集合.
-	 * Hibernate.initialize(user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
-	 */
-	public void initProxyObject(Object proxy) {
-		Hibernate.initialize(proxy);
-	}
-
-	/**
-	 * Flush当前Session.
-	 */
-	public void flush() {
-		currentSession().flush();
-	}
-
-	/**
 	 * 为Query添加distinct transformer.
 	 * 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
 	 */
@@ -404,14 +383,6 @@ public class HibernateDAO<T, ID extends Serializable> {
 	public Criteria distinct(Criteria criteria) {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return criteria;
-	}
-
-	/**
-	 * 取得对象的主键名.
-	 */
-	public String getIdName() {
-		ClassMetadata meta = getSessionFactory().getClassMetadata(entityClass);
-		return meta.getIdentifierPropertyName();
 	}
 
 	/**
