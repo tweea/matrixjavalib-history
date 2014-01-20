@@ -7,8 +7,7 @@ package net.matrix.app.message;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Objects;
 
 import net.matrix.text.MessageFormats;
 
@@ -132,7 +131,7 @@ public class CodedMessage {
 	 * @return true 包含
 	 */
 	public boolean hasLevel(final CodedMessageLevel targetLevel) {
-		if (ObjectUtils.equals(level, targetLevel)) {
+		if (Objects.equals(level, targetLevel)) {
 			return true;
 		}
 		for (CodedMessage message : messages) {
