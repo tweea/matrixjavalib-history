@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class HibernateTransactionContext {
 	private static final Logger LOG = LoggerFactory.getLogger(HibernateTransactionContext.class);
 
-	private String sessionFactoryName;
+	private final String sessionFactoryName;
 
 	private Session session;
 
