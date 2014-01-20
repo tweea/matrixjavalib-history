@@ -395,10 +395,11 @@ public final class HibernateHelper {
 	}
 
 	private static void setQueryParameter(Query query, Object... parameters) {
-		if (parameters != null) {
-			for (int i = 0; i < parameters.length; i++) {
-				query.setParameter(HQLs.getParameterName(i), parameters[i]);
-			}
+		if (parameters == null) {
+			return;
+		}
+		for (int i = 0; i < parameters.length; i++) {
+			query.setParameter(HQLs.getParameterName(i), parameters[i]);
 		}
 	}
 
@@ -410,7 +411,7 @@ public final class HibernateHelper {
 	}
 
 	private static void setQueryParameter(Query query, Map<String, ?> parameters) {
-		for (Map.Entry<String, ? extends Object> paramEntry : parameters.entrySet()) {
+		for (Map.Entry<String, ?> paramEntry : parameters.entrySet()) {
 			query.setParameter(paramEntry.getKey(), paramEntry.getValue());
 		}
 	}
@@ -423,8 +424,7 @@ public final class HibernateHelper {
 		try {
 			Query query = session.createQuery(queryString);
 			setQueryParameter(query, params);
-			int effectedRows = query.executeUpdate();
-			return effectedRows;
+			return query.executeUpdate();
 		} catch (HibernateException e) {
 			throw new SQLException(e);
 		}
@@ -462,8 +462,7 @@ public final class HibernateHelper {
 		try {
 			Query query = session.createQuery(queryString);
 			setQueryParameter(query, params);
-			int effectedRows = query.executeUpdate();
-			return effectedRows;
+			return query.executeUpdate();
 		} catch (HibernateException e) {
 			throw new SQLException(e);
 		}
@@ -501,8 +500,7 @@ public final class HibernateHelper {
 		try {
 			Query query = session.createQuery(queryString);
 			setQueryParameter(query, params);
-			int effectedRows = query.executeUpdate();
-			return effectedRows;
+			return query.executeUpdate();
 		} catch (HibernateException e) {
 			throw new SQLException(e);
 		}
@@ -1039,7 +1037,7 @@ public final class HibernateHelper {
 			if (r == null) {
 				return 0;
 			}
-			return (Long) r;
+			return ((Number) r).longValue();
 		} catch (ObjectNotFoundException oe) {
 			return 0;
 		} catch (HibernateException he) {
@@ -1083,7 +1081,7 @@ public final class HibernateHelper {
 			if (r == null) {
 				return 0;
 			}
-			return (Long) r;
+			return ((Number) r).longValue();
 		} catch (HibernateException he) {
 			throw new SQLException(he);
 		}
@@ -1125,7 +1123,7 @@ public final class HibernateHelper {
 			if (r == null) {
 				return 0;
 			}
-			return (Long) r;
+			return ((Number) r).longValue();
 		} catch (HibernateException he) {
 			throw new SQLException(he);
 		}
@@ -1155,7 +1153,7 @@ public final class HibernateHelper {
 		return queryCount(getTransactionContext(sessionFactoryName), queryString, params);
 	}
 
-	public static <T> T doWork(Session session, ReturningWork<T> work)
+	public static <T> T doReturningWork(Session session, ReturningWork<T> work)
 		throws SQLException {
 		try {
 			return session.doReturningWork(work);
@@ -1173,7 +1171,7 @@ public final class HibernateHelper {
 
 	public static Integer updateSQL(Session session, final String sql, final Object... params)
 		throws SQLException {
-		return doWork(session, new ReturningWork<Integer>() {
+		return doReturningWork(session, new ReturningWork<Integer>() {
 			@Override
 			public Integer execute(Connection connection)
 				throws SQLException {
@@ -1212,7 +1210,7 @@ public final class HibernateHelper {
 
 	public static List<Map<String, String>> querySQLAsMap(Session session, final String sql)
 		throws SQLException {
-		return doWork(session, new ReturningWork<List<Map<String, String>>>() {
+		return doReturningWork(session, new ReturningWork<List<Map<String, String>>>() {
 			@Override
 			public List<Map<String, String>> execute(Connection connection)
 				throws SQLException {
@@ -1264,7 +1262,7 @@ public final class HibernateHelper {
 
 	public static List<Map<String, String>> querySQLPageAsMap(Session session, final String sql, final int startNum, final int numPerPage)
 		throws SQLException {
-		return doWork(session, new ReturningWork<List<Map<String, String>>>() {
+		return doReturningWork(session, new ReturningWork<List<Map<String, String>>>() {
 			@Override
 			public List<Map<String, String>> execute(Connection connection)
 				throws SQLException {
@@ -1323,7 +1321,7 @@ public final class HibernateHelper {
 
 	public static Long querySQLCount(Session session, final String sql, final Object... params)
 		throws SQLException {
-		return doWork(session, new ReturningWork<Long>() {
+		return doReturningWork(session, new ReturningWork<Long>() {
 			@Override
 			public Long execute(Connection connection)
 				throws SQLException {
@@ -1366,7 +1364,7 @@ public final class HibernateHelper {
 
 	public static Long[] querySQLCount(Session session, final String sql, final int countNum, final Object... params)
 		throws SQLException {
-		return doWork(session, new ReturningWork<Long[]>() {
+		return doReturningWork(session, new ReturningWork<Long[]>() {
 			@Override
 			public Long[] execute(Connection connection)
 				throws SQLException {
