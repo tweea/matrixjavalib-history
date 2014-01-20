@@ -6,24 +6,21 @@
 package net.matrix.sql.hibernate;
 
 /**
- * HQL 构造器。
- * 
- * @since 2005.06.15
+ * HQL 工具类。
  */
-public class HQLBuilder {
+public final class HQLs {
 	private static final char[] PARAMETER_PREFIX = {
 		':', 'p'
 	};
 
-	private StringBuilder sb;
-
-	public HQLBuilder() {
-		sb = new StringBuilder();
+	/**
+	 * 阻止实例化。
+	 */
+	private HQLs() {
 	}
 
-	public HQLBuilder appendParameterName(int index) {
+	public static void appendParameterName(StringBuilder sb, int index) {
 		sb.append(PARAMETER_PREFIX).append(index);
-		return this;
 	}
 
 	public static String getParameterName(int index) {
