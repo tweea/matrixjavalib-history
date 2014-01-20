@@ -14,11 +14,11 @@ import org.junit.Test;
  * @author Tweea
  * @version 2005-11-30
  */
-public class HQLBuilderTest {
+public class HQLsTest {
 	@Test
 	public void getParameterName()
 		throws Exception {
-		Assert.assertEquals("p0", HQLBuilder.getParameterName(0));
-		Assert.assertEquals("p10", HQLBuilder.getParameterName(10));
+		Assert.assertEquals("p0", HQLs.getParameterName(0));
+		Assert.assertEquals("p10", HQLs.getParameterName(10));
 	}
 }

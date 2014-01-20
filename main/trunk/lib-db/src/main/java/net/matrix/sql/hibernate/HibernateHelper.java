@@ -403,7 +403,7 @@ public final class HibernateHelper {
 	private static void setQueryParameter(Query query, Object... parameters) {
 		if (parameters != null) {
 			for (int i = 0; i < parameters.length; i++) {
-				query.setParameter(HQLBuilder.getParameterName(i), parameters[i]);
+				query.setParameter(HQLs.getParameterName(i), parameters[i]);
 			}
 		}
 	}
@@ -411,7 +411,7 @@ public final class HibernateHelper {
 	private static void setQueryParameter(Query query, Iterable parameters) {
 		int i = 0;
 		for (Object param : parameters) {
-			query.setParameter(HQLBuilder.getParameterName(i++), param);
+			query.setParameter(HQLs.getParameterName(i++), param);
 		}
 	}
 
