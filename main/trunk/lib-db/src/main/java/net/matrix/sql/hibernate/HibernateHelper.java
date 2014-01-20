@@ -56,12 +56,6 @@ public final class HibernateHelper {
 		return context.getSession();
 	}
 
-	// TODO How to get EntityMode.MAP mode Session?
-	private static Session getMapSession(HibernateTransactionContext context)
-		throws SQLException {
-		return context.getSession();
-	}
-
 	public static void beginTransaction()
 		throws SQLException {
 		getTransactionContext().begin();
@@ -381,7 +375,7 @@ public final class HibernateHelper {
 	 */
 	public static Map<String, Object> getAsMap(HibernateTransactionContext context, Class objectClass, Serializable primaryKey)
 		throws SQLException {
-		return getAsMap(getMapSession(context), objectClass, primaryKey);
+		return getAsMap(getSession(context), objectClass, primaryKey);
 	}
 
 	/**
@@ -679,7 +673,7 @@ public final class HibernateHelper {
 	 */
 	public static List<Map<String, Object>> queryAllAsMap(HibernateTransactionContext context, String queryString, Object... params)
 		throws SQLException {
-		return queryAllAsMap(getMapSession(context), queryString, params);
+		return queryAllAsMap(getSession(context), queryString, params);
 	}
 
 	/**
@@ -719,7 +713,7 @@ public final class HibernateHelper {
 	 */
 	public static List<Map<String, Object>> queryAllAsMap(HibernateTransactionContext context, String queryString, Iterable params)
 		throws SQLException {
-		return queryAllAsMap(getMapSession(context), queryString, params);
+		return queryAllAsMap(getSession(context), queryString, params);
 	}
 
 	/**
@@ -759,7 +753,7 @@ public final class HibernateHelper {
 	 */
 	public static List<Map<String, Object>> queryAllAsMap(HibernateTransactionContext context, String queryString, Map<String, ?> params)
 		throws SQLException {
-		return queryAllAsMap(getMapSession(context), queryString, params);
+		return queryAllAsMap(getSession(context), queryString, params);
 	}
 
 	/**
@@ -928,7 +922,7 @@ public final class HibernateHelper {
 	public static List<Map<String, Object>> queryPageAsMap(HibernateTransactionContext context, String queryString, int startNum, int maxResults,
 		Object... params)
 		throws SQLException {
-		return queryPageAsMap(getMapSession(context), queryString, startNum, maxResults, params);
+		return queryPageAsMap(getSession(context), queryString, startNum, maxResults, params);
 	}
 
 	/**
@@ -971,7 +965,7 @@ public final class HibernateHelper {
 	public static List<Map<String, Object>> queryPageAsMap(HibernateTransactionContext context, String queryString, int startNum, int maxResults,
 		Iterable params)
 		throws SQLException {
-		return queryPageAsMap(getMapSession(context), queryString, startNum, maxResults, params);
+		return queryPageAsMap(getSession(context), queryString, startNum, maxResults, params);
 	}
 
 	/**
@@ -1014,7 +1008,7 @@ public final class HibernateHelper {
 	public static List<Map<String, Object>> queryPageAsMap(HibernateTransactionContext context, String queryString, int startNum, int maxResults,
 		Map<String, ?> params)
 		throws SQLException {
-		return queryPageAsMap(getMapSession(context), queryString, startNum, maxResults, params);
+		return queryPageAsMap(getSession(context), queryString, startNum, maxResults, params);
 	}
 
 	/**
