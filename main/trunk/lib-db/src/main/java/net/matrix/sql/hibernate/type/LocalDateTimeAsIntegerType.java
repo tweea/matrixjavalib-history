@@ -13,7 +13,7 @@ import org.joda.time.LocalDateTime;
 /**
  * 将数据库中的整形值作为日期时间值处理的类型。
  */
-public class DateTimeAsIntegerType
+public class LocalDateTimeAsIntegerType
 	extends AbstractParameterizedUserType<LocalDateTime, Integer, IntegerColumnLocalDateTimeMapper> {
 	/**
 	 * 序列化。
