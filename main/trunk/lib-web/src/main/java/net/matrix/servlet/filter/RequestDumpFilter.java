@@ -112,9 +112,11 @@ public class RequestDumpFilter
 
 			if (hasCookie) {
 				Cookie[] cookies = httpRequest.getCookies();
-				if (cookies != null)
-					for (Cookie cookie : cookies)
+				if (cookies != null) {
+					for (Cookie cookie : cookies) {
 						dumpCookie(cookie, pw);
+					}
+				}
 			}
 
 			if (hasSession) {
@@ -166,10 +168,11 @@ public class RequestDumpFilter
 		Collections.sort(names);
 		for (String name : names) {
 			String[] values = request.getParameterValues(name);
-			if (values.length < 2)
+			if (values.length < 2) {
 				requestParameters.put(name, values[0]);
-			else
+			} else {
 				requestParameters.put(name, Arrays.toString(values));
+			}
 		}
 		dumpStringMap(writer, "Request Parameters", requestParameters);
 		// request attributes
@@ -233,41 +236,50 @@ public class RequestDumpFilter
 		int totalLen = title.length();
 		if (map.size() != 0) {
 			for (Map.Entry<String, String> item : map.entrySet()) {
-				if (item.getValue() == null)
+				if (item.getValue() == null) {
 					item.setValue("(null)");
-				if (item.getKey().length() > maxNameLen)
+				}
+				if (item.getKey().length() > maxNameLen) {
 					maxNameLen = item.getKey().length();
-				if (item.getValue().length() <= maxLength && item.getValue().length() > maxValueLen)
+				}
+				if (item.getValue().length() <= maxLength && item.getValue().length() > maxValueLen) {
 					maxValueLen = item.getValue().length();
-				else if (item.getValue().length() > maxLength)
+				} else if (item.getValue().length() > maxLength) {
 					maxValueLen = maxLength;
+				}
 			}
-			if (maxNameLen + maxValueLen + 1 > totalLen)
+			if (maxNameLen + maxValueLen + 1 > totalLen) {
 				totalLen = maxNameLen + maxValueLen + 1;
-			else
+			} else {
 				maxValueLen = totalLen - (maxNameLen + 1);
+			}
 		}
 		writer.print('+');
-		for (int i = 0; i < totalLen; i++)
+		for (int i = 0; i < totalLen; i++) {
 			writer.print('-');
+		}
 		writer.println('+');
 		writer.print('|');
 		writer.print(title);
-		for (int i = 0; i < totalLen - title.length(); i++)
+		for (int i = 0; i < totalLen - title.length(); i++) {
 			writer.print(' ');
+		}
 		writer.println('|');
 		if (map.size() == 0) {
 			writer.print('+');
-			for (int i = 0; i < totalLen; i++)
+			for (int i = 0; i < totalLen; i++) {
 				writer.print('-');
+			}
 			writer.println('+');
 		} else {
 			writer.print('+');
-			for (int i = 0; i < maxNameLen; i++)
+			for (int i = 0; i < maxNameLen; i++) {
 				writer.print('-');
+			}
 			writer.print('+');
-			for (int i = 0; i < maxValueLen; i++)
+			for (int i = 0; i < maxValueLen; i++) {
 				writer.print('-');
+			}
 			writer.println('+');
 			for (Map.Entry<String, String> item : map.entrySet()) {
 				writer.print('|');
