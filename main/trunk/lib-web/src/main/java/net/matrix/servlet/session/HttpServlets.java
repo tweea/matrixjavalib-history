@@ -14,6 +14,8 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.matrix.lang.Objects2;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
@@ -33,7 +35,7 @@ public final class HttpServlets {
 	public static void addMessage(HttpServletRequest request, String msg) {
 		StringBuffer sb = (StringBuffer) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
-			sb = new StringBuffer(255);
+			sb = new StringBuffer();
 			request.setAttribute(MESSAGE_KEY, sb);
 		}
 		sb.append(msg);
@@ -41,13 +43,16 @@ public final class HttpServlets {
 
 	public static String getMessage(HttpServletRequest request) {
 		StringBuffer sb = (StringBuffer) request.getAttribute(MESSAGE_KEY);
-		return sb != null ? sb.toString() : "";
+		if (sb == null) {
+			return "";
+		}
+		return sb.toString();
 	}
 
 	public static void addError(HttpServletRequest request, String errorMsg) {
 		StringBuffer sb = (StringBuffer) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
-			sb = new StringBuffer(255);
+			sb = new StringBuffer();
 			request.setAttribute(ERROR_KEY, sb);
 		}
 		sb.append(errorMsg);
@@ -55,10 +60,13 @@ public final class HttpServlets {
 
 	public static String getError(HttpServletRequest request) {
 		StringBuffer sb = (StringBuffer) request.getAttribute(ERROR_KEY);
-		return sb != null ? sb.toString() : "";
+		if (sb == null) {
+			return "";
+		}
+		return sb.toString();
 	}
 
-	public static void addBackURI(HttpServletRequest request, String uri) {
+	public static void setBackURI(HttpServletRequest request, String uri) {
 		request.setAttribute(BACK_URI_KEY, uri);
 	}
 
@@ -82,31 +90,31 @@ public final class HttpServlets {
 	// 参数获取方法
 	// /////////////////////////////////////////////////////////////////////////////////////
 	public static String getParameter(HttpServletRequest request, String property) {
-		String v = request.getParameter(property);
-		if (v == null) {
+		String value = request.getParameter(property);
+		if (value == null) {
 			return "";
 		}
-		return v;
+		return value;
 	}
 
 	public static int getIntParameter(HttpServletRequest request, String property) {
-		String value = getParameter(request, property);
-		if ("".equals(value)) {
+		String value = getParameter(request, property).trim();
+		if (!StringUtils.isNumeric(value)) {
 			return 0;
 		}
 		return Integer.parseInt(value);
 	}
 
 	public static long getLongParameter(HttpServletRequest request, String property) {
-		String value = getParameter(request, property);
-		if ("".equals(value)) {
+		String value = getParameter(request, property).trim();
+		if (!StringUtils.isNumeric(value)) {
 			return 0;
 		}
 		return Long.parseLong(value);
 	}
 
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property) {
-		String value = getParameter(request, property);
+		String value = getParameter(request, property).trim();
 		if ("".equals(value)) {
 			return BigDecimal.ZERO;
 		}
@@ -114,7 +122,7 @@ public final class HttpServlets {
 	}
 
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property, MathContext mc) {
-		String value = getParameter(request, property);
+		String value = getParameter(request, property).trim();
 		if ("".equals(value)) {
 			return new BigDecimal(0, mc);
 		}
@@ -122,7 +130,7 @@ public final class HttpServlets {
 	}
 
 	public static GregorianCalendar getGregorianCalendarParameter(HttpServletRequest request, String property, String format) {
-		String value = getParameter(request, property);
+		String value = getParameter(request, property).trim();
 		if ("".equals(value)) {
 			return null;
 		}
