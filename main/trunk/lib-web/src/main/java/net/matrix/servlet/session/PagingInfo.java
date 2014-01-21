@@ -14,7 +14,7 @@ public class PagingInfo {
 
 	private int pageIndex;
 
-	private int numberPerPage;
+	private int pageSize;
 
 	private long totalPage;
 
@@ -22,15 +22,15 @@ public class PagingInfo {
 		this("", "", 0, 0, 1);
 	}
 
-	public PagingInfo(String key, String url, long total, int pageIndex, int numberPerPage) {
+	public PagingInfo(String key, String url, long total, int pageIndex, int pageSize) {
 		this.key = key;
 		this.url = url;
 		this.total = total;
 		this.pageIndex = pageIndex;
-		if (numberPerPage <= 0) {
-			this.numberPerPage = 1;
+		if (pageSize <= 0) {
+			this.pageSize = 1;
 		} else {
-			this.numberPerPage = numberPerPage;
+			this.pageSize = pageSize;
 		}
 		computeTotalPage();
 	}
@@ -51,12 +51,12 @@ public class PagingInfo {
 		this.url = url;
 	}
 
-	public int getNumberPerPage() {
-		return numberPerPage;
+	public long getTotal() {
+		return total;
 	}
 
-	public void setNumberPerPage(int numberPerPage) {
-		this.numberPerPage = numberPerPage;
+	public void setTotal(long total) {
+		this.total = total;
 		computeTotalPage();
 	}
 
@@ -68,12 +68,12 @@ public class PagingInfo {
 		this.pageIndex = pageIndex;
 	}
 
-	public long getTotal() {
-		return total;
+	public int getPageSize() {
+		return pageSize;
 	}
 
-	public void setTotal(long total) {
-		this.total = total;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 		computeTotalPage();
 	}
 
@@ -87,11 +87,11 @@ public class PagingInfo {
 		sb.append(super.toString()).append("{");
 		sb.append("key=").append(key).append(",url=").append(url);
 		sb.append(",total=").append(total).append(",pageIndex=").append(pageIndex);
-		sb.append(",numberPerPage=").append(numberPerPage).append("}");
+		sb.append(",pageSize=").append(pageSize).append("}");
 		return sb.toString();
 	}
 
 	private void computeTotalPage() {
-		totalPage = (total + numberPerPage - 1) / numberPerPage;
+		totalPage = (total + pageSize - 1) / pageSize;
 	}
 }
