@@ -4,7 +4,6 @@ https://oss.sonatype.org
 ------ next ------
 文档、异常、测试、规则、兼容性、提升
 ------ next ------
-整理代码样式
 数据库
 	使用 dbutils、unitils
 	测试事务性
