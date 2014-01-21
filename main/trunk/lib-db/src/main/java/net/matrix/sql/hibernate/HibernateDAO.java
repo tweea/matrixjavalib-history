@@ -237,42 +237,6 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按HQL查询对象列表.
-	 * 
-	 * @param values
-	 *            数量可变的参数,按顺序绑定.
-	 */
-	public <X> List<X> find(final String hql, final Object... values) {
-		return createQuery(hql, values).list();
-	}
-
-	/**
-	 * 按HQL查询对象列表.
-	 * 
-	 * @param param
-	 *            命名参数,按名称绑定.
-	 */
-	public List<T> find(final String hql, final Map<String, ? extends Object> param) {
-		return createQuery(hql, param).list();
-	}
-
-	public Page<T> find(final String hql, final Map<String, ? extends Object> param, final Pageable pageable) {
-		long totalCount = count(hql, param);
-		List<T> result = createQuery(hql, param, pageable).list();
-		return new PageImpl(result, pageable, totalCount);
-	}
-
-	public long count(final String hql, final Map<String, ? extends Object> param) {
-		String countHql = buildCountQueryString(hql);
-
-		Number result = (Number) createQuery(countHql, param, null).uniqueResult();
-		if (result == null) {
-			throw new NonUniqueResultException(0);
-		}
-		return result.longValue();
-	}
-
-	/**
 	 * 按属性查找对象列表，匹配方式为相等。
 	 */
 	public List<T> findBy(final String propertyName, final Object value) {
@@ -310,11 +274,11 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * 判断对象的属性值在数据库内是否唯一。
 	 * 在修改对象的情景下，如果属性新修改的值（newValue）等于属性原来的值（oldValue）则不作比较。
 	 */
-	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
+	public boolean isPropertyUnique(final String propertyName, final T newValue, final T oldValue) {
 		if (newValue == null || newValue.equals(oldValue)) {
 			return true;
 		}
-		Object object = findOneBy(propertyName, newValue);
+		T object = findOneBy(propertyName, newValue);
 		return object == null;
 	}
 
@@ -334,59 +298,95 @@ public class HibernateDAO<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 按HQL查询唯一对象.
+	 * 按HQL查询对象列表.
 	 * 
-	 * @param values
+	 * @param param
 	 *            数量可变的参数,按顺序绑定.
 	 */
-	public <X> X findUnique(final String hql, final Object... values) {
-		return (X) createQuery(hql, values).uniqueResult();
+	public <X> List<X> find(final String hql, final Object... param) {
+		return createQuery(hql, param).list();
+	}
+
+	/**
+	 * 按HQL查询对象列表.
+	 * 
+	 * @param param
+	 *            命名参数,按名称绑定.
+	 */
+	public <X> List<X> find(final String hql, final Map<String, ?> param) {
+		return createQuery(hql, param).list();
+	}
+
+	public <X> Page<X> find(final String hql, final Map<String, ?> param, final Pageable pageable) {
+		long totalCount = count(hql, param);
+		List<X> result = createQuery(hql, param, pageable).list();
+		return new PageImpl(result, pageable, totalCount);
+	}
+
+	public long count(final String hql, final Map<String, ?> param) {
+		String countHql = buildCountQueryString(hql);
+
+		Number result = (Number) createQuery(countHql, param).uniqueResult();
+		if (result == null) {
+			throw new NonUniqueResultException(0);
+		}
+		return result.longValue();
 	}
 
 	/**
 	 * 按HQL查询唯一对象.
 	 * 
-	 * @param values
+	 * @param param
+	 *            数量可变的参数,按顺序绑定.
+	 */
+	public <X> X findUnique(final String hql, final Object... param) {
+		return (X) createQuery(hql, param).uniqueResult();
+	}
+
+	/**
+	 * 按HQL查询唯一对象.
+	 * 
+	 * @param param
 	 *            命名参数,按名称绑定.
 	 */
-	public <X> X findUnique(final String hql, final Map<String, ?> values) {
-		return (X) createQuery(hql, values).uniqueResult();
+	public <X> X findUnique(final String hql, final Map<String, ?> param) {
+		return (X) createQuery(hql, param).uniqueResult();
 	}
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
 	 * 
-	 * @param values
+	 * @param param
 	 *            数量可变的参数,按顺序绑定.
 	 * @return 更新记录数.
 	 */
-	public int batchExecute(final String hql, final Object... values) {
-		return createQuery(hql, values).executeUpdate();
+	public int batchExecute(final String hql, final Object... param) {
+		return createQuery(hql, param).executeUpdate();
 	}
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
 	 * 
-	 * @param values
+	 * @param param
 	 *            命名参数,按名称绑定.
 	 * @return 更新记录数.
 	 */
-	public int batchExecute(final String hql, final Map<String, ?> values) {
-		return createQuery(hql, values).executeUpdate();
+	public int batchExecute(final String hql, final Map<String, ?> param) {
+		return createQuery(hql, param).executeUpdate();
 	}
 
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 与find()方法可进行更加灵活的操作.
 	 * 
-	 * @param values
+	 * @param param
 	 *            数量可变的参数,按顺序绑定.
 	 */
-	public Query createQuery(final String queryString, final Object... values) {
-		Query query = currentSession().createQuery(queryString);
-		if (values != null) {
-			for (int i = 0; i < values.length; i++) {
-				query.setParameter(i, values[i]);
+	public Query createQuery(final String hql, final Object... param) {
+		Query query = currentSession().createQuery(hql);
+		if (param != null) {
+			for (int i = 0; i < param.length; i++) {
+				query.setParameter(i, param[i]);
 			}
 		}
 		return query;
@@ -396,13 +396,13 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 与find()方法可进行更加灵活的操作.
 	 * 
-	 * @param values
+	 * @param param
 	 *            命名参数,按名称绑定.
 	 */
-	public Query createQuery(final String queryString, final Map<String, ?> values) {
-		Query query = currentSession().createQuery(queryString);
-		if (values != null) {
-			query.setProperties(values);
+	public Query createQuery(final String hql, final Map<String, ?> param) {
+		Query query = currentSession().createQuery(hql);
+		if (param != null) {
+			query.setProperties(param);
 		}
 		return query;
 	}
@@ -418,7 +418,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 *            分页参数
 	 * @return Query 对象
 	 */
-	public Query createQuery(final String hql, final Map<String, ? extends Object> param, final Pageable pageable) {
+	public Query createQuery(final String hql, final Map<String, ?> param, final Pageable pageable) {
 		StringBuilder queryHql = new StringBuilder(hql);
 		if (pageable != null && pageable.getSort() != null) {
 			queryHql.append(" order by ");
