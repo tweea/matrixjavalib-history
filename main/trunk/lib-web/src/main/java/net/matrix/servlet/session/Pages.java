@@ -14,26 +14,26 @@ import org.apache.commons.lang3.StringUtils;
 import net.matrix.lang.Objects2;
 
 public final class Pages {
-	public static final String PAGING_KEY = "pagekey";
+	public static final String KEY_KEY = "page_key";
 
-	public static final String URL_KEY = "pageurl";
+	public static final String URL_KEY = "page_url";
 
-	public static final String INDEX_KEY = "pageindex";
+	public static final String TATAL_KEY = "page_total";
 
-	public static final String NUM_PER_PAGE_KEY = "numPerPage";
+	public static final String INDEX_KEY = "page_index";
 
-	public static final String TATAL_NUM_KEY = "total";
+	public static final String SIZE_KEY = "page_size";
 
 	public static void setPageInfos(HttpServletRequest request, PagingInfo info) {
-		request.setAttribute(PAGING_KEY, info.getKey());
+		request.setAttribute(KEY_KEY, info.getKey());
 		if (StringUtils.isEmpty(info.getUrl())) {
 			request.setAttribute(URL_KEY, request.getServletPath());
 		} else {
 			request.setAttribute(URL_KEY, info.getUrl());
 		}
+		request.setAttribute(TATAL_KEY, info.getTotal());
 		request.setAttribute(INDEX_KEY, info.getPageIndex());
-		request.setAttribute(NUM_PER_PAGE_KEY, info.getNumberPerPage());
-		request.setAttribute(TATAL_NUM_KEY, info.getTotal());
+		request.setAttribute(SIZE_KEY, info.getPageSize());
 	}
 
 	public static PagingInfo getPageInfos(HttpServletRequest request) {
@@ -44,21 +44,21 @@ public final class Pages {
 		PagingInfo info = new PagingInfo();
 		info.setKey(getPageKey(request));
 		info.setUrl(getUrl(request));
-		info.setPageIndex(getPageIndex(request));
-		info.setNumberPerPage(getNumbersPerPage(request, defaultValue));
 		info.setTotal(getTotal(request));
+		info.setPageIndex(getPageIndex(request));
+		info.setPageSize(getPageSize(request, defaultValue));
 		return info;
 	}
 
 	private static String getPageKey(HttpServletRequest request) {
-		String key = request.getParameter(PAGING_KEY);
+		String key = request.getParameter(KEY_KEY);
 		if (StringUtils.isEmpty(key)) {
-			key = (String) request.getAttribute(PAGING_KEY);
+			key = (String) request.getAttribute(KEY_KEY);
 		}
 		if (StringUtils.isEmpty(key)) {
 			key = UUID.randomUUID().toString();
 		}
-		request.setAttribute(PAGING_KEY, key);
+		request.setAttribute(KEY_KEY, key);
 		return key;
 	}
 
@@ -72,6 +72,22 @@ public final class Pages {
 		}
 		request.setAttribute(URL_KEY, url);
 		return url;
+	}
+
+	private static long getTotal(HttpServletRequest request) {
+		long total;
+		String page = request.getParameter(TATAL_KEY);
+		if (StringUtils.isEmpty(page)) {
+			total = Objects2.isNull((Long) request.getAttribute(TATAL_KEY), 0L);
+		} else {
+			try {
+				total = Long.parseLong(page);
+			} catch (NumberFormatException e) {
+				total = 0L;
+			}
+		}
+		request.setAttribute(TATAL_KEY, total);
+		return total;
 	}
 
 	private static int getPageIndex(HttpServletRequest request) {
@@ -90,38 +106,22 @@ public final class Pages {
 		return pageIndex;
 	}
 
-	private static int getNumbersPerPage(HttpServletRequest request, int defaultValue) {
+	private static int getPageSize(HttpServletRequest request, int defaultValue) {
 		if (defaultValue <= 0) {
 			throw new IllegalArgumentException("每页显示数目必须大于等于1");
 		}
-		int pageIndex;
-		String page = request.getParameter(NUM_PER_PAGE_KEY);
+		int pageSize;
+		String page = request.getParameter(SIZE_KEY);
 		if (StringUtils.isEmpty(page)) {
-			pageIndex = Objects2.isNull((Integer) request.getAttribute(NUM_PER_PAGE_KEY), defaultValue);
+			pageSize = Objects2.isNull((Integer) request.getAttribute(SIZE_KEY), defaultValue);
 		} else {
 			try {
-				pageIndex = Integer.parseInt(page);
+				pageSize = Integer.parseInt(page);
 			} catch (NumberFormatException e) {
-				pageIndex = 0;
+				pageSize = 0;
 			}
 		}
-		request.setAttribute(NUM_PER_PAGE_KEY, pageIndex);
-		return pageIndex;
-	}
-
-	private static long getTotal(HttpServletRequest request) {
-		long total;
-		String page = request.getParameter(TATAL_NUM_KEY);
-		if (StringUtils.isEmpty(page)) {
-			total = Objects2.isNull((Long) request.getAttribute(TATAL_NUM_KEY), 0L);
-		} else {
-			try {
-				total = Long.parseLong(page);
-			} catch (NumberFormatException e) {
-				total = 0L;
-			}
-		}
-		request.setAttribute(TATAL_NUM_KEY, total);
-		return total;
+		request.setAttribute(SIZE_KEY, pageSize);
+		return pageSize;
 	}
 }
