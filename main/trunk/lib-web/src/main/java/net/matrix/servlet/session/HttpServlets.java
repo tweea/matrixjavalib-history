@@ -14,8 +14,6 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.Validate;
-
 import net.matrix.lang.Objects2;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
@@ -27,7 +25,7 @@ public final class HttpServlets {
 
 	private static final String BACK_URI_KEY = "back_uri";
 
-	private static final String STORE_URI_KEY = "storeuri";
+	private static final String STORE_URI_KEY = "store_uri";
 
 	// /////////////////////////////////////////////////////////////////////////////////////
 	// 消息处理方法
@@ -136,7 +134,6 @@ public final class HttpServlets {
 	 * 返回的结果的Parameter名已去除前缀.
 	 */
 	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix) {
-		Validate.notNull(request, "Request must not be null");
 		if (prefix == null) {
 			prefix = "";
 		}
