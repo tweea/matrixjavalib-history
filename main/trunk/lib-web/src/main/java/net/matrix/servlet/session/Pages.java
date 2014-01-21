@@ -75,14 +75,15 @@ public final class Pages {
 	}
 
 	private static int getPageIndex(HttpServletRequest request) {
-		int pageIndex = 0;
+		int pageIndex;
 		String page = request.getParameter(INDEX_KEY);
 		if (StringUtils.isEmpty(page)) {
 			pageIndex = Objects2.isNull((Integer) request.getAttribute(INDEX_KEY), 0);
 		} else {
 			try {
 				pageIndex = Integer.parseInt(page);
-			} catch (NumberFormatException ne) {
+			} catch (NumberFormatException e) {
+				pageIndex = 0;
 			}
 		}
 		request.setAttribute(INDEX_KEY, pageIndex);
@@ -93,14 +94,15 @@ public final class Pages {
 		if (defaultValue <= 0) {
 			throw new IllegalArgumentException("每页显示数目必须大于等于1");
 		}
-		int pageIndex = 0;
+		int pageIndex;
 		String page = request.getParameter(NUM_PER_PAGE_KEY);
 		if (StringUtils.isEmpty(page)) {
 			pageIndex = Objects2.isNull((Integer) request.getAttribute(NUM_PER_PAGE_KEY), defaultValue);
 		} else {
 			try {
 				pageIndex = Integer.parseInt(page);
-			} catch (NumberFormatException ne) {
+			} catch (NumberFormatException e) {
+				pageIndex = 0;
 			}
 		}
 		request.setAttribute(NUM_PER_PAGE_KEY, pageIndex);
@@ -108,17 +110,18 @@ public final class Pages {
 	}
 
 	private static long getTotal(HttpServletRequest request) {
-		long pageIndex = 0;
+		long total;
 		String page = request.getParameter(TATAL_NUM_KEY);
 		if (StringUtils.isEmpty(page)) {
-			pageIndex = Objects2.isNull((Long) request.getAttribute(TATAL_NUM_KEY), 0L);
+			total = Objects2.isNull((Long) request.getAttribute(TATAL_NUM_KEY), 0L);
 		} else {
 			try {
-				pageIndex = Integer.parseInt(page);
-			} catch (NumberFormatException ne) {
+				total = Long.parseLong(page);
+			} catch (NumberFormatException e) {
+				total = 0L;
 			}
 		}
-		request.setAttribute(TATAL_NUM_KEY, pageIndex);
-		return pageIndex;
+		request.setAttribute(TATAL_NUM_KEY, total);
+		return total;
 	}
 }

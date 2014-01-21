@@ -5,9 +5,7 @@
  */
 package net.matrix.web.http;
 
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -33,14 +31,14 @@ public final class HTTPs {
 	public static String encodeParameterStringWithPrefix(final Map<String, Object> params, final String prefix) {
 		StringBuilder queryStringBuilder = new StringBuilder();
 
-		Iterator<Entry<String, Object>> it = params.entrySet().iterator();
-		while (it.hasNext()) {
-			Entry<String, Object> entry = it.next();
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
 			queryStringBuilder.append(prefix).append(entry.getKey()).append("=").append(entry.getValue());
-			if (it.hasNext()) {
-				queryStringBuilder.append("&");
-			}
+			queryStringBuilder.append("&");
 		}
+		if (queryStringBuilder.length() > 0) {
+			queryStringBuilder.setLength(queryStringBuilder.length() - 1);
+		}
+
 		return queryStringBuilder.toString();
 	}
 

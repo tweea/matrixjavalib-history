@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 在会话中设置标示。
  * 
@@ -27,7 +29,7 @@ public final class Tokens {
 
 	public static boolean isTokenValid(HttpServletRequest request, String key) {
 		String token = request.getParameter(key);
-		if (token == null || "".equals(token)) {
+		if (StringUtils.isBlank(token)) {
 			return false;
 		}
 		String session = (String) request.getSession(true).getAttribute(key);
