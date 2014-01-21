@@ -5,69 +5,37 @@
  */
 package net.matrix.sql.hibernate.type;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.regex.Pattern;
 
 import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
 import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.usertype.ParameterizedType;
-import org.hibernate.usertype.UserType;
+import org.jadira.usertype.spi.shared.AbstractParameterizedUserType;
+import org.jadira.usertype.spi.shared.ConfigurationHelper;
 
+/**
+ * 将数据库中的字符串值作为整形列表值处理的类型。
+ */
 public class IntegerListAsStringType
-	implements UserType, ParameterizedType {
-	private String separator;
-
-	private Pattern pattern;
-
-	public IntegerListAsStringType() {
-		separator = ",";
-		pattern = Pattern.compile(separator);
-	}
+	extends AbstractParameterizedUserType<List<Integer>, String, StringColumnIntegerListMapper> {
+	/**
+	 * 序列化。
+	 */
+	private static final long serialVersionUID = 2068406929466129144L;
 
 	@Override
-	public int[] sqlTypes() {
-		return new int[] {
-			Types.VARCHAR
-		};
-	}
-
-	@Override
-	public Class returnedClass() {
-		return List.class;
-	}
-
-	@Override
-	public boolean equals(Object x, Object y)
-		throws HibernateException {
-		return x.equals(y);
-	}
-
-	@Override
-	public int hashCode(Object x)
-		throws HibernateException {
-		return x.hashCode();
-	}
-
-	@Override
-	public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
+	public List<Integer> nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner)
 		throws HibernateException, SQLException {
-		String r = rs.getString(names[0]);
-		if (r == null) {
+		List<Integer> list = super.nullSafeGet(rs, names, session, owner);
+		if (list == null) {
 			return new ArrayList();
 		}
-		List<Integer> l = new ArrayList<Integer>();
-		String[] list = pattern.split(r);
-		for (String item : list) {
-			l.add(Integer.parseInt(item));
-		}
-		return l;
+		return list;
 	}
 
 	@Override
@@ -78,60 +46,31 @@ public class IntegerListAsStringType
 			return;
 		}
 		List<Integer> v = (List) value;
-		if (v.size() == 0) {
+		if (v.isEmpty()) {
 			st.setNull(index, Types.VARCHAR);
 			return;
 		}
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < v.size(); i++) {
-			if (i != 0) {
-				sb.append(separator);
-			}
-			sb.append(v.get(i));
+		super.nullSafeSet(st, value, index, session);
+	}
+
+	@Override
+	public void applyConfiguration(SessionFactory sessionFactory) {
+		super.applyConfiguration(sessionFactory);
+
+		StringColumnIntegerListMapper columnMapper = getColumnMapper();
+
+		String separator = null;
+		if (getParameterValues() != null) {
+			separator = getParameterValues().getProperty("separator");
 		}
-		st.setString(index, sb.toString());
-	}
-
-	@Override
-	public Object deepCopy(Object value)
-		throws HibernateException {
-		if (value == null) {
-			return null;
+		if (separator == null) {
+			separator = ConfigurationHelper.getProperty("separator");
 		}
-		return new ArrayList((List) value);
-	}
 
-	@Override
-	public boolean isMutable() {
-		return true;
-	}
-
-	@Override
-	public Serializable disassemble(Object value)
-		throws HibernateException {
-		return (Serializable) deepCopy(value);
-	}
-
-	@Override
-	public Object assemble(Serializable cached, Object owner)
-		throws HibernateException {
-		return deepCopy(cached);
-	}
-
-	@Override
-	public Object replace(Object original, Object target, Object owner)
-		throws HibernateException {
-		return deepCopy(original);
-	}
-
-	@Override
-	public void setParameterValues(Properties parameters) {
-		if (parameters == null) {
-			return;
-		}
-		if (parameters.get("separator") != null) {
-			this.separator = parameters.getProperty("separator");
-			this.pattern = Pattern.compile(separator);
+		if (separator == null) {
+			columnMapper.setSeparator(",");
+		} else {
+			columnMapper.setSeparator(separator);
 		}
 	}
 }
