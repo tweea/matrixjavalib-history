@@ -7,7 +7,6 @@ https://oss.sonatype.org
 数据库
 	使用 dbutils、unitils
 	测试事务性
-	整理 Hibernate 工具类
 Web
 	整理 Web 工具类
 异常
