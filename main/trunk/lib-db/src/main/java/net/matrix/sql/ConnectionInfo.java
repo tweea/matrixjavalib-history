@@ -142,7 +142,7 @@ public class ConnectionInfo
 	 * @throws SQLException
 	 *             找不到驱动类或建立连接失败
 	 */
-	public Connection getConnection()
+	public final Connection getConnection()
 		throws SQLException {
 		try {
 			Class.forName(driverClass);

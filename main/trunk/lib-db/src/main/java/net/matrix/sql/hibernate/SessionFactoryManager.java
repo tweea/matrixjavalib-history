@@ -43,11 +43,11 @@ public final class SessionFactoryManager
 	 */
 	private static final Map<String, SessionFactoryManager> INSTANCES = new HashMap<String, SessionFactoryManager>();
 
-	private String factoryName;
+	private final String factoryName;
 
-	private String configResource;
+	private final String configResource;
 
-	private ThreadLocal<HibernateTransactionContext> threadContext;
+	private final ThreadLocal<HibernateTransactionContext> threadContext;
 
 	private Configuration configuration;
 
