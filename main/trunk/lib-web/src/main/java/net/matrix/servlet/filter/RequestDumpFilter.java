@@ -332,7 +332,7 @@ public class RequestDumpFilter
 		}
 	}
 
-	private class ClassAndToString {
+	private static class ClassAndToString {
 		private String clazz;
 
 		private String toString;
