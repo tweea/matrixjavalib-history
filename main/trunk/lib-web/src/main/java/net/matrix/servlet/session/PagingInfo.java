@@ -75,6 +75,12 @@ public class PagingInfo {
 		return total;
 	}
 
+	/**
+	 * 设置总记录数
+	 * 
+	 * @param total
+	 *            总记录数
+	 */
 	public void setTotal(long total) {
 		this.total = total;
 		computeTotalPage();
@@ -92,6 +98,12 @@ public class PagingInfo {
 		return pageSize;
 	}
 
+	/**
+	 * 设置每页记录数
+	 * 
+	 * @param pageSize
+	 *            每页记录数
+	 */
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 		computeTotalPage();

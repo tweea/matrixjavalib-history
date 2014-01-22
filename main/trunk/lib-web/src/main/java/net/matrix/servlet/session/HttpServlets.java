@@ -6,8 +6,8 @@
 package net.matrix.servlet.session;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -241,12 +241,12 @@ public final class HttpServlets {
 	 *            日期格式
 	 * @return 参数内容
 	 */
-	public static GregorianCalendar getGregorianCalendarParameter(HttpServletRequest request, String property, String format) {
+	public static Calendar getCalendarParameter(HttpServletRequest request, String property, String format) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
 			return null;
 		}
-		return (GregorianCalendar) DateFormatHelper.parse(value, format);
+		return DateFormatHelper.parse(value, format);
 	}
 
 	/**
