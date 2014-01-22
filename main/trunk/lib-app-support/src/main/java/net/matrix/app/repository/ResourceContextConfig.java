@@ -34,7 +34,7 @@ public class ResourceContextConfig
 			String version = catalogNode.getString("[@version]");
 			// resource 节点
 			List<HierarchicalConfiguration> resourcesNode = catalogNode.configurationsAt("file");
-			if (resourcesNode.size() == 0) {
+			if (resourcesNode.isEmpty()) {
 				set.add(new ResourceSelection(catalog, version, null));
 			} else {
 				for (HierarchicalConfiguration resourceNode : resourcesNode) {
