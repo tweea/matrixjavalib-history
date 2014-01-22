@@ -13,6 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import net.matrix.lang.Objects2;
 
+/**
+ * 分页工具。
+ */
 public final class Pages {
 	public static final String KEY_KEY = "page_key";
 

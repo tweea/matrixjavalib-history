@@ -6,7 +6,6 @@
 package net.matrix.servlet.session;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Map;
@@ -19,6 +18,9 @@ import org.apache.commons.lang3.StringUtils;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
 
+/**
+ * 参数和请求工具。
+ */
 public final class HttpServlets {
 	private static final String ERROR_KEY = "error_key";
 
@@ -37,15 +39,30 @@ public final class HttpServlets {
 	// /////////////////////////////////////////////////////////////////////////////////////
 	// 消息处理方法
 	// /////////////////////////////////////////////////////////////////////////////////////
-	public static void addMessage(HttpServletRequest request, String msg) {
+	/**
+	 * 附加消息内容。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param message
+	 *            消息内容
+	 */
+	public static void addMessage(HttpServletRequest request, String message) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
 			sb = new StringBuilder();
 			request.setAttribute(MESSAGE_KEY, sb);
 		}
-		sb.append(msg);
+		sb.append(message);
 	}
 
+	/**
+	 * 获取消息内容。
+	 * 
+	 * @param request
+	 *            请求
+	 * @return 消息内容
+	 */
 	public static String getMessage(HttpServletRequest request) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
@@ -54,15 +71,30 @@ public final class HttpServlets {
 		return sb.toString();
 	}
 
-	public static void addError(HttpServletRequest request, String errorMsg) {
+	/**
+	 * 附加错误内容。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param message
+	 *            错误内容
+	 */
+	public static void addError(HttpServletRequest request, String message) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
 			sb = new StringBuilder();
 			request.setAttribute(ERROR_KEY, sb);
 		}
-		sb.append(errorMsg);
+		sb.append(message);
 	}
 
+	/**
+	 * 获取消息内容。
+	 * 
+	 * @param request
+	 *            请求
+	 * @return 消息内容
+	 */
 	public static String getError(HttpServletRequest request) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
@@ -71,29 +103,74 @@ public final class HttpServlets {
 		return sb.toString();
 	}
 
+	/**
+	 * 设置回退 URI。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param uri
+	 *            回退 URI
+	 */
 	public static void setBackURI(HttpServletRequest request, String uri) {
 		request.setAttribute(BACK_URI_KEY, uri);
 	}
 
+	/**
+	 * 获取回退 URI。
+	 * 
+	 * @param request
+	 *            请求
+	 * @return 回退 URI
+	 */
 	public static String getBackURI(HttpServletRequest request) {
 		return (String) request.getAttribute(BACK_URI_KEY);
 	}
 
+	/**
+	 * 设置请求 URI。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param requestURI
+	 *            请求 URI
+	 */
 	public static void setRequestURI(HttpServletRequest request, String requestURI) {
 		request.getSession(true).setAttribute(STORE_URI_KEY, requestURI);
 	}
 
+	/**
+	 * 保存当前请求 URI。
+	 * 
+	 * @param request
+	 *            请求
+	 */
 	public static void storeRequestURI(HttpServletRequest request) {
 		request.getSession(true).setAttribute(STORE_URI_KEY, request.getRequestURI());
 	}
 
-	public static String getStoredRequestURI(HttpServletRequest request) {
+	/**
+	 * 获取请求 URI。
+	 * 
+	 * @param request
+	 *            请求
+	 * @return 请求 URI
+	 */
+	public static String getRequestURI(HttpServletRequest request) {
 		return (String) request.getSession(true).getAttribute(STORE_URI_KEY);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////////////
 	// 参数获取方法
 	// /////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * 获取字符串参数。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param property
+	 *            参数名
+	 * @return 参数内容
+	 */
 	public static String getParameter(HttpServletRequest request, String property) {
 		String value = request.getParameter(property);
 		if (value == null) {
@@ -102,6 +179,15 @@ public final class HttpServlets {
 		return value;
 	}
 
+	/**
+	 * 获取整形参数。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param property
+	 *            参数名
+	 * @return 参数内容
+	 */
 	public static int getIntParameter(HttpServletRequest request, String property) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
@@ -110,6 +196,15 @@ public final class HttpServlets {
 		return Integer.parseInt(value);
 	}
 
+	/**
+	 * 获取长整形参数。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param property
+	 *            参数名
+	 * @return 参数内容
+	 */
 	public static long getLongParameter(HttpServletRequest request, String property) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
@@ -118,6 +213,15 @@ public final class HttpServlets {
 		return Long.parseLong(value);
 	}
 
+	/**
+	 * 获取 BigDecimal 参数。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param property
+	 *            参数名
+	 * @return 参数内容
+	 */
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
@@ -126,14 +230,17 @@ public final class HttpServlets {
 		return new BigDecimal(value);
 	}
 
-	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property, MathContext mc) {
-		String value = request.getParameter(property);
-		if (StringUtils.isBlank(value)) {
-			return new BigDecimal(0, mc);
-		}
-		return new BigDecimal(value, mc);
-	}
-
+	/**
+	 * 获取日期参数。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param property
+	 *            参数名
+	 * @param format
+	 *            日期格式
+	 * @return 参数内容
+	 */
 	public static GregorianCalendar getGregorianCalendarParameter(HttpServletRequest request, String property, String format) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
@@ -143,8 +250,14 @@ public final class HttpServlets {
 	}
 
 	/**
-	 * 取得带相同前缀的 Request Parameters, copy from spring。
-	 * 返回的结果的 Parameter 名已去除前缀。
+	 * 取得带相同前缀的参数。
+	 * 返回的结果的参数名已去除前缀。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param prefix
+	 *            前缀
+	 * @return 参数内容
 	 */
 	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix) {
 		if (prefix == null) {

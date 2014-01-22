@@ -26,6 +26,9 @@ public final class Servlets {
 
 	/**
 	 * 获取客户端 UserAgent 字符串。
+	 * 
+	 * @param request
+	 *            请求
 	 */
 	public static String getUserAgent(final HttpServletRequest request) {
 		return request.getHeader(HttpHeaders.USER_AGENT);
@@ -33,6 +36,9 @@ public final class Servlets {
 
 	/**
 	 * 设置客户端缓存过期时间的 Header。
+	 * 
+	 * @param response
+	 *            响应
 	 */
 	public static void setExpiresHeader(final HttpServletResponse response, final long expiresSeconds) {
 		// Http 1.0 header, set a fix expires date.
@@ -43,6 +49,9 @@ public final class Servlets {
 
 	/**
 	 * 设置禁止客户端缓存的 Header。
+	 * 
+	 * @param response
+	 *            响应
 	 */
 	public static void setNoCacheHeader(final HttpServletResponse response) {
 		// Http 1.0 header
@@ -54,6 +63,9 @@ public final class Servlets {
 
 	/**
 	 * 设置 LastModified Header。
+	 * 
+	 * @param response
+	 *            响应
 	 */
 	public static void setLastModifiedHeader(final HttpServletResponse response, final long lastModifiedDate) {
 		response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModifiedDate);
@@ -63,6 +75,10 @@ public final class Servlets {
 	 * 根据浏览器 If-Modified-Since Header，计算文件是否已被修改。
 	 * 如果无修改，返回 false，设置 304 not modify status。
 	 * 
+	 * @param request
+	 *            请求
+	 * @param response
+	 *            响应
 	 * @param lastModified
 	 *            内容的最后修改时间
 	 */
@@ -77,6 +93,9 @@ public final class Servlets {
 
 	/**
 	 * 设置 ETag Header。
+	 * 
+	 * @param response
+	 *            响应
 	 */
 	public static void setEtag(final HttpServletResponse response, final String etag) {
 		response.setHeader(HttpHeaders.ETAG, etag);
@@ -86,6 +105,10 @@ public final class Servlets {
 	 * 根据浏览器 If-None-Match Header，计算 ETag 是否已失效。
 	 * 如果 ETag 有效，返回 false，设置 304 not modify status。
 	 * 
+	 * @param request
+	 *            请求
+	 * @param response
+	 *            响应
 	 * @param etag
 	 *            内容的ETag
 	 */
@@ -117,6 +140,8 @@ public final class Servlets {
 	/**
 	 * 设置让浏览器弹出下载对话框的 Header。
 	 * 
+	 * @param response
+	 *            响应
 	 * @param filename
 	 *            下载后的文件名
 	 */
