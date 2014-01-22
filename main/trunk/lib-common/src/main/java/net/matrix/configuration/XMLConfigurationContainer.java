@@ -46,6 +46,9 @@ public class XMLConfigurationContainer
 			config.setReloadingStrategy(new FileChangedReloadingStrategy());
 			config.addConfigurationListener(new ConfigurationReloadingListener(this));
 		} catch (IOException e) {
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("", e);
+			}
 			try {
 				config.load(resource.getInputStream());
 			} catch (IOException ise) {

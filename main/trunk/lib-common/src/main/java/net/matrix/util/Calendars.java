@@ -7,11 +7,18 @@ package net.matrix.util;
 
 import org.joda.time.DateTime;
 import org.joda.time.IllegalFieldValueException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 日期工具类。
  */
 public final class Calendars {
+	/**
+	 * 日志记录器。
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(Calendars.class);
+
 	/**
 	 * 阻止实例化。
 	 */
@@ -34,6 +41,9 @@ public final class Calendars {
 			buildDate(year, month, day);
 			return true;
 		} catch (IllegalFieldValueException e) {
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("", e);
+			}
 			return false;
 		}
 	}
