@@ -23,7 +23,6 @@ https://oss.sonatype.org
 检查规则
 	整理开发规范
 	精简 Sonar 规则
-	应用 JSR305 注解
 依赖
 	OSGi
 发展计划
