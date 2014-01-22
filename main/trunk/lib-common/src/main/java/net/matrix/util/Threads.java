@@ -36,7 +36,6 @@ public final class Threads {
 		try {
 			Thread.sleep(durationMillis);
 		} catch (InterruptedException e) {
-			LOG.trace("", e);
 			Thread.currentThread().interrupt();
 		}
 	}
@@ -53,7 +52,6 @@ public final class Threads {
 		try {
 			Thread.sleep(unit.toMillis(duration));
 		} catch (InterruptedException e) {
-			LOG.trace("", e);
 			Thread.currentThread().interrupt();
 		}
 	}
@@ -88,7 +86,6 @@ public final class Threads {
 				}
 			}
 		} catch (InterruptedException ie) {
-			LOG.trace("", ie);
 			// (Re-)Cancel if current thread also interrupted
 			pool.shutdownNow();
 			// Preserve interrupt status
@@ -113,7 +110,6 @@ public final class Threads {
 				LOG.error("Pool did not terminated");
 			}
 		} catch (InterruptedException ie) {
-			LOG.trace("", ie);
 			Thread.currentThread().interrupt();
 		}
 	}
