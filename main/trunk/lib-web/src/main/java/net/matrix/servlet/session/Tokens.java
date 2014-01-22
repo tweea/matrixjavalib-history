@@ -23,16 +23,43 @@ public final class Tokens {
 	private Tokens() {
 	}
 
+	/**
+	 * 产生新的标示。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param key
+	 *            主键
+	 * @return 标示
+	 */
 	public static String generateToken(HttpServletRequest request, String key) {
 		String token = UUID.randomUUID().toString();
 		request.getSession(true).setAttribute(key, token);
 		return token;
 	}
 
+	/**
+	 * 获取已有标示。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param key
+	 *            主键
+	 * @return 标示
+	 */
 	public static String getToken(HttpServletRequest request, String key) {
 		return (String) request.getSession(true).getAttribute(key);
 	}
 
+	/**
+	 * 判断标示是否有效。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param key
+	 *            主键
+	 * @return 是否有效
+	 */
 	public static boolean isTokenValid(HttpServletRequest request, String key) {
 		String token = request.getParameter(key);
 		if (StringUtils.isBlank(token)) {
@@ -42,6 +69,14 @@ public final class Tokens {
 		return token.equals(session);
 	}
 
+	/**
+	 * 删除标示。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param key
+	 *            主键
+	 */
 	public static void removeToken(HttpServletRequest request, String key) {
 		request.getSession(true).removeAttribute(key);
 	}
