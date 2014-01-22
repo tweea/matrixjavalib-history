@@ -343,12 +343,12 @@ public class RequestDumpFilter
 		}
 	}
 
-	private static class ClassAndToString {
+	private static final class ClassAndToString {
 		private final String clazz;
 
 		private final String toString;
 
-		private ClassAndToString(Object obj) {
+		public ClassAndToString(Object obj) {
 			if (obj == null) {
 				this.clazz = "(n/a)";
 				this.toString = "(null)";

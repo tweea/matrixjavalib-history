@@ -125,7 +125,9 @@ public final class Servlets {
 		String headerValue = request.getHeader(HttpHeaders.IF_NONE_MATCH);
 		if (headerValue != null) {
 			boolean conditionSatisfied = false;
-			if (!"*".equals(headerValue)) {
+			if ("*".equals(headerValue)) {
+				conditionSatisfied = true;
+			} else {
 				StringTokenizer commaTokenizer = new StringTokenizer(headerValue, ",");
 				while (!conditionSatisfied && commaTokenizer.hasMoreTokens()) {
 					String currentToken = commaTokenizer.nextToken();
@@ -133,8 +135,6 @@ public final class Servlets {
 						conditionSatisfied = true;
 					}
 				}
-			} else {
-				conditionSatisfied = true;
 			}
 
 			if (conditionSatisfied) {
