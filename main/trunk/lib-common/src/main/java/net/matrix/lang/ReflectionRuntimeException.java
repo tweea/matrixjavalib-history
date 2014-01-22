@@ -41,8 +41,7 @@ public class ReflectionRuntimeException
 	 *            原因异常（使用 {@link #getCause()} 方法获取）。可以使用 <tt>null</tt> 值，指原因异常不存在或未知。
 	 */
 	public ReflectionRuntimeException(final Throwable cause) {
-		super();
-		initCause(cause);
+		super(getInitCause(cause));
 	}
 
 	/**
@@ -56,15 +55,18 @@ public class ReflectionRuntimeException
 	 *            原因异常（使用 {@link #getCause()} 方法获取）。可以使用 <tt>null</tt> 值，指原因异常不存在或未知。
 	 */
 	public ReflectionRuntimeException(final String message, final Throwable cause) {
-		super(message);
-		initCause(cause);
+		super(message, getInitCause(cause));
 	}
 
 	@Override
 	public synchronized Throwable initCause(final Throwable cause) {
+		return super.initCause(getInitCause(cause));
+	}
+
+	private static Throwable getInitCause(final Throwable cause) {
 		if (cause instanceof InvocationTargetException) {
-			return super.initCause(((InvocationTargetException) cause).getTargetException());
+			return ((InvocationTargetException) cause).getTargetException();
 		}
-		return super.initCause(cause);
+		return cause;
 	}
 }
