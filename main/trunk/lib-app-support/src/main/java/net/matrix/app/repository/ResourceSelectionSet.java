@@ -137,17 +137,23 @@ public class ResourceSelectionSet {
 
 		// 读取源版本
 		Set<ResourceSelection> sourceEntrys = selections;
-		LOG.debug("源版本：" + sourceEntrys);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("源版本：" + sourceEntrys);
+		}
 
 		// 读取目标版本
 		Set<ResourceSelection> targetEntrys = target.selections;
-		LOG.debug("目标版本：" + targetEntrys);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("目标版本：" + targetEntrys);
+		}
 
 		// 处理是否更新
 		diffs.addAll(targetEntrys);
 		diffs.removeAll(sourceEntrys);
 
-		LOG.debug("更新结果：" + diffs);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("更新结果：" + diffs);
+		}
 		return diffs;
 	}
 }

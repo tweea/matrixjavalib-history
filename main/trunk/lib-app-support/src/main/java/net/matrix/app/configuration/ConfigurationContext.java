@@ -47,7 +47,7 @@ public final class ConfigurationContext
 	 */
 	public static ConfigurationContext load(final ResourceRepository repository, final ResourceSelection selection)
 		throws ConfigurationException {
-		LOG.debug("从 " + selection + " 加载配置集合");
+		LOG.debug("从 {} 加载配置集合", selection);
 		Resource resource = repository.getResource(selection);
 		if (resource == null) {
 			throw new ConfigurationException(selection + " 解析失败");
@@ -57,6 +57,14 @@ public final class ConfigurationContext
 		return new ConfigurationContext(repository, contextConfig);
 	}
 
+	/**
+	 * 根据必要信息构造。
+	 * 
+	 * @param repository
+	 *            资源仓库
+	 * @param contextConfig
+	 *            资源仓库加载环境配置
+	 */
 	public ConfigurationContext(final ResourceRepository repository, final ResourceContextConfig contextConfig) {
 		super(repository, contextConfig);
 		this.containerCache = new ConcurrentHashMap<Resource, ReloadableConfigurationContainer>();
@@ -96,6 +104,8 @@ public final class ConfigurationContext
 	/**
 	 * 加载配置资源，返回配置对象。
 	 * 
+	 * @param <T>
+	 *            配置对象的类型
 	 * @param selection
 	 *            配置资源选择
 	 * @return 配置对象
@@ -124,7 +134,7 @@ public final class ConfigurationContext
 				throw new ConfigurationException("配置类 " + type.getName() + " 实例化失败", e);
 			}
 			// 加载配置
-			LOG.debug("从 " + selection + "(" + resource + ") 加载配置");
+			LOG.debug("从 {}({}) 加载配置", selection, resource);
 			try {
 				container.load(resource);
 			} catch (ConfigurationException e) {

@@ -45,10 +45,32 @@ public class CodedMessage {
 	 */
 	private final List<CodedMessage> messages;
 
+	/**
+	 * 构造一个消息，记录时间为现在。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param level
+	 *            消息级别
+	 * @param arguments
+	 *            参数列表
+	 */
 	public CodedMessage(final String code, final CodedMessageLevel level, final String... arguments) {
 		this(code, System.currentTimeMillis(), level, arguments);
 	}
 
+	/**
+	 * 构造一个消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param time
+	 *            记录时间
+	 * @param level
+	 *            消息级别
+	 * @param arguments
+	 *            参数列表
+	 */
 	public CodedMessage(final String code, final long time, final CodedMessageLevel level, final String... arguments) {
 		this.code = code;
 		this.time = time;
