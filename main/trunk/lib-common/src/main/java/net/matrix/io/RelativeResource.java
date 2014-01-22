@@ -5,9 +5,12 @@
  */
 package net.matrix.io;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * 相对定位的资源。
  */
+@Immutable
 public class RelativeResource {
 	/**
 	 * 根路径名。
