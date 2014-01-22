@@ -348,10 +348,10 @@ public class DefaultTree<ID, DATA>
 		@Override
 		public int hashCode() {
 			if (hash == 0) {
-				if (parent != null) {
-					hash = parent.hashCode() * 31 + index;
-				} else {
+				if (parent == null) {
 					hash = 31 + index;
+				} else {
+					hash = parent.hashCode() * 31 + index;
 				}
 			}
 			return hash;
@@ -360,10 +360,10 @@ public class DefaultTree<ID, DATA>
 		@Override
 		public String toString() {
 			if (string == null) {
-				if (parent != null) {
-					string = parent.toString() + "," + index;
-				} else {
+				if (parent == null) {
 					string = Integer.toString(index);
+				} else {
+					string = parent.toString() + "," + index;
 				}
 			}
 			return string;
