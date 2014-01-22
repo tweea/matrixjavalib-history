@@ -406,7 +406,8 @@ public final class HibernateHelper {
 	private static void setQueryParameter(Query query, Iterable parameters) {
 		int i = 0;
 		for (Object param : parameters) {
-			query.setParameter(HQLs.getParameterName(i++), param);
+			query.setParameter(HQLs.getParameterName(i), param);
+			i++;
 		}
 	}
 
@@ -1286,7 +1287,7 @@ public final class HibernateHelper {
 					}
 					int j = 0;
 					while (rs.next() && j < numPerPage) {
-						HashMap<String, String> row = new HashMap<String, String>();
+						Map<String, String> row = new HashMap<String, String>();
 						for (i = 0; i < count; i++) {
 							String tem = Objects2.isNull(rs.getString(i + 1), "");
 							row.put(str[i], tem);
