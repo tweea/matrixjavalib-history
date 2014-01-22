@@ -5,12 +5,15 @@
  */
 package net.matrix.app.repository;
 
+import javax.annotation.concurrent.Immutable;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * 资源仓库选择，指向资源仓库中的一项资源。
  */
+@Immutable
 public class ResourceSelection {
 	/**
 	 * 类别。

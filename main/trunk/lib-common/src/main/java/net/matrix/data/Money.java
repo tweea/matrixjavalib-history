@@ -9,19 +9,22 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * 金额：包括数量和货币。
  */
+@Immutable
 public class Money {
 	/**
 	 * 数量。
 	 */
-	private BigDecimal amount;
+	private final BigDecimal amount;
 
 	/**
 	 * 货币。
 	 */
-	private Currency currency;
+	private final Currency currency;
 
 	/**
 	 * 使用特定数量和默认货币构造对象。
