@@ -17,6 +17,12 @@ import org.apache.commons.lang3.StringUtils;
  * @since 2005.11.10
  */
 public final class Tokens {
+	/**
+	 * 阻止实例化。
+	 */
+	private Tokens() {
+	}
+
 	public static String generateToken(HttpServletRequest request, String key) {
 		String token = UUID.randomUUID().toString();
 		request.getSession(true).setAttribute(key, token);

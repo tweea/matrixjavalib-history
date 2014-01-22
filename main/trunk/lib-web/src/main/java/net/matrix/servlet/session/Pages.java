@@ -24,6 +24,12 @@ public final class Pages {
 
 	public static final String SIZE_KEY = "page_size";
 
+	/**
+	 * 阻止实例化。
+	 */
+	private Pages() {
+	}
+
 	public static void setPageInfos(HttpServletRequest request, PagingInfo info) {
 		request.setAttribute(KEY_KEY, info.getKey());
 		if (StringUtils.isEmpty(info.getUrl())) {
