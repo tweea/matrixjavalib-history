@@ -21,10 +21,27 @@ public class PagingInfo {
 
 	private long totalPage;
 
+	/**
+	 * 构造空对象。
+	 */
 	public PagingInfo() {
 		this("", "", 0, 0, 1);
 	}
 
+	/**
+	 * 根据实际信息构造。
+	 * 
+	 * @param key
+	 *            主键
+	 * @param url
+	 *            URL
+	 * @param total
+	 *            总记录数
+	 * @param pageIndex
+	 *            页号
+	 * @param pageSize
+	 *            每页记录数
+	 */
 	public PagingInfo(String key, String url, long total, int pageIndex, int pageSize) {
 		this.key = key;
 		this.url = url;

@@ -29,6 +29,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 保存所有请求内容。
+ */
 public class RequestDumpFilter
 	implements Filter {
 	private static final Logger LOG = LoggerFactory.getLogger(RequestDumpFilter.class);
@@ -337,7 +340,7 @@ public class RequestDumpFilter
 
 		private String toString;
 
-		public ClassAndToString(Object obj) {
+		private ClassAndToString(Object obj) {
 			if (obj == null) {
 				this.clazz = "(n/a)";
 				this.toString = "(null)";
