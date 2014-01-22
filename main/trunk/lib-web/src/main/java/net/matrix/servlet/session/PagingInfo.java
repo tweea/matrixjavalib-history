@@ -5,6 +5,9 @@
  */
 package net.matrix.servlet.session;
 
+/**
+ * 分页信息。
+ */
 public class PagingInfo {
 	private String key;
 

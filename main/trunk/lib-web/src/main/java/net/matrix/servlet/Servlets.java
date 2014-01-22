@@ -29,6 +29,7 @@ public final class Servlets {
 	 * 
 	 * @param request
 	 *            请求
+	 * @return 客户端 UserAgent 字符串
 	 */
 	public static String getUserAgent(final HttpServletRequest request) {
 		return request.getHeader(HttpHeaders.USER_AGENT);
@@ -39,6 +40,8 @@ public final class Servlets {
 	 * 
 	 * @param response
 	 *            响应
+	 * @param expiresSeconds
+	 *            过期时间
 	 */
 	public static void setExpiresHeader(final HttpServletResponse response, final long expiresSeconds) {
 		// Http 1.0 header, set a fix expires date.
@@ -66,9 +69,11 @@ public final class Servlets {
 	 * 
 	 * @param response
 	 *            响应
+	 * @param lastModified
+	 *            最后修改时间
 	 */
-	public static void setLastModifiedHeader(final HttpServletResponse response, final long lastModifiedDate) {
-		response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModifiedDate);
+	public static void setLastModifiedHeader(final HttpServletResponse response, final long lastModified) {
+		response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 	}
 
 	/**
@@ -81,6 +86,7 @@ public final class Servlets {
 	 *            响应
 	 * @param lastModified
 	 *            内容的最后修改时间
+	 * @return 文件是否已被修改
 	 */
 	public static boolean checkIfModifiedSince(final HttpServletRequest request, final HttpServletResponse response, final long lastModified) {
 		long ifModifiedSince = request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
@@ -96,6 +102,8 @@ public final class Servlets {
 	 * 
 	 * @param response
 	 *            响应
+	 * @param etag
+	 *            内容的ETag
 	 */
 	public static void setEtag(final HttpServletResponse response, final String etag) {
 		response.setHeader(HttpHeaders.ETAG, etag);
@@ -111,6 +119,7 @@ public final class Servlets {
 	 *            响应
 	 * @param etag
 	 *            内容的ETag
+	 * @return 是否已失效
 	 */
 	public static boolean checkIfNoneMatchEtag(final HttpServletRequest request, final HttpServletResponse response, final String etag) {
 		String headerValue = request.getHeader(HttpHeaders.IF_NONE_MATCH);
