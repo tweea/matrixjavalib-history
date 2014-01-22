@@ -63,6 +63,13 @@ public enum CodedMessageLevel {
 		this.code = code;
 	}
 
+	/**
+	 * 根据编码查找。
+	 * 
+	 * @param code
+	 *            编码
+	 * @return 编码消息级别
+	 */
 	public static CodedMessageLevel forCode(final Integer code) {
 		return CODE_MAP.get(code);
 	}

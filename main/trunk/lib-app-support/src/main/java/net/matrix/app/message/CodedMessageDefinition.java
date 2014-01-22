@@ -75,6 +75,13 @@ public class CodedMessageDefinition {
 
 	/**
 	 * 默认构造器。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param locale
+	 *            区域
+	 * @param template
+	 *            模板
 	 */
 	public CodedMessageDefinition(final String code, final Locale locale, final String template) {
 		this.code = code;

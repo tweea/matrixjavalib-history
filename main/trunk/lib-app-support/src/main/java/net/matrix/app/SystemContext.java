@@ -63,6 +63,8 @@ public interface SystemContext {
 	/**
 	 * 按类型注册对象。
 	 * 
+	 * @param <T>
+	 *            对象类型
 	 * @param type
 	 *            类型
 	 * @param object

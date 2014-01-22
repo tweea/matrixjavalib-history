@@ -44,26 +44,80 @@ public final class CodedMessages {
 	private CodedMessages() {
 	}
 
+	/**
+	 * 新建跟踪级别的消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param arguments
+	 *            参数列表
+	 * @return 新建的消息
+	 */
 	public static CodedMessage trace(final String code, final String... arguments) {
 		return new CodedMessage(code, CodedMessageLevel.TRACE, arguments);
 	}
 
+	/**
+	 * 新建调试级别的消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param arguments
+	 *            参数列表
+	 * @return 新建的消息
+	 */
 	public static CodedMessage debug(final String code, final String... arguments) {
 		return new CodedMessage(code, CodedMessageLevel.DEBUG, arguments);
 	}
 
+	/**
+	 * 新建消息级别的消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param arguments
+	 *            参数列表
+	 * @return 新建的消息
+	 */
 	public static CodedMessage information(final String code, final String... arguments) {
 		return new CodedMessage(code, CodedMessageLevel.INFORMATION, arguments);
 	}
 
+	/**
+	 * 新建警告级别的消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param arguments
+	 *            参数列表
+	 * @return 新建的消息
+	 */
 	public static CodedMessage warning(final String code, final String... arguments) {
 		return new CodedMessage(code, CodedMessageLevel.WARNING, arguments);
 	}
 
+	/**
+	 * 新建错误级别的消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param arguments
+	 *            参数列表
+	 * @return 新建的消息
+	 */
 	public static CodedMessage error(final String code, final String... arguments) {
 		return new CodedMessage(code, CodedMessageLevel.ERROR, arguments);
 	}
 
+	/**
+	 * 新建致命错误级别的消息。
+	 * 
+	 * @param code
+	 *            编码
+	 * @param arguments
+	 *            参数列表
+	 * @return 新建的消息
+	 */
 	public static CodedMessage fatal(final String code, final String... arguments) {
 		return new CodedMessage(code, CodedMessageLevel.FATAL, arguments);
 	}
@@ -77,7 +131,7 @@ public final class CodedMessages {
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static List<CodedMessage> load(InputStream reader)
+	public static List<CodedMessage> load(final InputStream reader)
 		throws CodedMessageException {
 		Document document;
 		try {
@@ -100,7 +154,7 @@ public final class CodedMessages {
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static List<CodedMessage> load(Reader reader)
+	public static List<CodedMessage> load(final Reader reader)
 		throws CodedMessageException {
 		Document document;
 		try {
@@ -114,7 +168,7 @@ public final class CodedMessages {
 		return load0(document.getDocumentElement());
 	}
 
-	private static List<CodedMessage> load0(Node node) {
+	private static List<CodedMessage> load0(final Node node) {
 		List<CodedMessage> messageList = new ArrayList<CodedMessage>();
 		NodeList messageNodeList = node.getChildNodes();
 		for (int i = 0; i < messageNodeList.getLength(); i++) {
@@ -129,7 +183,7 @@ public final class CodedMessages {
 		return messageList;
 	}
 
-	private static CodedMessage load1(Node node) {
+	private static CodedMessage load1(final Node node) {
 		NamedNodeMap messageNodeAttributes = node.getAttributes();
 		String code = getCodeNode(messageNodeAttributes).getNodeValue();
 		long time = Long.parseLong(messageNodeAttributes.getNamedItem("time").getNodeValue());
@@ -152,7 +206,7 @@ public final class CodedMessages {
 		return message;
 	}
 
-	private static Node getCodeNode(NamedNodeMap messageNodeAttributes) {
+	private static Node getCodeNode(final NamedNodeMap messageNodeAttributes) {
 		Node codeNode = messageNodeAttributes.getNamedItem("logId");
 		if (codeNode == null) {
 			codeNode = messageNodeAttributes.getNamedItem("code");
@@ -163,12 +217,14 @@ public final class CodedMessages {
 	/**
 	 * 保存到文件。
 	 * 
+	 * @param messageList
+	 *            消息记录组
 	 * @param writer
 	 *            输出流
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static void save(List<CodedMessage> messageList, OutputStream writer)
+	public static void save(final List<CodedMessage> messageList, final OutputStream writer)
 		throws CodedMessageException {
 		try {
 			Document document = save0(messageList);
@@ -183,12 +239,14 @@ public final class CodedMessages {
 	/**
 	 * 保存到文件。
 	 * 
+	 * @param messageList
+	 *            消息记录组
 	 * @param writer
 	 *            输出流
 	 * @throws CodedMessageException
 	 *             操作异常
 	 */
-	public static void save(List<CodedMessage> messageList, Writer writer)
+	public static void save(final List<CodedMessage> messageList, final Writer writer)
 		throws CodedMessageException {
 		try {
 			Document document = save0(messageList);
@@ -200,7 +258,7 @@ public final class CodedMessages {
 		}
 	}
 
-	private static Document save0(List<CodedMessage> messageList)
+	private static Document save0(final List<CodedMessage> messageList)
 		throws CodedMessageException {
 		try {
 			DocumentBuilder builder = DOM_FACTORY.newDocumentBuilder();
@@ -216,7 +274,7 @@ public final class CodedMessages {
 		}
 	}
 
-	private static Element save1(CodedMessage message, Document document) {
+	private static Element save1(final CodedMessage message, final Document document) {
 		Element messageElement = document.createElement("message");
 		messageElement.setAttribute("time", Long.toString(message.getTime()));
 		messageElement.setAttribute("code", message.getCode());

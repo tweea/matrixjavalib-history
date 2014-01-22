@@ -40,6 +40,9 @@ public class DefaultSystemContext
 
 	private SystemController controller;
 
+	/**
+	 * 默认构造器。
+	 */
 	public DefaultSystemContext() {
 		objects = new HashMap<String, Object>();
 	}
