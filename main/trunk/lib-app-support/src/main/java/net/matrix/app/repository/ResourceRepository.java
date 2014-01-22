@@ -71,7 +71,7 @@ public class ResourceRepository {
 			}
 			path = path.substring(0, path.lastIndexOf('/'));
 		}
-		if (LOG.isTraceEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("未找到资源：" + selection);
 		}
 		return null;
