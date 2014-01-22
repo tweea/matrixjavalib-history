@@ -65,11 +65,19 @@ public class RequestDumpFilter
 		throws ServletException {
 		this.filterConfig = filterConfigIn;
 		this.enabled = "true".equals(filterConfigIn.getInitParameter("enable"));
-		this.hasRequesst = !"false".equals(filterConfigIn.getInitParameter("hasRequesst"));
-		this.hasCookie = !"false".equals(filterConfigIn.getInitParameter("hasCookie"));
-		this.hasResponse = !"false".equals(filterConfigIn.getInitParameter("hasResponse"));
-		this.hasSession = !"false".equals(filterConfigIn.getInitParameter("hasSession"));
-		if (!StringUtils.isEmpty(filterConfigIn.getInitParameter("maxLength"))) {
+		if (StringUtils.isNotEmpty(filterConfigIn.getInitParameter("hasRequesst"))) {
+			this.hasRequesst = "true".equals(filterConfigIn.getInitParameter("hasRequesst"));
+		}
+		if (StringUtils.isNotEmpty(filterConfigIn.getInitParameter("hasCookie"))) {
+			this.hasCookie = "true".equals(filterConfigIn.getInitParameter("hasCookie"));
+		}
+		if (StringUtils.isNotEmpty(filterConfigIn.getInitParameter("hasResponse"))) {
+			this.hasResponse = "true".equals(filterConfigIn.getInitParameter("hasResponse"));
+		}
+		if (StringUtils.isNotEmpty(filterConfigIn.getInitParameter("hasSession"))) {
+			this.hasSession = "true".equals(filterConfigIn.getInitParameter("hasSession"));
+		}
+		if (StringUtils.isNotEmpty(filterConfigIn.getInitParameter("maxLength"))) {
 			this.maxLength = Integer.parseInt(filterConfigIn.getInitParameter("maxLength"));
 		}
 	}
@@ -336,9 +344,9 @@ public class RequestDumpFilter
 	}
 
 	private static class ClassAndToString {
-		private String clazz;
+		private final String clazz;
 
-		private String toString;
+		private final String toString;
 
 		private ClassAndToString(Object obj) {
 			if (obj == null) {

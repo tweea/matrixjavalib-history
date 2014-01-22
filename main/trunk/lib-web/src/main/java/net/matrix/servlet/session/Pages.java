@@ -33,6 +33,14 @@ public final class Pages {
 	private Pages() {
 	}
 
+	/**
+	 * 保存分页信息。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param info
+	 *            分页信息
+	 */
 	public static void setPageInfos(HttpServletRequest request, PagingInfo info) {
 		request.setAttribute(KEY_KEY, info.getKey());
 		if (StringUtils.isEmpty(info.getUrl())) {
@@ -45,17 +53,33 @@ public final class Pages {
 		request.setAttribute(SIZE_KEY, info.getPageSize());
 	}
 
+	/**
+	 * 提取分页信息，默认为每页一条记录。
+	 * 
+	 * @param request
+	 *            请求
+	 * @return 分页信息
+	 */
 	public static PagingInfo getPageInfos(HttpServletRequest request) {
 		return getPageInfos(request, 1);
 	}
 
-	public static PagingInfo getPageInfos(HttpServletRequest request, int defaultValue) {
+	/**
+	 * 提取分页信息。
+	 * 
+	 * @param request
+	 *            请求
+	 * @param defaultPageSize
+	 *            默认每页记录数
+	 * @return 分页信息
+	 */
+	public static PagingInfo getPageInfos(HttpServletRequest request, int defaultPageSize) {
 		PagingInfo info = new PagingInfo();
 		info.setKey(getPageKey(request));
 		info.setUrl(getUrl(request));
 		info.setTotal(getTotal(request));
 		info.setPageIndex(getPageIndex(request));
-		info.setPageSize(getPageSize(request, defaultValue));
+		info.setPageSize(getPageSize(request, defaultPageSize));
 		return info;
 	}
 
