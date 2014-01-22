@@ -82,12 +82,14 @@ public class SystemInitializeListener
 	 * 装配系统资源加载器。
 	 */
 	protected void setupResourceLoader() {
+		// 空实现
 	}
 
 	/**
 	 * 加载系统配置。
 	 */
 	protected void loadConfig() {
+		// 空实现
 	}
 
 	/**
