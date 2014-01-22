@@ -14,12 +14,12 @@ public class ResourceContext {
 	/**
 	 * 资源仓库。
 	 */
-	private ResourceRepository repository;
+	private final ResourceRepository repository;
 
 	/**
 	 * 加载环境配置。
 	 */
-	private ResourceContextConfig contextConfig;
+	private final ResourceContextConfig contextConfig;
 
 	/**
 	 * @param repository

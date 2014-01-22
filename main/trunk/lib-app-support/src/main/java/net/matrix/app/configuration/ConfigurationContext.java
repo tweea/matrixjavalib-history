@@ -106,6 +106,8 @@ public final class ConfigurationContext
 	 * 
 	 * @param <T>
 	 *            配置对象的类型
+	 * @param type
+	 *            配置对象的类型
 	 * @param selection
 	 *            配置资源选择
 	 * @return 配置对象
