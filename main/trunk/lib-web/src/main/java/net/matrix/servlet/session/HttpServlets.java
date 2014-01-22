@@ -28,20 +28,26 @@ public final class HttpServlets {
 
 	private static final String STORE_URI_KEY = "store_uri";
 
+	/**
+	 * 阻止实例化。
+	 */
+	private HttpServlets() {
+	}
+
 	// /////////////////////////////////////////////////////////////////////////////////////
 	// 消息处理方法
 	// /////////////////////////////////////////////////////////////////////////////////////
 	public static void addMessage(HttpServletRequest request, String msg) {
-		StringBuffer sb = (StringBuffer) request.getAttribute(MESSAGE_KEY);
+		StringBuilder sb = (StringBuilder) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
-			sb = new StringBuffer();
+			sb = new StringBuilder();
 			request.setAttribute(MESSAGE_KEY, sb);
 		}
 		sb.append(msg);
 	}
 
 	public static String getMessage(HttpServletRequest request) {
-		StringBuffer sb = (StringBuffer) request.getAttribute(MESSAGE_KEY);
+		StringBuilder sb = (StringBuilder) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
 			return "";
 		}
@@ -49,16 +55,16 @@ public final class HttpServlets {
 	}
 
 	public static void addError(HttpServletRequest request, String errorMsg) {
-		StringBuffer sb = (StringBuffer) request.getAttribute(ERROR_KEY);
+		StringBuilder sb = (StringBuilder) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
-			sb = new StringBuffer();
+			sb = new StringBuilder();
 			request.setAttribute(ERROR_KEY, sb);
 		}
 		sb.append(errorMsg);
 	}
 
 	public static String getError(HttpServletRequest request) {
-		StringBuffer sb = (StringBuffer) request.getAttribute(ERROR_KEY);
+		StringBuilder sb = (StringBuilder) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
 			return "";
 		}
