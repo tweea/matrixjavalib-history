@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.matrix.lang.Objects2;
 import net.matrix.text.DateFormatHelper;
 import net.matrix.util.IterableEnumeration;
 
@@ -98,48 +97,48 @@ public final class HttpServlets {
 	}
 
 	public static int getIntParameter(HttpServletRequest request, String property) {
-		String value = getParameter(request, property).trim();
-		if (!StringUtils.isNumeric(value)) {
+		String value = request.getParameter(property);
+		if (StringUtils.isBlank(value)) {
 			return 0;
 		}
 		return Integer.parseInt(value);
 	}
 
 	public static long getLongParameter(HttpServletRequest request, String property) {
-		String value = getParameter(request, property).trim();
-		if (!StringUtils.isNumeric(value)) {
-			return 0;
+		String value = request.getParameter(property);
+		if (StringUtils.isBlank(value)) {
+			return 0L;
 		}
 		return Long.parseLong(value);
 	}
 
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property) {
-		String value = getParameter(request, property).trim();
-		if ("".equals(value)) {
+		String value = request.getParameter(property);
+		if (StringUtils.isBlank(value)) {
 			return BigDecimal.ZERO;
 		}
 		return new BigDecimal(value);
 	}
 
 	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property, MathContext mc) {
-		String value = getParameter(request, property).trim();
-		if ("".equals(value)) {
+		String value = request.getParameter(property);
+		if (StringUtils.isBlank(value)) {
 			return new BigDecimal(0, mc);
 		}
 		return new BigDecimal(value, mc);
 	}
 
 	public static GregorianCalendar getGregorianCalendarParameter(HttpServletRequest request, String property, String format) {
-		String value = getParameter(request, property).trim();
-		if ("".equals(value)) {
+		String value = request.getParameter(property);
+		if (StringUtils.isBlank(value)) {
 			return null;
 		}
 		return (GregorianCalendar) DateFormatHelper.parse(value, format);
 	}
 
 	/**
-	 * 取得带相同前缀的Request Parameters, copy from spring.
-	 * 返回的结果的Parameter名已去除前缀.
+	 * 取得带相同前缀的 Request Parameters, copy from spring。
+	 * 返回的结果的 Parameter 名已去除前缀。
 	 */
 	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix) {
 		if (prefix == null) {
@@ -161,12 +160,5 @@ public final class HttpServlets {
 			}
 		}
 		return params;
-	}
-
-	// /////////////////////////////////////////////////////////////////////////////////////
-	// 其它
-	// /////////////////////////////////////////////////////////////////////////////////////
-	public static String getDisplayString(String string) {
-		return Objects2.isNull(string, "");
 	}
 }
