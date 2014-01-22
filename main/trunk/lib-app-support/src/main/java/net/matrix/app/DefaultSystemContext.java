@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class DefaultSystemContext
 
 	private Configuration config;
 
-	private Map<String, Object> objects;
+	private final Map<String, Object> objects;
 
 	private SystemController controller;
 
@@ -86,9 +87,9 @@ public class DefaultSystemContext
 			try {
 				config = new PropertiesConfiguration(resource.getURL());
 			} catch (IOException e) {
-				throw new RuntimeException("sysconfig.cfg 加载失败", e);
+				throw new ConfigurationRuntimeException("sysconfig.cfg 加载失败", e);
 			} catch (ConfigurationException e) {
-				throw new RuntimeException("sysconfig.cfg 加载失败", e);
+				throw new ConfigurationRuntimeException("sysconfig.cfg 加载失败", e);
 			}
 		}
 		return config;

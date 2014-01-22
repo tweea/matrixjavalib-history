@@ -27,17 +27,21 @@ public class DefaultSystemController
 
 	@Override
 	public void init() {
+		// 空实现
 	}
 
 	@Override
 	public void start() {
+		// 空实现
 	}
 
 	@Override
 	public void stop() {
+		// 空实现
 	}
 
 	@Override
 	public void reset() {
+		// 空实现
 	}
 }

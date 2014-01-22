@@ -23,7 +23,7 @@ public class ResourceSelectionSet {
 	/**
 	 * 内部集合。
 	 */
-	private Set<ResourceSelection> selections;
+	private final Set<ResourceSelection> selections;
 
 	/**
 	 * 构造一个空的集合。
