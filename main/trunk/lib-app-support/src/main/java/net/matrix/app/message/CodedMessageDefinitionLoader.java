@@ -27,6 +27,12 @@ public final class CodedMessageDefinitionLoader {
 	private static final Logger LOG = LoggerFactory.getLogger(CodedMessageDefinitionLoader.class);
 
 	/**
+	 * 阻止实例化。
+	 */
+	private CodedMessageDefinitionLoader() {
+	}
+
+	/**
 	 * 从类路径中加载所有名为 codedMessageDefinition.xml 的配置文件。
 	 * 
 	 * @param resolver

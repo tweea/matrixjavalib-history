@@ -20,6 +20,12 @@ public final class GlobalSystemContext {
 	private static SystemContext global;
 
 	/**
+	 * 阻止实例化。
+	 */
+	private GlobalSystemContext() {
+	}
+
+	/**
 	 * 获取系统环境的全局实例，如果不存在则建立默认的系统环境实例。
 	 * 
 	 * @return 系统环境的全局实例
