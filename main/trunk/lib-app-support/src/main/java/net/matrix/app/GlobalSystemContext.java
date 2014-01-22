@@ -17,7 +17,7 @@ public final class GlobalSystemContext {
 	/**
 	 * 系统环境的全局实例。
 	 */
-	private volatile static SystemContext global;
+	private static SystemContext global;
 
 	/**
 	 * 获取系统环境的全局实例，如果不存在则建立默认的系统环境实例。
