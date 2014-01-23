@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.google.common.base.Charsets;
+
 /**
  * HTTP 工具类。
  */
@@ -53,6 +55,6 @@ public final class HTTPs {
 	 */
 	public static String encodeHttpBasic(final String username, final String password) {
 		String encode = username + ":" + password;
-		return "Basic " + Base64.encodeBase64String(encode.getBytes());
+		return "Basic " + Base64.encodeBase64String(encode.getBytes(Charsets.UTF_8));
 	}
 }

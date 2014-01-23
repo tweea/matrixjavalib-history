@@ -41,7 +41,7 @@ public final class Pages {
 	 * @param info
 	 *            分页信息
 	 */
-	public static void setPageInfos(HttpServletRequest request, PagingInfo info) {
+	public static void setPageInfos(final HttpServletRequest request, final PagingInfo info) {
 		request.setAttribute(KEY_KEY, info.getKey());
 		if (StringUtils.isEmpty(info.getUrl())) {
 			request.setAttribute(URL_KEY, request.getServletPath());
@@ -60,7 +60,7 @@ public final class Pages {
 	 *            请求
 	 * @return 分页信息
 	 */
-	public static PagingInfo getPageInfos(HttpServletRequest request) {
+	public static PagingInfo getPageInfos(final HttpServletRequest request) {
 		return getPageInfos(request, 1);
 	}
 
@@ -73,7 +73,7 @@ public final class Pages {
 	 *            默认每页记录数
 	 * @return 分页信息
 	 */
-	public static PagingInfo getPageInfos(HttpServletRequest request, int defaultPageSize) {
+	public static PagingInfo getPageInfos(final HttpServletRequest request, final int defaultPageSize) {
 		PagingInfo info = new PagingInfo();
 		info.setKey(getPageKey(request));
 		info.setUrl(getUrl(request));
@@ -83,7 +83,7 @@ public final class Pages {
 		return info;
 	}
 
-	private static String getPageKey(HttpServletRequest request) {
+	private static String getPageKey(final HttpServletRequest request) {
 		String key = request.getParameter(KEY_KEY);
 		if (StringUtils.isEmpty(key)) {
 			key = (String) request.getAttribute(KEY_KEY);
@@ -95,7 +95,7 @@ public final class Pages {
 		return key;
 	}
 
-	private static String getUrl(HttpServletRequest request) {
+	private static String getUrl(final HttpServletRequest request) {
 		String url = request.getParameter(URL_KEY);
 		if (StringUtils.isEmpty(url)) {
 			url = (String) request.getAttribute(URL_KEY);
@@ -107,7 +107,7 @@ public final class Pages {
 		return url;
 	}
 
-	private static long getTotal(HttpServletRequest request) {
+	private static long getTotal(final HttpServletRequest request) {
 		long total;
 		String page = request.getParameter(TATAL_KEY);
 		if (StringUtils.isEmpty(page)) {
@@ -123,7 +123,7 @@ public final class Pages {
 		return total;
 	}
 
-	private static int getPageIndex(HttpServletRequest request) {
+	private static int getPageIndex(final HttpServletRequest request) {
 		int pageIndex;
 		String page = request.getParameter(INDEX_KEY);
 		if (StringUtils.isEmpty(page)) {
@@ -139,7 +139,7 @@ public final class Pages {
 		return pageIndex;
 	}
 
-	private static int getPageSize(HttpServletRequest request, int defaultValue) {
+	private static int getPageSize(final HttpServletRequest request, final int defaultValue) {
 		if (defaultValue <= 0) {
 			throw new IllegalArgumentException("每页显示数目必须大于等于1");
 		}

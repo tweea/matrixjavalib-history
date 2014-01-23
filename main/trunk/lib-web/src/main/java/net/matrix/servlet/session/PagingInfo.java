@@ -9,16 +9,34 @@ package net.matrix.servlet.session;
  * 分页信息。
  */
 public class PagingInfo {
+	/**
+	 * 主键。
+	 */
 	private String key;
 
+	/**
+	 * URL。
+	 */
 	private String url;
 
+	/**
+	 * 总记录数。
+	 */
 	private long total;
 
+	/**
+	 * 页号。
+	 */
 	private int pageIndex;
 
+	/**
+	 * 每页记录数。
+	 */
 	private int pageSize;
 
+	/**
+	 * 总页数。
+	 */
 	private long totalPage;
 
 	/**
@@ -42,7 +60,7 @@ public class PagingInfo {
 	 * @param pageSize
 	 *            每页记录数
 	 */
-	public PagingInfo(String key, String url, long total, int pageIndex, int pageSize) {
+	public PagingInfo(final String key, final String url, final long total, final int pageIndex, final int pageSize) {
 		this.key = key;
 		this.url = url;
 		this.total = total;
@@ -59,7 +77,7 @@ public class PagingInfo {
 		return key;
 	}
 
-	public void setKey(String key) {
+	public void setKey(final String key) {
 		this.key = key;
 	}
 
@@ -67,7 +85,7 @@ public class PagingInfo {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(final String url) {
 		this.url = url;
 	}
 
@@ -81,7 +99,7 @@ public class PagingInfo {
 	 * @param total
 	 *            总记录数
 	 */
-	public void setTotal(long total) {
+	public void setTotal(final long total) {
 		this.total = total;
 		computeTotalPage();
 	}
@@ -90,7 +108,7 @@ public class PagingInfo {
 		return pageIndex;
 	}
 
-	public void setPageIndex(int pageIndex) {
+	public void setPageIndex(final int pageIndex) {
 		this.pageIndex = pageIndex;
 	}
 
@@ -104,13 +122,17 @@ public class PagingInfo {
 	 * @param pageSize
 	 *            每页记录数
 	 */
-	public void setPageSize(int pageSize) {
+	public void setPageSize(final int pageSize) {
 		this.pageSize = pageSize;
 		computeTotalPage();
 	}
 
 	public long getTotalPage() {
 		return totalPage;
+	}
+
+	private void computeTotalPage() {
+		totalPage = (total + pageSize - 1) / pageSize;
 	}
 
 	@Override
@@ -121,9 +143,5 @@ public class PagingInfo {
 		sb.append(",total=").append(total).append(",pageIndex=").append(pageIndex);
 		sb.append(",pageSize=").append(pageSize).append("}");
 		return sb.toString();
-	}
-
-	private void computeTotalPage() {
-		totalPage = (total + pageSize - 1) / pageSize;
 	}
 }
