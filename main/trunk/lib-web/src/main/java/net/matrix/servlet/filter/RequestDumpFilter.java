@@ -354,14 +354,10 @@ public class RequestDumpFilter
 			for (Map.Entry<String, ClassAndToString> item : map.entrySet()) {
 				writer.print('|');
 				writer.print(item.getKey());
-				for (int i = 0; i < maxNameLen - item.getKey().length(); i++) {
-					writer.print(' ');
-				}
+				printChar(writer, ' ', maxNameLen - item.getKey().length());
 				writer.print('|');
 				writer.print(item.getValue().clazz);
-				for (int i = 0; i < maxClassLen - item.getValue().clazz.length(); i++) {
-					writer.print(' ');
-				}
+				printChar(writer, ' ', maxClassLen - item.getValue().clazz.length());
 				writer.println('|');
 				int linNum = item.getValue().toString.length() / maxLength;
 				if (item.getValue().toString.length() % maxLength != 0) {
