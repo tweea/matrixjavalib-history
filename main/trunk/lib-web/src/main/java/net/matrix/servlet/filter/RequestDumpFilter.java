@@ -251,79 +251,57 @@ public class RequestDumpFilter
 			}
 		}
 		writer.print('+');
-		for (int i = 0; i < totalLen; i++) {
-			writer.print('-');
-		}
+		printChar(writer, '-', totalLen);
 		writer.println('+');
 		writer.print('|');
 		writer.print(title);
-		for (int i = 0; i < totalLen - title.length(); i++) {
-			writer.print(' ');
-		}
+		printChar(writer, ' ', totalLen - title.length());
 		writer.println('|');
 		if (map.isEmpty()) {
 			writer.print('+');
-			for (int i = 0; i < totalLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', totalLen);
 			writer.println('+');
 		} else {
 			writer.print('+');
-			for (int i = 0; i < maxNameLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxNameLen);
 			writer.print('+');
-			for (int i = 0; i < maxValueLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxValueLen);
 			writer.println('+');
 			for (Map.Entry<String, String> item : map.entrySet()) {
 				writer.print('|');
 				writer.print(item.getKey());
-				for (int i = 0; i < maxNameLen - item.getKey().length(); i++) {
-					writer.print(' ');
-				}
+				printChar(writer, ' ', maxNameLen - item.getKey().length());
 				writer.print('|');
 				int linNum = item.getValue().length() / maxLength;
-				linNum += item.getValue().length() % maxLength == 0 ? 0 : 1;
+				if (item.getValue().length() % maxLength != 0) {
+					linNum++;
+				}
 				if (linNum == 0) {
-					for (int i = 0; i < maxValueLen; i++) {
-						writer.print(' ');
-					}
+					printChar(writer, ' ', maxValueLen);
 					writer.println('|');
 				}
-				for (int j = 0; j < linNum; j++) {
-					if (j < linNum - 1) {
-						writer.append(item.getValue(), j * maxLength, (j + 1) * maxLength);
+				for (int i = 0; i < linNum; i++) {
+					if (i < linNum - 1) {
+						writer.append(item.getValue(), i * maxLength, (i + 1) * maxLength);
 						writer.println('|');
 						writer.print('|');
-						for (int i = 0; i < maxNameLen; i++) {
-							writer.print(' ');
-						}
+						printChar(writer, ' ', maxNameLen);
 						writer.print('|');
 					} else if (linNum > 1) {
-						writer.append(item.getValue(), j * maxLength, item.getValue().length());
-						for (int i = 0; i < (j + 1) * maxLength - item.getValue().length(); i++) {
-							writer.print(' ');
-						}
+						writer.append(item.getValue(), i * maxLength, item.getValue().length());
+						printChar(writer, ' ', (i + 1) * maxLength - item.getValue().length());
 						writer.println('|');
 					} else {
 						writer.append(item.getValue());
-						for (int i = 0; i < maxValueLen - item.getValue().length(); i++) {
-							writer.print(' ');
-						}
+						printChar(writer, ' ', maxValueLen - item.getValue().length());
 						writer.println('|');
 					}
 				}
 			}
 			writer.print('+');
-			for (int i = 0; i < maxNameLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxNameLen);
 			writer.print('+');
-			for (int i = 0; i < maxValueLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxValueLen);
 			writer.println('+');
 		}
 	}
@@ -357,9 +335,7 @@ public class RequestDumpFilter
 			}
 		}
 		writer.print('+');
-		for (int i = 0; i < maxValueLen; i++) {
-			writer.print('-');
-		}
+		printChar(writer, '-', maxValueLen);
 		writer.println('+');
 		writer.print('|');
 		writer.print(title);
@@ -454,6 +430,12 @@ public class RequestDumpFilter
 					this.toString = obj.toString();
 				}
 			}
+		}
+	}
+
+	private void printChar(final PrintWriter writer, final char ch, final int repeat) {
+		for (int i = 0; i < repeat; i++) {
+			writer.print(ch);
 		}
 	}
 }
