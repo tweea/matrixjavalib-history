@@ -32,7 +32,7 @@ public final class Tokens {
 	 *            主键
 	 * @return 标示
 	 */
-	public static String generateToken(HttpServletRequest request, String key) {
+	public static String generateToken(final HttpServletRequest request, final String key) {
 		String token = UUID.randomUUID().toString();
 		request.getSession(true).setAttribute(key, token);
 		return token;
@@ -47,7 +47,7 @@ public final class Tokens {
 	 *            主键
 	 * @return 标示
 	 */
-	public static String getToken(HttpServletRequest request, String key) {
+	public static String getToken(final HttpServletRequest request, final String key) {
 		return (String) request.getSession(true).getAttribute(key);
 	}
 
@@ -60,7 +60,7 @@ public final class Tokens {
 	 *            主键
 	 * @return 是否有效
 	 */
-	public static boolean isTokenValid(HttpServletRequest request, String key) {
+	public static boolean isTokenValid(final HttpServletRequest request, final String key) {
 		String token = request.getParameter(key);
 		if (StringUtils.isBlank(token)) {
 			return false;
@@ -77,7 +77,7 @@ public final class Tokens {
 	 * @param key
 	 *            主键
 	 */
-	public static void removeToken(HttpServletRequest request, String key) {
+	public static void removeToken(final HttpServletRequest request, final String key) {
 		request.getSession(true).removeAttribute(key);
 	}
 }

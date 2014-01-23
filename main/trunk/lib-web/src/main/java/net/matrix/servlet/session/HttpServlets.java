@@ -47,7 +47,7 @@ public final class HttpServlets {
 	 * @param message
 	 *            消息内容
 	 */
-	public static void addMessage(HttpServletRequest request, String message) {
+	public static void addMessage(final HttpServletRequest request, final String message) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
 			sb = new StringBuilder();
@@ -63,7 +63,7 @@ public final class HttpServlets {
 	 *            请求
 	 * @return 消息内容
 	 */
-	public static String getMessage(HttpServletRequest request) {
+	public static String getMessage(final HttpServletRequest request) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(MESSAGE_KEY);
 		if (sb == null) {
 			return "";
@@ -79,7 +79,7 @@ public final class HttpServlets {
 	 * @param message
 	 *            错误内容
 	 */
-	public static void addError(HttpServletRequest request, String message) {
+	public static void addError(final HttpServletRequest request, final String message) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
 			sb = new StringBuilder();
@@ -95,7 +95,7 @@ public final class HttpServlets {
 	 *            请求
 	 * @return 消息内容
 	 */
-	public static String getError(HttpServletRequest request) {
+	public static String getError(final HttpServletRequest request) {
 		StringBuilder sb = (StringBuilder) request.getAttribute(ERROR_KEY);
 		if (sb == null) {
 			return "";
@@ -111,7 +111,7 @@ public final class HttpServlets {
 	 * @param uri
 	 *            回退 URI
 	 */
-	public static void setBackURI(HttpServletRequest request, String uri) {
+	public static void setBackURI(final HttpServletRequest request, final String uri) {
 		request.setAttribute(BACK_URI_KEY, uri);
 	}
 
@@ -122,7 +122,7 @@ public final class HttpServlets {
 	 *            请求
 	 * @return 回退 URI
 	 */
-	public static String getBackURI(HttpServletRequest request) {
+	public static String getBackURI(final HttpServletRequest request) {
 		return (String) request.getAttribute(BACK_URI_KEY);
 	}
 
@@ -134,7 +134,7 @@ public final class HttpServlets {
 	 * @param requestURI
 	 *            请求 URI
 	 */
-	public static void setRequestURI(HttpServletRequest request, String requestURI) {
+	public static void setRequestURI(final HttpServletRequest request, final String requestURI) {
 		request.getSession(true).setAttribute(STORE_URI_KEY, requestURI);
 	}
 
@@ -144,7 +144,7 @@ public final class HttpServlets {
 	 * @param request
 	 *            请求
 	 */
-	public static void storeRequestURI(HttpServletRequest request) {
+	public static void storeRequestURI(final HttpServletRequest request) {
 		request.getSession(true).setAttribute(STORE_URI_KEY, request.getRequestURI());
 	}
 
@@ -155,7 +155,7 @@ public final class HttpServlets {
 	 *            请求
 	 * @return 请求 URI
 	 */
-	public static String getRequestURI(HttpServletRequest request) {
+	public static String getRequestURI(final HttpServletRequest request) {
 		return (String) request.getSession(true).getAttribute(STORE_URI_KEY);
 	}
 
@@ -171,7 +171,7 @@ public final class HttpServlets {
 	 *            参数名
 	 * @return 参数内容
 	 */
-	public static String getParameter(HttpServletRequest request, String property) {
+	public static String getParameter(final HttpServletRequest request, final String property) {
 		String value = request.getParameter(property);
 		if (value == null) {
 			return "";
@@ -188,7 +188,7 @@ public final class HttpServlets {
 	 *            参数名
 	 * @return 参数内容
 	 */
-	public static int getIntParameter(HttpServletRequest request, String property) {
+	public static int getIntParameter(final HttpServletRequest request, final String property) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
 			return 0;
@@ -205,7 +205,7 @@ public final class HttpServlets {
 	 *            参数名
 	 * @return 参数内容
 	 */
-	public static long getLongParameter(HttpServletRequest request, String property) {
+	public static long getLongParameter(final HttpServletRequest request, final String property) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
 			return 0L;
@@ -222,7 +222,7 @@ public final class HttpServlets {
 	 *            参数名
 	 * @return 参数内容
 	 */
-	public static BigDecimal getBigDecimalParameter(HttpServletRequest request, String property) {
+	public static BigDecimal getBigDecimalParameter(final HttpServletRequest request, final String property) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
 			return BigDecimal.ZERO;
@@ -241,7 +241,7 @@ public final class HttpServlets {
 	 *            日期格式
 	 * @return 参数内容
 	 */
-	public static Calendar getCalendarParameter(HttpServletRequest request, String property, String format) {
+	public static Calendar getCalendarParameter(final HttpServletRequest request, final String property, final String format) {
 		String value = request.getParameter(property);
 		if (StringUtils.isBlank(value)) {
 			return null;
@@ -259,7 +259,7 @@ public final class HttpServlets {
 	 *            前缀
 	 * @return 参数内容
 	 */
-	public static Map<String, Object> getParametersStartingWith(HttpServletRequest request, String prefix) {
+	public static Map<String, Object> getParametersStartingWith(final HttpServletRequest request, String prefix) {
 		if (prefix == null) {
 			prefix = "";
 		}
