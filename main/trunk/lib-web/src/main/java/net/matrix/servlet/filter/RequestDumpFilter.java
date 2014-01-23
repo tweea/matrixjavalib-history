@@ -36,12 +36,6 @@ public class RequestDumpFilter
 	implements Filter {
 	private static final Logger LOG = LoggerFactory.getLogger(RequestDumpFilter.class);
 
-	/**
-	 * The filter configuration object we are associated with. If this value is
-	 * null, this filter instance is not currently configured.
-	 */
-	protected FilterConfig filterConfig;
-
 	private boolean enabled = false;
 
 	private boolean hasRequesst = true;
@@ -61,9 +55,8 @@ public class RequestDumpFilter
 	 *            The filter configuration object
 	 */
 	@Override
-	public void init(FilterConfig filterConfigIn)
+	public void init(final FilterConfig filterConfigIn)
 		throws ServletException {
-		this.filterConfig = filterConfigIn;
 		this.enabled = "true".equals(filterConfigIn.getInitParameter("enable"));
 		if (StringUtils.isNotEmpty(filterConfigIn.getInitParameter("hasRequesst"))) {
 			this.hasRequesst = "true".equals(filterConfigIn.getInitParameter("hasRequesst"));
@@ -87,7 +80,7 @@ public class RequestDumpFilter
 	 */
 	@Override
 	public void destroy() {
-		this.filterConfig = null;
+		this.enabled = false;
 	}
 
 	/**
@@ -106,7 +99,7 @@ public class RequestDumpFilter
 	 *                if a servlet error occurs
 	 */
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
 		throws IOException, ServletException {
 		if (enabled) {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -145,11 +138,7 @@ public class RequestDumpFilter
 		chain.doFilter(request, response);
 	}
 
-	/**
-	 * @param request
-	 * @param writer
-	 */
-	private void dumpRequest(HttpServletRequest request, PrintWriter writer) {
+	private void dumpRequest(final HttpServletRequest request, final PrintWriter writer) {
 		// Object Properties
 		Map<String, String> requestProperties = new LinkedHashMap<String, String>();
 		requestProperties.put("Local", request.getLocalAddr() + ":" + request.getLocalPort());
@@ -164,6 +153,7 @@ public class RequestDumpFilter
 		requestProperties.put("Locale", request.getLocale().toString());
 		requestProperties.put("Locales", Collections.list(request.getLocales()).toString());
 		dumpStringMap(writer, "Request: " + request, requestProperties);
+
 		// request headers
 		Map<String, String> requestHeaders = new LinkedHashMap<String, String>();
 		List<String> names = Collections.list(request.getHeaderNames());
@@ -173,19 +163,21 @@ public class RequestDumpFilter
 			requestHeaders.put(name, value);
 		}
 		dumpStringMap(writer, "Request Headers", requestHeaders);
+
 		// request parameters
 		Map<String, String> requestParameters = new LinkedHashMap<String, String>();
 		names = Collections.list(request.getParameterNames());
 		Collections.sort(names);
 		for (String name : names) {
 			String[] values = request.getParameterValues(name);
-			if (values.length < 2) {
+			if (values.length == 1) {
 				requestParameters.put(name, values[0]);
 			} else {
 				requestParameters.put(name, Arrays.toString(values));
 			}
 		}
 		dumpStringMap(writer, "Request Parameters", requestParameters);
+
 		// request attributes
 		Map<String, Object> requestAttributes = new LinkedHashMap<String, Object>();
 		names = Collections.list(request.getAttributeNames());
@@ -197,7 +189,7 @@ public class RequestDumpFilter
 		dumpObjectMap(writer, "Request Attributes", requestAttributes);
 	}
 
-	private void dumpCookie(Cookie cookie, PrintWriter writer) {
+	private void dumpCookie(final Cookie cookie, final PrintWriter writer) {
 		Map<String, String> cookieProperties = new LinkedHashMap<String, String>();
 		cookieProperties.put("Name", cookie.getName());
 		cookieProperties.put("Value", cookie.getValue());
@@ -210,16 +202,13 @@ public class RequestDumpFilter
 		dumpStringMap(writer, "Cookie: " + cookie, cookieProperties);
 	}
 
-	/**
-	 * @param session
-	 * @param writer
-	 */
-	private void dumpSession(HttpSession session, PrintWriter writer) {
+	private void dumpSession(final HttpSession session, final PrintWriter writer) {
 		writer.print("session: ");
 		if (session == null) {
 			writer.println("未创建");
 		} else {
 			writer.println(session);
+
 			// session attributes
 			Map<String, Object> sessionAttributes = new LinkedHashMap<String, Object>();
 			List<String> names = Collections.list(session.getAttributeNames());
@@ -232,16 +221,12 @@ public class RequestDumpFilter
 		}
 	}
 
-	/**
-	 * @param response
-	 * @param writer
-	 */
-	private void dumpResponse(HttpServletResponse response, PrintWriter writer) {
+	private void dumpResponse(final HttpServletResponse response, final PrintWriter writer) {
 		writer.print("response: ");
 		writer.println(response);
 	}
 
-	private void dumpStringMap(PrintWriter writer, String title, Map<String, String> map) {
+	private void dumpStringMap(final PrintWriter writer, final String title, final Map<String, String> map) {
 		int maxNameLen = 0;
 		int maxValueLen = 0;
 		int totalLen = title.length();
@@ -343,27 +328,7 @@ public class RequestDumpFilter
 		}
 	}
 
-	private static final class ClassAndToString {
-		private final String clazz;
-
-		private final String toString;
-
-		public ClassAndToString(Object obj) {
-			if (obj == null) {
-				this.clazz = "(n/a)";
-				this.toString = "(null)";
-			} else {
-				this.clazz = obj.getClass().toString();
-				if (obj.getClass().isArray()) {
-					this.toString = Arrays.toString((Object[]) obj);
-				} else {
-					this.toString = obj.toString();
-				}
-			}
-		}
-	}
-
-	private void dumpObjectMap(PrintWriter writer, String title, Map<String, Object> objMap) {
+	private void dumpObjectMap(final PrintWriter writer, final String title, final Map<String, Object> objMap) {
 		Map<String, ClassAndToString> map = new LinkedHashMap<String, ClassAndToString>();
 		for (Map.Entry<String, Object> item : objMap.entrySet()) {
 			map.put(item.getKey(), new ClassAndToString(item.getValue()));
@@ -463,6 +428,32 @@ public class RequestDumpFilter
 				writer.print('-');
 			}
 			writer.println('+');
+		}
+	}
+
+	private static final class ClassAndToString {
+		private final String clazz;
+
+		private final String toString;
+
+		/**
+		 * 根据对象信息构造。
+		 * 
+		 * @param obj
+		 *            对象
+		 */
+		public ClassAndToString(final Object obj) {
+			if (obj == null) {
+				this.clazz = "(n/a)";
+				this.toString = "(null)";
+			} else {
+				this.clazz = obj.getClass().toString();
+				if (obj.getClass().isArray()) {
+					this.toString = Arrays.toString((Object[]) obj);
+				} else {
+					this.toString = obj.toString();
+				}
+			}
 		}
 	}
 }
