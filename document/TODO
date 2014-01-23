@@ -7,6 +7,8 @@ https://oss.sonatype.org
 数据库
 	使用 dbutils、unitils
 	测试事务性
+应用支持
+	Guice or CDI
 异常
 	抛出和处理
 	建立异常体系
@@ -21,6 +23,7 @@ https://oss.sonatype.org
 文档
 	增强 Javadoc
 检查规则
+	final 关键字
 	整理开发规范
 	精简 Sonar 规则
 依赖
