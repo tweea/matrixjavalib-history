@@ -364,35 +364,27 @@ public class RequestDumpFilter
 					linNum++;
 				}
 				if (linNum == 0) {
-					for (int i = 0; i < maxValueLen; i++) {
-						writer.print(' ');
-					}
+					printChar(writer, ' ', maxValueLen);
 					writer.println('|');
 				}
-				for (int j = 0; j < linNum; j++) {
+				for (int i = 0; i < linNum; i++) {
 					writer.print('|');
-					if (j < linNum - 1) {
-						writer.append(item.getValue().toString, j * maxLength, (j + 1) * maxLength);
+					if (i < linNum - 1) {
+						writer.append(item.getValue().toString, i * maxLength, (i + 1) * maxLength);
 						writer.println('|');
 					} else if (linNum > 1) {
-						writer.append(item.getValue().toString, j * maxLength, item.getValue().toString.length());
-						for (int i = 0; i < (j + 1) * maxLength - item.getValue().toString.length(); i++) {
-							writer.print(' ');
-						}
+						writer.append(item.getValue().toString, i * maxLength, item.getValue().toString.length());
+						printChar(writer, ' ', (i + 1) * maxLength - item.getValue().toString.length());
 						writer.println('|');
 					} else {
 						writer.append(item.getValue().toString);
-						for (int i = 0; i < maxValueLen - item.getValue().toString.length(); i++) {
-							writer.print(' ');
-						}
+						printChar(writer, ' ', maxValueLen - item.getValue().toString.length());
 						writer.println('|');
 					}
 				}
 			}
 			writer.print('+');
-			for (int i = 0; i < maxValueLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxValueLen);
 			writer.println('+');
 		}
 	}
