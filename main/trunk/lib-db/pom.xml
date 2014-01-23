@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-db</artifactId>
-	<version>1.7.0-SNAPSHOT</version>
+	<version>1.7.0</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -174,8 +174,8 @@
 		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/lib-db</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/lib-db</developerConnection>
-		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/lib-db</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/tags/mxlib-db-1.7.0</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/tags/mxlib-db-1.7.0</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/tags/mxlib-db-1.7.0</url>
 	</scm>
 </project>
