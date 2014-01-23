@@ -339,25 +339,17 @@ public class RequestDumpFilter
 		writer.println('+');
 		writer.print('|');
 		writer.print(title);
-		for (int i = 0; i < maxValueLen - title.length(); i++) {
-			writer.print(' ');
-		}
+		printChar(writer, ' ', maxValueLen - title.length());
 		writer.println('|');
 		if (map.isEmpty()) {
 			writer.print('+');
-			for (int i = 0; i < maxValueLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxValueLen);
 			writer.println('+');
 		} else {
 			writer.print('+');
-			for (int i = 0; i < maxNameLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxNameLen);
 			writer.print('+');
-			for (int i = 0; i < maxClassLen; i++) {
-				writer.print('-');
-			}
+			printChar(writer, '-', maxClassLen);
 			writer.println('+');
 			for (Map.Entry<String, ClassAndToString> item : map.entrySet()) {
 				writer.print('|');
@@ -372,7 +364,9 @@ public class RequestDumpFilter
 				}
 				writer.println('|');
 				int linNum = item.getValue().toString.length() / maxLength;
-				linNum += item.getValue().toString.length() % maxLength == 0 ? 0 : 1;
+				if (item.getValue().toString.length() % maxLength != 0) {
+					linNum++;
+				}
 				if (linNum == 0) {
 					for (int i = 0; i < maxValueLen; i++) {
 						writer.print(' ');
