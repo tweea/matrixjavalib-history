@@ -29,7 +29,7 @@ public class HibernateTransactionContext {
 	 * 使用默认的 SessionFactory 构建。
 	 */
 	public HibernateTransactionContext() {
-		sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
+		this.sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
 	}
 
 	/**
@@ -38,11 +38,12 @@ public class HibernateTransactionContext {
 	 * @param sessionFactoryName
 	 *            SessionFactory 名称
 	 */
-	public HibernateTransactionContext(String sessionFactoryName) {
+	public HibernateTransactionContext(final String sessionFactoryName) {
 		if (sessionFactoryName == null) {
-			sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
+			this.sessionFactoryName = SessionFactoryManager.DEFAULT_NAME;
+		} else {
+			this.sessionFactoryName = sessionFactoryName;
 		}
-		this.sessionFactoryName = sessionFactoryName;
 	}
 
 	/**
