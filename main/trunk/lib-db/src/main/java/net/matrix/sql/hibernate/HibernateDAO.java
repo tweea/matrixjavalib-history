@@ -274,7 +274,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * 判断对象的属性值在数据库内是否唯一。
 	 * 在修改对象的情景下，如果属性新修改的值（newValue）等于属性原来的值（oldValue）则不作比较。
 	 */
-	public boolean isPropertyUnique(final String propertyName, final T newValue, final T oldValue) {
+	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
 		if (newValue == null || newValue.equals(oldValue)) {
 			return true;
 		}
