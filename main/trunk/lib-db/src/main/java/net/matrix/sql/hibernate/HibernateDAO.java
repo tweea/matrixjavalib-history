@@ -303,7 +303,7 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * @param param
 	 *            数量可变的参数,按顺序绑定.
 	 */
-	public <X> List<X> find(final String hql, final Object... param) {
+	public List<T> find(final String hql, final Object... param) {
 		return createQuery(hql, param).list();
 	}
 
@@ -313,13 +313,13 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * @param param
 	 *            命名参数,按名称绑定.
 	 */
-	public <X> List<X> find(final String hql, final Map<String, ?> param) {
+	public List<T> find(final String hql, final Map<String, ?> param) {
 		return createQuery(hql, param).list();
 	}
 
-	public <X> Page<X> find(final String hql, final Map<String, ?> param, final Pageable pageable) {
+	public Page<T> find(final String hql, final Map<String, ?> param, final Pageable pageable) {
 		long totalCount = count(hql, param);
-		List<X> result = createQuery(hql, param, pageable).list();
+		List<T> result = createQuery(hql, param, pageable).list();
 		return new PageImpl(result, pageable, totalCount);
 	}
 
@@ -339,8 +339,8 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * @param param
 	 *            数量可变的参数,按顺序绑定.
 	 */
-	public <X> X findUnique(final String hql, final Object... param) {
-		return (X) createQuery(hql, param).uniqueResult();
+	public T findUnique(final String hql, final Object... param) {
+		return (T) createQuery(hql, param).uniqueResult();
 	}
 
 	/**
@@ -349,8 +349,8 @@ public class HibernateDAO<T, ID extends Serializable> {
 	 * @param param
 	 *            命名参数,按名称绑定.
 	 */
-	public <X> X findUnique(final String hql, final Map<String, ?> param) {
-		return (X) createQuery(hql, param).uniqueResult();
+	public T findUnique(final String hql, final Map<String, ?> param) {
+		return (T) createQuery(hql, param).uniqueResult();
 	}
 
 	/**
