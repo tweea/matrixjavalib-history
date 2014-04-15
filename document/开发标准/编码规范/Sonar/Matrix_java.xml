@@ -21,12 +21,12 @@
 					<value>true</value>
 				</parameter>
 				<parameter>
-					<key>applyToPrivate</key>
-					<value>true</value>
-				</parameter>
-				<parameter>
 					<key>format</key>
 					<value>^[a-z][a-zA-Z0-9]*$</value>
+				</parameter>
+				<parameter>
+					<key>applyToPrivate</key>
+					<value>true</value>
 				</parameter>
 			</parameters>
 		</rule>
@@ -254,11 +254,6 @@
 		<rule>
 			<repositoryKey>findbugs</repositoryKey>
 			<key>VA_FORMAT_STRING_BAD_ARGUMENT</key>
-			<priority>CRITICAL</priority>
-		</rule>
-		<rule>
-			<repositoryKey>findbugs</repositoryKey>
-			<key>UPM_UNCALLED_PRIVATE_METHOD</key>
 			<priority>CRITICAL</priority>
 		</rule>
 		<rule>
@@ -2775,7 +2770,7 @@
 		<rule>
 			<repositoryKey>squid</repositoryKey>
 			<key>UndocumentedApi</key>
-			<priority>MAJOR</priority>
+			<priority>MINOR</priority>
 		</rule>
 		<rule>
 			<repositoryKey>squid</repositoryKey>
@@ -3381,6 +3376,31 @@
 		<rule>
 			<repositoryKey>squid</repositoryKey>
 			<key>S1186</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1488</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1611</key>
+			<priority>MINOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1314</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1602</key>
+			<priority>MAJOR</priority>
+		</rule>
+		<rule>
+			<repositoryKey>squid</repositoryKey>
+			<key>S1596</key>
 			<priority>MAJOR</priority>
 		</rule>
 	</rules>
