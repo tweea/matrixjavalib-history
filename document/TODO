@@ -1,4 +1,4 @@
-springside Commit:e6f36ef3961ef8b44b42aea12f2f06e76d80f03f 2014/01/17 20:58:33
+springside Commit:5afe60a790aa7b2854484079ce79511c51020606 2014/04/14 23:36:17
 https://github.com/springside/springside4/wiki
 https://oss.sonatype.org
 ------ next ------
@@ -18,6 +18,7 @@ https://oss.sonatype.org
 	使用 MDC 增强日志
 	国际化和本地化
 测试
+	assertJ
 	单元测试
 	Mock
 文档
@@ -25,7 +26,6 @@ https://oss.sonatype.org
 检查规则
 	final 关键字
 	整理开发规范
-	精简 Sonar 规则
 依赖
 	OSGi
 发展计划
