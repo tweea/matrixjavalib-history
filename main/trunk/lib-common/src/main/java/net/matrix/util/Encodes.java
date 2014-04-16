@@ -9,8 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-import org.apache.commons.lang3.Validate;
-
 import net.matrix.lang.ImpossibleException;
 
 /**
@@ -61,8 +59,6 @@ public final class Encodes {
 	 * @return 数字
 	 */
 	public static long decodeBase62(final String str) {
-		Validate.notBlank(str);
-
 		long result = 0;
 		int base = BASE62.length();
 		for (int i = 0; i < str.length(); i++) {
