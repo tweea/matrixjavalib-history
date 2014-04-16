@@ -20,15 +20,15 @@ public final class Exceptions {
 	/**
 	 * 将 Exception 转换为 RuntimeException。
 	 * 
-	 * @param e
+	 * @param t
 	 *            原始异常
 	 * @return 运行时异常
 	 */
-	public static RuntimeException unchecked(final Exception e) {
-		if (e instanceof RuntimeException) {
-			return (RuntimeException) e;
+	public static RuntimeException unchecked(final Throwable t) {
+		if (t instanceof RuntimeException) {
+			return (RuntimeException) t;
 		} else {
-			return new RuntimeException(e);
+			return new RuntimeException(t);
 		}
 	}
 
