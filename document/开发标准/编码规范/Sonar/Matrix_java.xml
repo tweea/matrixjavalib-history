@@ -3405,12 +3405,6 @@
 		</rule>
 		<rule>
 			<repositoryKey>checkstyle</repositoryKey>
-			<key>com.puppycrawl.tools.checkstyle.checks.duplicates.StrictDuplicateCodeCheck</key>
-			<priority>MINOR</priority>
-			<parameters></parameters>
-		</rule>
-		<rule>
-			<repositoryKey>checkstyle</repositoryKey>
 			<key>com.puppycrawl.tools.checkstyle.checks.annotation.MissingDeprecatedCheck</key>
 			<priority>MAJOR</priority>
 		</rule>
