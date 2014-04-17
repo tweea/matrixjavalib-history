@@ -33,7 +33,6 @@
 					<version>2.4</version>
 				</plugin>
 				<plugin>
-					<!-- TODO maven-checkstyle-plugin 2.11 版本 NPE bug -->
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>2.12</version>
@@ -529,7 +528,6 @@
 			<name>Nexus Release Repository</name>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
-		<!-- TODO find a host to deploy the site -->
 	</distributionManagement>
 	<profiles>
 		<profile>
