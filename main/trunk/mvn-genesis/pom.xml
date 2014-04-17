@@ -15,7 +15,7 @@
 	</properties>
 
 	<!-- 基本属性 - 项目关系 -->
-	<!-- 发布信息从 org.sonatype.oss:oss-parent:7 合并 -->
+	<!-- 发布信息从 org.sonatype.oss:oss-parent:9 合并 -->
 
 	<!-- 构建设置 -->
 	<build>
