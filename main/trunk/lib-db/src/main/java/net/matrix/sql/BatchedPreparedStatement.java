@@ -724,16 +724,4 @@ public class BatchedPreparedStatement
 		}
 		return statement.unwrap(iface);
 	}
-
-	@Override
-	public void closeOnCompletion()
-		throws SQLException {
-		statement.closeOnCompletion();
-	}
-
-	@Override
-	public boolean isCloseOnCompletion()
-		throws SQLException {
-		return statement.isCloseOnCompletion();
-	}
 }
