@@ -16,6 +16,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -48,9 +49,22 @@ public final class ResourceBundles {
 
 		@Override
 		public Enumeration<String> getKeys() {
-			return Collections.emptyEnumeration();
+			return new EmptyEnumeration();
 		}
 	};
+
+	private static class EmptyEnumeration
+		implements Enumeration<String> {
+		@Override
+		public boolean hasMoreElements() {
+			return false;
+		}
+
+		@Override
+		public String nextElement() {
+			throw new NoSuchElementException();
+		}
+	}
 
 	/**
 	 * 加载 XML 资源的控制对象。
