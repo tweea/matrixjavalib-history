@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="gbk"?>
+<test id="foo">
+	<test1 name="a">
+		<field name="6" value="01#02#03#09" />
+	</test1>
+</test>
