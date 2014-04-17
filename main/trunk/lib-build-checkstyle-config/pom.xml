@@ -6,7 +6,7 @@
 	<!-- 基本属性 - 项目属性 -->
 	<groupId>net.sf.matrixjavalib.build</groupId>
 	<artifactId>checkstyle-config</artifactId>
-	<version>1.8</version>
+	<version>1.9-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -31,8 +31,8 @@
 		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/tags/checkstyle-config-1.8</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/tags/checkstyle-config-1.8</developerConnection>
-		<url>http://code.google.com/p/matrixjavalib/source/browse/main/tags/checkstyle-config-1.8</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/lib-build-checkstyle-config</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/lib-build-checkstyle-config</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/lib-build-checkstyle-config</url>
 	</scm>
 </project>
