@@ -21,13 +21,13 @@
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-app-support</artifactId>
-			<version>1.7.0</version>
+			<version>1.7.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.matrixjavalib</groupId>
 			<artifactId>mxlib-web</artifactId>
-			<version>1.7.0</version>
+			<version>1.7.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- provided -->
