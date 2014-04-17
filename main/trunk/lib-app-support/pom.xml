@@ -5,7 +5,7 @@
 
 	<!-- 基本属性 - 项目属性 -->
 	<artifactId>mxlib-app-support</artifactId>
-	<version>1.7.1-SNAPSHOT</version>
+	<version>1.7.1</version>
 	<packaging>jar</packaging>
 
 	<!-- 基本属性 - 属性 -->
@@ -48,8 +48,8 @@
 		<url>http://code.google.com/p/matrixjavalib/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/trunk/lib-app-support</connection>
-		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/trunk/lib-app-support</developerConnection>
-		<url>http://code.google.com/p/matrixjavalib/source/browse/main/trunk/lib-app-support</url>
+		<connection>scm:svn:http://matrixjavalib.googlecode.com/svn/main/tags/mxlib-app-support-1.7.1</connection>
+		<developerConnection>scm:svn:https://matrixjavalib.googlecode.com/svn/main/tags/mxlib-app-support-1.7.1</developerConnection>
+		<url>http://code.google.com/p/matrixjavalib/source/browse/main/tags/mxlib-app-support-1.7.1</url>
 	</scm>
 </project>
