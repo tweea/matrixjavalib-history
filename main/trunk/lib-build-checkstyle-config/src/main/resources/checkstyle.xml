@@ -6,9 +6,6 @@
 		<property name="severity" value="warning" />
 		<property name="header" value="^/\*$\n^ \* \$Id.+\$$" />
 	</module>
-	<module name="StrictDuplicateCode">
-		<property name="severity" value="info" />
-	</module>
 	<module name="JavadocPackage">
 		<property name="severity" value="info" />
 		<property name="allowLegacy" value="false" />
