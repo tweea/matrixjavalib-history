@@ -5,6 +5,7 @@
  */
 package net.matrix.app.message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,13 @@ import net.matrix.text.MessageFormats;
 /**
  * 编码消息。
  */
-public class CodedMessage {
+public class CodedMessage
+	implements Serializable {
+	/**
+	 * 序列化。
+	 */
+	private static final long serialVersionUID = -646058578027845072L;
+
 	/**
 	 * 编码。
 	 */
